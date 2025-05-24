@@ -14,25 +14,26 @@ export default function PdfViewer({ file }) {
   };
 
 const handleDownload = () => {
-  if (file) {
+  if (file instanceof Blob) {
+    const blobUrl = URL.createObjectURL(file);
     const link = document.createElement('a');
-
-    if (typeof file === 'string') {
-      // URL classique
-      link.href = file;
-      link.download = file.split('/').pop() || 'document.pdf';
-    } else {
-      // Blob/File
-      const blobUrl = URL.createObjectURL(file);
-      link.href = blobUrl;
-      link.download = file.name || 'document.pdf';
-    }
-
+    link.href = blobUrl;
+    link.download = file.name || 'document.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(blobUrl);
+  } else if (typeof file === 'string') {
+    // URL distante
+    const link = document.createElement('a');
+    link.href = file;
+    link.download = file.split('/').pop() || 'document.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   }
 };
+
 
 
   return (
