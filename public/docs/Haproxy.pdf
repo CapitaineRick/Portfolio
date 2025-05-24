@@ -1,0 +1,78 @@
+# Installation et Configuration de HAProxy
+
+## Introduction
+HAProxy est une solution de load balancing et de proxy haute performance pour les applications TCP et HTTP.
+
+## Installation
+1. Mise à jour du système
+```bash
+sudo apt update
+sudo apt upgrade
+```
+
+2. Installation de HAProxy
+```bash
+sudo apt install haproxy
+```
+
+## Configuration de base
+1. Éditer le fichier de configuration principal
+```bash
+sudo nano /etc/haproxy/haproxy.cfg
+```
+
+2. Configuration globale
+```conf
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+```
+
+3. Configuration du frontend et backend
+```conf
+frontend http_front
+    bind *:80
+    stats uri /haproxy?stats
+    default_backend http_back
+
+backend http_back
+    balance roundrobin
+    server server1 192.168.1.10:80 check
+    server server2 192.168.1.11:80 check
+```
+
+## Vérification et démarrage
+1. Vérifier la configuration
+```bash
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+```
+
+2. Démarrer HAProxy
+```bash
+sudo systemctl start haproxy
+sudo systemctl enable haproxy
+```
+
+## Monitoring
+- Interface web de statistiques accessible via : http://votre-ip/haproxy?stats
+- Authentification par défaut : admin/admin
+
+## Sécurité
+- Toujours utiliser HTTPS en production
+- Limiter l'accès aux statistiques
+- Mettre à jour régulièrement
