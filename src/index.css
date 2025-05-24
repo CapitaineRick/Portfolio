@@ -25,13 +25,13 @@ section {
 
 /* Section colors */
 section:nth-child(odd) {
-  --tw-gradient-from: theme('colors.orange.50' / 5%);
-  --tw-gradient-to: theme('colors.purple.50' / 5%);
+  --tw-gradient-from: theme('colors.gray.50');
+  --tw-gradient-to: theme('colors.white');
 }
 
 section:nth-child(even) {
-  --tw-gradient-from: theme('colors.purple.50' / 5%);
-  --tw-gradient-to: theme('colors.orange.50' / 5%);
+  --tw-gradient-from: theme('colors.white');
+  --tw-gradient-to: theme('colors.gray.50');
 }
 
 .dark section:nth-child(odd) {
