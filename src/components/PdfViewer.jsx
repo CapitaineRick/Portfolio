@@ -14,37 +14,56 @@ export default function PdfViewer({ file }) {
   };
 
 const handleDownload = () => {
-  if (!file) return;
+  console.log("Téléchargement lancé");
+
+  if (!file) {
+    console.warn("Aucun fichier à télécharger :", file);
+    return;
+  }
 
   const link = document.createElement('a');
 
+  // Si c’est un fichier Blob ou File
   if (file instanceof Blob) {
     const blobUrl = URL.createObjectURL(file);
+    const filename = file.name || 'document.pdf';
+
     link.href = blobUrl;
-    link.download = file.name || 'document.pdf';
+    link.download = filename;
+    link.style.display = 'none';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    // Libère l’URL blob
     URL.revokeObjectURL(blobUrl);
-    console.log('Type:', typeof file);
-console.log('Instanceof File:', file instanceof File);
-console.log('Instanceof Blob:', file instanceof Blob);
-console.log('Value:', file);
-  } else if (typeof file === 'string') {
+
+    console.log('Téléchargement d’un fichier Blob');
+    console.log('Nom :', filename);
+    console.log('Type :', file.type);
+  }
+
+  // Si c’est une URL string vers un fichier en ligne
+  else if (typeof file === 'string') {
+    const filename = file.split('/').pop() || 'document.pdf';
+
     link.href = file;
-    link.download = file.split('/').pop() || 'document.pdf';
+    link.download = filename;
     link.target = '_blank';
+    link.style.display = 'none';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    console.log('Type:', typeof file);
-console.log('Instanceof File:', file instanceof File);
-console.log('Instanceof Blob:', file instanceof Blob);
-console.log('Value:', file);
-  } else {
-    console.error("Type de fichier non pris en charge pour le téléchargement");
+
+    console.log('Téléchargement depuis une URL :', file);
+  }
+
+  // Sinon : erreur de type
+  else {
+    console.error("Type de fichier non pris en charge pour le téléchargement :", file);
   }
 };
+
 
 
 
