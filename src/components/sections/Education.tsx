@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Network, Code, Book, Award, Clock, Users, ChevronRight, GraduationCap, Briefcase } from 'lucide-react';
+import { Network, Code, Book, Award, Clock, Users, ChevronRight, GraduationCap, Briefcase, CheckCircle2 } from 'lucide-react';
 
 const Education: React.FC = () => {
   const educationRef = useRef<HTMLDivElement>(null);
@@ -40,8 +40,9 @@ const Education: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">BTS SIO - Services Informatiques aux Organisations</h2>
           <div className="w-20 h-1 bg-orange-500 mx-auto mb-6"></div>
           <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Formation de niveau Bac+2 préparant aux métiers de l'informatique avec deux options distinctes : 
-            SISR (infrastructure) et SLAM (développement)
+            Formation professionnalisante de niveau Bac+2 qui prépare aux métiers de l'informatique. 
+            Elle offre une double compétence en développement et en infrastructure, avec une spécialisation 
+            au choix entre SISR (infrastructure) et SLAM (développement).
           </p>
         </div>
         
@@ -49,40 +50,144 @@ const Education: React.FC = () => {
           ref={educationRef}
           className="transition-all duration-1000 opacity-0 translate-y-10"
         >
-          {/* Overview Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-all duration-300">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                  <Clock className="w-6 h-6 text-orange-500" />
+          {/* Formation Overview */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 mb-8">
+            <h3 className="text-2xl font-bold mb-6">Présentation de la formation</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                    <Clock className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-lg">Organisation</h4>
+                    <p className="text-gray-600 dark:text-gray-400">2 ans de formation</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Durée</h3>
-                  <p className="text-gray-600 dark:text-gray-400">2 ans de formation</p>
+                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-500" />
+                    <span>1850 heures de formation</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-500" />
+                    <span>10 semaines de stage minimum</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-500" />
+                    <span>Alternance possible</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                    <Book className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-lg">Programme</h4>
+                    <p className="text-gray-600 dark:text-gray-400">Formation complète</p>
+                  </div>
                 </div>
+                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-500" />
+                    <span>Culture générale et expression</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-500" />
+                    <span>Anglais technique</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-500" />
+                    <span>Mathématiques pour l'informatique</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                    <Award className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-lg">Validation</h4>
+                    <p className="text-gray-600 dark:text-gray-400">Diplôme d'État</p>
+                  </div>
+                </div>
+                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-500" />
+                    <span>Niveau 5 (Bac+2)</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-500" />
+                    <span>120 crédits ECTS</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-500" />
+                    <span>Certification professionnelle</span>
+                  </li>
+                </ul>
               </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-all duration-300">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                  <Book className="w-6 h-6 text-orange-500" />
+            <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-6">
+              <h4 className="font-semibold text-lg mb-4">Compétences communes</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                  <h5 className="font-medium mb-2 text-orange-500">Support et assistance</h5>
+                  <ul className="space-y-1 text-sm">
+                    <li className="flex items-center gap-2">
+                      <ChevronRight className="w-4 h-4 text-orange-500" />
+                      <span>Gestion du patrimoine informatique</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <ChevronRight className="w-4 h-4 text-orange-500" />
+                      <span>Réponse aux incidents</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <ChevronRight className="w-4 h-4 text-orange-500" />
+                      <span>Développement de la présence en ligne</span>
+                    </li>
+                  </ul>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Niveau</h3>
-                  <p className="text-gray-600 dark:text-gray-400">Bac+2 (Niveau 5)</p>
-                </div>
-              </div>
-            </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-all duration-300">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                  <Award className="w-6 h-6 text-orange-500" />
+                <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                  <h5 className="font-medium mb-2 text-orange-500">Cybersécurité</h5>
+                  <ul className="space-y-1 text-sm">
+                    <li className="flex items-center gap-2">
+                      <ChevronRight className="w-4 h-4 text-orange-500" />
+                      <span>Protection des données</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <ChevronRight className="w-4 h-4 text-orange-500" />
+                      <span>Sécurisation des équipements</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <ChevronRight className="w-4 h-4 text-orange-500" />
+                      <span>Politique de sécurité</span>
+                    </li>
+                  </ul>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Diplôme</h3>
-                  <p className="text-gray-600 dark:text-gray-400">Diplôme d'État</p>
+
+                <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                  <h5 className="font-medium mb-2 text-orange-500">Gestion de projet</h5>
+                  <ul className="space-y-1 text-sm">
+                    <li className="flex items-center gap-2">
+                      <ChevronRight className="w-4 h-4 text-orange-500" />
+                      <span>Analyse des besoins</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <ChevronRight className="w-4 h-4 text-orange-500" />
+                      <span>Documentation technique</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <ChevronRight className="w-4 h-4 text-orange-500" />
+                      <span>Travail en équipe</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
