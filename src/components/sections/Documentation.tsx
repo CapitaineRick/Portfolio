@@ -55,17 +55,11 @@ const Documentation: React.FC = () => {
 
   const handleDownload = () => {
     if (project?.pdfUrl) {
-      // Créer un lien direct vers le fichier PDF
       const link = document.createElement('a');
       link.href = project.pdfUrl;
-      
-      // Extraire le nom du fichier du chemin pour s'assurer qu'il a l'extension .pdf
-      const filename = project.pdfUrl.split('/').pop();
-      
-      // Définir le nom du fichier à télécharger
-      link.download = filename || `${project.title}.pdf`;
-      
-      // Ajouter temporairement le lien au document, cliquer dessus, puis le supprimer
+      // Extraire le nom du fichier à partir de l'URL
+      const fileName = project.pdfUrl.split('/').pop() || `${project.title}.pdf`;
+      link.download = fileName;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -115,6 +109,7 @@ const Documentation: React.FC = () => {
             Consultez mes documentations techniques détaillées sur différents projets et technologies
           </p>
         </div>
+        
         
         <div 
           ref={docsRef}
@@ -200,72 +195,60 @@ const Documentation: React.FC = () => {
                     <ChevronLeft size={20} />
                   </button>
                   <span className="text-gray-700 dark:text-gray-300 font-medium">
-                    Page {pageNumber} sur {numPages || '?'}
+                    Page {pageNumber} sur {numPages}
                   </span>
                   <button
                     onClick={handleNext}
-                    disabled={!numPages || pageNumber >= numPages}
+                    disabled={numPages === null || pageNumber >= numPages}
                     className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 
                              disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300
                              hover:bg-orange-100 dark:hover:bg-orange-900/50"
                   >
                     <ChevronRight size={20} />
                   </button>
-                  <div className="flex items-center gap-2 ml-4">
-                    <button
-                      onClick={() => setScale(Math.max(0.5, scale - 0.1))}
-                      className="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300
-                               hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                    >
-                      -
-                    </button>
-                    <span className="text-gray-700 dark:text-gray-300 min-w-[60px] text-center">
-                      {Math.round(scale * 100)}%
-                    </span>
-                    <button
-                      onClick={() => setScale(Math.min(2.0, scale + 0.1))}
-                      className="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300
-                               hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                    >
-                      +
-                    </button>
-                  </div>
                 </div>
               </div>
 
-              <div className="flex justify-center overflow-auto max-h-[70vh]">
-                <Document
-                  file={project.pdfUrl}
-                  onLoadSuccess={onDocumentLoadSuccess}
-                  className="border border-gray-300 dark:border-gray-600 rounded-xl overflow-hidden"
-                  loading={
-                    <div className="flex items-center justify-center p-8">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
-                    </div>
-                  }
-                  error={
-                    <div className="flex flex-col items-center justify-center p-8 text-center">
-                      <div className="text-red-500 dark:text-red-400 mb-4">
-                        Impossible de charger le PDF. Veuillez réessayer plus tard.
+              <div className="flex justify-center">
+                {project.pdfUrl ? (
+                  <Document
+                    file={project.pdfUrl}
+                    onLoadSuccess={onDocumentLoadSuccess}
+                    className="border border-gray-300 dark:border-gray-600 rounded-xl overflow-hidden"
+                    loading={
+                      <div className="flex items-center justify-center p-8">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
                       </div>
-                      <button
-                        onClick={handleDownload}
-                        className="px-4 py-2 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors"
-                      >
-                        Télécharger le PDF
-                      </button>
+                    }
+                    error={
+                      <div className="flex flex-col items-center justify-center p-8 text-center">
+                        <div className="text-red-500 dark:text-red-400 mb-4">
+                          Impossible de charger le PDF. Veuillez réessayer plus tard.
+                        </div>
+                        <button
+                          onClick={handleDownload}
+                          className="px-4 py-2 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors"
+                        >
+                          Télécharger le PDF
+                        </button>
+                      </div>
+                    }
+                  >
+                    <Page
+                      pageNumber={pageNumber}
+                      scale={scale}
+                      className="shadow-lg"
+                      renderTextLayer={true}
+                      renderAnnotationLayer={true}
+                    />
+                  </Document>
+                ) : (
+                  <div className="flex flex-col items-center justify-center p-8 text-center">
+                    <div className="text-gray-500 dark:text-gray-400 mb-4">
+                      Documentation non disponible pour ce projet.
                     </div>
-                  }
-                >
-                  <Page
-                    pageNumber={pageNumber}
-                    scale={scale}
-                    className="shadow-lg"
-                    renderTextLayer={true}
-                    renderAnnotationLayer={true}
-                    width={isFullscreen ? window.innerWidth * 0.7 : undefined}
-                  />
-                </Document>
+                  </div>
+                )}
               </div>
             </div>
           </div>
