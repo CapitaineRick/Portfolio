@@ -37,245 +37,220 @@ const Education: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ma formation – BTS SIO</h2>
-          <div className="w-20 h-1 bg-orange-500 mx-auto"></div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">BTS SIO - Services Informatiques aux Organisations</h2>
+          <div className="w-20 h-1 bg-orange-500 mx-auto mb-6"></div>
+          <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Formation de niveau Bac+2 préparant aux métiers de l'informatique avec deux options distinctes : 
+            SISR (infrastructure) et SLAM (développement)
+          </p>
         </div>
         
         <div 
           ref={educationRef}
           className="transition-all duration-1000 opacity-0 translate-y-10"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Left Column - Overview */}
-            <div className="space-y-6">
-              {/* Introduction Card */}
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 transform hover:scale-[1.02] transition-all duration-300">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                    <GraduationCap className="w-6 h-6 text-orange-500" />
-                  </div>
-                  <h3 className="text-2xl font-semibold">BTS SIO</h3>
+          {/* Overview Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-all duration-300">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                  <Clock className="w-6 h-6 text-orange-500" />
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  Le BTS Services Informatiques aux Organisations est un diplôme reconnu par l'État de niveau Bac+2
-                  qui forme des professionnels de l'informatique capables de répondre aux besoins des entreprises.
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Clock className="w-5 h-5 text-orange-500" />
-                      <span className="font-medium">Durée</span>
-                    </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">2 ans de formation</p>
-                  </div>
-                  <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Users className="w-5 h-5 text-orange-500" />
-                      <span className="font-medium">Format</span>
-                    </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">Alternance</p>
-                  </div>
+                <div>
+                  <h3 className="font-semibold text-lg">Durée</h3>
+                  <p className="text-gray-600 dark:text-gray-400">2 ans de formation</p>
                 </div>
               </div>
+            </div>
 
-              {/* Key Features */}
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6">
-                <h4 className="text-xl font-semibold mb-4">Points clés de la formation</h4>
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-all duration-300">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                  <Book className="w-6 h-6 text-orange-500" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">Niveau</h3>
+                  <p className="text-gray-600 dark:text-gray-400">Bac+2 (Niveau 5)</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-all duration-300">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                  <Award className="w-6 h-6 text-orange-500" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">Diplôme</h3>
+                  <p className="text-gray-600 dark:text-gray-400">Diplôme d'État</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Specializations */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* SISR Option */}
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-xl blur opacity-50 group-hover:opacity-75 transition duration-1000"></div>
+              <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <Network className="w-12 h-12 text-orange-500" />
+                  <div>
+                    <h4 className="text-xl font-semibold">Option SISR</h4>
+                    <p className="text-orange-600 dark:text-orange-400">
+                      Solutions d'Infrastructure, Systèmes et Réseaux
+                    </p>
+                  </div>
+                </div>
+
                 <div className="space-y-4">
-                  <div className="flex items-start gap-4 p-4 bg-orange-50 dark:bg-gray-700/50 rounded-lg transform hover:scale-[1.02] transition-all duration-300">
-                    <Book className="w-6 h-6 text-orange-500 mt-1" />
-                    <div>
-                      <h5 className="font-medium mb-1">Formation technique approfondie</h5>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Apprentissage des technologies et méthodologies actuelles du marché
-                      </p>
+                  <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-2">Compétences techniques</h5>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>Administration Windows</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>Administration Linux</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>Virtualisation</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>Réseaux TCP/IP</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4 p-4 bg-orange-50 dark:bg-gray-700/50 rounded-lg transform hover:scale-[1.02] transition-all duration-300">
-                    <Briefcase className="w-6 h-6 text-orange-500 mt-1" />
-                    <div>
-                      <h5 className="font-medium mb-1">Expérience professionnelle</h5>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Stages et projets en entreprise pour une formation pratique
-                      </p>
+
+                  <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-2">Services et sécurité</h5>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>Active Directory</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>Pare-feu</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>VPN</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>Supervision</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4 p-4 bg-orange-50 dark:bg-gray-700/50 rounded-lg transform hover:scale-[1.02] transition-all duration-300">
-                    <Award className="w-6 h-6 text-orange-500 mt-1" />
-                    <div>
-                      <h5 className="font-medium mb-1">Diplôme reconnu</h5>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Certification d'État de niveau 5 (Bac+2)
-                      </p>
+
+                  <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-2">Débouchés professionnels</h5>
+                    <div className="grid grid-cols-1 gap-2">
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>Administrateur systèmes et réseaux</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>Technicien support</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>Responsable infrastructure</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-orange-500" />
+                        <span>Consultant cybersécurité</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column - Specializations */}
-            <div className="space-y-6">
-              {/* SISR Option */}
-              <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-xl blur opacity-50 group-hover:opacity-75 transition duration-1000"></div>
-                <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6">
-                  <div className="flex items-center gap-4 mb-6">
-                    <Network className="w-12 h-12 text-orange-500" />
-                    <div>
-                      <h4 className="text-xl font-semibold">Option SISR</h4>
-                      <p className="text-orange-600 dark:text-orange-400">
-                        Solutions d'Infrastructure, Systèmes et Réseaux
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                      <h5 className="font-medium mb-2">Compétences techniques</h5>
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>Administration Windows</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>Administration Linux</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>Virtualisation</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>Réseaux TCP/IP</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                      <h5 className="font-medium mb-2">Services et sécurité</h5>
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>Active Directory</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>Pare-feu</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>VPN</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>Supervision</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                      <h5 className="font-medium mb-2">Débouchés professionnels</h5>
-                      <div className="grid grid-cols-1 gap-2">
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>Administrateur systèmes et réseaux</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>Technicien support</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>Responsable infrastructure</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-orange-500" />
-                          <span>Consultant cybersécurité</span>
-                        </div>
-                      </div>
-                    </div>
+            {/* SLAM Option */}
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur opacity-50 group-hover:opacity-75 transition duration-1000"></div>
+              <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <Code className="w-12 h-12 text-blue-500" />
+                  <div>
+                    <h4 className="text-xl font-semibold">Option SLAM</h4>
+                    <p className="text-blue-600 dark:text-blue-400">
+                      Solutions Logicielles et Applications Métiers
+                    </p>
                   </div>
                 </div>
-              </div>
 
-              {/* SLAM Option */}
-              <div className="relative">
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6">
-                  <div className="flex items-center gap-4 mb-6">
-                    <Code className="w-12 h-12 text-gray-500" />
-                    <div>
-                      <h4 className="text-xl font-semibold">Option SLAM</h4>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Solutions Logicielles et Applications Métiers
-                      </p>
+                <div className="space-y-4">
+                  <div className="bg-blue-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-2">Compétences techniques</h5>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Développement Web</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Applications mobiles</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Bases de données</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Programmation objet</span>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="space-y-4">
-                    <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                      <h5 className="font-medium mb-2">Compétences techniques</h5>
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>Développement Web</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>Applications mobiles</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>Bases de données</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>Programmation objet</span>
-                        </div>
+                  <div className="bg-blue-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-2">Technologies</h5>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Java, C#, Python</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>HTML, CSS, JavaScript</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>React, Angular</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>SQL, NoSQL</span>
                       </div>
                     </div>
+                  </div>
 
-                    <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                      <h5 className="font-medium mb-2">Technologies</h5>
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>Java, C#, Python</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>HTML, CSS, JavaScript</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>React, Angular</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>SQL, NoSQL</span>
-                        </div>
+                  <div className="bg-blue-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                    <h5 className="font-medium mb-2">Débouchés professionnels</h5>
+                    <div className="grid grid-cols-1 gap-2">
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Développeur d'applications</span>
                       </div>
-                    </div>
-
-                    <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                      <h5 className="font-medium mb-2">Débouchés professionnels</h5>
-                      <div className="grid grid-cols-1 gap-2">
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>Développeur d'applications</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>Développeur Web</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>Analyste programmeur</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <ChevronRight className="w-4 h-4 text-gray-500" />
-                          <span>Chef de projet junior</span>
-                        </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Développeur Web</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Analyste programmeur</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Chef de projet junior</span>
                       </div>
                     </div>
                   </div>
