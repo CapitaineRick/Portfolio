@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { projectsData } from '../../data/projectsData';
-import { Briefcase, GraduationCap, Filter, Tags, Search, ChevronDown, ChevronUp, ExternalLink, ArrowRight, FileText } from 'lucide-react';
+import { Briefcase, GraduationCap, Filter, Tags, Search, ChevronDown, ChevronUp, ExternalLink, ArrowRight, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
@@ -18,11 +18,11 @@ const Projects: React.FC = () => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [isTagsTransitioning, setIsTagsTransitioning] = useState(false);
-  const [displayLimit, setDisplayLimit] = useState(9);
+  const [currentPage, setCurrentPage] = useState(1);
+  const projectsPerPage = 9;
 
   const handleTagClick = (tag: string) => {
     setSelectedTag(selectedTag === tag ? null : tag);
-    setDisplayLimit(9); // Reset display limit when changing filters
   };
 
   const handleDocClick = (projectId: string) => {
@@ -30,7 +30,6 @@ const Projects: React.FC = () => {
     setPageNumber(1);
   };
 
-  // Get available tags based on selected type
   const getAvailableTags = () => {
     let projects = [];
     if (selectedType === 'all') {
@@ -65,12 +64,15 @@ const Projects: React.FC = () => {
     return projects;
   })();
 
-  // Get displayed projects based on limit
-  const displayedProjects = filteredProjects.slice(0, displayLimit);
-  const hasMoreProjects = filteredProjects.length > displayLimit;
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+  const displayedProjects = filteredProjects.slice(
+    (currentPage - 1) * projectsPerPage,
+    currentPage * projectsPerPage
+  );
 
-  const handleShowMore = () => {
-    setDisplayLimit(prev => prev + 9);
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
@@ -78,20 +80,20 @@ const Projects: React.FC = () => {
   }
 
   useEffect(() => {
-    // Trigger animation when type changes
+    setCurrentPage(1);
+  }, [selectedTag, selectedType, searchTerm]);
+
+  useEffect(() => {
     setIsTagsTransitioning(true);
     const timer = setTimeout(() => setIsTagsTransitioning(false), 300);
     return () => clearTimeout(timer);
   }, [selectedType]);
 
   useEffect(() => {
-    // Reset selected tag if it's not available in current type
     const availableTags = getAvailableTags();
     if (selectedTag && !availableTags.includes(selectedTag)) {
       setSelectedTag(null);
     }
-    // Reset display limit when changing type
-    setDisplayLimit(9);
   }, [selectedType]);
 
   useEffect(() => {
@@ -137,12 +139,10 @@ const Projects: React.FC = () => {
           </p>
         </div>
 
-        {/* Modern Search Interface */}
         <div className="mb-12">
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
             <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8">
-              {/* Search Bar */}
               <div className="relative mb-8">
                 <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
                   <Search className="h-6 w-6 text-gray-400" />
@@ -151,10 +151,7 @@ const Projects: React.FC = () => {
                   type="text"
                   placeholder="Rechercher un projet par nom, description ou technologie..."
                   value={searchTerm}
-                  onChange={(e) => {
-                    setSearchTerm(e.target.value);
-                    setDisplayLimit(9); // Reset display limit when searching
-                  }}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-14 pr-4 py-4 rounded-2xl bg-gray-50 dark:bg-gray-700/50 
                            border-2 border-gray-200 dark:border-gray-600 
                            focus:ring-4 focus:ring-orange-500/20 focus:border-orange-500
@@ -163,7 +160,6 @@ const Projects: React.FC = () => {
                 />
               </div>
 
-              {/* Project Types */}
               <div className="space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <Filter className="w-5 h-5 text-orange-500" />
@@ -205,7 +201,6 @@ const Projects: React.FC = () => {
                 </div>
               </div>
 
-              {/* Active Filters Display */}
               {(selectedType !== 'all' || selectedTag || searchTerm) && (
                 <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
@@ -234,7 +229,6 @@ const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Technologies Filter */}
         <div className="mb-12">
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
@@ -269,7 +263,6 @@ const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Projects Grid */}
         <div 
           ref={projectsRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 opacity-0 translate-y-10"
@@ -458,17 +451,42 @@ const Projects: React.FC = () => {
                 </div>
               ))}
 
-              {/* Show More Button */}
-              {hasMoreProjects && (
-                <div className="col-span-full flex justify-center mt-8">
+              {totalPages > 1 && (
+                <div className="col-span-full flex justify-center items-center gap-4 mt-12">
                   <button
-                    onClick={handleShowMore}
-                    className="px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl
-                              hover:opacity-90 transform hover:scale-105 transition-all duration-300
-                              flex items-center gap-2"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 
+                             disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300
+                             hover:bg-orange-100 dark:hover:bg-orange-900/50"
                   >
-                    Voir plus de projets
-                    <ChevronDown className="w-5 h-5" />
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+
+                  <div className="flex items-center gap-2">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`w-10 h-10 rounded-xl font-medium transition-all duration-300 ${
+                          currentPage === page
+                            ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white'
+                            : 'bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/50'
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 
+                             disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300
+                             hover:bg-orange-100 dark:hover:bg-orange-900/50"
+                  >
+                    <ChevronRight className="w-5 h-5" />
                   </button>
                 </div>
               )}
