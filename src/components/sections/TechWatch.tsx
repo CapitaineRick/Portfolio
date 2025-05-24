@@ -279,7 +279,7 @@ const TechWatch: React.FC = () => {
 
                     <div className="prose dark:prose-invert max-w-none">
                       <pre 
-                        className={`whitespace-pre-wrap font-sans text-sm bg-gray-50 dark:bg-gray-900 p-4 rounded-lg overflow-hidden transition-all duration-300 ${
+                        className={`whitespace-pre-wrap font-sans text-sm bg-gray-100 dark:bg-gray-900 p-4 rounded-lg overflow-hidden transition-all duration-300 text-gray-900 dark:text-gray-100 ${
                           expandedArticles[item.title] ? 'max-h-[2000px]' : 'max-h-[200px]'
                         }`}
                       >
