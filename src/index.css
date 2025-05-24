@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Smooth transitions for all elements */
+* {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Blob animation */
 @keyframes blob {
   0% {
     transform: translate(0px, 0px) scale(1);
@@ -27,4 +38,94 @@
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+/* Smooth fade-in animation for sections */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add smooth transitions for theme changes */
+.dark {
+  @apply transition-colors duration-500;
+}
+
+/* Smooth hover effects */
+.hover-lift {
+  @apply transition-transform duration-300 ease-out hover:scale-105;
+}
+
+/* Gradient text animation */
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Smooth section transitions */
+section {
+  @apply transition-opacity duration-500 ease-in-out;
+}
+
+/* Smooth background blur transitions */
+.backdrop-blur {
+  @apply transition-[backdrop-filter] duration-300;
+}
+
+/* Smooth card hover effects */
+.card-hover {
+  @apply transition-all duration-300 ease-out hover:transform hover:scale-[1.02] hover:shadow-lg;
+}
+
+/* Smooth button transitions */
+button {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Smooth image hover effects */
+img {
+  @apply transition-transform duration-500 ease-out;
+}
+
+/* Smooth color transitions */
+.text-transition {
+  @apply transition-colors duration-300;
+}
+
+/* Smooth border transitions */
+.border-transition {
+  @apply transition-[border-color] duration-300;
+}
+
+/* Smooth shadow transitions */
+.shadow-transition {
+  @apply transition-shadow duration-300;
+}
+
+/* Smooth background transitions */
+.bg-transition {
+  @apply transition-[background-color] duration-300;
+}
+
+/* Smooth opacity transitions */
+.opacity-transition {
+  @apply transition-opacity duration-300;
 }
