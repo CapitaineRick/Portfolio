@@ -247,6 +247,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                       className="mx-auto"
                       renderTextLayer={true}
                       renderAnnotationLayer={true}
+                      height={600} // Increased height for better visibility
                     />
                   </Document>
                 </div>
