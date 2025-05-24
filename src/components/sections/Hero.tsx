@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Database, Code, Monitor, Network } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -11,15 +10,6 @@ const Hero: React.FC = () => {
         if (entry.isIntersecting) {
           entry.target.classList.add('opacity-100', 'translate-y-0');
           entry.target.classList.remove('opacity-0', 'translate-y-10');
-          
-          iconRefs.current.forEach((icon, index) => {
-            if (icon) {
-              setTimeout(() => {
-                icon.classList.add('opacity-100', 'scale-100', 'translate-y-0');
-                icon.classList.remove('opacity-0', 'scale-95', 'translate-y-10');
-              }, index * 150);
-            }
-          });
         }
       },
       { threshold: 0.1 }
@@ -67,10 +57,11 @@ const Hero: React.FC = () => {
           ref={heroRef}
           className="flex flex-col lg:flex-row items-center gap-12 transition-all duration-1000 opacity-0 translate-y-10"
         >
-          <div className="lg:w-3/5 space-y-8">
+          {/* Left Column */}
+          <div className="lg:w-1/2 space-y-8">
             <div className="space-y-6 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-sm font-medium">
-                <Monitor className="w-4 h-4" />
+                <Server className="w-4 h-4" />
                 BTS SIO SISR - Administrateur Systèmes & Réseaux
               </div>
               
@@ -81,50 +72,6 @@ const Hero: React.FC = () => {
                 <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300">
                   Étudiant passionné par l'infrastructure IT & la cybersécurité
                 </p>
-              </div>
-
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Mes domaines d'expertise
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-                  <div className="flex items-start gap-3">
-                    <Server className="w-5 h-5 text-orange-500 mt-1" />
-                    <div>
-                      <h3 className="font-medium">Infrastructure</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Windows Server, Linux, VMware, Proxmox
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Shield className="w-5 h-5 text-orange-500 mt-1" />
-                    <div>
-                      <h3 className="font-medium">Sécurité</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Pare-feu, VPN, Monitoring, Audit
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Network className="w-5 h-5 text-orange-500 mt-1" />
-                    <div>
-                      <h3 className="font-medium">Réseaux</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Cisco, pfSense, VLAN, Routage
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Terminal className="w-5 h-5 text-orange-500 mt-1" />
-                    <div>
-                      <h3 className="font-medium">Automatisation</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        PowerShell, Bash, Python, Ansible
-                      </p>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
@@ -170,93 +117,89 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:w-2/5 relative">
+          {/* Right Column */}
+          <div className="lg:w-1/2 relative">
             <div className="absolute -top-20 -right-20 w-64 h-64 bg-orange-500/10 rounded-full filter blur-3xl"></div>
             <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-blue-500/10 rounded-full filter blur-3xl"></div>
             
             <div className="relative bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-gray-200/50 dark:border-gray-700/50">
-              <div className="grid grid-cols-2 gap-6">
-                {[
-                  { 
-                    icon: Server, 
-                    label: 'Infrastructure', 
-                    gradient: 'from-orange-500 to-red-500',
-                    description: 'Administration système Windows & Linux'
-                  },
-                  { 
-                    icon: Shield, 
-                    label: 'Sécurité', 
-                    gradient: 'from-blue-500 to-cyan-500',
-                    description: 'Protection et audit des systèmes'
-                  },
-                  { 
-                    icon: Network, 
-                    label: 'Réseaux', 
-                    gradient: 'from-green-500 to-emerald-500',
-                    description: 'Configuration et maintenance'
-                  },
-                  { 
-                    icon: Terminal, 
-                    label: 'DevOps', 
-                    gradient: 'from-purple-500 to-pink-500',
-                    description: 'Automatisation et scripts'
-                  }
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    ref={el => iconRefs.current[index] = el}
-                    className="relative group"
-                  >
-                    <div className={`
-                      w-full aspect-square rounded-2xl
-                      bg-gradient-to-br ${item.gradient}
-                      p-0.5 transition-all duration-300
-                      opacity-0 scale-95 translate-y-10
-                      group-hover:scale-105 cursor-pointer
-                    `}>
-                      <div className="w-full h-full rounded-2xl bg-white dark:bg-gray-800 p-6
-                                    flex flex-col items-center justify-center gap-4
-                                    border border-gray-100 dark:border-gray-700">
-                        <item.icon className="w-12 h-12 transition-transform duration-300
-                                            group-hover:scale-110 group-hover:rotate-6" />
-                        <div className="text-center">
-                          <div className="font-medium text-gray-900 dark:text-white mb-1">
-                            {item.label}
+              <div className="space-y-8">
+                {/* Featured Skills */}
+                <div className="grid grid-cols-2 gap-6">
+                  {[
+                    { 
+                      icon: Server, 
+                      label: 'Infrastructure', 
+                      gradient: 'from-orange-500 to-red-500',
+                      description: 'Administration système Windows & Linux'
+                    },
+                    { 
+                      icon: Shield, 
+                      label: 'Sécurité', 
+                      gradient: 'from-blue-500 to-cyan-500',
+                      description: 'Protection et audit des systèmes'
+                    },
+                    { 
+                      icon: Network, 
+                      label: 'Réseaux', 
+                      gradient: 'from-green-500 to-emerald-500',
+                      description: 'Configuration et maintenance'
+                    },
+                    { 
+                      icon: Terminal, 
+                      label: 'DevOps', 
+                      gradient: 'from-purple-500 to-pink-500',
+                      description: 'Automatisation et scripts'
+                    }
+                  ].map((item, index) => (
+                    <div
+                      key={index}
+                      className="relative group"
+                    >
+                      <div className={`
+                        w-full aspect-square rounded-2xl
+                        bg-gradient-to-br ${item.gradient}
+                        p-0.5 transition-all duration-300
+                        group-hover:scale-105 cursor-pointer
+                      `}>
+                        <div className="w-full h-full rounded-2xl bg-white dark:bg-gray-800 p-6
+                                      flex flex-col items-center justify-center gap-4
+                                      border border-gray-100 dark:border-gray-700">
+                          <item.icon className="w-12 h-12 transition-transform duration-300
+                                              group-hover:scale-110 group-hover:rotate-6" />
+                          <div className="text-center">
+                            <div className="font-medium text-gray-900 dark:text-white mb-1">
+                              {item.label}
+                            </div>
+                            <p className="text-xs text-gray-600 dark:text-gray-400">
+                              {item.description}
+                            </p>
                           </div>
-                          <p className="text-xs text-gray-600 dark:text-gray-400">
-                            {item.description}
-                          </p>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 p-6 bg-gradient-to-br from-orange-500/5 to-purple-500/5 rounded-xl border border-gray-200/50 dark:border-gray-700/50">
-                <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
-                  Technologies maîtrisées
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    'Windows Server',
-                    'Linux',
-                    'VMware',
-                    'Proxmox',
-                    'Active Directory',
-                    'Docker',
-                    'pfSense',
-                    'PowerShell',
-                    'Python'
-                  ].map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 text-sm bg-white/50 dark:bg-gray-700/50 rounded-full
-                                text-gray-700 dark:text-gray-300 border border-gray-200/50 dark:border-gray-600/50"
-                    >
-                      {tech}
-                    </span>
                   ))}
+                </div>
+
+                {/* Current Focus */}
+                <div className="bg-gradient-to-br from-orange-500/5 to-purple-500/5 rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+                    Objectifs professionnels
+                  </h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                      <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                      Devenir expert en sécurité des systèmes
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                      <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                      Spécialisation en pentesting
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                      Certification en cybersécurité
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
