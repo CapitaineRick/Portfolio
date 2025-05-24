@@ -14,9 +14,12 @@ export default function PdfViewer({ file }) {
   };
 
 const handleDownload = () => {
+  if (!file) return;
+
+  const link = document.createElement('a');
+
   if (file instanceof Blob) {
     const blobUrl = URL.createObjectURL(file);
-    const link = document.createElement('a');
     link.href = blobUrl;
     link.download = file.name || 'document.pdf';
     document.body.appendChild(link);
@@ -24,15 +27,17 @@ const handleDownload = () => {
     document.body.removeChild(link);
     URL.revokeObjectURL(blobUrl);
   } else if (typeof file === 'string') {
-    // URL distante
-    const link = document.createElement('a');
     link.href = file;
     link.download = file.split('/').pop() || 'document.pdf';
+    link.target = '_blank';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  } else {
+    console.error("Type de fichier non pris en charge pour le téléchargement");
   }
 };
+
 
 
 
