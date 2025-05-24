@@ -1,9 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Award, Book, Code, Monitor, Server, Shield, Briefcase, GraduationCap } from 'lucide-react';
 
 const About: React.FC = () => {
-  const [showPastEducation, setShowPastEducation] = useState(false);
-  const [showCertifications, setShowCertifications] = useState(false);
+  const [showPastEducation, setShowPastEducation] = React.useState(false);
+  const [showCertifications, setShowCertifications] = React.useState(false);
+  const aboutRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          entry.target.classList.remove('opacity-0', 'translate-y-10');
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (aboutRef.current) {
+      observer.observe(aboutRef.current);
+    }
+
+    return () => {
+      if (aboutRef.current) {
+        observer.unobserve(aboutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <section id="about" className="py-16 md:py-24">
@@ -14,6 +37,7 @@ const About: React.FC = () => {
         </div>
         
         <div 
+          ref={aboutRef}
           className="transition-all duration-1000 opacity-0 translate-y-10"
         >
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 transition-all duration-300">
