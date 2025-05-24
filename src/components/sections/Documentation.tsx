@@ -6,7 +6,6 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
-// Set worker URL for PDF.js
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 const Documentation: React.FC = () => {
@@ -18,7 +17,6 @@ const Documentation: React.FC = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [scale, setScale] = useState(1.0);
   
-  // Find the current project based on selection
   const project = projectsData[selectedCategory].find(p => p.id === selectedProject);
 
   const handlePrevious = () => {
@@ -37,7 +35,6 @@ const Documentation: React.FC = () => {
     setIsTransitioning(true);
     setTimeout(() => {
       setSelectedCategory(category);
-      // Set the first project of the selected category as default
       setSelectedProject(projectsData[category][0].id);
       setPageNumber(1);
       setIsTransitioning(false);
@@ -104,22 +101,27 @@ const Documentation: React.FC = () => {
     <section id="documentation" className={`py-16 md:py-24 ${isFullscreen ? 'fixed inset-0 bg-white dark:bg-gray-900 z-50 overflow-auto' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Documentations</h2>
-          <div className="w-20 h-1 bg-orange-500 mx-auto"></div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-purple-600">
+            Documentations
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
+          <p className="text-lg text-gray-800 dark:text-gray-300 max-w-3xl mx-auto font-medium">
+            Consultez mes documentations techniques détaillées sur différents projets et technologies
+          </p>
         </div>
         
         <div 
           ref={docsRef}
-          className="transition-all duration-1000 opacity-0 translate-y-10"
+          className="transition-all duration-300 opacity-0 translate-y-10"
         >
           {/* Category Selector */}
           <div className="flex justify-center gap-4 mb-8">
             <button
               onClick={() => handleCategoryChange('enterprise')}
-              className={`flex items-center px-4 py-2 rounded-lg transition-all ${
+              className={`flex items-center px-4 py-2 rounded-xl transition-all ${
                 selectedCategory === 'enterprise'
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                  ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               <Briefcase className="w-5 h-5 mr-2" />
@@ -127,10 +129,10 @@ const Documentation: React.FC = () => {
             </button>
             <button
               onClick={() => handleCategoryChange('school')}
-              className={`flex items-center px-4 py-2 rounded-lg transition-all ${
+              className={`flex items-center px-4 py-2 rounded-xl transition-all ${
                 selectedCategory === 'school'
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                  ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               <GraduationCap className="w-5 h-5 mr-2" />
@@ -143,7 +145,10 @@ const Documentation: React.FC = () => {
             <select
               value={selectedProject}
               onChange={(e) => handleProjectChange(e.target.value)}
-              className="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-center"
+              className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-600 
+                       bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white
+                       focus:ring-2 focus:ring-orange-500 focus:border-transparent
+                       text-center transition-all duration-300"
             >
               {projectsData[selectedCategory].map(p => (
                 <option key={p.id} value={p.id}>
@@ -154,64 +159,70 @@ const Documentation: React.FC = () => {
           </div>
           
           {/* PDF Viewer */}
-          <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-xl p-4 transition-all duration-300 ${
-            isFullscreen ? 'fixed inset-4 z-50 overflow-auto' : ''
-          }`}>
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-2xl font-bold text-orange-500">{project.title}</h3>
-              <div className="flex gap-2">
-                <button
-                  onClick={handleDownload}
-                  className="p-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600"
-                  title="Télécharger le PDF"
-                >
-                  <Download size={20} />
-                </button>
-                <button
-                  onClick={toggleFullscreen}
-                  className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
-                >
-                  {isFullscreen ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
-                </button>
+          <div className={`relative group ${isFullscreen ? 'fixed inset-4 z-50 overflow-auto' : ''}`}>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+            <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{project.title}</h3>
+                <div className="flex gap-2">
+                  <button
+                    onClick={handleDownload}
+                    className="p-2 rounded-xl bg-gradient-to-r from-orange-500 to-purple-500 text-white hover:opacity-90 transition-all duration-300"
+                    title="Télécharger le PDF"
+                  >
+                    <Download size={20} />
+                  </button>
+                  <button
+                    onClick={toggleFullscreen}
+                    className="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
+                             hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
+                  >
+                    {isFullscreen ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div className="flex justify-center mb-4">
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={handlePrevious}
-                  disabled={pageNumber <= 1}
-                  className="p-2 rounded-lg bg-orange-500 text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <span>
-                  Page {pageNumber} sur {numPages}
-                </span>
-                <button
-                  onClick={handleNext}
-                  disabled={numPages === null || pageNumber >= numPages}
-                  className="p-2 rounded-lg bg-orange-500 text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
-                >
-                  <ChevronRight size={20} />
-                </button>
+              <div className="flex justify-center mb-6">
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={handlePrevious}
+                    disabled={pageNumber <= 1}
+                    className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 
+                             disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300
+                             hover:bg-orange-100 dark:hover:bg-orange-900/50"
+                  >
+                    <ChevronLeft size={20} />
+                  </button>
+                  <span className="text-gray-700 dark:text-gray-300 font-medium">
+                    Page {pageNumber} sur {numPages}
+                  </span>
+                  <button
+                    onClick={handleNext}
+                    disabled={numPages === null || pageNumber >= numPages}
+                    className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 
+                             disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300
+                             hover:bg-orange-100 dark:hover:bg-orange-900/50"
+                  >
+                    <ChevronRight size={20} />
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div className="flex justify-center">
-              <Document
-                file={project.pdfUrl}
-                onLoadSuccess={onDocumentLoadSuccess}
-                className="border rounded-lg overflow-hidden"
-              >
-                <Page
-                  pageNumber={pageNumber}
-                  scale={scale}
-                  className="shadow-lg"
-                  renderTextLayer={true}
-                  renderAnnotationLayer={true}
-                />
-              </Document>
+              <div className="flex justify-center">
+                <Document
+                  file={project.pdfUrl}
+                  onLoadSuccess={onDocumentLoadSuccess}
+                  className="border border-gray-300 dark:border-gray-600 rounded-xl overflow-hidden"
+                >
+                  <Page
+                    pageNumber={pageNumber}
+                    scale={scale}
+                    className="shadow-lg"
+                    renderTextLayer={true}
+                    renderAnnotationLayer={true}
+                  />
+                </Document>
+              </div>
             </div>
           </div>
         </div>
