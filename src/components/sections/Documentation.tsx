@@ -3,12 +3,8 @@ import { projectsData } from '../../data/projectsData';
 import { ChevronLeft, ChevronRight, Briefcase, GraduationCap, Maximize2, Minimize2, Download } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page, pdfjs } from 'react-pdf';
-console.log('PDFJS:', pdfjs);
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
-
-// Configure PDF.js worker with the correct version
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const Documentation: React.FC = () => {
   const docsRef = useRef<HTMLDivElement>(null);
@@ -20,6 +16,10 @@ const Documentation: React.FC = () => {
   const [scale, setScale] = useState(1.0);
   
   const project = projectsData[selectedCategory].find(p => p.id === selectedProject);
+
+  useEffect(() => {
+    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+  }, []);
 
   const handlePrevious = () => {
     if (pageNumber > 1) {
