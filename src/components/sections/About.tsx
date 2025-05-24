@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Award, Book, Code, Monitor, Server, Shield, Briefcase, GraduationCap, ChevronDown, ChevronUp, User } from 'lucide-react';
+import { Award, Book, Code, Monitor, Server, Shield, Briefcase, GraduationCap, ChevronDown, ChevronUp, User, MapPin, Calendar, Mail, Phone, Globe, FileText } from 'lucide-react';
 
 const About: React.FC = () => {
   const [showPastEducation, setShowPastEducation] = React.useState(false);
@@ -30,419 +30,468 @@ const About: React.FC = () => {
 
   return (
     <section id="about" className="py-16 md:py-24 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 -left-4 w-72 h-72 bg-orange-200/30 dark:bg-orange-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
-        <div className="absolute -bottom-8 -right-4 w-72 h-72 bg-blue-200/30 dark:bg-blue-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
-        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-purple-200/30 dark:bg-purple-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000" />
+      {/* Background decorative elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-orange-50/20 to-purple-50/20 dark:from-orange-900/20 dark:to-purple-900/20" />
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl animate-pulse animation-delay-2000" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">À propos</h2>
-          <div className="w-20 h-1 bg-orange-500 mx-auto"></div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-purple-600">
+            À propos de moi
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
         </div>
         
         <div 
           ref={aboutRef}
           className="transition-all duration-1000 opacity-0 translate-y-10"
         >
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-xl shadow-xl p-8 transition-all duration-300">
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-              {/* Profile Section */}
-              <div className="md:w-1/3">
-                <div className="relative group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full blur opacity-50 group-hover:opacity-75 transition duration-1000"></div>
-                  <div className="relative w-48 h-48 mx-auto rounded-full overflow-hidden bg-gradient-to-br from-orange-400 to-orange-600">
-                    <div className="w-full h-full flex items-center justify-center bg-white dark:bg-gray-800">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Profile Card - Left Column */}
+            <div className="lg:col-span-4">
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
+                  {/* Profile Image */}
+                  <div className="relative w-48 h-48 mx-auto mb-6">
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-purple-500 rounded-full animate-spin-slow"></div>
+                    <div className="absolute inset-1 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center">
                       <User className="w-24 h-24 text-orange-500" />
                     </div>
                   </div>
-                </div>
 
-                {/* Quick Stats */}
-                <div className="mt-8 space-y-4">
-                  <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-4">
-                    <div className="flex items-center gap-3">
-                      <GraduationCap className="w-6 h-6 text-orange-500" />
-                      <div>
-                        <h4 className="font-medium">Formation</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">BTS SIO SISR</p>
+                  {/* Personal Info */}
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-bold mb-2">Fernandes Sébastien</h3>
+                    <p className="text-orange-500 dark:text-orange-400 font-medium">
+                      Étudiant en BTS SIO SISR
+                    </p>
+                  </div>
+
+                  {/* Contact Details */}
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                        <MapPin className="w-4 h-4 text-orange-500" />
                       </div>
+                      <span>Versailles, France</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                        <Mail className="w-4 h-4 text-orange-500" />
+                      </div>
+                      <a href="mailto:sebastien.78.fernandes@outlook.fr" className="hover:text-orange-500">
+                        sebastien.78.fernandes@outlook.fr
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                        <Globe className="w-4 h-4 text-orange-500" />
+                      </div>
+                      <a href="https://github.com/CapitaineRick" target="_blank" rel="noopener noreferrer" className="hover:text-orange-500">
+                        github.com/CapitaineRick
+                      </a>
                     </div>
                   </div>
-                  <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-4">
-                    <div className="flex items-center gap-3">
-                      <Briefcase className="w-6 h-6 text-orange-500" />
-                      <div>
-                        <h4 className="font-medium">Expérience</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">2 stages professionnels</p>
-                      </div>
+
+                  {/* Quick Stats */}
+                  <div className="grid grid-cols-2 gap-4 mt-6">
+                    <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
+                      <div className="text-2xl font-bold text-orange-500">2+</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Années d'études</div>
+                    </div>
+                    <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
+                      <div className="text-2xl font-bold text-orange-500">15+</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Projets</div>
+                    </div>
+                    <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
+                      <div className="text-2xl font-bold text-orange-500">3+</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Certifications</div>
+                    </div>
+                    <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
+                      <div className="text-2xl font-bold text-orange-500">2</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Stages</div>
                     </div>
                   </div>
-                  <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-4">
-                    <div className="flex items-center gap-3">
-                      <Award className="w-6 h-6 text-orange-500" />
-                      <div>
-                        <h4 className="font-medium">Certifications</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">3+ certifications techniques</p>
+
+                  {/* Download CV Button */}
+                  <button className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+                    <FileText className="w-5 h-5" />
+                    Télécharger mon CV
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Main Content - Right Column */}
+            <div className="lg:col-span-8 space-y-8">
+              {/* About Me Section */}
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl">
+                      <User className="w-6 h-6 text-orange-500" />
+                    </div>
+                    <h3 className="text-2xl font-bold">Qui suis-je ?</h3>
+                  </div>
+
+                  <div className="space-y-4">
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                      Je suis un étudiant passionné en BTS SIO avec une spécialisation en SISR à l'IPSSI de Saint Quentin en Yvelines. 
+                      Ma formation me permet d'acquérir des compétences techniques solides dans la conception, le déploiement et la maintenance 
+                      d'infrastructures informatiques.
+                    </p>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                      Mon objectif est de devenir administrateur systèmes & réseaux ou dans plusieurs années pentester, en mettant à profit 
+                      ma rigueur, ma logique et mon autonomie.
+                    </p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                      <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-700/50 dark:to-gray-700/30 p-6 rounded-xl">
+                        <h4 className="font-semibold text-lg mb-4 text-orange-600 dark:text-orange-400">Points forts</h4>
+                        <ul className="space-y-3">
+                          <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                            <span>Autonomie</span>
+                          </li>
+                          <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                            <span>Rigueur</span>
+                          </li>
+                          <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                            <span>Esprit d'équipe</span>
+                          </li>
+                          <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                            <span>Capacité d'adaptation</span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-gray-700/50 dark:to-gray-700/30 p-6 rounded-xl">
+                        <h4 className="font-semibold text-lg mb-4 text-purple-600 dark:text-purple-400">Centres d'intérêt</h4>
+                        <ul className="space-y-3">
+                          <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                            <span>Cybersécurité</span>
+                          </li>
+                          <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                            <span>Nouvelles technologies</span>
+                          </li>
+                          <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                            <span>Veille technologique</span>
+                          </li>
+                          <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                            <span>Administration système</span>
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              
-              {/* Main Content */}
-              <div className="md:w-2/3">
-                {/* About Me Section */}
-                <div className="mb-8">
-                  <div className="bg-gradient-to-r from-orange-500 to-purple-500 p-[1px] rounded-xl">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6">
-                      <h3 className="text-2xl font-semibold mb-4 flex items-center">
-                        <User className="w-6 h-6 text-orange-500 mr-2" />
-                        Qui suis-je ?
-                      </h3>
-                      <p className="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">
-                        Je suis un étudiant passionné en BTS SIO avec une spécialisation en SISR à l'IPSSI de Saint Quentin en Yvelines. 
-                        Ma formation me permet d'acquérir des compétences techniques solides dans la conception, le déploiement et la maintenance 
-                        d'infrastructures informatiques.
-                      </p>
-                      <p className="mb-6 text-gray-700 dark:text-gray-300 leading-relaxed">
-                        Mon objectif est de devenir administrateur systèmes & réseaux ou dans plusieurs années pentester, en mettant à profit 
-                        ma rigueur, ma logique et mon autonomie.
-                      </p>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                          <h4 className="font-medium mb-2 text-orange-600 dark:text-orange-400">Points forts</h4>
-                          <ul className="space-y-2">
-                            <li className="flex items-center gap-2 text-sm">
-                              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                              Autonomie
-                            </li>
-                            <li className="flex items-center gap-2 text-sm">
-                              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                              Rigueur
-                            </li>
-                            <li className="flex items-center gap-2 text-sm">
-                              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                              Esprit d'équipe
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                          <h4 className="font-medium mb-2 text-orange-600 dark:text-orange-400">Centres d'intérêt</h4>
-                          <ul className="space-y-2">
-                            <li className="flex items-center gap-2 text-sm">
-                              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                              Cybersécurité
-                            </li>
-                            <li className="flex items-center gap-2 text-sm">
-                              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                              Nouvelles technologies
-                            </li>
-                            <li className="flex items-center gap-2 text-sm">
-                              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                              Veille technologique
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
+              {/* Education Timeline */}
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
+                      <GraduationCap className="w-6 h-6 text-blue-500" />
                     </div>
+                    <h3 className="text-2xl font-bold">Parcours Académique</h3>
                   </div>
-                </div>
 
-                {/* Education Section */}
-                <div className="mb-8">
-                  <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-[1px] rounded-xl">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6">
-                      <h3 className="text-2xl font-semibold mb-4 flex items-center">
-                        <GraduationCap className="w-6 h-6 text-orange-500 mr-2" />
-                        Parcours Académique
-                      </h3>
-                      <div className="space-y-6">
-                        {/* BTS SIO */}
-                        <div className="relative">
-                          <div className="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-orange-500 to-purple-500"></div>
-                          <div className="pl-6">
-                            <div className="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-orange-500"></div>
-                            <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6">
-                              <div className="flex items-center mb-4">
-                                <img 
-                                  src="https://www.ecole-ipssi.com/wp-content/uploads/2020/01/logo-ipssi-1.png"
-                                  alt="IPSSI"
-                                  className="w-24 h-auto mr-4"
-                                />
-                                <div>
-                                  <h4 className="text-xl font-semibold">BTS SIO - Option SISR</h4>
-                                  <p className="text-gray-600 dark:text-gray-400">IPSSI, Saint-Quentin-en-Yvelines (2023-2025)</p>
-                                </div>
-                              </div>
-                              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                                Services Informatiques aux Organisations - Solutions d'Infrastructure, Systèmes et Réseaux
-                              </p>
-                              <ul className="mt-3 space-y-1 text-sm text-gray-600 dark:text-gray-300">
-                                <li className="flex items-center gap-2">
-                                  <Server className="w-4 h-4 text-orange-500" />
-                                  Administration systèmes et réseaux
-                                </li>
-                                <li className="flex items-center gap-2">
-                                  <Shield className="w-4 h-4 text-orange-500" />
-                                  Sécurité des infrastructures
-                                </li>
-                                <li className="flex items-center gap-2">
-                                  <Monitor className="w-4 h-4 text-orange-500" />
-                                  Virtualisation et Cloud Computing
-                                </li>
-                                <li className="flex items-center gap-2">
-                                  <Code className="w-4 h-4 text-orange-500" />
-                                  Support et maintenance informatique
-                                </li>
-                              </ul>
-                              <div className="mt-3 flex items-center">
-                                <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-full text-sm font-medium">
-                                  En cours
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                  <div className="relative">
+                    <div className="absolute left-8 top-0 h-full w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
 
-                        {/* Bac STI2D */}
-                        <div className="relative">
-                          <div className="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-orange-500 to-purple-500"></div>
-                          <div className="pl-6">
-                            <div className="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-orange-500"></div>
-                            <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6">
-                              <div className="flex items-center mb-4">
-                                <img 
-                                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Logo_JF_Versailles.png/640px-Logo_JF_Versailles.png"
-                                  alt="Lycée Jules Ferry"
-                                  className="w-24 h-auto mr-4"
-                                />
-                                <div>
-                                  <h4 className="text-xl font-semibold">Baccalauréat STI2D - Option SIN</h4>
-                                  <p className="text-gray-600 dark:text-gray-400">Lycée Jules Ferry, Versailles (2021-2023)</p>
-                                </div>
-                              </div>
-                              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                                Sciences et Technologies de l'Industrie et du Développement Durable - Systèmes d'Information et Numérique
-                              </p>
-                              <div className="mt-3 flex items-center">
-                                <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full text-sm font-medium">
-                                  Mention Bien
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Brevet */}
-                        <div className="relative">
-                          <div className="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-orange-500 to-purple-500"></div>
-                          <div className="pl-6">
-                            <div className="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-orange-500"></div>
-                            <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6">
-                              <div className="flex items-center mb-4">
-                                <img 
-                                  src="https://www.education.gouv.fr/sites/default/files/styles/image_bandeau/public/2020-02/college-jean-philippe-rameau-versailles-78000-51585.jpg"
-                                  alt="Collège Jean-Philippe Rameau"
-                                  className="w-24 h-auto mr-4 rounded"
-                                />
-                                <div>
-                                  <h4 className="text-xl font-semibold">Brevet des Collèges</h4>
-                                  <p className="text-gray-600 dark:text-gray-400">Collège Jean-Philippe Rameau, Versailles (2017-2021)</p>
-                                </div>
-                              </div>
-                              <div className="mt-3 flex items-center">
-                                <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full text-sm font-medium">
-                                  Mention Très Bien
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Collapsible Past Education */}
-                        <div className="relative">
-                          <button
-                            onClick={() => setShowPastEducation(!showPastEducation)}
-                            className="w-full flex items-center justify-center gap-2 py-2 text-orange-500 hover:text-orange-600 transition-colors"
-                          >
-                            {showPastEducation ? (
-                              <>
-                                <ChevronUp size={20} />
-                                <span>Masquer les formations non terminé</span>
-                              </>
-                            ) : (
-                              <>
-                                <ChevronDown size={20} />
-                                <span>Afficher les formations non terminé</span>
-                              </>
-                            )}
-                          </button>
-
-                          <div className={`transition-all duration-300 ${showPastEducation ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-                            {/* BTS SNIR - Non validé */}
-                            <div className="relative">
-                              <div className="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-orange-500 to-purple-500"></div>
-                              <div className="pl-6">
-                                <div className="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-orange-500"></div>
-                                <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6">
-                                  <div className="flex items-center mb-4">
-                                    <img 
-                                      src="https://www.lyc-vaucanson-versailles.ac-versailles.fr/sites/lyc-vaucanson-versailles/local/cache-vignettes/L144xH144/siteon0-e0d79.png"
-                                      alt="Lycée Vaucanson"
-                                      className="w-24 h-auto mr-4"
-                                    />
-                                    <div>
-                                      <h4 className="text-xl font-semibold">BTS SNIR</h4>
-                                      <p className="text-gray-600 dark:text-gray-400">Lycée Vaucanson, Versailles (2022-2023)</p>
-                                    </div>
-                                  </div>
-                                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                                    Systèmes Numériques option Informatique et Réseaux
-                                  </p>
-                                  <div className="mt-3 flex items-center">
-                                    <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full text-sm font-medium">
-                                      Non validé
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Certifications Section */}
-                <div className="mb-8">
-                  <div className="bg-gradient-to-r from-green-500 to-blue-500 p-[1px] rounded-xl">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6">
-                      <h3 className="text-2xl font-semibold mb-4 flex items-center">
-                        <Award className="w-6 h-6 text-orange-500 mr-2" />
-                        Certifications et Formations
-                      </h3>
-                      <div className="space-y-4">
-                        <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6 transform transition-all duration-300 hover:scale-[1.02]">
-                          <div className="flex items-center mb-3">
+                    {/* BTS SIO */}
+                    <div className="relative pl-16 pb-8">
+                      <div className="absolute left-6 top-3 w-4 h-4 rounded-full bg-blue-500 border-4 border-white dark:border-gray-800"></div>
+                      <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-4">
+                            <img 
+                              src="https://www.ecole-ipssi.com/wp-content/uploads/2020/01/logo-ipssi-1.png"
+                              alt="IPSSI"
+                              className="w-24 h-auto"
+                            />
                             <div>
-                              <h4 className="text-xl font-semibold">Sauveteur Secouriste du Travail (SST)</h4>
-                              <p className="text-gray-600 dark:text-gray-400">Mission locale, Guyancourt (78) - Septembre 2023</p>
+                              <h4 className="text-xl font-bold">BTS SIO - Option SISR</h4>
+                              <p className="text-gray-600 dark:text-gray-400">IPSSI, Saint-Quentin-en-Yvelines</p>
                             </div>
                           </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">
-                            Formation aux premiers secours en milieu professionnel
-                          </p>
+                          <span className="px-4 py-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-full text-sm">
+                            2023-2025
+                          </span>
                         </div>
-
-                        <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6 transform transition-all duration-300 hover:scale-[1.02]">
-                          <div className="flex items-center mb-3">
-                            <div>
-                              <h4 className="text-xl font-semibold">Prévention et Secours Civiques de niveau 1 (PSC1)</h4>
-                              <p className="text-gray-600 dark:text-gray-400">Croix-Rouge Française - Juin 2021</p>
-                            </div>
-                          </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">
-                            Formation aux gestes de premiers secours
+                        <div className="space-y-4">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            Services Informatiques aux Organisations - Solutions d'Infrastructure, Systèmes et Réseaux
                           </p>
-                        </div>
-
-                        {/* Collapsible Additional Certifications */}
-                        <div className="relative">
-                          <button
-                            onClick={() => setShowCertifications(!showCertifications)}
-                            className="w-full flex items-center justify-center gap-2 py-2 text-orange-500 hover:text-orange-600 transition-colors"
-                          >
-                            {showCertifications ? (
-                              <>
-                                <ChevronUp size={20} />
-                                <span>Masquer les autres formations</span>
-                              </>
-                            ) : (
-                              <>
-                                <ChevronDown size={20} />
-                                <span>Afficher les autres formations</span>
-                              </>
-                            )}
-                          </button>
-
-                          <div className={`transition-all duration-300 ${showCertifications ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-                            <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6 mb-4 transform transition-all duration-300 hover:scale-[1.02]">
-                              <div className="flex items-center mb-3">
-                                <div>
-                                  <h4 className="text-xl font-semibold">Introduction aux réseaux (Cisco)</h4>
-                                  <p className="text-gray-600 dark:text-gray-400">Formation en ligne - 2022</p>
-                                </div>
-                              </div>
-                              <p className="text-sm text-gray-600 dark:text-gray-300">
-                                Notions fondamentales des réseaux informatiques, adressage IP, routage et commutation
-                              </p>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="flex items-center gap-2">
+                              <Server className="w-4 h-4 text-blue-500" />
+                              <span className="text-sm">Administration systèmes</span>
                             </div>
-                            
-                            <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6 transform transition-all duration-300 hover:scale-[1.02]">
-                              <div className="flex items-center mb-3">
-                                <div>
-                                  <h4 className="text-xl font-semibold">Permis B</h4>
-                                  <p className="text-gray-600 dark:text-gray-400">Obtenu en 2021</p>
-                                </div>
-                              </div>
-                              <p className="text-sm text-gray-600 dark:text-gray-300">
-                                Mobilité et autonomie dans mes déplacements professionnels
-                              </p>
+                            <div className="flex items-center gap-2">
+                              <Shield className="w-4 h-4 text-blue-500" />
+                              <span className="text-sm">Sécurité des infrastructures</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Monitor className="w-4 h-4 text-blue-500" />
+                              <span className="text-sm">Virtualisation</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Code className="w-4 h-4 text-blue-500" />
+                              <span className="text-sm">Support technique</span>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                {/* Professional Experience */}
-                <div>
-                  <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-[1px] rounded-xl">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6">
-                      <h3 className="text-2xl font-semibold mb-4 flex items-center">
-                        <Briefcase className="w-6 h-6 text-orange-500 mr-2" />
-                        Expérience professionnelle
-                      </h3>
-                      <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6 transform transition-all duration-300 hover:scale-[1.02]">
-                        <div className="flex items-center mb-4">
-                          <img 
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/KNDS_logo.svg/1200px-KNDS_logo.svg.png"
-                            alt="KNDS"
-                            className="w-24 h-auto mr-4"
-                          />
-                          <div>
-                            <h4 className="text-xl font-semibold">Stage - Support Informatique</h4>
-                            <p className="text-gray-600 dark:text-gray-400">KNDS, Versailles (Mai - Juin 2023)</p>
+                    {/* Bac STI2D */}
+                    <div className="relative pl-16 pb-8">
+                      <div className="absolute left-6 top-3 w-4 h-4 rounded-full bg-purple-500 border-4 border-white dark:border-gray-800"></div>
+                      <div className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-4">
+                            <img 
+                              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Logo_JF_Versailles.png/640px-Logo_JF_Versailles.png"
+                              alt="Lycée Jules Ferry"
+                              className="w-24 h-auto"
+                            />
+                            <div>
+                              <h4 className="text-xl font-bold">Bac STI2D - Option SIN</h4>
+                              <p className="text-gray-600 dark:text-gray-400">Lycée Jules Ferry, Versailles</p>
+                            </div>
+                          </div>
+                          <span className="px-4 py-2 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full text-sm">
+                            2021-2023
+                          </span>
+                        </div>
+                        <div className="space-y-4">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            Sciences et Technologies de l'Industrie et du Développement Durable - Systèmes d'Information et Numérique
+                          </p>
+                          <div className="inline-flex px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full text-sm">
+                            Mention Bien
                           </div>
                         </div>
-                        <ul className="mt-3 space-y-2 text-sm text-gray-600 dark:text-gray-300">
-                          <li className="flex items-center gap-2">
+                      </div>
+                    </div>
+
+                    {/* Past Education Toggle */}
+                    <div className="relative pl-16">
+                      <button
+                        onClick={() => setShowPastEducation(!showPastEducation)}
+                        className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-colors"
+                      >
+                        {showPastEducation ? (
+                          <>
+                            <ChevronUp size={20} />
+                            <span>Masquer les formations non terminées</span>
+                          </>
+                        ) : (
+                          <>
+                            <ChevronDown size={20} />
+                            <span>Afficher les formations non terminées</span>
+                          </>
+                        )}
+                      </button>
+
+                      {showPastEducation && (
+                        <div className="mt-8">
+                          <div className="absolute left-6 top-3 w-4 h-4 rounded-full bg-red-500 border-4 border-white dark:border-gray-800"></div>
+                          <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-6">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="flex items-center gap-4">
+                                <img 
+                                  src="https://www.lyc-vaucanson-versailles.ac-versailles.fr/sites/lyc-vaucanson-versailles/local/cache-vignettes/L144xH144/siteon0-e0d79.png"
+                                  alt="Lycée Vaucanson"
+                                  className="w-24 h-auto"
+                                />
+                                <div>
+                                  <h4 className="text-xl font-bold">BTS SNIR</h4>
+                                  <p className="text-gray-600 dark:text-gray-400">Lycée Vaucanson, Versailles</p>
+                                </div>
+                              </div>
+                              <span className="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full text-sm">
+                                2022-2023
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                              Systèmes Numériques option Informatique et Réseaux
+                            </p>
+                            <div className="mt-4 inline-flex px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full text-sm">
+                              Non validé
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Certifications */}
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl">
+                      <Award className="w-6 h-6 text-green-500" />
+                    </div>
+                    <h3 className="text-2xl font-bold">Certifications</h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-700/50 dark:to-gray-700/30 rounded-xl p-6 transform transition-transform hover:scale-105">
+                      <h4 className="text-xl font-bold mb-2">Sauveteur Secouriste du Travail (SST)</h4>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                        Mission locale, Guyancourt (78) - Septembre 2023
+                      </p>
+                      <p className="text-sm">Formation aux premiers secours en milieu professionnel</p>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-700/50 dark:to-gray-700/30 rounded-xl p-6 transform transition-transform hover:scale-105">
+                      <h4 className="text-xl font-bold mb-2">PSC1</h4>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                        Croix-Rouge Française - Juin 2021
+                      </p>
+                      <p className="text-sm">Formation aux gestes de premiers secours</p>
+                    </div>
+                  </div>
+
+                  {/* Additional Certifications Toggle */}
+                  <div className="mt-6">
+                    <button
+                      onClick={() => setShowCertifications(!showCertifications)}
+                      className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-green-500 transition-colors"
+                    >
+                      {showCertifications ? (
+                        <>
+                          <ChevronUp size={20} />
+                          <span>Masquer les autres formations</span>
+                        </>
+                      ) : (
+                        <>
+                          <ChevronDown size={20} />
+                          <span>Afficher les autres formations</span>
+                        </>
+                      )}
+                    </button>
+
+                    {showCertifications && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-700/50 dark:to-gray-700/30 rounded-xl p-6 transform transition-transform hover:scale-105">
+                          <h4 className="text-xl font-bold mb-2">Introduction aux réseaux (Cisco)</h4>
+                          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                            Formation en ligne - 2022
+                          </p>
+                          <p className="text-sm">Notions fondamentales des réseaux informatiques</p>
+                        </div>
+
+                        <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-gray-700/50 dark:to-gray-700/30 rounded-xl p-6 transform transition-transform hover:scale-105">
+                          <h4 className="text-xl font-bold mb-2">Permis B</h4>
+                          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                            Obtenu en 2021
+                          </p>
+                          <p className="text-sm">Mobilité et autonomie dans mes déplacements</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Professional Experience */}
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl">
+                      <Briefcase className="w-6 h-6 text-orange-500" />
+                    </div>
+                    <h3 className="text-2xl font-bold">Expérience Professionnelle</h3>
+                  </div>
+
+                  <div className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-gray-700/50 dark:to-gray-700/30 rounded-xl p-6">
+                    <div className="flex items-center gap-6 mb-6">
+                      <img 
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/KNDS_logo.svg/1200px-KNDS_logo.svg.png"
+                        alt="KNDS"
+                        className="w-32 h-auto"
+                      />
+                      <div>
+                        <h4 className="text-xl font-bold">Stage - Support Informatique</h4>
+                        <p className="text-gray-600 dark:text-gray-400">KNDS, Versailles</p>
+                        <p className="text-sm text-orange-500">Mai - Juin 2023</p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-3">
+                        <h5 className="font-semibold text-lg mb-3">Missions principales</h5>
+                        <ul className="space-y-2">
+                          <li className="flex items-center gap-2 text-sm">
                             <div className="w-2 h-2 rounded-full bg-orange-500"></div>
                             Support utilisateur niveau 1 et 2
                           </li>
-                          <li className="flex items-center gap-2">
+                          <li className="flex items-center gap-2 text-sm">
                             <div className="w-2 h-2 rounded-full bg-orange-500"></div>
                             Gestion du parc informatique
                           </li>
-                          <li className="flex items-center gap-2">
+                          <li className="flex items-center gap-2 text-sm">
                             <div className="w-2 h-2 rounded-full bg-orange-500"></div>
                             Administration système et réseau
                           </li>
-                          <li className="flex items-center gap-2">
+                        </ul>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h5 className="font-semibold text-lg mb-3">Réalisations</h5>
+                        <ul className="space-y-2">
+                          <li className="flex items-center gap-2 text-sm">
                             <div className="w-2 h-2 rounded-full bg-orange-500"></div>
                             Documentation technique
                           </li>
-                          <li className="flex items-center gap-2">
+                          <li className="flex items-center gap-2 text-sm">
                             <div className="w-2 h-2 rounded-full bg-orange-500"></div>
                             Participation aux projets d'infrastructure
                           </li>
+                          <li className="flex items-center gap-2 text-sm">
+                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                            Mise en place d'outils de supervision
+                          </li>
                         </ul>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                      <h5 className="font-semibold text-lg mb-3">Compétences développées</h5>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full text-sm">
+                          Support technique
+                        </span>
+                        <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm">
+                          Administration AD
+                        </span>
+                        <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full text-sm">
+                          Gestion de parc
+                        </span>
+                        <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm">
+                          Documentation
+                        </span>
                       </div>
                     </div>
                   </div>
