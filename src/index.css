@@ -25,13 +25,13 @@ section {
 
 /* Section colors */
 section:nth-child(odd) {
-  --tw-gradient-from: theme('colors.gray.50');
+  --tw-gradient-from: theme('colors.orange.50');
   --tw-gradient-to: theme('colors.white');
 }
 
 section:nth-child(even) {
-  --tw-gradient-from: theme('colors.white');
-  --tw-gradient-to: theme('colors.gray.50');
+  --tw-gradient-from: theme('colors.purple.50');
+  --tw-gradient-to: theme('colors.white');
 }
 
 .dark section:nth-child(odd) {
@@ -110,4 +110,19 @@ img {
 
 .opacity-transition {
   @apply transition-opacity duration-300;
+}
+
+/* Light mode specific styles */
+@media (prefers-color-scheme: light) {
+  .bg-white {
+    @apply bg-opacity-95;
+  }
+  
+  .text-gray-600 {
+    @apply text-gray-700;
+  }
+  
+  .border-gray-200 {
+    @apply border-gray-300;
+  }
 }
