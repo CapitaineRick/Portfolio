@@ -46,10 +46,15 @@ console.log('Value:', file);
   }
 };
 
-console.log('Type:', typeof file);
-console.log('Instanceof File:', file instanceof File);
-console.log('Instanceof Blob:', file instanceof Blob);
-console.log('Value:', file);
+  const TestComponent = () => {
+  const file = new File([new Blob(['%PDF-1.4 test'], { type: 'application/pdf' })], 'test.pdf', {
+    type: 'application/pdf',
+  });
+
+  return <PdfViewer file={file} />;
+};
+
+
 
 
 
