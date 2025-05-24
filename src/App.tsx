@@ -1,4 +1,5 @@
 import React from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ProjectProvider } from './contexts/ProjectContext';
 import Layout from './components/Layout';
@@ -11,18 +12,20 @@ import Contact from './components/sections/Contact';
 
 function App() {
   return (
-    <ThemeProvider>
-      <ProjectProvider>
-        <Layout>
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <TechWatch />
-          <Contact />
-        </Layout>
-      </ProjectProvider>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider>
+        <ProjectProvider>
+          <Layout>
+            <Hero />
+            <About />
+            <Skills />
+            <Projects />
+            <TechWatch />
+            <Contact />
+          </Layout>
+        </ProjectProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }
 
