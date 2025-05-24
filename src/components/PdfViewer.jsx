@@ -13,59 +13,40 @@ export default function PdfViewer({ file }) {
     setPageNumber(1);
   };
 
-const handleDownload = () => {
-  console.log("Téléchargement lancé");
+  const handleDownload = () => {
+    if (!file) {
+      console.warn("Aucun fichier à télécharger");
+      return;
+    }
 
-  if (!file) {
-    console.warn("Aucun fichier à télécharger :", file);
-    return;
-  }
+    // Créer un lien pour le téléchargement
+    const link = document.createElement('a');
 
-  const link = document.createElement('a');
-
-  // Si c’est un fichier Blob ou File
-  if (file instanceof Blob) {
-    const blobUrl = URL.createObjectURL(file);
-    const filename = file.name || 'document.pdf';
-
-    link.href = blobUrl;
-    link.download = filename;
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    // Libère l’URL blob
-    URL.revokeObjectURL(blobUrl);
-
-    console.log('Téléchargement d’un fichier Blob');
-    console.log('Nom :', filename);
-    console.log('Type :', file.type);
-  }
-
-  // Si c’est une URL string vers un fichier en ligne
-  else if (typeof file === 'string') {
-    const filename = file.split('/').pop() || 'document.pdf';
-
-    link.href = file;
-    link.download = filename;
-    link.target = '_blank';
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    console.log('Téléchargement depuis une URL :', file);
-  }
-
-  // Sinon : erreur de type
-  else {
-    console.error("Type de fichier non pris en charge pour le téléchargement :", file);
-  }
-};
-
-
-
+    // Si c'est un fichier Blob ou File
+    if (file instanceof Blob) {
+      const blobUrl = URL.createObjectURL(file);
+      link.href = blobUrl;
+      link.download = file.name || 'document.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+    }
+    // Si c'est une URL string
+    else if (typeof file === 'string') {
+      // Extraire le nom du fichier du chemin
+      const filename = file.split('/').pop() || 'document.pdf';
+      
+      link.href = file;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    else {
+      console.error("Type de fichier non pris en charge pour le téléchargement");
+    }
+  };
 
   return (
     <div className="pdf-viewer flex flex-col items-center">

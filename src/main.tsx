@@ -4,7 +4,7 @@ import App from "./App";
 import "./index.css";
 import { pdfjs } from 'react-pdf';
 
-// Configure PDF.js worker with a CDN URL to ensure consistent loading
+// Configure PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

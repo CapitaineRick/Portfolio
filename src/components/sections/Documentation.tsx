@@ -55,16 +55,17 @@ const Documentation: React.FC = () => {
 
   const handleDownload = () => {
     if (project?.pdfUrl) {
-      // Create a direct link to the PDF file
+      // Créer un lien direct vers le fichier PDF
       const link = document.createElement('a');
       link.href = project.pdfUrl;
       
-      // Extract the filename from the path to ensure it has .pdf extension
+      // Extraire le nom du fichier du chemin pour s'assurer qu'il a l'extension .pdf
       const filename = project.pdfUrl.split('/').pop();
       
-      // If no extension or wrong extension, add .pdf
+      // Définir le nom du fichier à télécharger
       link.download = filename || `${project.title}.pdf`;
       
+      // Ajouter temporairement le lien au document, cliquer dessus, puis le supprimer
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
