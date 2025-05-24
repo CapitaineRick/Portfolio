@@ -26,6 +26,10 @@ const handleDownload = () => {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(blobUrl);
+    console.log('Type:', typeof file);
+console.log('Instanceof File:', file instanceof File);
+console.log('Instanceof Blob:', file instanceof Blob);
+console.log('Value:', file);
   } else if (typeof file === 'string') {
     link.href = file;
     link.download = file.split('/').pop() || 'document.pdf';
@@ -33,6 +37,10 @@ const handleDownload = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    console.log('Type:', typeof file);
+console.log('Instanceof File:', file instanceof File);
+console.log('Instanceof Blob:', file instanceof Blob);
+console.log('Value:', file);
   } else {
     console.error("Type de fichier non pris en charge pour le téléchargement");
   }
