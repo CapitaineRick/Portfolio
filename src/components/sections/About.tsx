@@ -36,17 +36,20 @@ const About: React.FC = () => {
             À propos de moi
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
+          <p className="text-lg text-gray-800 dark:text-gray-300 max-w-3xl mx-auto font-medium">
+            Découvrez mon parcours, mes compétences et mes objectifs professionnels
+          </p>
         </div>
         
         <div 
           ref={aboutRef}
-          className="transition-all duration-1000 opacity-0 translate-y-10"
+          className="transition-all duration-300 opacity-0 translate-y-10"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Profile Card */}
             <div className="lg:col-span-4">
               <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
                   {/* Profile Image */}
                   <div className="relative w-48 h-48 mx-auto mb-6">
@@ -58,33 +61,33 @@ const About: React.FC = () => {
 
                   {/* Personal Info */}
                   <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold mb-2">Fernandes Sébastien</h3>
-                    <p className="text-orange-500 dark:text-orange-400 font-medium">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Fernandes Sébastien</h3>
+                    <p className="text-orange-700 dark:text-orange-400 font-medium">
                       Étudiant en BTS SIO SISR
                     </p>
                   </div>
 
                   {/* Contact Details */}
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-sm">
+                    <div className="flex items-center gap-3">
                       <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                        <MapPin className="w-4 h-4 text-orange-500" />
+                        <MapPin className="w-4 h-4 text-orange-700 dark:text-orange-500" />
                       </div>
-                      <span>Versailles, France</span>
+                      <span className="text-gray-800 dark:text-gray-300">Versailles, France</span>
                     </div>
-                    <div className="flex items-center gap-3 text-sm">
+                    <div className="flex items-center gap-3">
                       <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                        <Mail className="w-4 h-4 text-orange-500" />
+                        <Mail className="w-4 h-4 text-orange-700 dark:text-orange-500" />
                       </div>
-                      <a href="mailto:sebastien.78.fernandes@outlook.fr" className="hover:text-orange-500">
+                      <a href="mailto:sebastien.78.fernandes@outlook.fr" className="text-gray-800 dark:text-gray-300 hover:text-orange-700 dark:hover:text-orange-400 transition-colors">
                         sebastien.78.fernandes@outlook.fr
                       </a>
                     </div>
-                    <div className="flex items-center gap-3 text-sm">
+                    <div className="flex items-center gap-3">
                       <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                        <Globe className="w-4 h-4 text-orange-500" />
+                        <Globe className="w-4 h-4 text-orange-700 dark:text-orange-500" />
                       </div>
-                      <a href="https://github.com/CapitaineRick" target="_blank" rel="noopener noreferrer" className="hover:text-orange-500">
+                      <a href="https://github.com/CapitaineRick" target="_blank" rel="noopener noreferrer" className="text-gray-800 dark:text-gray-300 hover:text-orange-700 dark:hover:text-orange-400 transition-colors">
                         github.com/CapitaineRick
                       </a>
                     </div>
@@ -93,20 +96,20 @@ const About: React.FC = () => {
                   {/* Quick Stats */}
                   <div className="grid grid-cols-2 gap-4 mt-6">
                     <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-                      <div className="text-2xl font-bold text-orange-500">2+</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Années d'études</div>
+                      <div className="text-2xl font-bold text-orange-700 dark:text-orange-400">2+</div>
+                      <div className="text-sm text-gray-800 dark:text-gray-400">Années d'études</div>
                     </div>
                     <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-                      <div className="text-2xl font-bold text-orange-500">15+</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Projets</div>
+                      <div className="text-2xl font-bold text-orange-700 dark:text-orange-400">15+</div>
+                      <div className="text-sm text-gray-800 dark:text-gray-400">Projets</div>
                     </div>
                     <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-                      <div className="text-2xl font-bold text-orange-500">3+</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Certifications</div>
+                      <div className="text-2xl font-bold text-orange-700 dark:text-orange-400">3+</div>
+                      <div className="text-sm text-gray-800 dark:text-gray-400">Certifications</div>
                     </div>
                     <div className="bg-orange-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-                      <div className="text-2xl font-bold text-orange-500">2</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Stages</div>
+                      <div className="text-2xl font-bold text-orange-700 dark:text-orange-400">2</div>
+                      <div className="text-sm text-gray-800 dark:text-gray-400">Stages</div>
                     </div>
                   </div>
 
@@ -123,67 +126,67 @@ const About: React.FC = () => {
             <div className="lg:col-span-8 space-y-8">
               {/* About Me Section */}
               <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl">
-                      <User className="w-6 h-6 text-orange-500" />
+                      <User className="w-6 h-6 text-orange-700 dark:text-orange-500" />
                     </div>
-                    <h3 className="text-2xl font-bold">Qui suis-je ?</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Qui suis-je ?</h3>
                   </div>
 
                   <div className="space-y-4">
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    <p className="text-gray-800 dark:text-gray-300 leading-relaxed">
                       Je suis un étudiant passionné en BTS SIO avec une spécialisation en SISR à l'IPSSI de Saint Quentin en Yvelines. 
                       Ma formation me permet d'acquérir des compétences techniques solides dans la conception, le déploiement et la maintenance 
                       d'infrastructures informatiques.
                     </p>
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    <p className="text-gray-800 dark:text-gray-300 leading-relaxed">
                       Mon objectif est de devenir administrateur systèmes & réseaux ou dans plusieurs années pentester, en mettant à profit 
                       ma rigueur, ma logique et mon autonomie.
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                       <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-700/50 dark:to-gray-700/30 p-6 rounded-xl">
-                        <h4 className="font-semibold text-lg mb-4 text-orange-600 dark:text-orange-400">Points forts</h4>
+                        <h4 className="font-semibold text-lg mb-4 text-orange-700 dark:text-orange-400">Points forts</h4>
                         <ul className="space-y-3">
                           <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                            <span>Autonomie</span>
+                            <div className="w-2 h-2 rounded-full bg-orange-700 dark:bg-orange-500"></div>
+                            <span className="text-gray-800 dark:text-gray-300">Autonomie</span>
                           </li>
                           <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                            <span>Rigueur</span>
+                            <div className="w-2 h-2 rounded-full bg-orange-700 dark:bg-orange-500"></div>
+                            <span className="text-gray-800 dark:text-gray-300">Rigueur</span>
                           </li>
                           <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                            <span>Esprit d'équipe</span>
+                            <div className="w-2 h-2 rounded-full bg-orange-700 dark:bg-orange-500"></div>
+                            <span className="text-gray-800 dark:text-gray-300">Esprit d'équipe</span>
                           </li>
                           <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                            <span>Capacité d'adaptation</span>
+                            <div className="w-2 h-2 rounded-full bg-orange-700 dark:bg-orange-500"></div>
+                            <span className="text-gray-800 dark:text-gray-300">Capacité d'adaptation</span>
                           </li>
                         </ul>
                       </div>
 
                       <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-gray-700/50 dark:to-gray-700/30 p-6 rounded-xl">
-                        <h4 className="font-semibold text-lg mb-4 text-purple-600 dark:text-purple-400">Centres d'intérêt</h4>
+                        <h4 className="font-semibold text-lg mb-4 text-purple-700 dark:text-purple-400">Centres d'intérêt</h4>
                         <ul className="space-y-3">
                           <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                            <span>Cybersécurité</span>
+                            <div className="w-2 h-2 rounded-full bg-purple-700 dark:bg-purple-500"></div>
+                            <span className="text-gray-800 dark:text-gray-300">Cybersécurité</span>
                           </li>
                           <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                            <span>Nouvelles technologies</span>
+                            <div className="w-2 h-2 rounded-full bg-purple-700 dark:bg-purple-500"></div>
+                            <span className="text-gray-800 dark:text-gray-300">Nouvelles technologies</span>
                           </li>
                           <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                            <span>Veille technologique</span>
+                            <div className="w-2 h-2 rounded-full bg-purple-700 dark:bg-purple-500"></div>
+                            <span className="text-gray-800 dark:text-gray-300">Veille technologique</span>
                           </li>
                           <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                            <span>Administration système</span>
+                            <div className="w-2 h-2 rounded-full bg-purple-700 dark:bg-purple-500"></div>
+                            <span className="text-gray-800 dark:text-gray-300">Administration système</span>
                           </li>
                         </ul>
                       </div>
@@ -194,13 +197,13 @@ const About: React.FC = () => {
 
               {/* Education Timeline */}
               <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                      <GraduationCap className="w-6 h-6 text-blue-500" />
+                      <GraduationCap className="w-6 h-6 text-blue-700 dark:text-blue-500" />
                     </div>
-                    <h3 className="text-2xl font-bold">Parcours Académique</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Parcours Académique</h3>
                   </div>
 
                   <div className="relative">
@@ -218,34 +221,34 @@ const About: React.FC = () => {
                               className="w-24 h-auto"
                             />
                             <div>
-                              <h4 className="text-xl font-bold">BTS SIO - Option SISR</h4>
-                              <p className="text-gray-600 dark:text-gray-400">IPSSI, Saint-Quentin-en-Yvelines</p>
+                              <h4 className="text-xl font-bold text-gray-900 dark:text-white">BTS SIO - Option SISR</h4>
+                              <p className="text-gray-700 dark:text-gray-400">IPSSI, Saint-Quentin-en-Yvelines</p>
                             </div>
                           </div>
-                          <span className="px-4 py-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-full text-sm">
+                          <span className="px-4 py-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm">
                             2023-2025
                           </span>
                         </div>
                         <div className="space-y-4">
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                          <p className="text-sm text-gray-800 dark:text-gray-400">
                             Services Informatiques aux Organisations - Solutions d'Infrastructure, Systèmes et Réseaux
                           </p>
                           <div className="grid grid-cols-2 gap-4">
                             <div className="flex items-center gap-2">
-                              <Server className="w-4 h-4 text-blue-500" />
-                              <span className="text-sm">Administration systèmes</span>
+                              <Server className="w-4 h-4 text-blue-700 dark:text-blue-500" />
+                              <span className="text-sm text-gray-800 dark:text-gray-300">Administration systèmes</span>
                             </div>
                             <div className="flex items-center gap-2">
-                              <Shield className="w-4 h-4 text-blue-500" />
-                              <span className="text-sm">Sécurité des infrastructures</span>
+                              <Shield className="w-4 h-4 text-blue-700 dark:text-blue-500" />
+                              <span className="text-sm text-gray-800 dark:text-gray-300">Sécurité des infrastructures</span>
                             </div>
                             <div className="flex items-center gap-2">
-                              <Monitor className="w-4 h-4 text-blue-500" />
-                              <span className="text-sm">Virtualisation</span>
+                              <Monitor className="w-4 h-4 text-blue-700 dark:text-blue-500" />
+                              <span className="text-sm text-gray-800 dark:text-gray-300">Virtualisation</span>
                             </div>
                             <div className="flex items-center gap-2">
-                              <Code className="w-4 h-4 text-blue-500" />
-                              <span className="text-sm">Support technique</span>
+                              <Code className="w-4 h-4 text-blue-700 dark:text-blue-500" />
+                              <span className="text-sm text-gray-800 dark:text-gray-300">Support technique</span>
                             </div>
                           </div>
                         </div>
@@ -264,19 +267,19 @@ const About: React.FC = () => {
                               className="w-24 h-auto"
                             />
                             <div>
-                              <h4 className="text-xl font-bold">Bac STI2D - Option SIN</h4>
-                              <p className="text-gray-600 dark:text-gray-400">Lycée Jules Ferry, Versailles</p>
+                              <h4 className="text-xl font-bold text-gray-900 dark:text-white">Bac STI2D - Option SIN</h4>
+                              <p className="text-gray-700 dark:text-gray-400">Lycée Jules Ferry, Versailles</p>
                             </div>
                           </div>
-                          <span className="px-4 py-2 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full text-sm">
+                          <span className="px-4 py-2 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 rounded-full text-sm">
                             2021-2023
                           </span>
                         </div>
                         <div className="space-y-4">
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                          <p className="text-sm text-gray-800 dark:text-gray-400">
                             Sciences et Technologies de l'Industrie et du Développement Durable - Systèmes d'Information et Numérique
                           </p>
-                          <div className="inline-flex px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full text-sm">
+                          <div className="inline-flex px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm">
                             Mention Bien
                           </div>
                         </div>
@@ -287,7 +290,7 @@ const About: React.FC = () => {
                     <div className="relative pl-16">
                       <button
                         onClick={() => setShowPastEducation(!showPastEducation)}
-                        className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-colors"
+                        className="flex items-center gap-2 text-gray-700 dark:text-gray-400 hover:text-orange-700 dark:hover:text-orange-400 transition-colors"
                       >
                         {showPastEducation ? (
                           <>
@@ -314,18 +317,18 @@ const About: React.FC = () => {
                                   className="w-24 h-auto"
                                 />
                                 <div>
-                                  <h4 className="text-xl font-bold">BTS SNIR</h4>
-                                  <p className="text-gray-600 dark:text-gray-400">Lycée Vaucanson, Versailles</p>
+                                  <h4 className="text-xl font-bold text-gray-900 dark:text-white">BTS SNIR</h4>
+                                  <p className="text-gray-700 dark:text-gray-400">Lycée Vaucanson, Versailles</p>
                                 </div>
                               </div>
-                              <span className="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full text-sm">
+                              <span className="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm">
                                 2022-2023
                               </span>
                             </div>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <p className="text-sm text-gray-800 dark:text-gray-400">
                               Systèmes Numériques option Informatique et Réseaux
                             </p>
-                            <div className="mt-4 inline-flex px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full text-sm">
+                            <div className="mt-4 inline-flex px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm">
                               Non validé
                             </div>
                           </div>
@@ -338,30 +341,30 @@ const About: React.FC = () => {
 
               {/* Certifications */}
               <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl">
-                      <Award className="w-6 h-6 text-green-500" />
+                      <Award className="w-6 h-6 text-green-700 dark:text-green-500" />
                     </div>
-                    <h3 className="text-2xl font-bold">Certifications</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Certifications</h3>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-700/50 dark:to-gray-700/30 rounded-xl p-6 transform transition-transform hover:scale-105">
-                      <h4 className="text-xl font-bold mb-2">Sauveteur Secouriste du Travail (SST)</h4>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                      <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">Sauveteur Secouriste du Travail (SST)</h4>
+                      <p className="text-gray-700 dark:text-gray-400 text-sm mb-4">
                         Mission locale, Guyancourt (78) - Septembre 2023
                       </p>
-                      <p className="text-sm">Formation aux premiers secours en milieu professionnel</p>
+                      <p className="text-sm text-gray-800 dark:text-gray-300">Formation aux premiers secours en milieu professionnel</p>
                     </div>
 
                     <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-700/50 dark:to-gray-700/30 rounded-xl p-6 transform transition-transform hover:scale-105">
-                      <h4 className="text-xl font-bold mb-2">PSC1</h4>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                      <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">PSC1</h4>
+                      <p className="text-gray-700 dark:text-gray-400 text-sm mb-4">
                         Croix-Rouge Française - Juin 2021
                       </p>
-                      <p className="text-sm">Formation aux gestes de premiers secours</p>
+                      <p className="text-sm text-gray-800 dark:text-gray-300">Formation aux gestes de premiers secours</p>
                     </div>
                   </div>
 
@@ -369,7 +372,7 @@ const About: React.FC = () => {
                   <div className="mt-6">
                     <button
                       onClick={() => setShowCertifications(!showCertifications)}
-                      className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-green-500 transition-colors"
+                      className="flex items-center gap-2 text-gray-700 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-400 transition-colors"
                     >
                       {showCertifications ? (
                         <>
@@ -387,19 +390,19 @@ const About: React.FC = () => {
                     {showCertifications && (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                         <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-700/50 dark:to-gray-700/30 rounded-xl p-6 transform transition-transform hover:scale-105">
-                          <h4 className="text-xl font-bold mb-2">Introduction aux réseaux (Cisco)</h4>
-                          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                          <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">Introduction aux réseaux (Cisco)</h4>
+                          <p className="text-gray-700 dark:text-gray-400 text-sm mb-4">
                             Formation en ligne - 2022
                           </p>
-                          <p className="text-sm">Notions fondamentales des réseaux informatiques</p>
+                          <p className="text-sm text-gray-800 dark:text-gray-300">Notions fondamentales des réseaux informatiques</p>
                         </div>
 
                         <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-gray-700/50 dark:to-gray-700/30 rounded-xl p-6 transform transition-transform hover:scale-105">
-                          <h4 className="text-xl font-bold mb-2">Permis B</h4>
-                          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                          <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">Permis B</h4>
+                          <p className="text-gray-700 dark:text-gray-400 text-sm mb-4">
                             Obtenu en 2021
                           </p>
-                          <p className="text-sm">Mobilité et autonomie dans mes déplacements</p>
+                          <p className="text-sm text-gray-800 dark:text-gray-300">Mobilité et autonomie dans mes déplacements</p>
                         </div>
                       </div>
                     )}
@@ -409,13 +412,13 @@ const About: React.FC = () => {
 
               {/* Professional Experience */}
               <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl">
-                      <Briefcase className="w-6 h-6 text-orange-500" />
+                      <Briefcase className="w-6 h-6 text-orange-700 dark:text-orange-500" />
                     </div>
-                    <h3 className="text-2xl font-bold">Expérience Professionnelle</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Expérience Professionnelle</h3>
                   </div>
 
                   <div className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-gray-700/50 dark:to-gray-700/30 rounded-xl p-6">
@@ -426,63 +429,64 @@ const About: React.FC = () => {
                         className="w-32 h-auto"
                       />
                       <div>
-                        <h4 className="text-xl font-bold">Stage - Support Informatique</h4>
-                        <p className="text-gray-600 dark:text-gray-400">KNDS, Versailles</p>
-                        <p className="text-sm text-orange-500">Mai - Juin 2023</p>
+                        <h4 className="text-xl font-bold text-gray-900 dark:text-white">Stage - Support Informatique</h4>
+                        <p className="text-gray-700 dark:text-gray-400">KNDS, Versailles</p>
+                        <p className="text-sm text-orange-700 dark:text-orange-400">Mai - Juin 2023</p>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-3">
-                        <h5 className="font-semibold text-lg mb-3">Missions principales</h5>
+                        <h5 className="font-semibold text-lg mb-3 text-gray-900 dark:text-white">Missions principales</h5>
                         <ul className="space-y-2">
-                          <li className="flex items-center gap-2 text-sm">
-                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                          <li className="flex items-center gap-2 text-sm text-gray-800 dark:text-gray-300">
+                            <div className="w-2 h-2 rounded-full bg-orange-700 dark:bg-orange-500"></div>
                             Support utilisateur niveau 1 et 2
                           </li>
-                          <li className="flex items-center gap-2 text-sm">
-                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                          <li className="flex items-center gap-2 text-sm text-gray-800 dark:text-gray-300">
+                            <div className="w-2 h-2 rounded-full bg-orange-700 dark:bg-orange-500"></div>
                             Gestion du parc informatique
                           </li>
-                          <li className="flex items-center gap-2 text-sm">
-                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                          <li className="flex items-center gap-2 text-sm text-gray-800 dark:text-gray-300">
+                            <div className="w-2 h-2 rounded-full bg-orange-700 dark:bg-orange-500"></div>
                             Administration système et réseau
                           </li>
+                
                         </ul>
                       </div>
 
                       <div className="space-y-3">
-                        <h5 className="font-semibold text-lg mb-3">Réalisations</h5>
+                        <h5 className="font-semibold text-lg mb-3 text-gray-900 dark:text-white">Réalisations</h5>
                         <ul className="space-y-2">
-                          <li className="flex items-center gap-2 text-sm">
-                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                          <li className="flex items-center gap-2 text-sm text-gray-800 dark:text-gray-300">
+                            <div className="w-2 h-2 rounded-full bg-orange-700 dark:bg-orange-500"></div>
                             Documentation technique
                           </li>
-                          <li className="flex items-center gap-2 text-sm">
-                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                          <li className="flex items-center gap-2 text-sm text-gray-800 dark:text-gray-300">
+                            <div className="w-2 h-2 rounded-full bg-orange-700 dark:bg-orange-500"></div>
                             Participation aux projets d'infrastructure
                           </li>
-                          <li className="flex items-center gap-2 text-sm">
-                            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                          <li className="flex items-center gap-2 text-sm text-gray-800 dark:text-gray-300">
+                            <div className="w-2 h-2 rounded-full bg-orange-700 dark:bg-orange-500"></div>
                             Mise en place d'outils de supervision
                           </li>
                         </ul>
                       </div>
                     </div>
 
-                    <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                      <h5 className="font-semibold text-lg mb-3">Compétences développées</h5>
+                    <div className="mt-6 pt-6 border-t border-gray-300 dark:border-gray-700">
+                      <h5 className="font-semibold text-lg mb-3 text-gray-900 dark:text-white">Compétences développées</h5>
                       <div className="flex flex-wrap gap-2">
-                        <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full text-sm">
+                        <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 rounded-full text-sm">
                           Support technique
                         </span>
-                        <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm">
+                        <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-sm">
                           Administration AD
                         </span>
-                        <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full text-sm">
+                        <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm">
                           Gestion de parc
                         </span>
-                        <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm">
+                        <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-full text-sm">
                           Documentation
                         </span>
                       </div>
