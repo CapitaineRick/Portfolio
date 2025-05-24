@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, FileText, X, Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
-import { Document, Page } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
 
 interface Project {
   id: string;
@@ -26,6 +26,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1.0);
+  const [pdfError, setPdfError] = useState<string | null>(null);
 
   const scrollToDocumentation = () => {
     const docsSection = document.querySelector('#documentation');
@@ -50,6 +51,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
     setPageNumber(1);
+    setPdfError(null);
+  }
+
+  function onDocumentLoadError(error: Error) {
+    console.error('Error loading PDF:', error);
+    setPdfError('Impossible de charger le PDF. Veuillez réessayer plus tard.');
   }
 
   return (
@@ -180,46 +187,66 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                 </button>
               </div>
             </div>
-            
-            <div className="flex justify-center mb-4">
-              <div className="flex items-center gap-4">
+
+            {pdfError ? (
+              <div className="flex flex-col items-center justify-center p-8 text-center">
+                <div className="text-red-500 dark:text-red-400 mb-4">{pdfError}</div>
                 <button
-                  onClick={() => setPageNumber(Math.max(1, pageNumber - 1))}
-                  disabled={pageNumber <= 1}
-                  className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
-                           disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  onClick={handleDownload}
+                  className="px-4 py-2 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors"
                 >
-                  <ChevronLeft size={20} />
-                </button>
-                <span className="text-gray-700 dark:text-gray-300">
-                  Page {pageNumber} sur {numPages}
-                </span>
-                <button
-                  onClick={() => setPageNumber(Math.min(numPages || 1, pageNumber + 1))}
-                  disabled={pageNumber >= (numPages || 1)}
-                  className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
-                           disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  <ChevronRight size={20} />
+                  Télécharger le PDF
                 </button>
               </div>
-            </div>
-            
-            <div className="flex justify-center">
-              <Document
-                file={project.pdfUrl}
-                onLoadSuccess={onDocumentLoadSuccess}
-                className="mx-auto"
-              >
-                <Page
-                  pageNumber={pageNumber}
-                  scale={scale}
-                  className="mx-auto"
-                  renderTextLayer={true}
-                  renderAnnotationLayer={true}
-                />
-              </Document>
-            </div>
+            ) : (
+              <>
+                <div className="flex justify-center mb-4">
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={() => setPageNumber(Math.max(1, pageNumber - 1))}
+                      disabled={pageNumber <= 1}
+                      className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
+                               disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      <ChevronLeft size={20} />
+                    </button>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      Page {pageNumber} sur {numPages}
+                    </span>
+                    <button
+                      onClick={() => setPageNumber(Math.min(numPages || 1, pageNumber + 1))}
+                      disabled={pageNumber >= (numPages || 1)}
+                      className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
+                               disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      <ChevronRight size={20} />
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="flex justify-center">
+                  <Document
+                    file={project.pdfUrl}
+                    onLoadSuccess={onDocumentLoadSuccess}
+                    onLoadError={onDocumentLoadError}
+                    loading={
+                      <div className="flex items-center justify-center p-8">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+                      </div>
+                    }
+                    className="mx-auto"
+                  >
+                    <Page
+                      pageNumber={pageNumber}
+                      scale={scale}
+                      className="mx-auto"
+                      renderTextLayer={true}
+                      renderAnnotationLayer={true}
+                    />
+                  </Document>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
