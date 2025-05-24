@@ -1,17 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { skillsData } from '../../data/skillsData';
-import { ChevronDown, ChevronUp, Info } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const Skills: React.FC = () => {
   const { theme } = useTheme();
   const skillsRef = useRef<HTMLDivElement>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [expandedSkills, setExpandedSkills] = useState<{[key: string]: boolean}>({});
-
-  const toggleCategory = (categoryName: string) => {
-    setSelectedCategory(selectedCategory === categoryName ? null : categoryName);
-  };
 
   const toggleSkillExpansion = (skillName: string) => {
     setExpandedSkills(prev => ({
@@ -96,37 +91,11 @@ const Skills: React.FC = () => {
           ref={skillsRef}
           className="transition-all duration-1000 opacity-0 translate-y-10 space-y-8"
         >
-          {/* Skills Overview */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            {skillsData.map((category, index) => (
-              <div 
-                key={index}
-                className="relative group cursor-pointer"
-                onClick={() => toggleCategory(category.name)}
-              >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-xl blur opacity-50 group-hover:opacity-100 transition duration-1000"></div>
-                <div className="relative bg-white dark:bg-gray-800 rounded-xl p-6 text-center">
-                  <div className="flex justify-center mb-4">
-                    <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl">
-                      <category.icon className="w-8 h-8 text-orange-500" />
-                    </div>
-                  </div>
-                  <h3 className="font-semibold mb-2">{category.name}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {category.skills.length} compétences
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
           {/* Detailed Skills */}
           {skillsData.map((category, categoryIndex) => (
             <div 
               key={categoryIndex}
-              className={`skill-category transition-all duration-500 opacity-0 translate-y-10 ${
-                selectedCategory && selectedCategory !== category.name ? 'hidden' : ''
-              }`}
+              className="skill-category transition-all duration-500 opacity-0 translate-y-10"
             >
               <div className="relative group mb-8">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
