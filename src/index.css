@@ -2,19 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scrolling for the entire page */
+/* Base styles */
 html {
   scroll-behavior: smooth;
 }
 
-/* Smooth transitions for all elements */
 * {
   @apply transition-all duration-1000 ease-in-out;
 }
 
-/* Section styling with smooth transitions */
+/* Section styling */
 section {
-  @apply relative overflow-hidden transition-all duration-1000 ease-in-out;
+  @apply relative overflow-hidden transition-all duration-1000 ease-in-out flex items-center justify-center min-h-screen py-16;
   background-image: radial-gradient(
     circle at center,
     var(--tw-gradient-from) 0%,
@@ -24,14 +23,7 @@ section {
   animation: gradientMove 15s ease infinite;
 }
 
-/* Subtle pattern overlay */
-section::before {
-  content: '';
-  @apply absolute inset-0 opacity-5 pointer-events-none;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-
-/* Alternating section colors with smooth transitions */
+/* Section colors */
 section:nth-child(odd) {
   --tw-gradient-from: theme('colors.orange.50' / 5%);
   --tw-gradient-to: theme('colors.purple.50' / 5%);
@@ -52,14 +44,13 @@ section:nth-child(even) {
   --tw-gradient-to: theme('colors.orange.900' / 5%);
 }
 
-/* Gradient animation */
+/* Animations */
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Blob animation */
 @keyframes blob {
   0% { transform: translate(0px, 0px) scale(1); }
   33% { transform: translate(30px, -50px) scale(1.1); }
@@ -79,12 +70,11 @@ section:nth-child(even) {
   animation-delay: 4s;
 }
 
-/* Theme transitions */
+/* Theme and transitions */
 .dark {
   @apply transition-colors duration-1000;
 }
 
-/* Card hover effects */
 .card-hover {
   @apply transition-all duration-300 ease-out hover:transform hover:scale-[1.02] hover:shadow-lg;
 }
