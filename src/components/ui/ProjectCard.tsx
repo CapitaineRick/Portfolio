@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, FileText } from 'lucide-react';
+import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, FileText, X } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page } from 'react-pdf';
 
