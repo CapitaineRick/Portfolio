@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, FileText, X, Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { Document, Page } from 'react-pdf';
 
 interface Project {
   id: string;
