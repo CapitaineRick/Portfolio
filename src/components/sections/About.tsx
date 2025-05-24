@@ -50,10 +50,12 @@ const About: React.FC = () => {
                 <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
                   {/* Profile Image */}
                   <div className="relative w-48 h-48 mx-auto mb-6">
+                    <img 
+                      src="https://images.pexels.com/photos/7606074/pexels-photo-7606074.jpeg"
+                      alt="Profile"
+                      className="absolute inset-1 w-full h-full object-cover rounded-full"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-purple-500 rounded-full animate-spin-slow"></div>
-                    <div className="absolute inset-1 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center">
-                      <User className="w-24 h-24 text-orange-700 dark:text-orange-500" />
-                    </div>
                   </div>
 
                   {/* Personal Info */}
