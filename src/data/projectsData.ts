@@ -3,10 +3,10 @@ export const projectsData = {
     {
       id: 'active-directory',
       title: 'Stage KNDS',
-      description: 'Stage de premiere année, support utilisateur, infographie du parc et ...',
+      description: 'Stage de première année, support utilisateur, infographie du parc et administration système',
       image: '/images/knds-logo.webp',
       pdfUrl: '',
-      tags: ['Netbox', 'VoIP/ToIP', 'AVAYA', 'Support utilisateur']
+      tags: ['Netbox', 'VoIP/ToIP', 'AVAYA', 'Support utilisateur', 'Active Directory']
     },
     {
       id: 'XX',
@@ -29,17 +29,17 @@ export const projectsData = {
         
     {
       id: 'pfsense',
-      title: 'pfsense',
-      description: 'Installation et configuration de pfsense',
+      title: 'pfSense',
+      description: 'Installation et configuration de pfSense',
       image: '/images/pfsense-logo.webp',
       pdfUrl: 'XX',
-      tags: ['XX', 'XX', 'XX', 'XX']
+      tags: ['Firewall', 'Réseau', 'Sécurité', 'VPN']
     },
     
     {
       id: 'Proxmox',
       title: 'Proxmox',
-      description: 'Installation et configuration de Proxmox EV',
+      description: 'Installation et configuration de Proxmox VE',
       image: '/images/proxmox-logo.webp',
       pdfUrl: 'XX',
       tags: ['Hyperviseur', 'Virtualisation', 'Baremetal']
@@ -58,7 +58,7 @@ export const projectsData = {
       description: 'Installation et configuration Windows 10',
       image: '/images/win10-logo.webp',
       pdfUrl: 'XX',
-      tags: ['OS', 'Windows']
+      tags: ['OS', 'Windows', 'Active Directory']
     }, 
     {
       id: 'Windows 11',
@@ -66,7 +66,7 @@ export const projectsData = {
       description: 'Installation et configuration Windows 11',
       image: '/images/win11-logo.webp',
       pdfUrl: 'XX',
-      tags: ['OS', 'Windows']
+      tags: ['OS', 'Windows', 'Active Directory']
     },
     {
       id: 'Ubuntu',
@@ -74,7 +74,7 @@ export const projectsData = {
       description: 'Installation et configuration de Ubuntu Linux',
       image: '/images/Ubuntu-Logo.webp',
       pdfUrl: 'XX',
-      tags: ['OS', 'Linux']
+      tags: ['OS', 'Linux', 'Serveur']
     },
     {
       id: 'HAproxy',
@@ -82,7 +82,7 @@ export const projectsData = {
       description: 'Installation et configuration de HAproxy',
       image: '/images/haproxy-logo.webp',
       pdfUrl: '/docs/Haproxy.pdf',
-      tags: ['Proxy', 'Reverse-proxy', 'Haute Diponibilité', 'WEB']
+      tags: ['Proxy', 'Reverse-proxy', 'Haute Disponibilité', 'WEB']
     },
     {
       id: 'Kali',
@@ -99,15 +99,15 @@ export const projectsData = {
       description: 'Installation et configuration de Arch Linux',
       image: '/images/arch-logo.webp',
       pdfUrl: 'XX',
-      tags: ['Linux', 'OS']
+      tags: ['Linux', 'OS', 'Serveur']
     },
     {
       id: 'Debian 12',
       title: 'Debian 12 Linux',
-      description: 'Installation et configuration de Arch Linux',
+      description: 'Installation et configuration de Debian 12',
       image: '/images/debian12-logo.webp',
       pdfUrl: 'XX',
-      tags: ['Linux', 'OS']
+      tags: ['Linux', 'OS', 'Serveur']
     },
     {
       id: 'Ticketing',
@@ -115,7 +115,7 @@ export const projectsData = {
       description: 'Installation et configuration GLPI',
       image: '/images/logo-glpi.webp',
       pdfUrl: 'XX',
-      tags: ['GLPI', 'Support', 'Ticketing']
+      tags: ['GLPI', 'Support', 'Ticketing', 'Inventaire']
     },
     {
       id: 'monitoring',
@@ -123,7 +123,7 @@ export const projectsData = {
       description: 'Installation et configuration Zabbix',
       image: '/images/Zabbix_logo.webp',
       pdfUrl: 'XX',
-      tags: ['Monitoring']
+      tags: ['Monitoring', 'Surveillance', 'Alertes']
     }
   ]
 };

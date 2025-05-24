@@ -161,10 +161,10 @@ const Contact: React.FC = () => {
                   <div>
                     <h4 className="text-lg font-medium">Email</h4>
                     <a 
-                      href="mailto:contact@example.com"
+                      href="mailto:sebastien.78.fernandes@outlook.fr"
                       className="text-orange-500 hover:underline"
                     >
-                      contact@example.com
+                      sebastien.78.fernandes@outlook.fr
                     </a>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ const Contact: React.FC = () => {
                       rel="noopener noreferrer"
                       className="text-orange-500 hover:underline"
                     >
-                      linkedin.com/in/mon-profil
+                      linkedin.com/in/sebastien-fernandes
                     </a>
                   </div>
                 </div>

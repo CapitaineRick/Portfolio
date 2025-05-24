@@ -13,21 +13,25 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <p className="text-sm">© {currentYear} Portfolio BTS SIO SISR</p>
+            <p className="text-sm">© {currentYear} Portfolio BTS SIO SISR - Sébastien Fernandes</p>
           </div>
           
           <div className="flex space-x-6">
             <a 
-              href="#" 
+              href="https://github.com/sebastienfernandes" 
               className="text-gray-500 hover:text-orange-500 transition-colors"
               aria-label="GitHub"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Github size={20} />
             </a>
             <a 
-              href="#" 
+              href="https://linkedin.com/in/sebastien-fernandes" 
               className="text-gray-500 hover:text-orange-500 transition-colors"
               aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Linkedin size={20} />
             </a>
