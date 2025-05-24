@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, FileText, X, Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 interface Project {
   id: string;

@@ -1,24 +1,46 @@
-import React from 'react';
-import { Worker, Viewer } from '@react-pdf-viewer/core';
-import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+import { Document, Page } from 'react-pdf';
+import { useState } from 'react';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
 
-// Import styles
-import '@react-pdf-viewer/core/lib/styles/index.css';
-import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+export default function PdfViewer({ file }) {
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
 
-const PdfViewer = ({ pdfUrl }) => {
-  const defaultLayoutPluginInstance = defaultLayoutPlugin();
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
+    setPageNumber(1);
+  };
 
   return (
-    <div style={{ height: '750px' }}>
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@4.8.69/build/pdf.worker.min.js">
-        <Viewer
-          fileUrl={pdfUrl}
-          plugins={[defaultLayoutPluginInstance]}
-        />
-      </Worker>
+    <div className="pdf-viewer">
+      <Document
+        file={file}
+        onLoadSuccess={onDocumentLoadSuccess}
+        onLoadError={(error) => console.error('Erreur chargement PDF:', error)}
+      >
+        <Page pageNumber={pageNumber} />
+      </Document>
+
+      <div className="pdf-controls mt-4 flex items-center justify-center gap-4">
+        <button 
+          onClick={() => setPageNumber(p => Math.max(p - 1, 1))}
+          className="px-4 py-2 bg-orange-500 text-white rounded-lg disabled:opacity-50"
+          disabled={pageNumber <= 1}
+        >
+          Page précédente
+        </button>
+        <span className="text-gray-700 dark:text-gray-300">
+          {pageNumber} / {numPages}
+        </span>
+        <button 
+          onClick={() => setPageNumber(p => Math.min(p + 1, numPages || 1))}
+          className="px-4 py-2 bg-orange-500 text-white rounded-lg disabled:opacity-50"
+          disabled={pageNumber >= (numPages || 1)}
+        >
+          Page suivante
+        </button>
+      </div>
     </div>
   );
-};
-
-export default PdfViewer;
+}
