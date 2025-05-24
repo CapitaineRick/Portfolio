@@ -170,38 +170,95 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:w-2/5">
-            <div className="grid grid-cols-2 gap-6 p-4">
-              {[
-                { icon: Server, label: 'Infrastructure', gradient: 'from-orange-500 to-red-500' },
-                { icon: Shield, label: 'Sécurité', gradient: 'from-blue-500 to-cyan-500' },
-                { icon: Terminal, label: 'DevOps', gradient: 'from-green-500 to-emerald-500' },
-                { icon: Code, label: 'Automatisation', gradient: 'from-purple-500 to-pink-500' }
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  ref={el => iconRefs.current[index] = el}
-                  className="relative group"
-                >
-                  <div className={`
-                    w-full aspect-square rounded-2xl
-                    bg-gradient-to-br ${item.gradient}
-                    p-0.5 transition-all duration-300
-                    opacity-0 scale-95 translate-y-10
-                    group-hover:scale-105 cursor-pointer
-                  `}>
-                    <div className="w-full h-full rounded-2xl bg-white dark:bg-gray-800 p-6
-                                  flex flex-col items-center justify-center gap-4
-                                  border border-gray-100 dark:border-gray-700">
-                      <item.icon className="w-12 h-12 transition-transform duration-300
-                                          group-hover:scale-110 group-hover:rotate-6" />
-                      <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                        {item.label}
-                      </span>
+          <div className="lg:w-2/5 relative">
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-orange-500/10 rounded-full filter blur-3xl"></div>
+            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-blue-500/10 rounded-full filter blur-3xl"></div>
+            
+            <div className="relative bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-gray-200/50 dark:border-gray-700/50">
+              <div className="grid grid-cols-2 gap-6">
+                {[
+                  { 
+                    icon: Server, 
+                    label: 'Infrastructure', 
+                    gradient: 'from-orange-500 to-red-500',
+                    description: 'Administration système Windows & Linux'
+                  },
+                  { 
+                    icon: Shield, 
+                    label: 'Sécurité', 
+                    gradient: 'from-blue-500 to-cyan-500',
+                    description: 'Protection et audit des systèmes'
+                  },
+                  { 
+                    icon: Network, 
+                    label: 'Réseaux', 
+                    gradient: 'from-green-500 to-emerald-500',
+                    description: 'Configuration et maintenance'
+                  },
+                  { 
+                    icon: Terminal, 
+                    label: 'DevOps', 
+                    gradient: 'from-purple-500 to-pink-500',
+                    description: 'Automatisation et scripts'
+                  }
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    ref={el => iconRefs.current[index] = el}
+                    className="relative group"
+                  >
+                    <div className={`
+                      w-full aspect-square rounded-2xl
+                      bg-gradient-to-br ${item.gradient}
+                      p-0.5 transition-all duration-300
+                      opacity-0 scale-95 translate-y-10
+                      group-hover:scale-105 cursor-pointer
+                    `}>
+                      <div className="w-full h-full rounded-2xl bg-white dark:bg-gray-800 p-6
+                                    flex flex-col items-center justify-center gap-4
+                                    border border-gray-100 dark:border-gray-700">
+                        <item.icon className="w-12 h-12 transition-transform duration-300
+                                            group-hover:scale-110 group-hover:rotate-6" />
+                        <div className="text-center">
+                          <div className="font-medium text-gray-900 dark:text-white mb-1">
+                            {item.label}
+                          </div>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                ))}
+              </div>
+
+              <div className="mt-8 p-6 bg-gradient-to-br from-orange-500/5 to-purple-500/5 rounded-xl border border-gray-200/50 dark:border-gray-700/50">
+                <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
+                  Technologies maîtrisées
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'Windows Server',
+                    'Linux',
+                    'VMware',
+                    'Proxmox',
+                    'Active Directory',
+                    'Docker',
+                    'pfSense',
+                    'PowerShell',
+                    'Python'
+                  ].map((tech, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 text-sm bg-white/50 dark:bg-gray-700/50 rounded-full
+                                text-gray-700 dark:text-gray-300 border border-gray-200/50 dark:border-gray-600/50"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
