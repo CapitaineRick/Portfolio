@@ -218,11 +218,11 @@ const Projects: React.FC = () => {
             filteredProjects.map((project, index) => (
               <div 
                 key={project.id}
-                className="project-card relative group transition-all duration-300 opacity-0 scale-95"
+                className="project-card relative group transition-all duration-300 opacity-0 scale-95 overflow-hidden"
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
-                <div className="relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden">
+                <div className="relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden h-full">
                   <div className="relative h-48">
                     <img 
                       src={project.image} 
@@ -315,7 +315,7 @@ const Projects: React.FC = () => {
                     </div>
 
                     {selectedDoc === project.id && project.pdfUrl && (
-                      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 overflow-hidden">
                         <div className="flex justify-between items-center mb-4">
                           <h4 className="font-medium text-orange-500">Documentation</h4>
                           <div className="flex items-center gap-2">
@@ -358,7 +358,7 @@ const Projects: React.FC = () => {
                     )}
 
                     {expandedProject === project.id && (
-                      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 overflow-hidden">
                         <div className="space-y-4">
                           <div>
                             <h4 className="font-medium text-orange-500 mb-2">Technologies utilisées</h4>
