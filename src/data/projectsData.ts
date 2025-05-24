@@ -71,7 +71,7 @@ export const projectsData = {
       title: 'HAproxy',
       description: 'Installation et configuration de HAproxy',
       image: '/images/haproxy-logo.webp',
-      pdfUrl: '/docs/installation-haproxy.pdf',
+      pdfUrl: '/pdfs/web/installation-haproxy.pdf',
       tags: ['Proxy', 'Reverse-proxy', 'Haute Disponibilité', 'Load Balancing', 'Web']
     },
     {
