@@ -17,17 +17,16 @@ section {
   @apply relative overflow-hidden;
   background-image: radial-gradient(
     circle at center,
-    var(--tw-gradient-from) 0%,
-    var(--tw-gradient-to) 100%
+    var(--tw-gradient-stops)
   );
-  background-size: 200% 200%;
+  background-size: 400% 400%;
   animation: gradientMove 15s ease infinite;
 }
 
 /* Subtle pattern overlay */
 section::before {
   content: '';
-  @apply absolute inset-0 opacity-5 pointer-events-none;
+  @apply absolute inset-0 opacity-5 pointer-events-none blur-sm;
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
@@ -37,23 +36,27 @@ section {
 }
 
 section:nth-child(odd) {
-  --tw-gradient-from: theme('colors.orange.50' / 5%);
-  --tw-gradient-to: theme('colors.purple.50' / 5%);
+  --tw-gradient-stops: theme('colors.orange.50' / 3%) 0%,
+                      theme('colors.purple.50' / 3%) 50%,
+                      theme('colors.orange.50' / 3%) 100%;
 }
 
 section:nth-child(even) {
-  --tw-gradient-from: theme('colors.purple.50' / 5%);
-  --tw-gradient-to: theme('colors.orange.50' / 5%);
+  --tw-gradient-stops: theme('colors.purple.50' / 3%) 0%,
+                      theme('colors.orange.50' / 3%) 50%,
+                      theme('colors.purple.50' / 3%) 100%;
 }
 
 .dark section:nth-child(odd) {
-  --tw-gradient-from: theme('colors.orange.900' / 5%);
-  --tw-gradient-to: theme('colors.purple.900' / 5%);
+  --tw-gradient-stops: theme('colors.orange.900' / 3%) 0%,
+                      theme('colors.purple.900' / 3%) 50%,
+                      theme('colors.orange.900' / 3%) 100%;
 }
 
 .dark section:nth-child(even) {
-  --tw-gradient-from: theme('colors.purple.900' / 5%);
-  --tw-gradient-to: theme('colors.orange.900' / 5%);
+  --tw-gradient-stops: theme('colors.purple.900' / 3%) 0%,
+                      theme('colors.orange.900' / 3%) 50%,
+                      theme('colors.purple.900' / 3%) 100%;
 }
 
 /* Gradient animation */
@@ -111,7 +114,7 @@ section:nth-child(even) {
 
 /* Add smooth transitions for theme changes */
 .dark {
-  @apply transition-colors duration-1000;
+  @apply transition-all duration-1000 ease-in-out;
 }
 
 /* Smooth hover effects */
@@ -144,7 +147,7 @@ section {
 
 /* Smooth background blur transitions */
 .backdrop-blur {
-  @apply transition-[backdrop-filter] duration-1000;
+  @apply transition-[backdrop-filter] duration-1000 ease-in-out;
 }
 
 /* Smooth card hover effects */
@@ -164,25 +167,25 @@ img {
 
 /* Smooth color transitions */
 .text-transition {
-  @apply transition-colors duration-1000;
+  @apply transition-colors duration-1000 ease-in-out;
 }
 
 /* Smooth border transitions */
 .border-transition {
-  @apply transition-[border-color] duration-1000;
+  @apply transition-[border-color] duration-1000 ease-in-out;
 }
 
 /* Smooth shadow transitions */
 .shadow-transition {
-  @apply transition-shadow duration-1000;
+  @apply transition-shadow duration-1000 ease-in-out;
 }
 
 /* Smooth background transitions */
 .bg-transition {
-  @apply transition-[background-color] duration-1000;
+  @apply transition-[background-color] duration-1000 ease-in-out;
 }
 
 /* Smooth opacity transitions */
 .opacity-transition {
-  @apply transition-opacity duration-1000;
+  @apply transition-opacity duration-1000 ease-in-out;
 }
