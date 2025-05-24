@@ -13,9 +13,11 @@ const Documentation: React.FC = () => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [scale, setScale] = useState(1.0);
+  const [scale, setScale] = useState(1.2);
+  const [isLoading, setIsLoading] = useState(false);
   
   const project = projectsData[selectedCategory].find(p => p.id === selectedProject);
+  
   const handlePrevious = () => {
     if (pageNumber > 1) {
       setPageNumber(pageNumber - 1);
@@ -40,6 +42,7 @@ const Documentation: React.FC = () => {
 
   const handleProjectChange = (projectId: string) => {
     setIsTransitioning(true);
+    setIsLoading(true);
     setTimeout(() => {
       setSelectedProject(projectId);
       setPageNumber(1);
@@ -49,7 +52,7 @@ const Documentation: React.FC = () => {
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
-    setScale(isFullscreen ? 1.0 : 1.5);
+    setScale(isFullscreen ? 1.2 : 1.5);
   };
 
   const handleDownload = () => {
@@ -66,6 +69,7 @@ const Documentation: React.FC = () => {
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
     setPageNumber(1);
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -180,6 +184,12 @@ const Documentation: React.FC = () => {
                 </div>
               </div>
 
+              {isLoading && (
+                <div className="flex justify-center items-center py-12">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+                </div>
+              )}
+
               <div className="flex justify-center mb-6">
                 <div className="flex items-center gap-4">
                   <button
@@ -192,7 +202,7 @@ const Documentation: React.FC = () => {
                     <ChevronLeft size={20} />
                   </button>
                   <span className="text-gray-700 dark:text-gray-300 font-medium">
-                    Page {pageNumber} sur {numPages}
+                    Page {pageNumber} sur {numPages || '...'}
                   </span>
                   <button
                     onClick={handleNext}
@@ -207,20 +217,70 @@ const Documentation: React.FC = () => {
               </div>
 
               <div className="flex justify-center">
-                <Document
-                  file={project.pdfUrl}
-                  onLoadSuccess={onDocumentLoadSuccess}
-                  className="border border-gray-300 dark:border-gray-600 rounded-xl overflow-hidden"
-                >
-                  <Page
-                    pageNumber={pageNumber}
-                    scale={scale}
-                    className="shadow-lg"
-                    renderTextLayer={true}
-                    renderAnnotationLayer={true}
-                  />
-                </Document>
+                {project.pdfUrl ? (
+                  <Document
+                    file={project.pdfUrl}
+                    onLoadSuccess={onDocumentLoadSuccess}
+                    onLoadError={(error) => {
+                      console.error('Error loading PDF:', error);
+                      setIsLoading(false);
+                    }}
+                    loading={
+                      <div className="flex justify-center items-center py-12">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+                      </div>
+                    }
+                    className="border border-gray-300 dark:border-gray-600 rounded-xl overflow-hidden"
+                    options={{
+                      cMapUrl: 'https://unpkg.com/pdfjs-dist@4.8.69/cmaps/',
+                      cMapPacked: true,
+                    }}
+                  >
+                    <Page
+                      pageNumber={pageNumber}
+                      scale={scale}
+                      className="shadow-lg"
+                      renderTextLayer={true}
+                      renderAnnotationLayer={true}
+                      loading={
+                        <div className="flex justify-center items-center py-12">
+                          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+                        </div>
+                      }
+                    />
+                  </Document>
+                ) : (
+                  <div className="flex flex-col items-center justify-center p-12 text-center">
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">
+                      Aucun document PDF disponible pour ce projet.
+                    </p>
+                  </div>
+                )}
               </div>
+              
+              {project.pdfUrl && numPages && (
+                <div className="flex justify-center mt-4">
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={() => setScale(Math.max(0.5, scale - 0.2))}
+                      className="px-3 py-1 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300
+                               hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    >
+                      Zoom -
+                    </button>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      {Math.round(scale * 100)}%
+                    </span>
+                    <button
+                      onClick={() => setScale(Math.min(2.5, scale + 0.2))}
+                      className="px-3 py-1 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300
+                               hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    >
+                      Zoom +
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
