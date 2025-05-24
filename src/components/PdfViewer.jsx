@@ -13,24 +13,27 @@ export default function PdfViewer({ file }) {
     setPageNumber(1);
   };
 
-  const handleDownload = () => {
-    if (file) {
-      // Create a direct link to the PDF file
-      const link = document.createElement('a');
+const handleDownload = () => {
+  if (file) {
+    const link = document.createElement('a');
+
+    if (typeof file === 'string') {
+      // URL classique
       link.href = file;
-      
-      // Extract the filename from the path to preserve the extension
-      const filename = file.split('/').pop();
-      
-      // Make sure the file has a .pdf extension
-      link.download = filename || 'document.pdf';
-      
-      link.target = '_blank';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      link.download = file.split('/').pop() || 'document.pdf';
+    } else {
+      // Blob/File
+      const blobUrl = URL.createObjectURL(file);
+      link.href = blobUrl;
+      link.download = file.name || 'document.pdf';
     }
-  };
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+};
+
 
   return (
     <div className="pdf-viewer flex flex-col items-center">
