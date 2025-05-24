@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Briefcase, GraduationCap } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 
 interface Project {
@@ -17,18 +17,19 @@ interface Project {
 
 interface ProjectCardProps {
   project: Project;
+  isEnterprise: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '', style }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, className = '', style }) => {
   const { setSelectedProject, setSelectedCategory } = useProject();
 
   const scrollToDocumentation = () => {
     const docsSection = document.querySelector('#documentation');
     if (docsSection) {
-      // Update the selected project before scrolling
       setSelectedProject(project.id);
+      setSelectedCategory(isEnterprise ? 'enterprise' : 'school');
       docsSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -45,20 +46,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '', styl
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-          <div className="p-4 text-white">
-            <div className="flex flex-wrap gap-1 mb-2">
-              {project.tags.slice(0, 3).map(tag => (
-                <span 
-                  key={tag} 
-                  className="px-2 py-0.5 text-xs rounded-full bg-orange-500/80 text-white"
-                >
-                  {tag}
-                </span>
-              ))}
-              {project.tags.length > 3 && (
-                <span className="px-2 py-0.5 text-xs rounded-full bg-gray-500/80 text-white">
-                  +{project.tags.length - 3}
-                </span>
+          <div className="p-4 text-white w-full">
+            <div className="flex justify-between items-center mb-2">
+              <div className="flex flex-wrap gap-1">
+                {project.tags.slice(0, 3).map(tag => (
+                  <span 
+                    key={tag} 
+                    className="px-2 py-0.5 text-xs rounded-full bg-orange-500/80 text-white"
+                  >
+                    {tag}
+                  </span>
+                ))}
+                {project.tags.length > 3 && (
+                  <span className="px-2 py-0.5 text-xs rounded-full bg-gray-500/80 text-white">
+                    +{project.tags.length - 3}
+                  </span>
+                )}
+              </div>
+              {isEnterprise ? (
+                <Briefcase className="w-5 h-5 text-orange-500" />
+              ) : (
+                <GraduationCap className="w-5 h-5 text-orange-500" />
               )}
             </div>
           </div>

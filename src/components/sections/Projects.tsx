@@ -6,24 +6,23 @@ import { Briefcase, GraduationCap } from 'lucide-react';
 const Projects: React.FC = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<'enterprise' | 'school'>('enterprise');
 
   const handleTagClick = (tag: string) => {
     setSelectedTag(selectedTag === tag ? null : tag);
   };
 
-  // Get all unique tags from both enterprise and school projects
+  // Combine enterprise and school projects into a single array
+  const allProjects = [...projectsData.enterprise, ...projectsData.school];
+
+  // Get all unique tags
   const allTags = Array.from(
-    new Set([
-      ...projectsData.enterprise.flatMap(project => project.tags),
-      ...projectsData.school.flatMap(project => project.tags)
-    ])
+    new Set(allProjects.flatMap(project => project.tags))
   ).sort();
 
-  // Filter projects based on selected tag and category
+  // Filter projects based on selected tag
   const filteredProjects = selectedTag
-    ? projectsData[selectedCategory].filter(project => project.tags.includes(selectedTag))
-    : projectsData[selectedCategory];
+    ? allProjects.filter(project => project.tags.includes(selectedTag))
+    : allProjects;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -54,40 +53,14 @@ const Projects: React.FC = () => {
         observer.unobserve(projectsRef.current);
       }
     };
-  }, [selectedTag, selectedCategory]);
+  }, [selectedTag]);
 
   return (
     <section id="projects" className="py-16 bg-gray-50 dark:bg-gray-800/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Expérence</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Expériences</h2>
           <div className="w-20 h-1 bg-orange-500 mx-auto mb-8"></div>
-          
-          {/* Category Selector */}
-          <div className="flex justify-center gap-4 mb-8">
-            <button
-              onClick={() => setSelectedCategory('enterprise')}
-              className={`flex items-center px-4 py-2 rounded-lg transition-all ${
-                selectedCategory === 'enterprise'
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
-              }`}
-            >
-              <Briefcase className="w-5 h-5 mr-2" />
-              Expérence en entreprise
-            </button>
-            <button
-              onClick={() => setSelectedCategory('school')}
-              className={`flex items-center px-4 py-2 rounded-lg transition-all ${
-                selectedCategory === 'school'
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
-              }`}
-            >
-              <GraduationCap className="w-5 h-5 mr-2" />
-              Expérence scolaires
-            </button>
-          </div>
           
           {/* Tags Filter */}
           <div className="flex flex-wrap justify-center gap-2 mb-8">
@@ -123,6 +96,7 @@ const Projects: React.FC = () => {
                 <ProjectCard 
                   key={project.id}
                   project={project}
+                  isEnterprise={projectsData.enterprise.some(p => p.id === project.id)}
                   className="project-card opacity-0 scale-95 transition-all duration-500"
                   style={{ transitionDelay: `${index * 100}ms` }}
                 />
