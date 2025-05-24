@@ -317,7 +317,7 @@ const Projects: React.FC = () => {
 
                       {(selectedDoc === project.id && project.pdfUrl) || expandedProject === project.id ? (
                         <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                          {selectedDoc === project.id && project.pdfUrl && (
+                          {selectedDoc === project.id && project.pdfUrl ? (
                             <>
                               <div className="flex justify-between items-center mb-4">
                                 <h4 className="font-medium text-orange-500">Documentation</h4>
@@ -358,9 +358,7 @@ const Projects: React.FC = () => {
                                 </Document>
                               </div>
                             </>
-                          )}
-
-                          {expandedProject === project.id && (
+                          ) : (
                             <div className="space-y-4">
                               <div>
                                 <h4 className="font-medium text-orange-500 mb-2">Technologies utilisées</h4>
