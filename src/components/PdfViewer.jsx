@@ -1,32 +1,24 @@
-import { Document, Page } from 'react-pdf';
-import { useState } from 'react';
+import React from 'react';
+import { Worker, Viewer } from '@react-pdf-viewer/core';
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 
-export default function PdfViewer({ file }) {
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+// Import styles
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
-  const onDocumentLoadSuccess = ({ numPages }) => {
-    setNumPages(numPages);
-    setPageNumber(1);
-  };
-
-  console.log('Chemin du PDF reçu :', file); // ✅ Ici, en dehors du JSX
+const PdfViewer = ({ pdfUrl }) => {
+  const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
   return (
-    <div className="pdf-viewer">
-      <Document
-        file={file}
-        onLoadSuccess={onDocumentLoadSuccess}
-        onLoadError={(error) => console.error('Erreur chargement PDF:', error)}
-      >
-        <Page pageNumber={pageNumber} />
-      </Document>
-
-      <div className="pdf-controls">
-        <button onClick={() => setPageNumber(p => Math.max(p - 1, 1))}>Page -</button>
-        <span>{pageNumber} / {numPages}</span>
-        <button onClick={() => setPageNumber(p => Math.min(p + 1, numPages))}>Page +</button>
-      </div>
+    <div style={{ height: '750px' }}>
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@4.8.69/build/pdf.worker.min.js">
+        <Viewer
+          fileUrl={pdfUrl}
+          plugins={[defaultLayoutPluginInstance]}
+        />
+      </Worker>
     </div>
   );
-}
+};
+
+export default PdfViewer;
