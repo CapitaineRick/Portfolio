@@ -162,7 +162,7 @@ const Projects: React.FC = () => {
             Mes Projets
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
             Découvrez mes réalisations techniques en administration système, réseau et sécurité
           </p>
         </div>
@@ -181,9 +181,10 @@ const Projects: React.FC = () => {
                   value={searchTerm}
                   onChange={handleSearchChange}
                   className="w-full pl-14 pr-4 py-4 rounded-2xl bg-gray-50 dark:bg-gray-700/50 
-                           border-2 border-gray-200 dark:border-gray-600 
+                           border-2 border-gray-300 dark:border-gray-600 
                            focus:ring-4 focus:ring-orange-500/20 focus:border-orange-500
-                           placeholder-gray-400 dark:placeholder-gray-500
+                           placeholder-gray-500 dark:placeholder-gray-500
+                           text-gray-900 dark:text-gray-100
                            text-lg transition-all duration-300"
                 />
               </div>
@@ -191,7 +192,7 @@ const Projects: React.FC = () => {
               <div className="space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <Filter className="w-5 h-5 text-orange-500" />
-                  <h3 className="text-lg font-semibold">Type de projet</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Type de projet</h3>
                 </div>
                 <div className="flex flex-wrap gap-3">
                   <button
@@ -199,7 +200,7 @@ const Projects: React.FC = () => {
                     className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
                       ${selectedType === 'all'
                         ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
-                        : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
+                        : 'bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600/50'
                       }`}
                   >
                     Tous les projets
@@ -209,7 +210,7 @@ const Projects: React.FC = () => {
                     className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
                       ${selectedType === 'enterprise'
                         ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
-                        : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
+                        : 'bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600/50'
                       }`}
                   >
                     <Briefcase className="w-5 h-5" />
@@ -220,7 +221,7 @@ const Projects: React.FC = () => {
                     className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
                       ${selectedType === 'school'
                         ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
-                        : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
+                        : 'bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600/50'
                       }`}
                   >
                     <GraduationCap className="w-5 h-5" />
@@ -230,22 +231,22 @@ const Projects: React.FC = () => {
               </div>
 
               {(selectedType !== 'all' || selectedTag || searchTerm) && (
-                <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                  <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                <div className="mt-8 pt-6 border-t border-gray-300 dark:border-gray-700">
+                  <div className="flex items-center gap-4 text-sm text-gray-700 dark:text-gray-400">
                     <span className="font-medium">Filtres actifs:</span>
                     <div className="flex flex-wrap gap-2">
                       {selectedType !== 'all' && (
-                        <span className="px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400">
+                        <span className="px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400">
                           {selectedType === 'enterprise' ? 'Projets professionnels' : 'Projets scolaires'}
                         </span>
                       )}
                       {selectedTag && (
-                        <span className="px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+                        <span className="px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400">
                           #{selectedTag}
                         </span>
                       )}
                       {searchTerm && (
-                        <span className="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                        <span className="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400">
                           Recherche: "{searchTerm}"
                         </span>
                       )}
@@ -263,8 +264,8 @@ const Projects: React.FC = () => {
             <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8 overflow-hidden">
               <div className="flex items-center gap-2 mb-4">
                 <Tags className="w-5 h-5 text-orange-500" />
-                <h3 className="text-lg font-semibold">Technologies disponibles</h3>
-                <span className="text-sm text-gray-500">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Technologies disponibles</h3>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
                   ({selectedType === 'all' ? 'tous les projets' : selectedType === 'enterprise' ? 'projets professionnels' : 'projets scolaires'})
                 </span>
               </div>
@@ -280,7 +281,7 @@ const Projects: React.FC = () => {
                     className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105
                       ${selectedTag === tag
                         ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
-                        : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
+                        : 'bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600/50'
                       }`}
                   >
                     #{tag}
@@ -301,8 +302,8 @@ const Projects: React.FC = () => {
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-8">
                   <Search className="w-12 h-12 text-orange-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">Aucun projet trouvé</h3>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Aucun projet trouvé</h3>
+                  <p className="text-gray-700 dark:text-gray-400">
                     Essayez de modifier vos critères de recherche
                   </p>
                 </div>
@@ -360,7 +361,7 @@ const Projects: React.FC = () => {
                         <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-orange-500 transition-colors">
                           {project.title}
                         </h3>
-                        <p className="text-gray-600 dark:text-gray-300 mb-6">
+                        <p className="text-gray-700 dark:text-gray-300 mb-6">
                           {project.description}
                         </p>
 
@@ -369,7 +370,7 @@ const Projects: React.FC = () => {
                             <button
                               onClick={() => handleDocClick(project.id)}
                               className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
-                                       text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
+                                       text-orange-700 dark:text-orange-400 font-medium transition-all duration-300
                                        hover:bg-orange-100 dark:hover:bg-orange-900/50"
                             >
                               <FileText className="w-4 h-4" />
@@ -379,7 +380,7 @@ const Projects: React.FC = () => {
                             <button
                               onClick={() => setExpandedProject(expandedProject === project.id ? null : project.id)}
                               className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
-                                       text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
+                                       text-orange-700 dark:text-orange-400 font-medium transition-all duration-300
                                        hover:bg-orange-100 dark:hover:bg-orange-900/50"
                             >
                               {expandedProject === project.id ? (
@@ -401,8 +402,8 @@ const Projects: React.FC = () => {
                               href={project.demoUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-700 
-                                       text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-all duration-300"
+                              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-700 
+                                       text-gray-700 dark:text-gray-400 hover:text-orange-500 transition-all duration-300"
                             >
                               <ExternalLink className="w-4 h-4" />
                               Demo
@@ -411,27 +412,27 @@ const Projects: React.FC = () => {
                         </div>
 
                         {((selectedDoc === project.id && project.pdfUrl) || expandedProject === project.id) && (
-                          <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                          <div className="mt-6 pt-6 border-t border-gray-300 dark:border-gray-700">
                             {selectedDoc === project.id && project.pdfUrl ? (
                               <>
                                 <div className="flex justify-between items-center mb-4">
-                                  <h4 className="font-medium text-orange-500">Documentation</h4>
+                                  <h4 className="font-medium text-orange-700 dark:text-orange-400">Documentation</h4>
                                   <div className="flex items-center gap-2">
                                     <button
                                       onClick={() => setPageNumber(Math.max(1, pageNumber - 1))}
                                       disabled={pageNumber <= 1}
-                                      className="p-2 rounded-lg bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 
+                                      className="p-2 rounded-lg bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 
                                                disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
                                     >
                                       <ChevronDown className="w-4 h-4 transform rotate-90" />
                                     </button>
-                                    <span className="text-sm">
+                                    <span className="text-sm text-gray-700 dark:text-gray-300">
                                       Page {pageNumber} / {numPages || 1}
                                     </span>
                                     <button
                                       onClick={() => setPageNumber(Math.min(numPages || 1, pageNumber + 1))}
                                       disabled={pageNumber >= (numPages || 1)}
-                                      className="p-2 rounded-lg bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
+                                      className="p-2 rounded-lg bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400
                                                disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
                                     >
                                       <ChevronDown className="w-4 h-4 transform -rotate-90" />
@@ -456,13 +457,13 @@ const Projects: React.FC = () => {
                             ) : (
                               <div className="space-y-4">
                                 <div>
-                                  <h4 className="font-medium text-orange-500 mb-2">Technologies utilisées</h4>
+                                  <h4 className="font-medium text-orange-700 dark:text-orange-400 mb-2">Technologies utilisées</h4>
                                   <div className="flex flex-wrap gap-2">
                                     {project.tags.map(tag => (
                                       <span 
                                         key={tag}
                                         className="px-2 py-1 text-xs rounded-lg bg-orange-50 dark:bg-orange-900/30 
-                                                 text-orange-600 dark:text-orange-400 transition-all duration-300"
+                                                 text-orange-700 dark:text-orange-400 transition-all duration-300"
                                       >
                                         {tag}
                                       </span>
@@ -484,7 +485,7 @@ const Projects: React.FC = () => {
                   <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 
+                    className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 
                              disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300
                              hover:bg-orange-100 dark:hover:bg-orange-900/50"
                   >
@@ -499,7 +500,7 @@ const Projects: React.FC = () => {
                         className={`w-10 h-10 rounded-xl font-medium transition-all duration-300 ${
                           currentPage === page
                             ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white'
-                            : 'bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/50'
+                            : 'bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/50'
                         }`}
                       >
                         {page}
@@ -510,7 +511,7 @@ const Projects: React.FC = () => {
                   <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 
+                    className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 
                              disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300
                              hover:bg-orange-100 dark:hover:bg-orange-900/50"
                   >
