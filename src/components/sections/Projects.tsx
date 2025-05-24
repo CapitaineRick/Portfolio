@@ -27,12 +27,18 @@ const Projects: React.FC = () => {
     setPageNumber(1);
   };
 
-  const allTags = Array.from(
-    new Set([
-      ...projectsData.enterprise.flatMap(project => project.tags),
-      ...projectsData.school.flatMap(project => project.tags)
-    ])
-  ).sort();
+  // Get available tags based on selected type
+  const getAvailableTags = () => {
+    let projects = [];
+    if (selectedType === 'all') {
+      projects = [...projectsData.enterprise, ...projectsData.school];
+    } else if (selectedType === 'enterprise') {
+      projects = projectsData.enterprise;
+    } else {
+      projects = projectsData.school;
+    }
+    return Array.from(new Set(projects.flatMap(project => project.tags))).sort();
+  };
 
   const filteredProjects = (() => {
     let projects = [];
@@ -67,6 +73,14 @@ const Projects: React.FC = () => {
   const handleNextPage = () => {
     setPageNumber(prev => Math.min(prev + 1, numPages || 1));
   };
+
+  useEffect(() => {
+    // Reset selected tag if it's not available in current type
+    const availableTags = getAvailableTags();
+    if (selectedTag && !availableTags.includes(selectedTag)) {
+      setSelectedTag(null);
+    }
+  }, [selectedType]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -212,10 +226,13 @@ const Projects: React.FC = () => {
             <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8">
               <div className="flex items-center gap-2 mb-4">
                 <Tags className="w-5 h-5 text-orange-500" />
-                <h3 className="text-lg font-semibold">Technologies</h3>
+                <h3 className="text-lg font-semibold">Technologies disponibles</h3>
+                <span className="text-sm text-gray-500">
+                  ({selectedType === 'all' ? 'tous les projets' : selectedType === 'enterprise' ? 'projets professionnels' : 'projets scolaires'})
+                </span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {allTags.map(tag => (
+                {getAvailableTags().map(tag => (
                   <button
                     key={tag}
                     onClick={() => handleTagClick(tag)}
