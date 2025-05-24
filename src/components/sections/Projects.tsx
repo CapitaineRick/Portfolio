@@ -17,6 +17,7 @@ const Projects: React.FC = () => {
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [isTagsTransitioning, setIsTagsTransitioning] = useState(false);
 
   const handleTagClick = (tag: string) => {
     setSelectedTag(selectedTag === tag ? null : tag);
@@ -73,6 +74,13 @@ const Projects: React.FC = () => {
   const handleNextPage = () => {
     setPageNumber(prev => Math.min(prev + 1, numPages || 1));
   };
+
+  useEffect(() => {
+    // Trigger animation when type changes
+    setIsTagsTransitioning(true);
+    const timer = setTimeout(() => setIsTagsTransitioning(false), 300);
+    return () => clearTimeout(timer);
+  }, [selectedType]);
 
   useEffect(() => {
     // Reset selected tag if it's not available in current type
@@ -223,7 +231,7 @@ const Projects: React.FC = () => {
         <div className="mb-12">
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
-            <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8">
+            <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8 overflow-hidden">
               <div className="flex items-center gap-2 mb-4">
                 <Tags className="w-5 h-5 text-orange-500" />
                 <h3 className="text-lg font-semibold">Technologies disponibles</h3>
@@ -231,12 +239,16 @@ const Projects: React.FC = () => {
                   ({selectedType === 'all' ? 'tous les projets' : selectedType === 'enterprise' ? 'projets professionnels' : 'projets scolaires'})
                 </span>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div 
+                className={`flex flex-wrap gap-2 transition-all duration-300 ${
+                  isTagsTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+                }`}
+              >
                 {getAvailableTags().map(tag => (
                   <button
                     key={tag}
                     onClick={() => handleTagClick(tag)}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105
                       ${selectedTag === tag
                         ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
                         : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
