@@ -6,8 +6,8 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
-// Set worker URL for PDF.js
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
+// Set worker URL for PDF.js - Using local worker file
+pdfjs.GlobalWorkerOptions.workerSrc = '/pdfjs/pdf.worker.min.js';
 
 const Documentation: React.FC = () => {
   const docsRef = useRef<HTMLDivElement>(null);
@@ -18,7 +18,6 @@ const Documentation: React.FC = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [scale, setScale] = useState(1.0);
   
-  // Find the current project based on selection
   const project = projectsData[selectedCategory].find(p => p.id === selectedProject);
 
   const handlePrevious = () => {
