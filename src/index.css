@@ -3,24 +3,14 @@
 @tailwind utilities;
 
 @keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
 }
 
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 @keyframes network-flow {
@@ -28,13 +18,16 @@
     stroke-dashoffset: 1000;
     opacity: 0;
   }
-  50% {
-    opacity: 1;
-  }
+  50% { opacity: 1; }
   100% {
     stroke-dashoffset: 0;
     opacity: 0;
   }
+}
+
+@keyframes slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .animate-float {
@@ -50,6 +43,10 @@
   animation: network-flow 8s linear infinite;
 }
 
+.animate-slide {
+  animation: slide 3s linear infinite;
+}
+
 .grid-bg {
   background-size: 50px 50px;
   background-image: 
@@ -61,4 +58,44 @@
   background-image: 
     linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+}
+
+.section-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(251, 146, 60, 0.05) 0%, rgba(251, 146, 60, 0.1) 100%);
+  mask-image: radial-gradient(circle at center, transparent 0%, black 100%);
+}
+
+.section-bg.alt {
+  background: linear-gradient(to right, rgba(31, 41, 55, 0.05), rgba(31, 41, 55, 0.1));
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -5px rgba(251, 146, 60, 0.3);
+}
+
+.glass-effect {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass-effect {
+  background: rgba(17, 24, 39, 0.4);
+  border-color: rgba(255, 255, 255, 0.1);
 }
