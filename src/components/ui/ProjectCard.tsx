@@ -10,11 +10,7 @@ interface Project {
   image: string;
   tags: string[];
   demoUrl?: string;
-  pdfUrl?: string;
-  longDescription: string;
-  tools: string[];
-  steps: string[];
-  results: string[];
+  pdfUrl: string;
 }
 
 interface ProjectCardProps {
@@ -107,40 +103,42 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             </p>
             
             <div className="flex items-center justify-between">
-              <button
-                onClick={scrollToDocumentation}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
-                         text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
-                         hover:bg-orange-100 dark:hover:bg-orange-900/50 group/btn"
-              >
-                <FileText className="w-4 h-4" />
-                Documentation
-                <ArrowRight className="transition-transform group-hover/btn:translate-x-1" size={16} />
-              </button>
-              
               <div className="flex items-center gap-2">
-                {project.pdfUrl && (
-                  <button
-                    onClick={() => setShowFullscreen(true)}
-                    className="p-2 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 
-                             hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors"
-                    title="Voir en plein écran"
-                  >
-                    <Maximize2 size={16} />
-                  </button>
-                )}
-                
-                {project.demoUrl && (
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-500 hover:text-orange-500 transition-colors"
-                  >
-                    <ExternalLink size={16} />
-                  </a>
-                )}
+                <button
+                  onClick={scrollToDocumentation}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
+                           text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
+                           hover:bg-orange-100 dark:hover:bg-orange-900/50 group/btn"
+                >
+                  <FileText className="w-4 h-4" />
+                  Documentation
+                  <ArrowRight className="transition-transform group-hover/btn:translate-x-1" size={16} />
+                </button>
+
+                <button
+                  onClick={() => setShowFullscreen(true)}
+                  className={`p-2 rounded-xl transition-colors ${
+                    project.pdfUrl 
+                      ? 'bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/50'
+                      : 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-600 cursor-not-allowed'
+                  }`}
+                  disabled={!project.pdfUrl}
+                  title={project.pdfUrl ? 'Voir en plein écran' : 'Documentation non disponible'}
+                >
+                  <Maximize2 size={16} />
+                </button>
               </div>
+              
+              {project.demoUrl && (
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-500 hover:text-orange-500 transition-colors"
+                >
+                  <ExternalLink size={16} />
+                </a>
+              )}
             </div>
           </div>
         </div>
