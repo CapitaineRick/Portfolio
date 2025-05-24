@@ -19,6 +19,7 @@ const Projects: React.FC = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [isTagsTransitioning, setIsTagsTransitioning] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAnimating, setIsAnimating] = useState(false);
   const projectsPerPage = 9;
 
   const handleTagClick = (tag: string) => {
@@ -71,7 +72,13 @@ const Projects: React.FC = () => {
   );
 
   const handlePageChange = (page: number) => {
+    setIsAnimating(true);
     setCurrentPage(page);
+    
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 50);
+    
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -97,34 +104,36 @@ const Projects: React.FC = () => {
   }, [selectedType]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
-          
-          const cards = entry.target.querySelectorAll('.project-card');
-          cards.forEach((card, index) => {
-            setTimeout(() => {
-              card.classList.add('opacity-100', 'scale-100');
-              card.classList.remove('opacity-0', 'scale-95');
-            }, 100 * index);
-          });
-        }
-      },
-      { threshold: 0.1 }
-    );
+    if (!isAnimating) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            
+            const cards = entry.target.querySelectorAll('.project-card');
+            cards.forEach((card, index) => {
+              setTimeout(() => {
+                card.classList.add('opacity-100', 'scale-100');
+                card.classList.remove('opacity-0', 'scale-95');
+              }, 50 * index);
+            });
+          }
+        },
+        { threshold: 0.1 }
+      );
 
-    if (projectsRef.current) {
-      observer.observe(projectsRef.current);
-    }
-
-    return () => {
       if (projectsRef.current) {
-        observer.unobserve(projectsRef.current);
+        observer.observe(projectsRef.current);
       }
-    };
-  }, [selectedTag, selectedType, searchTerm]);
+
+      return () => {
+        if (projectsRef.current) {
+          observer.unobserve(projectsRef.current);
+        }
+      };
+    }
+  }, [currentPage, isAnimating]);
 
   return (
     <section id="projects" className="py-16 flex items-center justify-center relative overflow-hidden">
