@@ -38,6 +38,10 @@ const handleDownload = () => {
   }
 };
 
+console.log('Type:', typeof file);
+console.log('Instanceof File:', file instanceof File);
+console.log('Instanceof Blob:', file instanceof Blob);
+console.log('Value:', file);
 
 
 
