@@ -3,6 +3,7 @@ import { projectsData } from '../../data/projectsData';
 import { ChevronLeft, ChevronRight, Briefcase, GraduationCap, Maximize2, Minimize2, Download } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page, pdfjs } from 'react-pdf';
+console.log('PDFJS:', pdfjs);
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
