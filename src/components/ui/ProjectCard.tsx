@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, FileText, X, Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
-import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
+import { Document, Page } from 'react-pdf';
 
 interface Project {
   id: string;
@@ -27,9 +25,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [showFullscreen, setShowFullscreen] = useState(false);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [scale, setScale] = useState(1.2);
+  const [scale, setScale] = useState(1.0);
   const [pdfError, setPdfError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const scrollToDocumentation = () => {
     const docsSection = document.querySelector('#documentation');
@@ -55,13 +52,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     setNumPages(numPages);
     setPageNumber(1);
     setPdfError(null);
-    setIsLoading(false);
   }
 
   function onDocumentLoadError(error: Error) {
     console.error('Error loading PDF:', error);
     setPdfError('Impossible de charger le PDF. Veuillez réessayer plus tard.');
-    setIsLoading(false);
   }
 
   return (
@@ -140,10 +135,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                 </button>
 
                 <button
-                  onClick={() => {
-                    setShowFullscreen(true);
-                    setIsLoading(true);
-                  }}
+                  onClick={() => setShowFullscreen(true)}
                   className={`p-2 rounded-xl transition-colors ${
                     project.pdfUrl 
                       ? 'bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/50'
@@ -208,12 +200,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
               </div>
             ) : (
               <>
-                {isLoading && (
-                  <div className="flex justify-center items-center py-12">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
-                  </div>
-                )}
-                
                 <div className="flex justify-center mb-4">
                   <div className="flex items-center gap-4">
                     <button
@@ -225,11 +211,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                       <ChevronLeft size={20} />
                     </button>
                     <span className="text-gray-700 dark:text-gray-300">
-                      Page {pageNumber} sur {numPages || '...'}
+                      Page {pageNumber} sur {numPages}
                     </span>
                     <button
                       onClick={() => setPageNumber(Math.min(numPages || 1, pageNumber + 1))}
-                      disabled={!numPages || pageNumber >= numPages}
+                      disabled={pageNumber >= (numPages || 1)}
                       className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
                                disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
@@ -249,10 +235,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                       </div>
                     }
                     className="mx-auto"
-                    options={{
-                      cMapUrl: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/cmaps/`,
-                      cMapPacked: true,
-                    }}
                   >
                     <Page
                       pageNumber={pageNumber}
@@ -260,35 +242,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                       className="mx-auto"
                       renderTextLayer={true}
                       renderAnnotationLayer={true}
-                      loading={
-                        <div className="flex items-center justify-center p-8">
-                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
-                        </div>
-                      }
                     />
                   </Document>
-                </div>
-                
-                <div className="flex justify-center mt-4">
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={() => setScale(Math.max(0.5, scale - 0.2))}
-                      className="px-3 py-1 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300
-                               hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                    >
-                      Zoom -
-                    </button>
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {Math.round(scale * 100)}%
-                    </span>
-                    <button
-                      onClick={() => setScale(Math.min(2.5, scale + 0.2))}
-                      className="px-3 py-1 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300
-                               hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                    >
-                      Zoom +
-                    </button>
-                  </div>
                 </div>
               </>
             )}

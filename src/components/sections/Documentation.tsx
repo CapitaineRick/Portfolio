@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { projectsData } from '../../data/projectsData';
 import { ChevronLeft, ChevronRight, Briefcase, GraduationCap, Maximize2, Minimize2, Download } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { Document, Page } from 'react-pdf';
 
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
@@ -14,11 +14,9 @@ const Documentation: React.FC = () => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [scale, setScale] = useState(1.2);
-  const [isLoading, setIsLoading] = useState(false);
+  const [scale, setScale] = useState(1.0);
   
   const project = projectsData[selectedCategory].find(p => p.id === selectedProject);
-  
   const handlePrevious = () => {
     if (pageNumber > 1) {
       setPageNumber(pageNumber - 1);
@@ -33,7 +31,6 @@ const Documentation: React.FC = () => {
 
   const handleCategoryChange = (category: 'enterprise' | 'school') => {
     setIsTransitioning(true);
-    setIsLoading(true);
     setTimeout(() => {
       setSelectedCategory(category);
       setSelectedProject(projectsData[category][0].id);
@@ -44,7 +41,6 @@ const Documentation: React.FC = () => {
 
   const handleProjectChange = (projectId: string) => {
     setIsTransitioning(true);
-    setIsLoading(true);
     setTimeout(() => {
       setSelectedProject(projectId);
       setPageNumber(1);
@@ -54,7 +50,7 @@ const Documentation: React.FC = () => {
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
-    setScale(isFullscreen ? 1.2 : 1.5);
+    setScale(isFullscreen ? 1.0 : 1.5);
   };
 
   const handleDownload = () => {
@@ -71,7 +67,6 @@ const Documentation: React.FC = () => {
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
     setPageNumber(1);
-    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -186,12 +181,6 @@ const Documentation: React.FC = () => {
                 </div>
               </div>
 
-              {isLoading && (
-                <div className="flex justify-center items-center py-12">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
-                </div>
-              )}
-
               <div className="flex justify-center mb-6">
                 <div className="flex items-center gap-4">
                   <button
@@ -204,11 +193,11 @@ const Documentation: React.FC = () => {
                     <ChevronLeft size={20} />
                   </button>
                   <span className="text-gray-700 dark:text-gray-300 font-medium">
-                    Page {pageNumber} sur {numPages || '...'}
+                    Page {pageNumber} sur {numPages}
                   </span>
                   <button
                     onClick={handleNext}
-                    disabled={!numPages || pageNumber >= numPages}
+                    disabled={numPages === null || pageNumber >= numPages}
                     className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 
                              disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300
                              hover:bg-orange-100 dark:hover:bg-orange-900/50"
@@ -219,70 +208,38 @@ const Documentation: React.FC = () => {
               </div>
 
               <div className="flex justify-center">
-                {project.pdfUrl ? (
-                  <Document
-                    file={project.pdfUrl}
-                    onLoadSuccess={onDocumentLoadSuccess}
-                    onLoadError={(error) => {
-                      console.error('Error loading PDF:', error);
-                      setIsLoading(false);
-                    }}
-                    loading={
-                      <div className="flex justify-center items-center py-12">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+                <Document
+                  file={project.pdfUrl}
+                  onLoadSuccess={onDocumentLoadSuccess}
+                  className="border border-gray-300 dark:border-gray-600 rounded-xl overflow-hidden"
+                  loading={
+                    <div className="flex items-center justify-center p-8">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+                    </div>
+                  }
+                  error={
+                    <div className="flex flex-col items-center justify-center p-8 text-center">
+                      <div className="text-red-500 dark:text-red-400 mb-4">
+                        Impossible de charger le PDF. Veuillez réessayer plus tard.
                       </div>
-                    }
-                    className="border border-gray-300 dark:border-gray-600 rounded-xl overflow-hidden"
-                    options={{
-                      cMapUrl: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/cmaps/`,
-                      cMapPacked: true,
-                    }}
-                  >
-                    <Page
-                      pageNumber={pageNumber}
-                      scale={scale}
-                      className="shadow-lg"
-                      renderTextLayer={true}
-                      renderAnnotationLayer={true}
-                      loading={
-                        <div className="flex justify-center items-center py-12">
-                          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
-                        </div>
-                      }
-                    />
-                  </Document>
-                ) : (
-                  <div className="flex flex-col items-center justify-center p-12 text-center">
-                    <p className="text-gray-500 dark:text-gray-400 mb-4">
-                      Aucun document PDF disponible pour ce projet.
-                    </p>
-                  </div>
-                )}
+                      <button
+                        onClick={handleDownload}
+                        className="px-4 py-2 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors"
+                      >
+                        Télécharger le PDF
+                      </button>
+                    </div>
+                  }
+                >
+                  <Page
+                    pageNumber={pageNumber}
+                    scale={scale}
+                    className="shadow-lg"
+                    renderTextLayer={true}
+                    renderAnnotationLayer={true}
+                  />
+                </Document>
               </div>
-              
-              {project.pdfUrl && numPages && (
-                <div className="flex justify-center mt-4">
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={() => setScale(Math.max(0.5, scale - 0.2))}
-                      className="px-3 py-1 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300
-                               hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                    >
-                      Zoom -
-                    </button>
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {Math.round(scale * 100)}%
-                    </span>
-                    <button
-                      onClick={() => setScale(Math.min(2.5, scale + 0.2))}
-                      className="px-3 py-1 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300
-                               hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                    >
-                      Zoom +
-                    </button>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>

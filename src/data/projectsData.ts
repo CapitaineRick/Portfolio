@@ -5,7 +5,7 @@ export const projectsData = {
       title: 'Stage KNDS',
       description: 'Stage de première année, support utilisateur, infographie du parc et administration système',
       image: '/images/knds-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/stage-knds.pdf',
       tags: ['Netbox', 'VoIP/ToIP', 'AVAYA', 'Support utilisateur', 'Active Directory']
     },
     {
@@ -13,7 +13,7 @@ export const projectsData = {
       title: 'Stage KNDS - Versailles',
       description: 'Support utilisateur niveau 1 et 2, gestion du parc informatique, administration système et réseau',
       image: '/images/knds-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/stage-knds-details.pdf',
       tags: ['Support N1/N2', 'Gestion de parc', 'Active Directory', 'AVAYA', 'VoIP/ToIP']
     }
   ],
@@ -23,7 +23,7 @@ export const projectsData = {
       title: 'pfSense',
       description: 'Installation et configuration de pfSense',
       image: '/images/pfsense-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/installation-pfsense.pdf',
       tags: ['Firewall', 'Réseau', 'Sécurité', 'VPN', 'Routage']
     },
     {
@@ -31,7 +31,7 @@ export const projectsData = {
       title: 'Proxmox',
       description: 'Installation et configuration de Proxmox VE',
       image: '/images/proxmox-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/installation-proxmox.pdf',
       tags: ['Hyperviseur', 'Virtualisation', 'Baremetal', 'Clustering']
     },
     {
@@ -39,7 +39,7 @@ export const projectsData = {
       title: 'Docker',
       description: 'Installation et configuration de Docker',
       image: '/images/Docker-Logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/installation-docker.pdf',
       tags: ['Docker', 'Linux', 'Conteneurisation', 'DevOps']
     },
     {
@@ -47,7 +47,7 @@ export const projectsData = {
       title: 'Windows 10',
       description: 'Installation et configuration Windows 10',
       image: '/images/win10-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/installation-windows10.pdf',
       tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
     }, 
     {
@@ -55,7 +55,7 @@ export const projectsData = {
       title: 'Windows 11',
       description: 'Installation et configuration Windows 11',
       image: '/images/win11-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/installation-windows11.pdf',
       tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
     },
     {
@@ -63,7 +63,7 @@ export const projectsData = {
       title: 'Ubuntu Linux',
       description: 'Installation et configuration de Ubuntu Linux',
       image: '/images/Ubuntu-Logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/installation-ubuntu.pdf',
       tags: ['OS', 'Linux', 'Serveur', 'Administration système']
     },
     {
@@ -71,7 +71,7 @@ export const projectsData = {
       title: 'HAproxy',
       description: 'Installation et configuration de HAproxy',
       image: '/images/haproxy-logo.webp',
-      pdfUrl: 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
+      pdfUrl: '/docs/installation-haproxy.pdf',
       tags: ['Proxy', 'Reverse-proxy', 'Haute Disponibilité', 'Load Balancing', 'Web']
     },
     {
@@ -79,7 +79,7 @@ export const projectsData = {
       title: 'Kali Linux',
       description: 'Installation et configuration de Kali Linux',
       image: '/images/kali-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/installation-kali.pdf',
       tags: ['Linux', 'Cybersécurité', 'Hacking', 'Pentesting', 'OS']
     },
     {
@@ -87,7 +87,7 @@ export const projectsData = {
       title: 'Arch Linux',
       description: 'Installation et configuration de Arch Linux',
       image: '/images/arch-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/installation-arch.pdf',
       tags: ['Linux', 'OS', 'Serveur', 'Administration système']
     },
     {
@@ -95,7 +95,7 @@ export const projectsData = {
       title: 'Debian 12 Linux',
       description: 'Installation et configuration de Debian 12',
       image: '/images/debian12-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/installation-debian12.pdf',
       tags: ['Linux', 'OS', 'Serveur', 'Administration système']
     },
     {
@@ -103,7 +103,7 @@ export const projectsData = {
       title: 'GLPI',
       description: 'Installation et configuration GLPI',
       image: '/images/logo-glpi.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/installation-glpi.pdf',
       tags: ['GLPI', 'Support', 'Ticketing', 'Inventaire', 'ITSM']
     },
     {
@@ -111,7 +111,7 @@ export const projectsData = {
       title: 'Zabbix',
       description: 'Installation et configuration Zabbix',
       image: '/images/Zabbix_logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/installation-zabbix.pdf',
       tags: ['Monitoring', 'Surveillance', 'Alertes', 'Administration système']
     },
     {
@@ -119,7 +119,7 @@ export const projectsData = {
       title: 'Projet Réseau',
       description: 'Déploiement du réseau informatique d\'une petite entreprise',
       image: '/images/network-project.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/projet-reseau.pdf',
       tags: ['Réseau', 'Routage', 'VLAN', 'Switching', 'Firewall']
     },
     {
@@ -127,7 +127,7 @@ export const projectsData = {
       title: 'Projet Web',
       description: 'Création d\'un site Web en anglais (HTML, CSS)',
       image: '/images/web-project.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/projet-web.pdf',
       tags: ['HTML', 'CSS', 'Web', 'Développement']
     },
     {
@@ -135,7 +135,7 @@ export const projectsData = {
       title: 'Projets Cybersécurité',
       description: 'Parsing de protocoles réseaux avec Python et Scapy',
       image: '/images/cybersec-project.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/projet-cybersec.pdf',
       tags: ['Python', 'Scapy', 'Cybersécurité', 'Réseau', 'Interception']
     }
   ]

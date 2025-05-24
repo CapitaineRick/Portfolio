@@ -4,8 +4,8 @@ import App from "./App";
 import "./index.css";
 import { pdfjs } from 'react-pdf';
 
-// Configuration du worker PDF.js avec un CDN fiable
-pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+// Configure PDF.js worker
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
