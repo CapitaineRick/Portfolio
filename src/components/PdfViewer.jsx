@@ -35,10 +35,6 @@ export default function PdfViewer({ file }) {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
           </div>
         }
-        options={{
-          cMapUrl: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/cmaps/`,
-          cMapPacked: true,
-        }}
       >
         <Page 
           pageNumber={pageNumber} 
