@@ -50,12 +50,14 @@ const About: React.FC = () => {
                 <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
                   {/* Profile Image */}
                   <div className="relative w-48 h-48 mx-auto mb-6">
-                    <img 
-                      src="https://images.pexels.com/photos/7606074/pexels-photo-7606074.jpeg"
-                      alt="Profile"
-                      className="absolute inset-1 w-full h-full object-cover rounded-full"
-                    />
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-purple-500 rounded-full animate-spin-slow"></div>
+                    <div className="absolute inset-1 bg-white dark:bg-gray-800 rounded-full overflow-hidden">
+                      <img 
+                        src="https://images.pexels.com/photos/7606074/pexels-photo-7606074.jpeg"
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                   </div>
 
                   {/* Personal Info */}
@@ -461,7 +463,8 @@ const About: React.FC = () => {
                       />
                       <div>
                         <h4 className="text-xl font-bold text-gray-900 dark:text-white">Stage - Support Informatique</h4>
-                        <p className="text-gray-700 dark:text-gray-400">KNDS, Versailles</p>
+                        <p className="text-gray-700 dark:text-gray-400">KNDS, Vers
+                        ailles</p>
                         <p className="text-sm text-orange-700 dark:text-orange-400">Mai -  Juin 2023</p>
                       </div>
                     </div>
