@@ -118,15 +118,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setShowFullscreen(true)}
-                  className={`p-2 rounded-xl transition-colors ${
-                    project.pdfUrl 
-                      ? 'bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/50'
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl 
+                    ${project.pdfUrl 
+                      ? 'bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/50'
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-600 cursor-not-allowed'
-                  }`}
+                    } font-medium transition-all duration-300 group/btn`}
                   disabled={!project.pdfUrl}
-                  title={project.pdfUrl ? 'Voir en plein écran' : 'Documentation non disponible'}
+                  title={project.pdfUrl ? 'Voir le document' : 'Documentation non disponible'}
                 >
-                  <Maximize2 size={16} />
+                  <Maximize2 className="w-4 h-4" />
+                  Voir le document
+                  <ArrowRight className="transition-transform group-hover/btn:translate-x-1" size={16} />
                 </button>
               </div>
               
