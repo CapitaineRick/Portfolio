@@ -4,7 +4,7 @@ export const projectsData = {
       id: 'active-directory',
       title: 'Stage KNDS',
       description: 'Stage de premiere année, support utilisateur, infographie du parc et ...',
-      image: '/src/data/images/knds-logo.webp',
+      image: '/images/knds-logo.webp',
       pdfUrl: '',
       tags: ['Netbox', 'VoIP/ToIP', 'AVAYA', 'Support utilisateur']
     },
@@ -31,7 +31,7 @@ export const projectsData = {
       id: 'pfsense',
       title: 'pfsense',
       description: 'Installation et configuration de pfsense',
-      image: '/src/data/images/pfsense-logo.webp',
+      image: '/images/pfsense-logo.webp',
       pdfUrl: 'XX',
       tags: ['XX', 'XX', 'XX', 'XX']
     },
@@ -40,7 +40,7 @@ export const projectsData = {
       id: 'Proxmox',
       title: 'Proxmox',
       description: 'Installation et configuration de Proxmox EV',
-      image: '/src/data/images/proxmox-logo.webp',
+      image: '/images/proxmox-logo.webp',
       pdfUrl: 'XX',
       tags: ['Hyperviseur', 'Virtualisation', 'Baremetal']
     },
@@ -48,7 +48,7 @@ export const projectsData = {
       id: 'Docker',
       title: 'Docker',
       description: 'Installation et configuration de Docker',
-      image: '/src/data/images/Docker-Logo.webp',
+      image: '/images/Docker-Logo.webp',
       pdfUrl: 'XX',
       tags: ['Docker', 'Linux', 'Conteneurisation']
     },
@@ -56,7 +56,7 @@ export const projectsData = {
       id: 'Windows 10',
       title: 'Windows 10',
       description: 'Installation et configuration Windows 10',
-      image: '/src/data/images/win10-logo.webp',
+      image: '/images/win10-logo.webp',
       pdfUrl: 'XX',
       tags: ['OS', 'Windows']
     }, 
@@ -64,7 +64,7 @@ export const projectsData = {
       id: 'Windows 11',
       title: 'Windows 11',
       description: 'Installation et configuration Windows 11',
-      image: '/src/data/images/win11-logo.webp',
+      image: '/images/win11-logo.webp',
       pdfUrl: 'XX',
       tags: ['OS', 'Windows']
     },
@@ -72,7 +72,7 @@ export const projectsData = {
       id: 'Ubuntu',
       title: 'Ubuntu Linux',
       description: 'Installation et configuration de Ubuntu Linux',
-      image: '/src/data/images/Ubuntu-Logo.webp',
+      image: '/images/Ubuntu-Logo.webp',
       pdfUrl: 'XX',
       tags: ['OS', 'Linux']
     },
@@ -80,15 +80,15 @@ export const projectsData = {
       id: 'HAproxy',
       title: 'HAproxy',
       description: 'Installation et configuration de HAproxy',
-      image: '/src/data/images/haproxy-logo.webp',
-      pdfUrl: '/docs/Installation Haproxy - Reverse proxy.pdf',
+      image: '/images/haproxy-logo.webp',
+      pdfUrl: '/docs/haproxy.pdf',
       tags: ['Proxy', 'Reverse-proxy', 'Haute Diponibilité', 'WEB']
     },
     {
       id: 'Kali',
       title: 'Kali Linux',
       description: 'Installation et configuration de Kali Linux',
-      image: '/src/data/images/kali-logo.webp',
+      image: '/images/kali-logo.webp',
       pdfUrl: 'XX',
       tags: ['Linux', 'Cybersécurité', 'Hacking', 'OS']
     },
@@ -97,7 +97,7 @@ export const projectsData = {
       id: 'Arch',
       title: 'Arch Linux',
       description: 'Installation et configuration de Arch Linux',
-      image: '/src/data/images/arch-logo.webp',
+      image: '/images/arch-logo.webp',
       pdfUrl: 'XX',
       tags: ['Linux', 'OS']
     },
@@ -105,7 +105,7 @@ export const projectsData = {
       id: 'Debian 12',
       title: 'Debian 12 Linux',
       description: 'Installation et configuration de Arch Linux',
-      image: '/src/data/images/debian12-logo.webp',
+      image: '/images/debian12-logo.webp',
       pdfUrl: 'XX',
       tags: ['Linux', 'OS']
     },
@@ -113,7 +113,7 @@ export const projectsData = {
       id: 'Ticketing',
       title: 'GLPI',
       description: 'Installation et configuration GLPI',
-      image: '/src/data/images/logo-glpi.webp',
+      image: '/images/logo-glpi.webp',
       pdfUrl: 'XX',
       tags: ['GLPI', 'Support', 'Ticketing']
     },
@@ -121,7 +121,7 @@ export const projectsData = {
       id: 'monitoring',
       title: 'Zabbix',
       description: 'Installation et configuration Zabbix',
-      image: '/src/data/images/Zabbix_logo.webp',
+      image: '/images/Zabbix_logo.webp',
       pdfUrl: 'XX',
       tags: ['Monitoring']
     }
