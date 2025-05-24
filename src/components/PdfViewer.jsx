@@ -105,7 +105,7 @@ console.log('Value:', file);
                 Impossible de charger le PDF. Veuillez réessayer plus tard.
               </div>
               <button
-                onClick={handleDownload}
+                onClick={TestComponent}
                 className="px-4 py-2 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors"
               >
                 Télécharger le PDF
