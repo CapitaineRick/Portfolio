@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, FileText, X } from 'lucide-react';
+import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, FileText, X, Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page } from 'react-pdf';
 
@@ -25,6 +25,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [showFullscreen, setShowFullscreen] = useState(false);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [scale, setScale] = useState(1.0);
 
   const scrollToDocumentation = () => {
     const docsSection = document.querySelector('#documentation');
@@ -32,6 +33,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       setSelectedProject(project.id);
       setSelectedCategory(isEnterprise ? 'enterprise' : 'school');
       docsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleDownload = () => {
+    if (project.pdfUrl) {
+      const link = document.createElement('a');
+      link.href = project.pdfUrl;
+      link.download = `${project.title}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -150,48 +162,63 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
           <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-auto p-6">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{project.title}</h3>
-              <button
-                onClick={() => setShowFullscreen(false)}
-                className="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
-                         hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-              >
-                <X size={20} />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleDownload}
+                  className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 
+                           hover:bg-orange-100 dark:hover:bg-orange-900/50 transition-colors"
+                  title="Télécharger le PDF"
+                >
+                  <Download size={20} />
+                </button>
+                <button
+                  onClick={() => setShowFullscreen(false)}
+                  className="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
+                           hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
             </div>
             
-            <Document
-              file={project.pdfUrl}
-              onLoadSuccess={onDocumentLoadSuccess}
-              className="mx-auto"
-            >
-              <Page
-                pageNumber={pageNumber}
-                className="mx-auto"
-                renderTextLayer={true}
-                renderAnnotationLayer={true}
-              />
-            </Document>
+            <div className="flex justify-center mb-4">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setPageNumber(Math.max(1, pageNumber - 1))}
+                  disabled={pageNumber <= 1}
+                  className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
+                           disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <span className="text-gray-700 dark:text-gray-300">
+                  Page {pageNumber} sur {numPages}
+                </span>
+                <button
+                  onClick={() => setPageNumber(Math.min(numPages || 1, pageNumber + 1))}
+                  disabled={pageNumber >= (numPages || 1)}
+                  className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
+                           disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            </div>
             
-            <div className="flex justify-center items-center gap-4 mt-6">
-              <button
-                onClick={() => setPageNumber(Math.max(1, pageNumber - 1))}
-                disabled={pageNumber <= 1}
-                className="px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
-                         disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            <div className="flex justify-center">
+              <Document
+                file={project.pdfUrl}
+                onLoadSuccess={onDocumentLoadSuccess}
+                className="mx-auto"
               >
-                Page précédente
-              </button>
-              <span className="text-gray-700 dark:text-gray-300">
-                Page {pageNumber} sur {numPages}
-              </span>
-              <button
-                onClick={() => setPageNumber(Math.min(numPages || 1, pageNumber + 1))}
-                disabled={pageNumber >= (numPages || 1)}
-                className="px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
-                         disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                Page suivante
-              </button>
+                <Page
+                  pageNumber={pageNumber}
+                  scale={scale}
+                  className="mx-auto"
+                  renderTextLayer={true}
+                  renderAnnotationLayer={true}
+                />
+              </Document>
             </div>
           </div>
         </div>
