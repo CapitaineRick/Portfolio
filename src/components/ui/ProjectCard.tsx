@@ -42,8 +42,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       // Create a direct link to the PDF file
       const link = document.createElement('a');
       link.href = project.pdfUrl;
-      // Use the original project title without modification
-      link.download = project.title;
+      
+      // Extract the filename from the path to ensure it has .pdf extension
+      const filename = project.pdfUrl.split('/').pop();
+      
+      // If no extension or wrong extension, add .pdf
+      link.download = filename || `${project.title}.pdf`;
+      
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

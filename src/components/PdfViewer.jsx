@@ -18,9 +18,13 @@ export default function PdfViewer({ file }) {
       // Create a direct link to the PDF file
       const link = document.createElement('a');
       link.href = file;
-      // Extract the filename from the path but keep the original name
+      
+      // Extract the filename from the path to preserve the extension
       const filename = file.split('/').pop();
-      link.download = filename;
+      
+      // Make sure the file has a .pdf extension
+      link.download = filename || 'document.pdf';
+      
       link.target = '_blank';
       document.body.appendChild(link);
       link.click();
