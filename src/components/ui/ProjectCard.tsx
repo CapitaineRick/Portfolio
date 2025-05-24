@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, FileText, X, Download, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page } from 'react-pdf';
 
@@ -27,15 +27,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1.0);
   const [pdfError, setPdfError] = useState<string | null>(null);
-
-  const scrollToDocumentation = () => {
-    const docsSection = document.querySelector('#documentation');
-    if (docsSection) {
-      setSelectedProject(project.id);
-      setSelectedCategory(isEnterprise ? 'enterprise' : 'school');
-      docsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   const handleDownload = () => {
     if (project.pdfUrl) {
@@ -125,17 +116,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <button
-                  onClick={scrollToDocumentation}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
-                           text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
-                           hover:bg-orange-100 dark:hover:bg-orange-900/50 group/btn"
-                >
-                  <FileText className="w-4 h-4" />
-                  Documentation
-                  <ArrowRight className="transition-transform group-hover/btn:translate-x-1" size={16} />
-                </button>
-
                 <button
                   onClick={() => setShowFullscreen(true)}
                   className={`p-2 rounded-xl transition-colors ${
