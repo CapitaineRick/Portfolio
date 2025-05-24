@@ -43,41 +43,15 @@ const Hero: React.FC = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 grid-bg"
+      className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800"
     >
-      {/* Animated network lines */}
+      {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-full h-full">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className={`absolute h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent
-                         animate-network`}
-              style={{
-                top: `${20 * i}%`,
-                left: '-100%',
-                width: '200%',
-                animationDelay: `${i * 1.6}s`
-              }}
-            />
-          ))}
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className={`absolute w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent
-                         animate-network`}
-              style={{
-                left: `${20 * i}%`,
-                top: '-100%',
-                height: '200%',
-                animationDelay: `${i * 1.6}s`
-              }}
-            />
-          ))}
-        </div>
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-orange-200/30 dark:bg-orange-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
+        <div className="absolute -bottom-8 -right-4 w-72 h-72 bg-blue-200/30 dark:bg-blue-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-purple-200/30 dark:bg-purple-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000" />
       </div>
 
-      {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
         <div 
           ref={heroRef}
@@ -86,21 +60,16 @@ const Hero: React.FC = () => {
           {/* Left Column */}
           <div className="lg:w-1/2 space-y-8">
             <div className="space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full 
-                            bg-orange-500/10 text-orange-400 text-sm font-medium
-                            border border-orange-500/20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-sm font-medium">
                 <Server className="w-4 h-4" />
                 BTS SIO SISR - Administrateur Systèmes & Réseaux
               </div>
               
               <div>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-white">
-                  Fernandes{' '}
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">
-                    Sébastien
-                  </span>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-orange-400">
+                  Fernandes Sébastien
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-300">
+                <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300">
                   Étudiant passionné par l'infrastructure IT & la cybersécurité
                 </p>
               </div>
@@ -118,8 +87,8 @@ const Hero: React.FC = () => {
                 </button>
                 <button 
                   onClick={scrollToContact}
-                  className="px-8 py-4 border-2 border-orange-500/50 text-orange-400
-                            hover:bg-orange-500/10 rounded-xl
+                  className="px-8 py-4 border-2 border-orange-500 text-orange-500
+                            hover:bg-orange-50 dark:hover:bg-orange-900/10 rounded-xl
                             transform hover:scale-105 transition-all duration-300
                             flex items-center gap-2 font-medium"
                 >
@@ -129,28 +98,31 @@ const Hero: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="p-6 rounded-xl bg-white/5 backdrop-blur-lg border border-white/10">
-                <div className="font-bold text-3xl text-orange-400">2+</div>
-                <div className="text-sm text-gray-400">Années d'études</div>
+              <div className="p-6 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur shadow-lg border border-gray-100 dark:border-gray-700">
+                <div className="font-bold text-3xl text-orange-500">2+</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Années d'études</div>
               </div>
-              <div className="p-6 rounded-xl bg-white/5 backdrop-blur-lg border border-white/10">
-                <div className="font-bold text-3xl text-orange-400">15+</div>
-                <div className="text-sm text-gray-400">Projets réalisés</div>
+              <div className="p-6 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur shadow-lg border border-gray-100 dark:border-gray-700">
+                <div className="font-bold text-3xl text-orange-500">15+</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Projets réalisés</div>
               </div>
-              <div className="p-6 rounded-xl bg-white/5 backdrop-blur-lg border border-white/10">
-                <div className="font-bold text-3xl text-orange-400">3+</div>
-                <div className="text-sm text-gray-400">Certifications</div>
+              <div className="p-6 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur shadow-lg border border-gray-100 dark:border-gray-700">
+                <div className="font-bold text-3xl text-orange-500">3+</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Certifications</div>
               </div>
-              <div className="p-6 rounded-xl bg-white/5 backdrop-blur-lg border border-white/10">
-                <div className="font-bold text-3xl text-orange-400">2</div>
-                <div className="text-sm text-gray-400">Stages effectués</div>
+              <div className="p-6 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur shadow-lg border border-gray-100 dark:border-gray-700">
+                <div className="font-bold text-3xl text-orange-500">2</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Stages effectués</div>
               </div>
             </div>
           </div>
 
           {/* Right Column */}
           <div className="lg:w-1/2 relative">
-            <div className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-orange-500/10 rounded-full filter blur-3xl"></div>
+            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-blue-500/10 rounded-full filter blur-3xl"></div>
+            
+            <div className="relative bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-gray-200/50 dark:border-gray-700/50">
               <div className="space-y-8">
                 {/* Featured Skills */}
                 <div className="grid grid-cols-2 gap-6">
@@ -182,8 +154,7 @@ const Hero: React.FC = () => {
                   ].map((item, index) => (
                     <div
                       key={index}
-                      className="relative group animate-float"
-                      style={{ animationDelay: `${index * 0.2}s` }}
+                      className="relative group"
                     >
                       <div className={`
                         w-full aspect-square rounded-2xl
@@ -191,17 +162,16 @@ const Hero: React.FC = () => {
                         p-0.5 transition-all duration-300
                         group-hover:scale-105 cursor-pointer
                       `}>
-                        <div className="w-full h-full rounded-2xl bg-gray-900/50 p-6
+                        <div className="w-full h-full rounded-2xl bg-white dark:bg-gray-800 p-6
                                       flex flex-col items-center justify-center gap-4
-                                      backdrop-blur-lg">
+                                      border border-gray-100 dark:border-gray-700">
                           <item.icon className="w-12 h-12 transition-transform duration-300
-                                              group-hover:scale-110 group-hover:rotate-6
-                                              text-white" />
+                                              group-hover:scale-110 group-hover:rotate-6" />
                           <div className="text-center">
-                            <div className="font-medium text-white mb-1">
+                            <div className="font-medium text-gray-900 dark:text-white mb-1">
                               {item.label}
                             </div>
-                            <p className="text-xs text-gray-400">
+                            <p className="text-xs text-gray-600 dark:text-gray-400">
                               {item.description}
                             </p>
                           </div>
@@ -212,21 +182,21 @@ const Hero: React.FC = () => {
                 </div>
 
                 {/* Current Focus */}
-                <div className="bg-white/5 rounded-xl p-6 border border-white/10 backdrop-blur-lg">
-                  <h3 className="text-lg font-semibold mb-4 text-white">
+                <div className="bg-gradient-to-br from-orange-500/5 to-purple-500/5 rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
                     Objectifs professionnels
                   </h3>
                   <ul className="space-y-3">
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse-slow"></div>
+                    <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                      <div className="w-2 h-2 rounded-full bg-orange-500"></div>
                       Devenir expert en sécurité des systèmes
                     </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse-slow"></div>
+                    <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                      <div className="w-2 h-2 rounded-full bg-blue-500"></div>
                       Spécialisation en pentesting
                     </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse-slow"></div>
+                    <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
                       Certification en cybersécurité
                     </li>
                   </ul>
