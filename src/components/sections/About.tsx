@@ -53,7 +53,7 @@ const About: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-purple-500 rounded-full animate-spin-slow"></div>
                     <div className="absolute inset-1 bg-white dark:bg-gray-800 rounded-full overflow-hidden">
                       <img 
-                        src="/public/images/profile.webp"
+                        src="/images/profile.webp"
                         alt="Profile"
                         className="w-full h-full object-cover"
                       />
