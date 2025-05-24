@@ -162,7 +162,7 @@ const Projects: React.FC = () => {
             Mes Projets
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-800 dark:text-gray-300 max-w-3xl mx-auto font-medium">
             Découvrez mes réalisations techniques en administration système, réseau et sécurité
           </p>
         </div>
