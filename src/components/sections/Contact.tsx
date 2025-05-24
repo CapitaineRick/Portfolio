@@ -176,12 +176,12 @@ const Contact: React.FC = () => {
                   <div>
                     <h4 className="text-lg font-medium">LinkedIn</h4>
                     <a 
-                      href="https://linkedin.com"
+                      href="https://www.linkedin.com/in/s%C3%A9bastien-fernandes-566008232/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-orange-500 hover:underline"
                     >
-                      linkedin.com/in/sebastien-fernandes
+                      linkedin.com/in/sébastien-fernandes
                     </a>
                   </div>
                 </div>
