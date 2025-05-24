@@ -3,7 +3,6 @@ import { projectsData } from '../../data/projectsData';
 import { ChevronLeft, ChevronRight, Briefcase, GraduationCap, Maximize2, Minimize2, Download } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page, pdfjs } from 'react-pdf';
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
@@ -34,6 +33,7 @@ const Documentation: React.FC = () => {
 
   const handleCategoryChange = (category: 'enterprise' | 'school') => {
     setIsTransitioning(true);
+    setIsLoading(true);
     setTimeout(() => {
       setSelectedCategory(category);
       setSelectedProject(projectsData[category][0].id);
@@ -208,7 +208,7 @@ const Documentation: React.FC = () => {
                   </span>
                   <button
                     onClick={handleNext}
-                    disabled={numPages === null || pageNumber >= numPages}
+                    disabled={!numPages || pageNumber >= numPages}
                     className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 
                              disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300
                              hover:bg-orange-100 dark:hover:bg-orange-900/50"
