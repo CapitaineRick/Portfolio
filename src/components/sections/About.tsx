@@ -252,33 +252,86 @@ const About: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* BTS SNIR (Non terminé) */}
-                    <div className="relative pl-16 pb-8">
-                      <div className="absolute left-6 top-3 w-4 h-4 rounded-full bg-red-500 border-4 border-white dark:border-gray-800"></div>
-                      <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center gap-4">
-                            <img 
-                              src="https://www.lyc-vaucanson-versailles.ac-versailles.fr/sites/lyc-vaucanson-versailles/local/cache-vignettes/L144xH144/siteon0-e0d79.png"
-                              alt="Lycée Vaucanson"
-                              className="w-24 h-auto"
-                            />
-                            <div>
-                              <h4 className="text-xl font-bold text-gray-900 dark:text-white">BTS SNIR</h4>
-                              <p className="text-gray-700 dark:text-gray-400">Lycée Vaucanson, Versailles</p>
+                    {/* Past Education Toggle */}
+                    <div className="relative pl-16">
+                      <button
+                        onClick={() => setShowPastEducation(!showPastEducation)}
+                        className="flex items-center gap-2 text-gray-700 dark:text-gray-400 hover:text-orange-500 transition-colors"
+                      >
+                        {showPastEducation ? (
+                          <>
+                            <ChevronUp size={20} />
+                            <span>Masquer les formations non terminées</span>
+                          </>
+                        ) : (
+                          <>
+                            <ChevronDown size={20} />
+                            <span>Afficher les formations non terminées</span>
+                          </>
+                        )}
+                      </button>
+
+                      {showPastEducation && (
+                        <div className="mt-8 space-y-8">
+                          {/* BTS SNIR (Non terminé) */}
+                          <div>
+                            <div className="absolute left-6 top-3 w-4 h-4 rounded-full bg-red-500 border-4 border-white dark:border-gray-800"></div>
+                            <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-6">
+                              <div className="flex items-center justify-between mb-4">
+                                <div className="flex items-center gap-4">
+                                  <img 
+                                    src="https://www.lyc-vaucanson-versailles.ac-versailles.fr/sites/lyc-vaucanson-versailles/local/cache-vignettes/L144xH144/siteon0-e0d79.png"
+                                    alt="Lycée Vaucanson"
+                                    className="w-24 h-auto"
+                                  />
+                                  <div>
+                                    <h4 className="text-xl font-bold text-gray-900 dark:text-white">BTS SNIR</h4>
+                                    <p className="text-gray-700 dark:text-gray-400">Lycée Vaucanson, Versailles</p>
+                                  </div>
+                                </div>
+                                <span className="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm">
+                                  2022-2023
+                                </span>
+                              </div>
+                              <p className="text-sm text-gray-700 dark:text-gray-400">
+                                Systèmes Numériques option Informatique et Réseaux
+                              </p>
+                              <div className="mt-4 inline-flex px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm">
+                                Non validé - Réorientation
+                              </div>
                             </div>
                           </div>
-                          <span className="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm">
-                            2022-2023
-                          </span>
+
+                          {/* BTS SN (Non terminé) */}
+                          <div>
+                            <div className="absolute left-6 top-3 w-4 h-4 rounded-full bg-red-500 border-4 border-white dark:border-gray-800"></div>
+                            <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-6">
+                              <div className="flex items-center justify-between mb-4">
+                                <div className="flex items-center gap-4">
+                                  <img 
+                                    src="https://www.lyc-vaucanson-versailles.ac-versailles.fr/sites/lyc-vaucanson-versailles/local/cache-vignettes/L144xH144/siteon0-e0d79.png"
+                                    alt="Lycée Vaucanson"
+                                    className="w-24 h-auto"
+                                  />
+                                  <div>
+                                    <h4 className="text-xl font-bold text-gray-900 dark:text-white">BTS SN</h4>
+                                    <p className="text-gray-700 dark:text-gray-400">Lycée Vaucanson, Versailles</p>
+                                  </div>
+                                </div>
+                                <span className="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm">
+                                  2021-2022
+                                </span>
+                              </div>
+                              <p className="text-sm text-gray-700 dark:text-gray-400">
+                                Systèmes Numériques option Électronique et Communication
+                              </p>
+                              <div className="mt-4 inline-flex px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm">
+                                Non validé - Réorientation
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <p className="text-sm text-gray-700 dark:text-gray-400">
-                          Systèmes Numériques option Informatique et Réseaux
-                        </p>
-                        <div className="mt-4 inline-flex px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm">
-                          Non validé
-                        </div>
-                      </div>
+                      )}
                     </div>
 
                     {/* Bac STI2D */}
@@ -407,7 +460,7 @@ const About: React.FC = () => {
                       <div>
                         <h4 className="text-xl font-bold text-gray-900 dark:text-white">Stage - Support Informatique</h4>
                         <p className="text-gray-700 dark:text-gray-400">KNDS, Versailles</p>
-                        <p className="text-sm text-orange-700 dark:text-orange-400">Mai - Juin 2023</p>
+                        <p className="text-sm text-orange-700 dark:text-orange-400">Mai -  Juin 2023</p>
                       </div>
                     </div>
 
@@ -450,7 +503,6 @@ const About: React.FC = () => {
                     </div>
 
                     <div className="mt-6 pt-6 border-t border-gray-300 dark:border-gray-700">
-                      
                       <h5 className="font-semibold text-lg mb-3 text-gray-900 dark:text-white">Compétences développées</h5>
                       <div className="flex flex-wrap gap-2">
                         <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 rounded-full text-sm">
