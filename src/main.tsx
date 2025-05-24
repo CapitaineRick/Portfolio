@@ -4,7 +4,11 @@ import App from "./App";
 import "./index.css";
 import { pdfjs } from 'react-pdf';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs/pdf.worker.min.js`;
+// Set the worker source to the correct public path
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url
+).toString();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
