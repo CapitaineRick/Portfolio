@@ -108,7 +108,6 @@ const Documentation: React.FC = () => {
           </p>
         </div>
         
-        
         <div 
           ref={docsRef}
           className="transition-all duration-300 opacity-0 translate-y-10"
@@ -193,7 +192,7 @@ const Documentation: React.FC = () => {
                     <ChevronLeft size={20} />
                   </button>
                   <span className="text-gray-700 dark:text-gray-300 font-medium">
-                    Page {pageNumber} sur {numPages}
+                    Page {pageNumber} sur {numPages || '?'}
                   </span>
                   <button
                     onClick={handleNext}
@@ -204,10 +203,29 @@ const Documentation: React.FC = () => {
                   >
                     <ChevronRight size={20} />
                   </button>
+                  <div className="flex items-center gap-2 ml-4">
+                    <button
+                      onClick={() => setScale(Math.max(0.5, scale - 0.1))}
+                      className="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300
+                               hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    >
+                      -
+                    </button>
+                    <span className="text-gray-700 dark:text-gray-300 min-w-[60px] text-center">
+                      {Math.round(scale * 100)}%
+                    </span>
+                    <button
+                      onClick={() => setScale(Math.min(2.0, scale + 0.1))}
+                      className="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300
+                               hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex justify-center">
+              <div className="flex justify-center overflow-auto max-h-[70vh]">
                 <Document
                   file={project.pdfUrl}
                   onLoadSuccess={onDocumentLoadSuccess}
@@ -237,6 +255,7 @@ const Documentation: React.FC = () => {
                     className="shadow-lg"
                     renderTextLayer={true}
                     renderAnnotationLayer={true}
+                    width={isFullscreen ? window.innerWidth * 0.7 : undefined}
                   />
                 </Document>
               </div>
