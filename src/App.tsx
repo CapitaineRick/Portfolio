@@ -8,6 +8,7 @@ import Education from './components/sections/Education';
 import Skills from './components/sections/Skills';
 import Projects from './components/sections/Projects';
 import Documentation from './components/sections/Documentation';
+import TechWatch from './components/sections/TechWatch';
 import Contact from './components/sections/Contact';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Skills />
           <Projects />
           <Documentation />
+          <TechWatch />
           <Contact />
         </Layout>
       </ProjectProvider>
@@ -28,4 +30,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
