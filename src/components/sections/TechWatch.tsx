@@ -146,7 +146,7 @@ const TechWatch: React.FC = () => {
                     <div className={`prose dark:prose-invert max-w-none ${
                       expandedArticles[index] ? '' : 'line-clamp-3'
                     }`}>
-                      <pre className="whitespace-pre-wrap font-sans text-gray-600 dark:text-gray-300">
+                      <pre className="whitespace-pre-wrap font-mono text-sm bg-gray-50 dark:bg-gray-900 p-4 rounded-lg overflow-x-auto">
                         {item.description}
                       </pre>
                     </div>
