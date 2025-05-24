@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Monitor, Moon, Sun, Menu, X } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
+import { Monitor, Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
     { name: 'Accueil', href: '#home' },
@@ -45,11 +43,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 backdrop-blur-md ${
-      theme === 'dark' 
-        ? 'bg-gray-900/80 border-b border-gray-800' 
-        : 'bg-white/80 border-b border-gray-200'
-    }`}>
+    <nav className="fixed w-full z-50 transition-all duration-300 backdrop-blur-md bg-gray-900/80 border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
@@ -74,7 +68,7 @@ const Navbar: React.FC = () => {
                   className={`px-4 py-2 mx-1 rounded-xl text-sm font-medium transition-all duration-300 relative group
                     ${activeSection === link.href.substring(1)
                       ? 'text-orange-500'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-orange-500'
+                      : 'text-gray-300 hover:text-orange-500'
                     }`}
                 >
                   {link.name}
@@ -84,38 +78,20 @@ const Navbar: React.FC = () => {
                 </a>
               ))}
             </div>
-
-            <div className="ml-6 flex items-center space-x-2">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? <Sun size={20} className="text-orange-500" /> : <Moon size={20} className="text-gray-700" />}
-              </button>
-            </div>
           </div>
           
           {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center space-x-2">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={20} className="text-orange-500" /> : <Moon size={20} className="text-gray-700" />}
-            </button>
-            
+          <div className="flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors"
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
-                <X className="block h-6 w-6 text-gray-700 dark:text-gray-300" aria-hidden="true" />
+                <X className="block h-6 w-6 text-gray-300" aria-hidden="true" />
               ) : (
-                <Menu className="block h-6 w-6 text-gray-700 dark:text-gray-300" aria-hidden="true" />
+                <Menu className="block h-6 w-6 text-gray-300" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -136,7 +112,7 @@ const Navbar: React.FC = () => {
               className={`block px-4 py-2 rounded-xl text-base font-medium transition-all duration-300
                 ${activeSection === link.href.substring(1)
                   ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  : 'text-gray-300 hover:bg-gray-800'
                 }`}
             >
               {link.name}
