@@ -61,6 +61,18 @@ const Projects: React.FC = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Expériences</h2>
           <div className="w-20 h-1 bg-orange-500 mx-auto mb-8"></div>
+
+          {/* Légende des icônes */}
+          <div className="flex justify-center gap-8 mb-6">
+            <div className="flex items-center gap-2">
+              <Briefcase className="w-5 h-5 text-orange-500" />
+              <span className="text-sm text-gray-600 dark:text-gray-300">Expérience professionnelle</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <GraduationCap className="w-5 h-5 text-orange-500" />
+              <span className="text-sm text-gray-600 dark:text-gray-300">Projet scolaire</span>
+            </div>
+          </div>
           
           {/* Tags Filter */}
           <div className="flex flex-wrap justify-center gap-2 mb-8">
