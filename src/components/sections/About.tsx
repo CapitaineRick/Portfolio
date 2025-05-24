@@ -29,14 +29,7 @@ const About: React.FC = () => {
   }, []);
 
   return (
-    <section id="about" className="py-16 md:py-24 relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-orange-50/20 to-purple-50/20 dark:from-orange-900/20 dark:to-purple-900/20" />
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl animate-pulse animation-delay-2000" />
-      </div>
-
+    <section id="about" className="py-16 md:py-24 flex items-center justify-center relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-purple-600">
@@ -50,7 +43,7 @@ const About: React.FC = () => {
           className="transition-all duration-1000 opacity-0 translate-y-10"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Profile Card - Left Column */}
+            {/* Profile Card */}
             <div className="lg:col-span-4">
               <div className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
@@ -126,7 +119,7 @@ const About: React.FC = () => {
               </div>
             </div>
 
-            {/* Main Content - Right Column */}
+            {/* Main Content */}
             <div className="lg:col-span-8 space-y-8">
               {/* About Me Section */}
               <div className="relative group">
