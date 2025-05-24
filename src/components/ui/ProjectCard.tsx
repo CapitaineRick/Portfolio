@@ -206,6 +206,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   </div>
                 </div>
                 
+                {/* Zoom controls */}
+                <div className="flex justify-center mb-4">
+                  <div className="flex items-center gap-4">
+                    <button 
+                      onClick={() => setScale(Math.max(0.5, scale - 0.1))}
+                      className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg"
+                    >
+                      -
+                    </button>
+                    <span className="text-gray-700 dark:text-gray-300 min-w-[60px] text-center">
+                      {Math.round(scale * 100)}%
+                    </span>
+                    <button 
+                      onClick={() => setScale(Math.min(2.0, scale + 0.1))}
+                      className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                
                 <div className="flex justify-center">
                   <Document
                     file={project.pdfUrl}
