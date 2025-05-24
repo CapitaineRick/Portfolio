@@ -111,88 +111,87 @@ const Projects: React.FC = () => {
           </p>
         </div>
 
-        <div className="space-y-8 mb-12">
-          {/* Search Bar */}
+        {/* Modern Search Interface */}
+        <div className="mb-12">
           <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
-            <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
-              <div className="flex flex-col md:flex-row gap-6">
-                {/* Search Input */}
-                <div className="flex-1">
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Search className="h-5 w-5 text-gray-400" />
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="Rechercher un projet..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-700/50 
-                               border border-gray-200 dark:border-gray-600 
-                               focus:ring-2 focus:ring-orange-500 focus:border-transparent
-                               placeholder-gray-400 dark:placeholder-gray-500
-                               transition-all duration-300"
-                    />
-                  </div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+            <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8">
+              {/* Search Bar */}
+              <div className="relative mb-8">
+                <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                  <Search className="h-6 w-6 text-gray-400" />
                 </div>
+                <input
+                  type="text"
+                  placeholder="Rechercher un projet par nom, description ou technologie..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-14 pr-4 py-4 rounded-2xl bg-gray-50 dark:bg-gray-700/50 
+                           border-2 border-gray-200 dark:border-gray-600 
+                           focus:ring-4 focus:ring-orange-500/20 focus:border-orange-500
+                           placeholder-gray-400 dark:placeholder-gray-500
+                           text-lg transition-all duration-300"
+                />
+              </div>
 
-                {/* Project Type Filter */}
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-3">
+              {/* Filters Section */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Project Types */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 mb-4">
                     <Filter className="w-5 h-5 text-orange-500" />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Type de projet</span>
+                    <h3 className="text-lg font-semibold">Type de projet</h3>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-3">
                     <button
                       onClick={() => setSelectedType('all')}
-                      className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2
+                      className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
                         ${selectedType === 'all'
-                          ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg'
+                          ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
                           : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
                         }`}
                     >
-                      Tous
+                      Tous les projets
                     </button>
                     <button
                       onClick={() => setSelectedType('enterprise')}
-                      className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2
+                      className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
                         ${selectedType === 'enterprise'
-                          ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg'
+                          ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
                           : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
                         }`}
                     >
-                      <Briefcase className="w-4 h-4" />
+                      <Briefcase className="w-5 h-5" />
                       Professionnels
                     </button>
                     <button
                       onClick={() => setSelectedType('school')}
-                      className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2
+                      className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
                         ${selectedType === 'school'
-                          ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg'
+                          ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
                           : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
                         }`}
                     >
-                      <GraduationCap className="w-4 h-4" />
+                      <GraduationCap className="w-5 h-5" />
                       Scolaires
                     </button>
                   </div>
                 </div>
 
-                {/* Tags Filter */}
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-3">
+                {/* Technologies */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 mb-4">
                     <Tags className="w-5 h-5 text-orange-500" />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Technologies</span>
+                    <h3 className="text-lg font-semibold">Technologies</h3>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {allTags.map(tag => (
                       <button
                         key={tag}
                         onClick={() => handleTagClick(tag)}
-                        className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-300
+                        className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
                           ${selectedTag === tag
-                            ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg'
+                            ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
                             : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
                           }`}
                       >
@@ -202,10 +201,36 @@ const Projects: React.FC = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Active Filters Display */}
+              {(selectedType !== 'all' || selectedTag || searchTerm) && (
+                <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                    <span className="font-medium">Filtres actifs:</span>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedType !== 'all' && (
+                        <span className="px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400">
+                          {selectedType === 'enterprise' ? 'Projets professionnels' : 'Projets scolaires'}
+                        </span>
+                      )}
+                      {selectedTag && (
+                        <span className="px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+                          #{selectedTag}
+                        </span>
+                      )}
+                      {searchTerm && (
+                        <span className="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                          Recherche: "{searchTerm}"
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
-        
+
         {/* Projects Grid */}
         <div 
           ref={projectsRef}
