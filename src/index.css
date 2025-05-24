@@ -133,6 +133,7 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 100%;
 }
 
 .react-pdf__Page {
@@ -140,6 +141,7 @@ img {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .react-pdf__Page__canvas {
@@ -151,6 +153,7 @@ img {
 .react-pdf__Page__textContent {
   border: none !important;
   background: transparent !important;
+  max-width: 100%;
 }
 
 .react-pdf__Page__annotations {
@@ -165,6 +168,7 @@ img {
   right: 0;
   bottom: 0;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .react-pdf__Page__textContent.textLayer {
@@ -176,4 +180,11 @@ img {
   overflow: hidden;
   opacity: 0.25;
   line-height: 1.0;
+  max-width: 100%;
+}
+
+/* PDF container */
+.pdf-container {
+  max-width: 100%;
+  overflow: hidden;
 }

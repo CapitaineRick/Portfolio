@@ -39,9 +39,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
   const handleDownload = () => {
     if (project.pdfUrl) {
+      // Create a direct link to the PDF file
       const link = document.createElement('a');
       link.href = project.pdfUrl;
-      link.download = `${project.title}.pdf`;
+      link.setAttribute('download', `${project.title.replace(/\s+/g, '-')}.pdf`);
+      link.setAttribute('target', '_blank');
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

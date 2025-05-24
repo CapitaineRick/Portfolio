@@ -13,6 +13,19 @@ export default function PdfViewer({ file }) {
     setPageNumber(1);
   };
 
+  const handleDownload = () => {
+    if (file) {
+      // Create a direct link to the PDF file
+      const link = document.createElement('a');
+      link.href = file;
+      link.setAttribute('download', file.split('/').pop() || 'document.pdf');
+      link.setAttribute('target', '_blank');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   return (
     <div className="pdf-viewer flex flex-col items-center">
       <div className="pdf-controls mb-4 flex items-center justify-center gap-4">
@@ -31,6 +44,17 @@ export default function PdfViewer({ file }) {
         >
           +
         </button>
+        <button
+          onClick={handleDownload}
+          className="px-3 py-1 bg-orange-500 text-white rounded-lg flex items-center gap-1"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Télécharger
+        </button>
       </div>
 
       <div className="overflow-auto max-h-[70vh] w-full flex justify-center">
@@ -41,6 +65,19 @@ export default function PdfViewer({ file }) {
           loading={
             <div className="flex items-center justify-center p-8">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+            </div>
+          }
+          error={
+            <div className="flex flex-col items-center justify-center p-8 text-center">
+              <div className="text-red-500 dark:text-red-400 mb-4">
+                Impossible de charger le PDF. Veuillez réessayer plus tard.
+              </div>
+              <button
+                onClick={handleDownload}
+                className="px-4 py-2 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors"
+              >
+                Télécharger le PDF
+              </button>
             </div>
           }
         >
