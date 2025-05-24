@@ -46,16 +46,6 @@ console.log('Value:', file);
   }
 };
 
-  const TestComponent = () => {
-  const file = new File([new Blob(['%PDF-1.4 test'], { type: 'application/pdf' })], 'test.pdf', {
-    type: 'application/pdf',
-  });
-
-  return <PdfViewer file={file} />;
-};
-
-
-
 
 
   return (
@@ -105,7 +95,7 @@ console.log('Value:', file);
                 Impossible de charger le PDF. Veuillez réessayer plus tard.
               </div>
               <button
-                onClick={TestComponent}
+                onClick={handleDownload}
                 className="px-4 py-2 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors"
               >
                 Télécharger le PDF
