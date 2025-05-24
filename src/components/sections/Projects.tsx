@@ -23,7 +23,30 @@ const Projects: React.FC = () => {
   const projectsPerPage = 9;
 
   const handleTagClick = (tag: string) => {
+    setIsAnimating(true);
     setSelectedTag(selectedTag === tag ? null : tag);
+    setCurrentPage(1);
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 50);
+  };
+
+  const handleTypeChange = (type: 'all' | 'enterprise' | 'school') => {
+    setIsAnimating(true);
+    setSelectedType(type);
+    setCurrentPage(1);
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 50);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsAnimating(true);
+    setSearchTerm(e.target.value);
+    setCurrentPage(1);
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 50);
   };
 
   const handleDocClick = (projectId: string) => {
@@ -87,10 +110,6 @@ const Projects: React.FC = () => {
   }
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedTag, selectedType, searchTerm]);
-
-  useEffect(() => {
     setIsTagsTransitioning(true);
     const timer = setTimeout(() => setIsTagsTransitioning(false), 300);
     return () => clearTimeout(timer);
@@ -133,7 +152,7 @@ const Projects: React.FC = () => {
         }
       };
     }
-  }, [currentPage, isAnimating]);
+  }, [currentPage, isAnimating, selectedTag, selectedType, searchTerm]);
 
   return (
     <section id="projects" className="py-16 flex items-center justify-center relative overflow-hidden">
@@ -150,7 +169,7 @@ const Projects: React.FC = () => {
 
         <div className="mb-12">
           <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
             <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8">
               <div className="relative mb-8">
                 <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
@@ -160,7 +179,7 @@ const Projects: React.FC = () => {
                   type="text"
                   placeholder="Rechercher un projet par nom, description ou technologie..."
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={handleSearchChange}
                   className="w-full pl-14 pr-4 py-4 rounded-2xl bg-gray-50 dark:bg-gray-700/50 
                            border-2 border-gray-200 dark:border-gray-600 
                            focus:ring-4 focus:ring-orange-500/20 focus:border-orange-500
@@ -176,7 +195,7 @@ const Projects: React.FC = () => {
                 </div>
                 <div className="flex flex-wrap gap-3">
                   <button
-                    onClick={() => setSelectedType('all')}
+                    onClick={() => handleTypeChange('all')}
                     className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
                       ${selectedType === 'all'
                         ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
@@ -186,7 +205,7 @@ const Projects: React.FC = () => {
                     Tous les projets
                   </button>
                   <button
-                    onClick={() => setSelectedType('enterprise')}
+                    onClick={() => handleTypeChange('enterprise')}
                     className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
                       ${selectedType === 'enterprise'
                         ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
@@ -197,7 +216,7 @@ const Projects: React.FC = () => {
                     Professionnels
                   </button>
                   <button
-                    onClick={() => setSelectedType('school')}
+                    onClick={() => handleTypeChange('school')}
                     className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
                       ${selectedType === 'school'
                         ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
@@ -240,7 +259,7 @@ const Projects: React.FC = () => {
 
         <div className="mb-12">
           <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
             <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8 overflow-hidden">
               <div className="flex items-center gap-2 mb-4">
                 <Tags className="w-5 h-5 text-orange-500" />
@@ -274,12 +293,12 @@ const Projects: React.FC = () => {
 
         <div 
           ref={projectsRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 opacity-0 translate-y-10"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300 opacity-0 translate-y-10"
         >
           {displayedProjects.length === 0 ? (
             <div className="col-span-full text-center py-12">
               <div className="relative group inline-block">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-8">
                   <Search className="w-12 h-12 text-orange-500 mx-auto mb-4" />
                   <h3 className="text-xl font-semibold mb-2">Aucun projet trouvé</h3>
@@ -295,10 +314,10 @@ const Projects: React.FC = () => {
                 <div 
                   key={project.id}
                   className="project-card group transition-all duration-300 opacity-0 scale-95"
-                  style={{ transitionDelay: `${index * 100}ms` }}
+                  style={{ transitionDelay: `${index * 50}ms` }}
                 >
                   <div className="relative">
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                     <div className="relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden h-full">
                       <div className="relative h-48">
                         <img 
