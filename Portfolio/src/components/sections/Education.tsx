@@ -1,8 +1,14 @@
-import React, { useEffect, useRef } from 'react';
-import { Network, Code } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { GraduationCap, ChevronDown, ChevronUp, ChevronRight } from 'lucide-react';
+import { educationData } from '../../data/educationData';
 
 const Education: React.FC = () => {
+  const [showIncomplete, setShowIncomplete] = useState(false);
   const educationRef = useRef<HTMLDivElement>(null);
+
+  const completedEducation = educationData.filter(edu => edu.status === 'completed');
+  const ongoingEducation = educationData.filter(edu => edu.status === 'ongoing');
+  const incompleteEducation = educationData.filter(edu => edu.status === 'incomplete');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,78 +32,125 @@ const Education: React.FC = () => {
     };
   }, []);
 
+  const renderEducation = (education: typeof educationData[0]) => (
+    <div className="relative pl-16 pb-8" key={education.id}>
+      <div className={`absolute left-6 top-3 w-4 h-4 rounded-full border-4 border-white dark:border-gray-800 ${
+        education.status === 'completed' 
+          ? 'bg-green-500' 
+          : education.status === 'ongoing'
+            ? 'bg-blue-500'
+            : 'bg-red-500'
+      }`}></div>
+      <div className={`${
+        education.status === 'completed'
+          ? 'bg-green-50 dark:bg-green-900/20'
+          : education.status === 'ongoing'
+            ? 'bg-blue-50 dark:bg-blue-900/20'
+            : 'bg-red-50 dark:bg-red-900/20'
+      } rounded-xl p-6`}>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-4">
+            <img 
+              src={education.logo}
+              alt={education.school}
+              className="w-24 h-auto"
+            />
+            <div>
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white">{education.title}</h4>
+              <p className="text-gray-700 dark:text-gray-400">{education.school}</p>
+            </div>
+          </div>
+          <span className={`px-4 py-2 rounded-full text-sm ${
+            education.status === 'completed'
+              ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+              : education.status === 'ongoing'
+                ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400'
+                : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
+          }`}>
+            {education.period}
+          </span>
+        </div>
+        <div className="space-y-4">
+          <p className="text-sm text-gray-700 dark:text-gray-400">
+            {education.description}
+          </p>
+          {education.skills && (
+            <div className="grid grid-cols-2 gap-4">
+              {education.skills.map((skill, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <ChevronRight className={`w-4 h-4 ${
+                    education.status === 'completed'
+                      ? 'text-green-700 dark:text-green-500'
+                      : 'text-blue-700 dark:text-blue-500'
+                  }`} />
+                  <span className="text-sm text-gray-700 dark:text-gray-300">{skill}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          {education.mention && (
+            <div className="inline-flex px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm">
+              Mention {education.mention}
+            </div>
+          )}
+          {education.reason && (
+            <div className="inline-flex px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm">
+              Non validé - {education.reason}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <section id="education" className="py-16 bg-gray-50 dark:bg-gray-800/50">
+    <section id="education" className="py-16 md:py-24 flex items-center justify-center relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ma formation – BTS SIO</h2>
-          <div className="w-20 h-1 bg-orange-500 mx-auto"></div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-purple-600">
+            Parcours Académique
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
         </div>
         
         <div 
           ref={educationRef}
-          className="transition-all duration-1000 opacity-0 translate-y-10"
+          className="transition-all duration-300 opacity-0 translate-y-10"
         >
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 mb-8 transition-all duration-300">
-            <h3 className="text-2xl font-semibold mb-4">Le BTS SIO – Services Informatiques aux Organisations</h3>
-            <p className="mb-8 text-gray-700 dark:text-gray-300">
-              Le BTS SIO forme des techniciens capables de concevoir, déployer et maintenir des solutions informatiques 
-              adaptées aux besoins des entreprises. Il comprend deux spécialités distinctes permettant une spécialisation 
-              selon les projets professionnels.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* SISR Option */}
-              <div className="bg-orange-50 dark:bg-gray-700 rounded-lg p-6 transition-all duration-300 hover:shadow-lg">
-                <div className="flex items-center mb-4">
-                  <Network className="w-12 h-12 text-orange-500 mr-4" />
-                  <h4 className="text-xl font-semibold">Option SISR</h4>
+          <div className="relative">
+            <div className="absolute left-8 top-0 h-full w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+
+            {/* Formation en cours */}
+            {ongoingEducation.map(renderEducation)}
+
+            {/* Formations non terminées */}
+            <div className="relative pl-16">
+              <button
+                onClick={() => setShowIncomplete(!showIncomplete)}
+                className="flex items-center gap-2 text-gray-700 dark:text-gray-400 hover:text-orange-500 transition-colors"
+              >
+                {showIncomplete ? (
+                  <>
+                    <ChevronUp size={20} />
+                    <span>Masquer les formations non terminées</span>
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown size={20} />
+                    <span>Afficher les formations non terminées</span>
+                  </>
+                )}
+              </button>
+
+              {showIncomplete && (
+                <div className="mt-8 space-y-8">
+                  {incompleteEducation.map(renderEducation)}
                 </div>
-                <h5 className="text-lg font-medium mb-2 text-orange-600 dark:text-orange-400">
-                  Solutions d'Infrastructure, Systèmes et Réseaux
-                </h5>
-                <p className="mb-4 text-gray-700 dark:text-gray-300">
-                  Formation orientée vers l'installation, l'administration et la sécurisation 
-                  des infrastructures réseaux et des systèmes serveurs pour les entreprises.
-                </p>
-                
-                <h6 className="font-medium mb-2">Compétences acquises :</h6>
-                <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
-                  <li>Administration de serveurs Windows Server et Linux</li>
-                  <li>Configuration de services réseaux (DNS, DHCP, Active Directory)</li>
-                  <li>Mise en place de solutions de virtualisation (VMware, Virtualbox, Proxmox)</li>
-                  <li>Mise en place de services </li>
-                  <li>Sécurisation d'infrastructures (pare-feu, VPN, back-up)</li>
-                  <li>Scripting avec PowerShell et Bash</li>
-                  <li>Supervision et maintenance préventive (GLPI, Zabbix, HAProxy)</li>
-                </ul>
-              </div>
-              
-              {/* SLAM Option */}
-              <div className="bg-gray-100 dark:bg-gray-700/80 rounded-lg p-6 transition-all duration-300 hover:shadow-lg">
-                <div className="flex items-center mb-4">
-                  <Code className="w-12 h-12 text-gray-500 mr-4" />
-                  <h4 className="text-xl font-semibold">Option SLAM</h4>
-                </div>
-                <h5 className="text-lg font-medium mb-2 text-gray-600 dark:text-gray-400">
-                  Solutions Logicielles et Applications Métiers
-                </h5>
-                <p className="mb-4 text-gray-700 dark:text-gray-300">
-                  Formation centrée sur le développement d'applications web, desktop ou mobiles 
-                  répondant aux besoins spécifiques des organisations.
-                </p>
-                
-                <h6 className="font-medium mb-2">Compétences acquises :</h6>
-                <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
-                  <li>Développement web avec PHP, HTML/CSS, JavaScript</li>
-                  <li>Conception et administration de bases de données SQL</li>
-                  <li>Utilisation de frameworks et CMS</li>
-                  <li>Gestion de projet et méthodes agiles</li>
-                  <li>Développement mobile (Android, iOS)</li>
-                  <li>Gestion de versions avec Git</li>
-                </ul>
-              </div>
+              )}
             </div>
+
+            {/* Formations terminées */}
+            {completedEducation.map(renderEducation)}
           </div>
         </div>
       </div>
