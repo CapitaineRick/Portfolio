@@ -43,10 +43,10 @@ const Hero: React.FC = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
         <div className="absolute top-0 -left-4 w-72 h-72 bg-orange-200/30 dark:bg-orange-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
         <div className="absolute -bottom-8 -right-4 w-72 h-72 bg-blue-200/30 dark:bg-blue-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
         <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-purple-200/30 dark:bg-purple-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000" />
@@ -154,7 +154,7 @@ const Hero: React.FC = () => {
                   ].map((item, index) => (
                     <div
                       key={index}
-                      className="relative group"
+                      className="relative group transition-all duration-300"
                     >
                       <div className={`
                         w-full aspect-square rounded-2xl
