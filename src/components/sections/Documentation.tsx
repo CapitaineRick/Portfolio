@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { projectsData } from '../../data/projectsData';
-import { ChevronLeft, ChevronRight, Briefcase, GraduationCap, Maximize2, Minimize2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Briefcase, GraduationCap, Maximize2, Minimize2, Download } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
@@ -56,6 +56,17 @@ const Documentation: React.FC = () => {
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
     setScale(isFullscreen ? 1.0 : 1.5);
+  };
+
+  const handleDownload = () => {
+    if (project?.pdfUrl) {
+      const link = document.createElement('a');
+      link.href = project.pdfUrl;
+      link.download = `${project.title}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
@@ -149,6 +160,13 @@ const Documentation: React.FC = () => {
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-2xl font-bold text-orange-500">{project.title}</h3>
               <div className="flex gap-2">
+                <button
+                  onClick={handleDownload}
+                  className="p-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600"
+                  title="Télécharger le PDF"
+                >
+                  <Download size={20} />
+                </button>
                 <button
                   onClick={toggleFullscreen}
                   className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
