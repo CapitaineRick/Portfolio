@@ -4,6 +4,7 @@ import { User, Code, Server, Shield, Book, Briefcase, GraduationCap, Award, Chev
 const About: React.FC = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
   const [showPastEducation, setShowPastEducation] = useState(false);
+  const [showCertifications, setShowCertifications] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -188,6 +189,85 @@ const About: React.FC = () => {
                         <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full text-sm font-medium">
                           Mention Très Bien
                         </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Certifications Section */}
+                <div className="mb-8">
+                  <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                    <Award className="w-6 h-6 text-orange-500 mr-2" />
+                    Certifications et Formations
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6">
+                      <div className="flex items-center mb-3">
+                        <div>
+                          <h4 className="text-xl font-semibold">Sauveteur Secouriste du Travail (SST)</h4>
+                          <p className="text-gray-600 dark:text-gray-400">Mission locale, Guyancourt (78) - Septembre 2023</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Formation aux premiers secours en milieu professionnel
+                      </p>
+                    </div>
+
+                    <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6">
+                      <div className="flex items-center mb-3">
+                        <div>
+                          <h4 className="text-xl font-semibold">Prévention et Secours Civiques de niveau 1 (PSC1)</h4>
+                          <p className="text-gray-600 dark:text-gray-400">Croix-Rouge Française - Juin 2021</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Formation aux gestes de premiers secours
+                      </p>
+                    </div>
+
+                    {/* Collapsible Additional Certifications */}
+                    <div className="relative">
+                      <button
+                        onClick={() => setShowCertifications(!showCertifications)}
+                        className="w-full flex items-center justify-center gap-2 py-2 text-orange-500 hover:text-orange-600 transition-colors"
+                      >
+                        {showCertifications ? (
+                          <>
+                            <ChevronUp size={20} />
+                            <span>Masquer les autres formations</span>
+                          </>
+                        ) : (
+                          <>
+                            <ChevronDown size={20} />
+                            <span>Afficher les autres formations</span>
+                          </>
+                        )}
+                      </button>
+
+                      <div className={`transition-all duration-300 ${showCertifications ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+                        <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6 mb-4">
+                          <div className="flex items-center mb-3">
+                            <div>
+                              <h4 className="text-xl font-semibold">Introduction aux réseaux (Cisco)</h4>
+                              <p className="text-gray-600 dark:text-gray-400">Formation en ligne - 2022</p>
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">
+                            Notions fondamentales des réseaux informatiques, adressage IP, routage et commutation
+                          </p>
+                        </div>
+                        
+                        <div className="bg-orange-50 dark:bg-gray-700/50 rounded-lg p-6">
+                          <div className="flex items-center mb-3">
+                            <div>
+                              <h4 className="text-xl font-semibold">Permis B</h4>
+                              <p className="text-gray-600 dark:text-gray-400">Obtenu en 2021</p>
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">
+                            Mobilité et autonomie dans mes déplacements professionnels
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
