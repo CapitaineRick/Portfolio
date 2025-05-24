@@ -11,11 +11,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { theme } = useTheme();
   
   return (
-    <div className={`min-h-screen flex flex-col transition-colors duration-300 ${
+    <div className={`min-h-screen transition-colors duration-300 ${
       theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
     }`}>
       <Navbar />
-      {children}
+      <main>
+        {children}
+      </main>
       <Footer />
     </div>
   );
