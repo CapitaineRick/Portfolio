@@ -315,7 +315,7 @@ const Projects: React.FC = () => {
                         )}
                       </div>
 
-                      {(selectedDoc === project.id && project.pdfUrl) || expandedProject === project.id ? (
+                      {((selectedDoc === project.id && project.pdfUrl) || expandedProject === project.id) ? (
                         <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
                           {selectedDoc === project.id && project.pdfUrl ? (
                             <>
@@ -377,7 +377,7 @@ const Projects: React.FC = () => {
                             </div>
                           )}
                         </div>
-                      )}
+                      ) : null}
                     </div>
                   </div>
                 </div>
