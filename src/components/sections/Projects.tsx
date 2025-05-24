@@ -1,6 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { projectsData } from '../../data/projectsData';
-import { Briefcase, GraduationCap, Filter, Tags, Calendar, CheckCircle2, Search, ChevronDown, ChevronUp, ExternalLink, ArrowRight } from 'lucide-react';
+import { Briefcase, GraduationCap, Filter, Tags, Calendar, CheckCircle2, Search, ChevronDown, ChevronUp, ExternalLink, ArrowRight, FileText } from 'lucide-react';
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+
+// Set worker URL for PDF.js
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 const Projects: React.FC = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
@@ -8,9 +14,17 @@ const Projects: React.FC = () => {
   const [selectedType, setSelectedType] = useState<'all' | 'enterprise' | 'school'>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
+  const [numPages, setNumPages] = useState<number | null>(null);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const handleTagClick = (tag: string) => {
     setSelectedTag(selectedTag === tag ? null : tag);
+  };
+
+  const handleDocClick = (projectId: string) => {
+    setSelectedDoc(selectedDoc === projectId ? null : projectId);
+    setPageNumber(1);
   };
 
   // Get all unique tags from both enterprise and school projects
@@ -43,6 +57,18 @@ const Projects: React.FC = () => {
     }
     return projects;
   })();
+
+  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
+    setNumPages(numPages);
+  }
+
+  const handlePrevPage = () => {
+    setPageNumber(prev => Math.max(prev - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setPageNumber(prev => Math.min(prev + 1, numPages || 1));
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -311,24 +337,36 @@ const Projects: React.FC = () => {
 
                       {/* Project Actions */}
                       <div className="flex items-center justify-between">
-                        <button
-                          onClick={() => setExpandedProject(expandedProject === project.id ? null : project.id)}
-                          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
-                                   text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
-                                   hover:bg-orange-100 dark:hover:bg-orange-900/50"
-                        >
-                          {expandedProject === project.id ? (
-                            <>
-                              Voir moins
-                              <ChevronUp className="w-4 h-4" />
-                            </>
-                          ) : (
-                            <>
-                              Voir plus
-                              <ChevronDown className="w-4 h-4" />
-                            </>
-                          )}
-                        </button>
+                        {project.pdfUrl ? (
+                          <button
+                            onClick={() => handleDocClick(project.id)}
+                            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
+                                     text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
+                                     hover:bg-orange-100 dark:hover:bg-orange-900/50"
+                          >
+                            <FileText className="w-4 h-4" />
+                            Documentation
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => setExpandedProject(expandedProject === project.id ? null : project.id)}
+                            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
+                                     text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
+                                     hover:bg-orange-100 dark:hover:bg-orange-900/50"
+                          >
+                            {expandedProject === project.id ? (
+                              <>
+                                Voir moins
+                                <ChevronUp className="w-4 h-4" />
+                              </>
+                            ) : (
+                              <>
+                                Voir plus
+                                <ChevronDown className="w-4 h-4" />
+                              </>
+                            )}
+                          </button>
+                        )}
                         
                         {project.demoUrl && (
                           <a
@@ -342,11 +380,53 @@ const Projects: React.FC = () => {
                         )}
                       </div>
 
+                      {/* Documentation Viewer */}
+                      {selectedDoc === project.id && project.pdfUrl && (
+                        <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                          <div className="flex justify-between items-center mb-4">
+                            <h4 className="font-medium text-orange-500">Documentation</h4>
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={handlePrevPage}
+                                disabled={pageNumber <= 1}
+                                className="p-1 rounded-lg bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 
+                                         disabled:opacity-50 disabled:cursor-not-allowed"
+                              >
+                                <ChevronDown className="w-4 h-4 transform rotate-90" />
+                              </button>
+                              <span className="text-sm">
+                                Page {pageNumber} / {numPages || 1}
+                              </span>
+                              <button
+                                onClick={handleNextPage}
+                                disabled={pageNumber >= (numPages || 1)}
+                                className="p-1 rounded-lg bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
+                                         disabled:opacity-50 disabled:cursor-not-allowed"
+                              >
+                                <ChevronDown className="w-4 h-4 transform -rotate-90" />
+                              </button>
+                            </div>
+                          </div>
+                          <div className="flex justify-center">
+                            <Document
+                              file={project.pdfUrl}
+                              onLoadSuccess={onDocumentLoadSuccess}
+                              className="border rounded-lg overflow-hidden"
+                            >
+                              <Page
+                                pageNumber={pageNumber}
+                                className="shadow-lg"
+                                renderTextLayer={true}
+                                renderAnnotationLayer={true}
+                              />
+                            </Document>
+                          </div>
+                        </div>
+                      )}
+
                       {/* Expanded Content */}
-                      <div className={`overflow-hidden transition-all duration-300 ${
-                        expandedProject === project.id ? 'max-h-96 mt-4' : 'max-h-0'
-                      }`}>
-                        <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                      {expandedProject === project.id && (
+                        <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
                           <div className="space-y-4">
                             <div>
                               <h4 className="font-medium text-orange-500 mb-2">Technologies utilisées</h4>
@@ -361,23 +441,9 @@ const Projects: React.FC = () => {
                                 ))}
                               </div>
                             </div>
-                            {project.pdfUrl && (
-                              <div>
-                                <h4 className="font-medium text-orange-500 mb-2">Documentation</h4>
-                                <a
-                                  href={project.pdfUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-2 text-sm text-orange-500 hover:text-orange-600"
-                                >
-                                  Voir la documentation complète
-                                  <ExternalLink size={14} />
-                                </a>
-                              </div>
-                            )}
                           </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>
