@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { projectsData } from '../../data/projectsData';
-import ProjectCard from '../ui/ProjectCard';
-import { Briefcase, GraduationCap, Filter, Tags, Calendar, CheckCircle2, Search, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { Briefcase, GraduationCap, Filter, Tags, Calendar, CheckCircle2, Search, ChevronDown, ChevronUp, ExternalLink, ArrowRight } from 'lucide-react';
 
 const Projects: React.FC = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
