@@ -134,71 +134,45 @@ const Projects: React.FC = () => {
                 />
               </div>
 
-              {/* Filters Section */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Project Types */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Filter className="w-5 h-5 text-orange-500" />
-                    <h3 className="text-lg font-semibold">Type de projet</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-3">
-                    <button
-                      onClick={() => setSelectedType('all')}
-                      className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
-                        ${selectedType === 'all'
-                          ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
-                          : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
-                        }`}
-                    >
-                      Tous les projets
-                    </button>
-                    <button
-                      onClick={() => setSelectedType('enterprise')}
-                      className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
-                        ${selectedType === 'enterprise'
-                          ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
-                          : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
-                        }`}
-                    >
-                      <Briefcase className="w-5 h-5" />
-                      Professionnels
-                    </button>
-                    <button
-                      onClick={() => setSelectedType('school')}
-                      className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
-                        ${selectedType === 'school'
-                          ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
-                          : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
-                        }`}
-                    >
-                      <GraduationCap className="w-5 h-5" />
-                      Scolaires
-                    </button>
-                  </div>
+              {/* Project Types */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <Filter className="w-5 h-5 text-orange-500" />
+                  <h3 className="text-lg font-semibold">Type de projet</h3>
                 </div>
-
-                {/* Technologies */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Tags className="w-5 h-5 text-orange-500" />
-                    <h3 className="text-lg font-semibold">Technologies</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {allTags.map(tag => (
-                      <button
-                        key={tag}
-                        onClick={() => handleTagClick(tag)}
-                        className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
-                          ${selectedTag === tag
-                            ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
-                            : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
-                          }`}
-                      >
-                        #{tag}
-                      </button>
-                    ))}
-                  </div>
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    onClick={() => setSelectedType('all')}
+                    className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
+                      ${selectedType === 'all'
+                        ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
+                        : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
+                      }`}
+                  >
+                    Tous les projets
+                  </button>
+                  <button
+                    onClick={() => setSelectedType('enterprise')}
+                    className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
+                      ${selectedType === 'enterprise'
+                        ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
+                        : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
+                      }`}
+                  >
+                    <Briefcase className="w-5 h-5" />
+                    Professionnels
+                  </button>
+                  <button
+                    onClick={() => setSelectedType('school')}
+                    className={`px-6 py-3 rounded-xl text-base font-medium transition-all duration-300 flex items-center gap-2
+                      ${selectedType === 'school'
+                        ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
+                        : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
+                      }`}
+                  >
+                    <GraduationCap className="w-5 h-5" />
+                    Scolaires
+                  </button>
                 </div>
               </div>
 
@@ -227,6 +201,34 @@ const Projects: React.FC = () => {
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+
+        {/* Technologies Filter */}
+        <div className="mb-12">
+          <div className="relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+            <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8">
+              <div className="flex items-center gap-2 mb-4">
+                <Tags className="w-5 h-5 text-orange-500" />
+                <h3 className="text-lg font-semibold">Technologies</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {allTags.map(tag => (
+                  <button
+                    key={tag}
+                    onClick={() => handleTagClick(tag)}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
+                      ${selectedTag === tag
+                        ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg shadow-orange-500/25'
+                        : 'bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600/50'
+                      }`}
+                  >
+                    #{tag}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
