@@ -17,10 +17,10 @@ const TechWatch: React.FC = () => {
     return true;
   });
 
-  const toggleArticle = (index: number) => {
+  const toggleArticle = (id: string) => {
     setExpandedArticles(prev => ({
       ...prev,
-      [index]: !prev[index]
+      [id]: !prev[id]
     }));
   };
 
@@ -102,9 +102,9 @@ const TechWatch: React.FC = () => {
           className="transition-all duration-1000 opacity-0 translate-y-10"
         >
           <div className="grid grid-cols-1 gap-8">
-            {filteredArticles.map((item, index) => (
+            {filteredArticles.map((item) => (
               <div 
-                key={index}
+                key={item.title}
                 className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
               >
                 <div className="flex flex-col md:flex-row">
@@ -144,7 +144,7 @@ const TechWatch: React.FC = () => {
                     </div>
 
                     <div className={`prose dark:prose-invert max-w-none ${
-                      expandedArticles[index] ? '' : 'line-clamp-3'
+                      !expandedArticles[item.title] ? 'line-clamp-3' : ''
                     }`}>
                       <pre className="whitespace-pre-wrap font-mono text-sm bg-gray-50 dark:bg-gray-900 p-4 rounded-lg overflow-x-auto">
                         {item.description}
@@ -153,10 +153,10 @@ const TechWatch: React.FC = () => {
 
                     <div className="flex justify-between items-center mt-4">
                       <button
-                        onClick={() => toggleArticle(index)}
+                        onClick={() => toggleArticle(item.title)}
                         className="text-orange-500 hover:text-orange-600 transition-colors flex items-center"
                       >
-                        {expandedArticles[index] ? (
+                        {expandedArticles[item.title] ? (
                           <>
                             <ChevronUp className="w-4 h-4 mr-1" />
                             Réduire
