@@ -61,35 +61,35 @@ const TechWatch: React.FC = () => {
             Veille Technologique
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
             Restez à jour avec les dernières tendances et innovations dans le domaine des systèmes, réseaux et de la cybersécurité
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
             <div className="relative bg-white dark:bg-gray-800 p-6 rounded-2xl">
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl">
-                  <Bell className="w-6 h-6 text-orange-500" />
+                  <Bell className="w-6 h-6 text-orange-700 dark:text-orange-500" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">Surveillance Active</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Veille quotidienne</p>
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Surveillance Active</h3>
+                  <p className="text-sm text-gray-700 dark:text-gray-400">Veille quotidienne</p>
                 </div>
               </div>
               <ul className="space-y-2">
-                <li className="flex items-center gap-2 text-sm">
-                  <ArrowRight className="w-4 h-4 text-orange-500" />
+                <li className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <ArrowRight className="w-4 h-4 text-orange-700 dark:text-orange-500" />
                   <span>Actualités tech</span>
                 </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <ArrowRight className="w-4 h-4 text-orange-500" />
+                <li className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <ArrowRight className="w-4 h-4 text-orange-700 dark:text-orange-500" />
                   <span>Bulletins de sécurité</span>
                 </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <ArrowRight className="w-4 h-4 text-orange-500" />
+                <li className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <ArrowRight className="w-4 h-4 text-orange-700 dark:text-orange-500" />
                   <span>Nouvelles vulnérabilités</span>
                 </li>
               </ul>
@@ -97,28 +97,28 @@ const TechWatch: React.FC = () => {
           </div>
 
           <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
             <div className="relative bg-white dark:bg-gray-800 p-6 rounded-2xl">
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl">
-                  <Rss className="w-6 h-6 text-purple-500" />
+                  <Rss className="w-6 h-6 text-purple-700 dark:text-purple-500" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">Sources Variées</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Multi-sources</p>
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Sources Variées</h3>
+                  <p className="text-sm text-gray-700 dark:text-gray-400">Multi-sources</p>
                 </div>
               </div>
               <ul className="space-y-2">
-                <li className="flex items-center gap-2 text-sm">
-                  <ArrowRight className="w-4 h-4 text-purple-500" />
+                <li className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <ArrowRight className="w-4 h-4 text-purple-700 dark:text-purple-500" />
                   <span>Blogs techniques</span>
                 </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <ArrowRight className="w-4 h-4 text-purple-500" />
+                <li className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <ArrowRight className="w-4 h-4 text-purple-700 dark:text-purple-500" />
                   <span>Forums spécialisés</span>
                 </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <ArrowRight className="w-4 h-4 text-purple-500" />
+                <li className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <ArrowRight className="w-4 h-4 text-purple-700 dark:text-purple-500" />
                   <span>Réseaux professionnels</span>
                 </li>
               </ul>
@@ -126,28 +126,28 @@ const TechWatch: React.FC = () => {
           </div>
 
           <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
             <div className="relative bg-white dark:bg-gray-800 p-6 rounded-2xl">
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                  <BookOpen className="w-6 h-6 text-blue-500" />
+                  <BookOpen className="w-6 h-6 text-blue-700 dark:text-blue-500" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">Analyse Approfondie</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Synthèse régulière</p>
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Analyse Approfondie</h3>
+                  <p className="text-sm text-gray-700 dark:text-gray-400">Synthèse régulière</p>
                 </div>
               </div>
               <ul className="space-y-2">
-                <li className="flex items-center gap-2 text-sm">
-                  <ArrowRight className="w-4 h-4 text-blue-500" />
+                <li className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <ArrowRight className="w-4 h-4 text-blue-700 dark:text-blue-500" />
                   <span>Résumés détaillés</span>
                 </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <ArrowRight className="w-4 h-4 text-blue-500" />
+                <li className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <ArrowRight className="w-4 h-4 text-blue-700 dark:text-blue-500" />
                   <span>Impact technologique</span>
                 </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <ArrowRight className="w-4 h-4 text-blue-500" />
+                <li className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <ArrowRight className="w-4 h-4 text-blue-700 dark:text-blue-500" />
                   <span>Recommandations</span>
                 </li>
               </ul>
@@ -157,27 +157,32 @@ const TechWatch: React.FC = () => {
 
         <div className="space-y-6 mb-12">
           <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
             <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-4">
-                    <Search className="w-5 h-5 text-orange-500" />
-                    <h3 className="font-semibold">Recherche</h3>
+                    <Search className="w-5 h-5 text-orange-700 dark:text-orange-500" />
+                    <h3 className="font-semibold text-gray-900 dark:text-white">Recherche</h3>
                   </div>
                   <input
                     type="text"
                     placeholder="Rechercher un article..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-700 
+                             border border-gray-300 dark:border-gray-600 
+                             focus:ring-2 focus:ring-orange-500 focus:border-transparent 
+                             text-gray-900 dark:text-white
+                             placeholder-gray-500 dark:placeholder-gray-400
+                             transition-all duration-300"
                   />
                 </div>
 
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-4">
-                    <Filter className="w-5 h-5 text-orange-500" />
-                    <h3 className="font-semibold">Catégories</h3>
+                    <Filter className="w-5 h-5 text-orange-700 dark:text-orange-500" />
+                    <h3 className="font-semibold text-gray-900 dark:text-white">Catégories</h3>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {categories.map(category => (
@@ -187,7 +192,7 @@ const TechWatch: React.FC = () => {
                         className={`px-4 py-2 rounded-xl transition-all duration-300 ${
                           selectedCategory === category
                             ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white'
-                            : 'bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600'
+                            : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                         }`}
                       >
                         {category}
@@ -198,8 +203,8 @@ const TechWatch: React.FC = () => {
 
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-4">
-                    <Tag className="w-5 h-5 text-orange-500" />
-                    <h3 className="font-semibold">Tags</h3>
+                    <Tag className="w-5 h-5 text-orange-700 dark:text-orange-500" />
+                    <h3 className="font-semibold text-gray-900 dark:text-white">Tags</h3>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {tags.map(tag => (
@@ -209,7 +214,7 @@ const TechWatch: React.FC = () => {
                         className={`px-3 py-1 rounded-full text-sm transition-all duration-300 ${
                           selectedTag === tag
                             ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white'
-                            : 'bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600'
+                            : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                         }`}
                       >
                         #{tag}
@@ -224,14 +229,14 @@ const TechWatch: React.FC = () => {
         
         <div 
           ref={watchRef}
-          className="grid grid-cols-1 gap-8 transition-all duration-1000 opacity-0 translate-y-10"
+          className="grid grid-cols-1 gap-8 transition-all duration-300 opacity-0 translate-y-10"
         >
           {filteredArticles.map((item) => (
             <div 
               key={item.title}
               className="relative group"
             >
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
               <div className="relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden">
                 <div className="flex flex-col md:flex-row">
                   <div className="md:w-1/3 relative">
@@ -266,7 +271,7 @@ const TechWatch: React.FC = () => {
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-orange-500 transition-colors">
                         {item.title}
                       </h3>
-                      <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-400">
                         <Calendar className="w-4 h-4" />
                         {item.date}
                       </div>
@@ -282,11 +287,11 @@ const TechWatch: React.FC = () => {
                       </pre>
                     </div>
 
-                    <div className="flex justify-between items-center mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <div className="flex justify-between items-center mt-6 pt-6 border-t border-gray-300 dark:border-gray-700">
                       <button
                         onClick={() => toggleArticle(item.title)}
                         className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
-                                 text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
+                                 text-orange-700 dark:text-orange-400 font-medium transition-all duration-300
                                  hover:bg-orange-100 dark:hover:bg-orange-900/50"
                       >
                         {expandedArticles[item.title] ? (
@@ -307,7 +312,7 @@ const TechWatch: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-50 dark:bg-purple-950/50 
-                                 text-purple-600 dark:text-purple-400 font-medium transition-all duration-300
+                                 text-purple-700 dark:text-purple-400 font-medium transition-all duration-300
                                  hover:bg-purple-100 dark:hover:bg-purple-900/50"
                       >
                         Article original
