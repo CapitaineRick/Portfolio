@@ -6,23 +6,34 @@ import { Briefcase, GraduationCap } from 'lucide-react';
 const Projects: React.FC = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [selectedType, setSelectedType] = useState<'all' | 'enterprise' | 'school'>('all');
 
   const handleTagClick = (tag: string) => {
     setSelectedTag(selectedTag === tag ? null : tag);
   };
 
-  // Combine enterprise and school projects into a single array
-  const allProjects = [...projectsData.enterprise, ...projectsData.school];
-
-  // Get all unique tags
+  // Get all unique tags from both enterprise and school projects
   const allTags = Array.from(
-    new Set(allProjects.flatMap(project => project.tags))
+    new Set([
+      ...projectsData.enterprise.flatMap(project => project.tags),
+      ...projectsData.school.flatMap(project => project.tags)
+    ])
   ).sort();
 
-  // Filter projects based on selected tag
-  const filteredProjects = selectedTag
-    ? allProjects.filter(project => project.tags.includes(selectedTag))
-    : allProjects;
+  // Filter projects based on selected tag and type
+  const filteredProjects = (() => {
+    let projects = [];
+    if (selectedType === 'all' || selectedType === 'enterprise') {
+      projects.push(...projectsData.enterprise);
+    }
+    if (selectedType === 'all' || selectedType === 'school') {
+      projects.push(...projectsData.school);
+    }
+    if (selectedTag) {
+      projects = projects.filter(project => project.tags.includes(selectedTag));
+    }
+    return projects;
+  })();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,7 +42,6 @@ const Projects: React.FC = () => {
           entry.target.classList.add('opacity-100', 'translate-y-0');
           entry.target.classList.remove('opacity-0', 'translate-y-10');
           
-          // Animate project cards
           const cards = entry.target.querySelectorAll('.project-card');
           cards.forEach((card, index) => {
             setTimeout(() => {
@@ -53,7 +63,7 @@ const Projects: React.FC = () => {
         observer.unobserve(projectsRef.current);
       }
     };
-  }, [selectedTag]);
+  }, [selectedTag, selectedType]);
 
   return (
     <section id="projects" className="py-16 bg-gray-50 dark:bg-gray-800/50">
@@ -62,16 +72,40 @@ const Projects: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Expériences</h2>
           <div className="w-20 h-1 bg-orange-500 mx-auto mb-8"></div>
 
-          {/* Légende des icônes */}
-          <div className="flex justify-center gap-8 mb-6">
-            <div className="flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-orange-500" />
-              <span className="text-sm text-gray-600 dark:text-gray-300">Expérience professionnelle</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <GraduationCap className="w-5 h-5 text-orange-500" />
-              <span className="text-sm text-gray-600 dark:text-gray-300">Projet scolaire</span>
-            </div>
+          {/* Type Filter */}
+          <div className="flex justify-center gap-4 mb-6">
+            <button
+              onClick={() => setSelectedType('all')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                selectedType === 'all'
+                  ? 'bg-orange-500 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+              }`}
+            >
+              Tous
+            </button>
+            <button
+              onClick={() => setSelectedType('enterprise')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                selectedType === 'enterprise'
+                  ? 'bg-orange-500 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+              }`}
+            >
+              <Briefcase className="w-5 h-5" />
+              Professionnel
+            </button>
+            <button
+              onClick={() => setSelectedType('school')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                selectedType === 'school'
+                  ? 'bg-orange-500 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+              }`}
+            >
+              <GraduationCap className="w-5 h-5" />
+              Scolaire
+            </button>
           </div>
           
           {/* Tags Filter */}
