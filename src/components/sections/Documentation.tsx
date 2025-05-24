@@ -58,7 +58,7 @@ const Documentation: React.FC = () => {
       // Create a direct link to the PDF file
       const link = document.createElement('a');
       link.href = project.pdfUrl;
-      link.setAttribute('download', `${project.title.replace(/\s+/g, '-')}.pdf`);
+      link.setAttribute('download', project.title);
       link.setAttribute('target', '_blank');
       document.body.appendChild(link);
       link.click();
