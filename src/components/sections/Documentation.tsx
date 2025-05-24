@@ -232,7 +232,7 @@ const Documentation: React.FC = () => {
                     }
                     className="border border-gray-300 dark:border-gray-600 rounded-xl overflow-hidden"
                     options={{
-                      cMapUrl: 'https://unpkg.com/pdfjs-dist@4.8.69/cmaps/',
+                      cMapUrl: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/cmaps/`,
                       cMapPacked: true,
                     }}
                   >

@@ -250,7 +250,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     }
                     className="mx-auto"
                     options={{
-                      cMapUrl: 'https://unpkg.com/pdfjs-dist@4.8.69/cmaps/',
+                      cMapUrl: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/cmaps/`,
                       cMapPacked: true,
                     }}
                   >
