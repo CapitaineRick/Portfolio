@@ -24,24 +24,95 @@ section {
 }
 
 /* Section colors */
-section:nth-child(odd) {
+section {
+  --tw-gradient-from: theme('colors.gray.50');
+  --tw-gradient-to: theme('colors.white');
+}
+
+section#home {
   --tw-gradient-from: theme('colors.orange.50');
   --tw-gradient-to: theme('colors.white');
 }
 
-section:nth-child(even) {
+section#about {
+  --tw-gradient-from: theme('colors.blue.50');
+  --tw-gradient-to: theme('colors.white');
+}
+
+section#education {
   --tw-gradient-from: theme('colors.purple.50');
   --tw-gradient-to: theme('colors.white');
 }
 
-.dark section:nth-child(odd) {
+section#skills {
+  --tw-gradient-from: theme('colors.green.50');
+  --tw-gradient-to: theme('colors.white');
+}
+
+section#projects {
+  --tw-gradient-from: theme('colors.orange.50');
+  --tw-gradient-to: theme('colors.white');
+}
+
+section#documentation {
+  --tw-gradient-from: theme('colors.indigo.50');
+  --tw-gradient-to: theme('colors.white');
+}
+
+section#techwatch {
+  --tw-gradient-from: theme('colors.rose.50');
+  --tw-gradient-to: theme('colors.white');
+}
+
+section#contact {
+  --tw-gradient-from: theme('colors.emerald.50');
+  --tw-gradient-to: theme('colors.white');
+}
+
+/* Dark mode sections */
+.dark section {
+  --tw-gradient-from: theme('colors.gray.900' / 5%);
+  --tw-gradient-to: theme('colors.gray.900' / 5%);
+}
+
+.dark section#home {
   --tw-gradient-from: theme('colors.orange.900' / 5%);
   --tw-gradient-to: theme('colors.purple.900' / 5%);
 }
 
-.dark section:nth-child(even) {
+.dark section#about {
+  --tw-gradient-from: theme('colors.blue.900' / 5%);
+  --tw-gradient-to: theme('colors.purple.900' / 5%);
+}
+
+.dark section#education {
   --tw-gradient-from: theme('colors.purple.900' / 5%);
-  --tw-gradient-to: theme('colors.orange.900' / 5%);
+  --tw-gradient-to: theme('colors.blue.900' / 5%);
+}
+
+.dark section#skills {
+  --tw-gradient-from: theme('colors.green.900' / 5%);
+  --tw-gradient-to: theme('colors.emerald.900' / 5%);
+}
+
+.dark section#projects {
+  --tw-gradient-from: theme('colors.orange.900' / 5%);
+  --tw-gradient-to: theme('colors.red.900' / 5%);
+}
+
+.dark section#documentation {
+  --tw-gradient-from: theme('colors.indigo.900' / 5%);
+  --tw-gradient-to: theme('colors.purple.900' / 5%);
+}
+
+.dark section#techwatch {
+  --tw-gradient-from: theme('colors.rose.900' / 5%);
+  --tw-gradient-to: theme('colors.pink.900' / 5%);
+}
+
+.dark section#contact {
+  --tw-gradient-from: theme('colors.emerald.900' / 5%);
+  --tw-gradient-to: theme('colors.green.900' / 5%);
 }
 
 /* Animations */
@@ -124,5 +195,29 @@ img {
   
   .border-gray-200 {
     @apply border-gray-300;
+  }
+
+  /* Card backgrounds */
+  .bg-white {
+    @apply shadow-sm;
+  }
+
+  /* Text colors */
+  .text-gray-600 {
+    @apply text-gray-700;
+  }
+
+  /* Borders */
+  .border-gray-200 {
+    @apply border-gray-300;
+  }
+
+  /* Buttons */
+  button.bg-gray-50 {
+    @apply bg-gray-100;
+  }
+
+  button.hover\:bg-gray-100:hover {
+    @apply hover:bg-gray-200;
   }
 }
