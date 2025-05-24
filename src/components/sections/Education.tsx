@@ -199,8 +199,8 @@ const Education: React.FC = () => {
                 </div>
               </div>
 
-              {/* SLAM Option (Grayed out) */}
-              <div className="relative opacity-50">
+              {/* SLAM Option */}
+              <div className="relative">
                 <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6">
                   <div className="flex items-center gap-4 mb-6">
                     <Code className="w-12 h-12 text-gray-500" />
@@ -214,10 +214,69 @@ const Education: React.FC = () => {
 
                   <div className="space-y-4">
                     <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                      <h5 className="font-medium mb-2">Option non choisie</h5>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Cette spécialisation est orientée développement d'applications
-                      </p>
+                      <h5 className="font-medium mb-2">Compétences techniques</h5>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>Développement Web</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>Applications mobiles</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>Bases de données</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>Programmation objet</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                      <h5 className="font-medium mb-2">Technologies</h5>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>Java, C#, Python</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>HTML, CSS, JavaScript</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>React, Angular</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>SQL, NoSQL</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                      <h5 className="font-medium mb-2">Débouchés professionnels</h5>
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>Développeur d'applications</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>Développeur Web</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>Analyste programmeur</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <span>Chef de projet junior</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
