@@ -218,165 +218,169 @@ const Projects: React.FC = () => {
             filteredProjects.map((project, index) => (
               <div 
                 key={project.id}
-                className="project-card relative group transition-all duration-300 opacity-0 scale-95"
+                className="project-card group transition-all duration-300 opacity-0 scale-95 h-fit"
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
-                <div className="relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden">
-                  <div className="relative h-48">
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-                      <div className="absolute bottom-4 left-4">
-                        <div className="flex flex-wrap gap-2">
-                          {project.tags.map(tag => (
-                            <span 
-                              key={tag}
-                              className="px-2 py-1 text-xs rounded-lg bg-white/20 backdrop-blur-sm text-white"
-                            >
-                              {tag}
-                            </span>
-                          ))}
+                <div className="relative">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                  <div className="relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden h-full">
+                    <div className="relative h-48">
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                        <div className="absolute bottom-4 left-4">
+                          <div className="flex flex-wrap gap-2">
+                            {project.tags.map(tag => (
+                              <span 
+                                key={tag}
+                                className="px-2 py-1 text-xs rounded-lg bg-white/20 backdrop-blur-sm text-white"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="absolute top-4 right-4">
+                        <div className={`
+                          p-2 rounded-xl backdrop-blur-md
+                          ${projectsData.enterprise.some(p => p.id === project.id)
+                            ? 'bg-orange-500/90 text-white' 
+                            : 'bg-blue-500/90 text-white'
+                          }
+                        `}>
+                          {projectsData.enterprise.some(p => p.id === project.id) ? (
+                            <Briefcase className="w-5 h-5" />
+                          ) : (
+                            <GraduationCap className="w-5 h-5" />
+                          )}
                         </div>
                       </div>
                     </div>
-                    <div className="absolute top-4 right-4">
-                      <div className={`
-                        p-2 rounded-xl backdrop-blur-md
-                        ${projectsData.enterprise.some(p => p.id === project.id)
-                          ? 'bg-orange-500/90 text-white' 
-                          : 'bg-blue-500/90 text-white'
-                        }
-                      `}>
-                        {projectsData.enterprise.some(p => p.id === project.id) ? (
-                          <Briefcase className="w-5 h-5" />
+
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-orange-500 transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-6">
+                        {project.description}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        {project.pdfUrl ? (
+                          <button
+                            onClick={() => handleDocClick(project.id)}
+                            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
+                                     text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
+                                     hover:bg-orange-100 dark:hover:bg-orange-900/50"
+                          >
+                            <FileText className="w-4 h-4" />
+                            Documentation
+                          </button>
                         ) : (
-                          <GraduationCap className="w-5 h-5" />
+                          <button
+                            onClick={() => setExpandedProject(expandedProject === project.id ? null : project.id)}
+                            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
+                                     text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
+                                     hover:bg-orange-100 dark:hover:bg-orange-900/50"
+                          >
+                            {expandedProject === project.id ? (
+                              <>
+                                Voir moins
+                                <ChevronUp className="w-4 h-4" />
+                              </>
+                            ) : (
+                              <>
+                                Voir plus
+                                <ChevronDown className="w-4 h-4" />
+                              </>
+                            )}
+                          </button>
+                        )}
+                        
+                        {project.demoUrl && (
+                          <a
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-700 
+                                     text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-all duration-300"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            Demo
+                          </a>
                         )}
                       </div>
-                    </div>
-                  </div>
 
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-orange-500 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                      {project.description}
-                    </p>
-
-                    <div className="flex items-center justify-between">
-                      {project.pdfUrl ? (
-                        <button
-                          onClick={() => handleDocClick(project.id)}
-                          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
-                                   text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
-                                   hover:bg-orange-100 dark:hover:bg-orange-900/50"
-                        >
-                          <FileText className="w-4 h-4" />
-                          Documentation
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => setExpandedProject(expandedProject === project.id ? null : project.id)}
-                          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 
-                                   text-orange-600 dark:text-orange-400 font-medium transition-all duration-300
-                                   hover:bg-orange-100 dark:hover:bg-orange-900/50"
-                        >
-                          {expandedProject === project.id ? (
+                      {(selectedDoc === project.id && project.pdfUrl) || expandedProject === project.id ? (
+                        <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                          {selectedDoc === project.id && project.pdfUrl && (
                             <>
-                              Voir moins
-                              <ChevronUp className="w-4 h-4" />
-                            </>
-                          ) : (
-                            <>
-                              Voir plus
-                              <ChevronDown className="w-4 h-4" />
+                              <div className="flex justify-between items-center mb-4">
+                                <h4 className="font-medium text-orange-500">Documentation</h4>
+                                <div className="flex items-center gap-2">
+                                  <button
+                                    onClick={handlePrevPage}
+                                    disabled={pageNumber <= 1}
+                                    className="p-2 rounded-lg bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 
+                                             disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                                  >
+                                    <ChevronDown className="w-4 h-4 transform rotate-90" />
+                                  </button>
+                                  <span className="text-sm">
+                                    Page {pageNumber} / {numPages || 1}
+                                  </span>
+                                  <button
+                                    onClick={handleNextPage}
+                                    disabled={pageNumber >= (numPages || 1)}
+                                    className="p-2 rounded-lg bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
+                                             disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                                  >
+                                    <ChevronDown className="w-4 h-4 transform -rotate-90" />
+                                  </button>
+                                </div>
+                              </div>
+                              <div className="flex justify-center">
+                                <Document
+                                  file={project.pdfUrl}
+                                  onLoadSuccess={onDocumentLoadSuccess}
+                                  className="border rounded-lg overflow-hidden"
+                                >
+                                  <Page
+                                    pageNumber={pageNumber}
+                                    className="shadow-lg"
+                                    renderTextLayer={true}
+                                    renderAnnotationLayer={true}
+                                  />
+                                </Document>
+                              </div>
                             </>
                           )}
-                        </button>
-                      )}
-                      
-                      {project.demoUrl && (
-                        <a
-                          href={project.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-700 
-                                   text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-all duration-300"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                          Demo
-                        </a>
+
+                          {expandedProject === project.id && (
+                            <div className="space-y-4">
+                              <div>
+                                <h4 className="font-medium text-orange-500 mb-2">Technologies utilisées</h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {project.tags.map(tag => (
+                                    <span 
+                                      key={tag}
+                                      className="px-2 py-1 text-xs rounded-lg bg-orange-50 dark:bg-orange-900/30 
+                                               text-orange-600 dark:text-orange-400 transition-all duration-300"
+                                    >
+                                      {tag}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
                       )}
                     </div>
-
-                    {selectedDoc === project.id && project.pdfUrl && (
-                      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                        <div className="flex justify-between items-center mb-4">
-                          <h4 className="font-medium text-orange-500">Documentation</h4>
-                          <div className="flex items-center gap-2">
-                            <button
-                              onClick={handlePrevPage}
-                              disabled={pageNumber <= 1}
-                              className="p-2 rounded-lg bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 
-                                       disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
-                            >
-                              <ChevronDown className="w-4 h-4 transform rotate-90" />
-                            </button>
-                            <span className="text-sm">
-                              Page {pageNumber} / {numPages || 1}
-                            </span>
-                            <button
-                              onClick={handleNextPage}
-                              disabled={pageNumber >= (numPages || 1)}
-                              className="p-2 rounded-lg bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
-                                       disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
-                            >
-                              <ChevronDown className="w-4 h-4 transform -rotate-90" />
-                            </button>
-                          </div>
-                        </div>
-                        <div className="flex justify-center">
-                          <Document
-                            file={project.pdfUrl}
-                            onLoadSuccess={onDocumentLoadSuccess}
-                            className="border rounded-lg overflow-hidden"
-                          >
-                            <Page
-                              pageNumber={pageNumber}
-                              className="shadow-lg"
-                              renderTextLayer={true}
-                              renderAnnotationLayer={true}
-                            />
-                          </Document>
-                        </div>
-                      </div>
-                    )}
-
-                    {expandedProject === project.id && (
-                      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                        <div className="space-y-4">
-                          <div>
-                            <h4 className="font-medium text-orange-500 mb-2">Technologies utilisées</h4>
-                            <div className="flex flex-wrap gap-2">
-                              {project.tags.map(tag => (
-                                <span 
-                                  key={tag}
-                                  className="px-2 py-1 text-xs rounded-lg bg-orange-50 dark:bg-orange-900/30 
-                                           text-orange-600 dark:text-orange-400 transition-all duration-300"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
