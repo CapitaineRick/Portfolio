@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Newspaper, ExternalLink, Filter, ChevronDown, ChevronUp } from 'lucide-react';
+import { Newspaper, ExternalLink, Filter } from 'lucide-react';
 import { techWatchData } from '../../data/techWatchData';
 
 const TechWatch: React.FC = () => {
   const watchRef = useRef<HTMLDivElement>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [expandedArticles, setExpandedArticles] = useState<{[key: string]: boolean}>({});
 
   const categories = Array.from(new Set(techWatchData.map(item => item.category)));
   const tags = Array.from(new Set(techWatchData.flatMap(item => item.tags)));
@@ -16,13 +15,6 @@ const TechWatch: React.FC = () => {
     if (selectedTag && !article.tags.includes(selectedTag)) return false;
     return true;
   });
-
-  const toggleArticle = (id: string) => {
-    setExpandedArticles(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -143,32 +135,13 @@ const TechWatch: React.FC = () => {
                       ))}
                     </div>
 
-                    <div className={`prose dark:prose-invert max-w-none ${
-                      !expandedArticles[item.title] ? 'line-clamp-3' : ''
-                    }`}>
+                    <div className="prose dark:prose-invert max-w-none">
                       <pre className="whitespace-pre-wrap font-mono text-sm bg-gray-50 dark:bg-gray-900 p-4 rounded-lg overflow-x-auto">
                         {item.description}
                       </pre>
                     </div>
 
-                    <div className="flex justify-between items-center mt-4">
-                      <button
-                        onClick={() => toggleArticle(item.title)}
-                        className="text-orange-500 hover:text-orange-600 transition-colors flex items-center"
-                      >
-                        {expandedArticles[item.title] ? (
-                          <>
-                            <ChevronUp className="w-4 h-4 mr-1" />
-                            Réduire
-                          </>
-                        ) : (
-                          <>
-                            <ChevronDown className="w-4 h-4 mr-1" />
-                            Lire plus
-                          </>
-                        )}
-                      </button>
-                      
+                    <div className="flex justify-end items-center mt-4">
                       <a
                         href={item.url}
                         target="_blank"
