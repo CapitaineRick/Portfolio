@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Network, Code } from 'lucide-react';
+import { Network, Code, Book, Award, Clock, Users, ChevronRight, GraduationCap, Briefcase } from 'lucide-react';
 
 const Education: React.FC = () => {
   const educationRef = useRef<HTMLDivElement>(null);
@@ -27,7 +27,14 @@ const Education: React.FC = () => {
   }, []);
 
   return (
-    <section id="education" className="py-16 bg-gray-50 dark:bg-gray-800/50">
+    <section id="education" className="py-16 bg-gray-50 dark:bg-gray-800/50 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-orange-200/30 dark:bg-orange-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
+        <div className="absolute -bottom-8 -right-4 w-72 h-72 bg-blue-200/30 dark:bg-blue-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-purple-200/30 dark:bg-purple-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000" />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ma formation – BTS SIO</h2>
@@ -38,64 +45,182 @@ const Education: React.FC = () => {
           ref={educationRef}
           className="transition-all duration-1000 opacity-0 translate-y-10"
         >
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 mb-8 transition-all duration-300">
-            <h3 className="text-2xl font-semibold mb-4">Le BTS SIO – Services Informatiques aux Organisations</h3>
-            <p className="mb-8 text-gray-700 dark:text-gray-300">
-              Le BTS SIO forme des techniciens capables de concevoir, déployer et maintenir des solutions informatiques 
-              adaptées aux besoins des entreprises. Il comprend deux spécialités distinctes permettant une spécialisation 
-              selon les projets professionnels.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* SISR Option */}
-              <div className="bg-orange-50 dark:bg-gray-700 rounded-lg p-6 transition-all duration-300 hover:shadow-lg">
-                <div className="flex items-center mb-4">
-                  <Network className="w-12 h-12 text-orange-500 mr-4" />
-                  <h4 className="text-xl font-semibold">Option SISR</h4>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left Column - Overview */}
+            <div className="space-y-6">
+              {/* Introduction Card */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 transform hover:scale-[1.02] transition-all duration-300">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                    <GraduationCap className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <h3 className="text-2xl font-semibold">BTS SIO</h3>
                 </div>
-                <h5 className="text-lg font-medium mb-2 text-orange-600 dark:text-orange-400">
-                  Solutions d'Infrastructure, Systèmes et Réseaux
-                </h5>
-                <p className="mb-4 text-gray-700 dark:text-gray-300">
-                  Formation orientée vers l'installation, l'administration et la sécurisation 
-                  des infrastructures réseaux et des systèmes serveurs pour les entreprises.
+                <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  Le BTS Services Informatiques aux Organisations est un diplôme reconnu par l'État de niveau Bac+2
+                  qui forme des professionnels de l'informatique capables de répondre aux besoins des entreprises.
                 </p>
-                
-                <h6 className="font-medium mb-2">Compétences acquises :</h6>
-                <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
-                  <li>Administration de serveurs Windows Server et Linux</li>
-                  <li>Configuration de services réseaux (DNS, DHCP, Active Directory)</li>
-                  <li>Mise en place de solutions de virtualisation (VMware, Virtualbox, Proxmox)</li>
-                  <li>Mise en place de services </li>
-                  <li>Sécurisation d'infrastructures (pare-feu, VPN, back-up)</li>
-                  <li>Scripting avec PowerShell et Bash</li>
-                  <li>Supervision et maintenance préventive (GLPI, Zabbix, HAProxy)</li>
-                </ul>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Clock className="w-5 h-5 text-orange-500" />
+                      <span className="font-medium">Durée</span>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">2 ans de formation</p>
+                  </div>
+                  <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Users className="w-5 h-5 text-orange-500" />
+                      <span className="font-medium">Format</span>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Alternance</p>
+                  </div>
+                </div>
               </div>
-              
-              {/* SLAM Option */}
-              <div className="bg-gray-100 dark:bg-gray-700/80 rounded-lg p-6 transition-all duration-300 hover:shadow-lg">
-                <div className="flex items-center mb-4">
-                  <Code className="w-12 h-12 text-gray-500 mr-4" />
-                  <h4 className="text-xl font-semibold">Option SLAM</h4>
+
+              {/* Key Features */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6">
+                <h4 className="text-xl font-semibold mb-4">Points clés de la formation</h4>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4 p-4 bg-orange-50 dark:bg-gray-700/50 rounded-lg transform hover:scale-[1.02] transition-all duration-300">
+                    <Book className="w-6 h-6 text-orange-500 mt-1" />
+                    <div>
+                      <h5 className="font-medium mb-1">Formation technique approfondie</h5>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Apprentissage des technologies et méthodologies actuelles du marché
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 bg-orange-50 dark:bg-gray-700/50 rounded-lg transform hover:scale-[1.02] transition-all duration-300">
+                    <Briefcase className="w-6 h-6 text-orange-500 mt-1" />
+                    <div>
+                      <h5 className="font-medium mb-1">Expérience professionnelle</h5>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Stages et projets en entreprise pour une formation pratique
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 bg-orange-50 dark:bg-gray-700/50 rounded-lg transform hover:scale-[1.02] transition-all duration-300">
+                    <Award className="w-6 h-6 text-orange-500 mt-1" />
+                    <div>
+                      <h5 className="font-medium mb-1">Diplôme reconnu</h5>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Certification d'État de niveau 5 (Bac+2)
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <h5 className="text-lg font-medium mb-2 text-gray-600 dark:text-gray-400">
-                  Solutions Logicielles et Applications Métiers
-                </h5>
-                <p className="mb-4 text-gray-700 dark:text-gray-300">
-                  Formation centrée sur le développement d'applications web, desktop ou mobiles 
-                  répondant aux besoins spécifiques des organisations.
-                </p>
-                
-                <h6 className="font-medium mb-2">Compétences acquises :</h6>
-                <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
-                  <li>Développement web avec PHP, HTML/CSS, JavaScript</li>
-                  <li>Conception et administration de bases de données SQL</li>
-                  <li>Utilisation de frameworks et CMS</li>
-                  <li>Gestion de projet et méthodes agiles</li>
-                  <li>Développement mobile (Android, iOS)</li>
-                  <li>Gestion de versions avec Git</li>
-                </ul>
+              </div>
+            </div>
+
+            {/* Right Column - Specializations */}
+            <div className="space-y-6">
+              {/* SISR Option */}
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-xl blur opacity-50 group-hover:opacity-75 transition duration-1000"></div>
+                <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6">
+                  <div className="flex items-center gap-4 mb-6">
+                    <Network className="w-12 h-12 text-orange-500" />
+                    <div>
+                      <h4 className="text-xl font-semibold">Option SISR</h4>
+                      <p className="text-orange-600 dark:text-orange-400">
+                        Solutions d'Infrastructure, Systèmes et Réseaux
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                      <h5 className="font-medium mb-2">Compétences techniques</h5>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>Administration Windows</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>Administration Linux</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>Virtualisation</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>Réseaux TCP/IP</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                      <h5 className="font-medium mb-2">Services et sécurité</h5>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>Active Directory</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>Pare-feu</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>VPN</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>Supervision</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-orange-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                      <h5 className="font-medium mb-2">Débouchés professionnels</h5>
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>Administrateur systèmes et réseaux</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>Technicien support</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>Responsable infrastructure</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <ChevronRight className="w-4 h-4 text-orange-500" />
+                          <span>Consultant cybersécurité</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* SLAM Option (Grayed out) */}
+              <div className="relative opacity-50">
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6">
+                  <div className="flex items-center gap-4 mb-6">
+                    <Code className="w-12 h-12 text-gray-500" />
+                    <div>
+                      <h4 className="text-xl font-semibold">Option SLAM</h4>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Solutions Logicielles et Applications Métiers
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
+                      <h5 className="font-medium mb-2">Option non choisie</h5>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Cette spécialisation est orientée développement d'applications
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
