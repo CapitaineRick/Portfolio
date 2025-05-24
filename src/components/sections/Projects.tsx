@@ -66,8 +66,14 @@ const Projects: React.FC = () => {
   }, [selectedTag, selectedType]);
 
   return (
-    <section id="projects" className="py-16 bg-gray-50 dark:bg-gray-800/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-16 bg-gray-50 dark:bg-gray-800/50 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 -right-40 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 -left-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Expériences</h2>
           <div className="w-20 h-1 bg-orange-500 mx-auto mb-8"></div>
@@ -76,20 +82,20 @@ const Projects: React.FC = () => {
           <div className="flex justify-center gap-4 mb-6">
             <button
               onClick={() => setSelectedType('all')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 ${
                 selectedType === 'all'
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                  ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/25'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-lg'
               }`}
             >
               Tous
             </button>
             <button
               onClick={() => setSelectedType('enterprise')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 ${
                 selectedType === 'enterprise'
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                  ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/25'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-lg'
               }`}
             >
               <Briefcase className="w-5 h-5" />
@@ -97,10 +103,10 @@ const Projects: React.FC = () => {
             </button>
             <button
               onClick={() => setSelectedType('school')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 ${
                 selectedType === 'school'
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                  ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/25'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-lg'
               }`}
             >
               <GraduationCap className="w-5 h-5" />
@@ -114,13 +120,13 @@ const Projects: React.FC = () => {
               <button
                 key={tag}
                 onClick={() => handleTagClick(tag)}
-                className={`px-3 py-1 rounded-full text-sm font-medium transition-all
-                  ${selectedTag === tag 
-                    ? 'bg-orange-500 text-white' 
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
-                  }`}
+                className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
+                  selectedTag === tag 
+                    ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/25' 
+                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-lg'
+                }`}
               >
-                {tag}
+                #{tag}
               </button>
             ))}
           </div>

@@ -48,8 +48,14 @@ const Skills: React.FC = () => {
   };
 
   return (
-    <section id="skills" className="py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-16 md:py-24 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 -right-40 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 -left-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Compétences techniques</h2>
           <div className="w-20 h-1 bg-orange-500 mx-auto mb-6"></div>
@@ -71,36 +77,41 @@ const Skills: React.FC = () => {
                 <h3 className="text-xl font-semibold">{category.name}</h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {category.skills.map((skill, index) => (
                   <div 
                     key={skill.name}
-                    className="skill-item opacity-0 scale-95 transition-all duration-500 bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+                    className="skill-item opacity-0 scale-95 transition-all duration-500 group relative"
                     style={{ transitionDelay: `${index * 50}ms` }}
                   >
-                    <div className="flex flex-col items-center text-center">
-                      <div className="h-16 w-16 mb-4">
-                        <img 
-                          src={skill.logo} 
-                          alt={skill.name}
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                      <h4 className="font-medium mb-2">{skill.name}</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                        {skill.description}
-                      </p>
-                      <div className="flex gap-2 mt-auto">
-                        {[1, 2, 3].map((dot) => (
-                          <div
-                            key={dot}
-                            className={`w-2 h-2 rounded-full ${
-                              dot <= skill.level 
-                                ? getLevelColor(skill.level)
-                                : 'bg-gray-200 dark:bg-gray-600'
-                            }`}
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                    <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50 transform group-hover:scale-[1.01] transition duration-500">
+                      <div className="flex flex-col items-center text-center">
+                        <div className="h-16 w-16 mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                          <img 
+                            src={skill.logo} 
+                            alt={skill.name}
+                            className="w-full h-full object-contain"
                           />
-                        ))}
+                        </div>
+                        <h4 className="font-medium mb-2">{skill.name}</h4>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                          {skill.description}
+                        </p>
+                        <div className="flex gap-2 mt-auto">
+                          {[1, 2, 3].map((dot) => (
+                            <div
+                              key={dot}
+                              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                                dot <= skill.level 
+                                  ? getLevelColor(skill.level)
+                                  : 'bg-gray-200 dark:bg-gray-600'
+                              } ${
+                                dot <= skill.level && 'group-hover:scale-110'
+                              }`}
+                            />
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
