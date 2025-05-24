@@ -16,12 +16,14 @@ function App() {
       <ThemeProvider>
         <ProjectProvider>
           <Layout>
-            <Hero />
-            <About />
-            <Skills />
-            <Projects />
-            <TechWatch />
-            <Contact />
+            <main className="flex flex-col w-full">
+              <Hero />
+              <About />
+              <Skills />
+              <Projects />
+              <TechWatch />
+              <Contact />
+            </main>
           </Layout>
         </ProjectProvider>
       </ThemeProvider>
