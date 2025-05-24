@@ -2,99 +2,88 @@ export const techWatchData = [
   {
     title: "L'impact de l'Intelligence Artificielle sur la Cybersécurité en 2024",
     description: `
-    1. Introduction
-    L'intégration de l'IA dans la cybersécurité transforme radicalement la protection des systèmes d'information, offrant des capacités de détection et de réponse sans précédent.
+    1. Contexte et enjeux
+       • Augmentation des cyberattaques sophistiquées
+       • Besoin de réponses automatisées et intelligentes
+       • Évolution des menaces en temps réel
+       • Complexité croissante des systèmes à protéger
 
-    2. Technologies clés
-    • Machine Learning avancé pour la détection des menaces
-    • Analyse comportementale en temps réel
-    • Systèmes prédictifs basés sur l'IA
-    • Automatisation intelligente des réponses
+    2. Solutions technologiques
+       • Détection des menaces par IA
+         - Analyse comportementale avancée
+         - Détection d'anomalies en temps réel
+         - Apprentissage continu des nouvelles menaces
+         - Taux de détection > 95%
 
-    3. Applications concrètes
-    • Détection des malwares :
-      - Analyse comportementale en temps réel
-      - Identification des variants inconnus
-      - Taux de détection amélioré de 95%
-    
-    • Réponse aux incidents :
-      - Quarantaine automatique
-      - Correction proactive des vulnérabilités
-      - Temps de réponse réduit de 60%
+       • Réponse automatisée
+         - Isolation immédiate des systèmes compromis
+         - Correction automatique des vulnérabilités
+         - Temps de réponse réduit de 60%
+         - Réduction des erreurs humaines de 75%
 
-    4. Bénéfices mesurables
-    • Réduction des coûts :
-      - 3,5M€ économisés par incident majeur
-      - ROI moyen de 280% sur 3 ans
-    
-    • Amélioration de l'efficacité :
-      - Détection 60% plus rapide
-      - Faux positifs réduits de 50%
-      - Temps d'analyse réduit de 75%
+    3. Impacts mesurables
+       • Sécurité
+         - Réduction des incidents de 65%
+         - Détection précoce améliorée de 80%
+         - Temps de réponse divisé par 3
+       
+       • Économique
+         - ROI moyen de 280% sur 3 ans
+         - Coûts de maintenance réduits de 40%
+         - Productivité des équipes +45%
 
-    5. Perspectives d'avenir
-    • Évolution vers des systèmes auto-apprenants
-    • Intégration avec le Zero Trust
-    • Développement de l'IA explicable`,
+    4. Perspectives futures
+       • Évolution vers l'IA explicable
+       • Intégration avec Zero Trust
+       • Automatisation cognitive avancée
+       • Prédiction des menaces émergentes`,
     image: "https://images.pexels.com/photos/5473337/pexels-photo-5473337.jpeg",
     date: "15 Mars 2024",
-    tags: ["IA", "Cybersécurité", "Machine Learning", "Automatisation", "Threat Detection"],
+    tags: ["IA", "Cybersécurité", "Machine Learning", "Automatisation"],
     url: "https://www.zdnet.fr/actualites/comment-l-ia-transforme-la-cybersecurite-39960994.htm",
     category: "Cybersécurité"
   },
   {
     title: "Architecture Zero Trust : Le nouveau standard de sécurité",
     description: `
-    1. Principes fondamentaux
-    • Vérification continue de chaque accès
-    • Principe du moindre privilège
-    • Micro-segmentation des ressources
-    • Chiffrement systématique
+    1. Fondamentaux du Zero Trust
+       • Principe "Never Trust, Always Verify"
+       • Authentification continue
+       • Segmentation microscopique
+       • Chiffrement de bout en bout
 
-    2. Composants techniques
-    • Identity and Access Management (IAM) :
-      - Authentification multifacteur (MFA)
-      - Single Sign-On (SSO)
-      - Gestion des identités basée sur les rôles
-    
-    • Sécurité réseau :
-      - Micro-segmentation
-      - Inspection SSL/TLS
-      - Contrôle d'accès basé sur le contexte
+    2. Composants essentiels
+       • Gestion des identités
+         - MFA obligatoire
+         - Authentification contextuelle
+         - Gestion granulaire des accès
+         - Surveillance continue
 
-    3. Méthodologie d'implémentation
-    • Phase 1 : Évaluation
-      - Cartographie des ressources
-      - Analyse des flux de données
-      - Identification des utilisateurs
-    
-    • Phase 2 : Conception
-      - Architecture cible
-      - Politiques de sécurité
-      - Plans de migration
-    
-    • Phase 3 : Déploiement
-      - Mise en place progressive
-      - Tests et validation
-      - Formation des équipes
+       • Sécurisation du réseau
+         - Micro-segmentation avancée
+         - Inspection SSL/TLS
+         - Contrôle d'accès dynamique
+         - Isolation des ressources
 
-    4. Résultats quantifiables
-    • Sécurité renforcée :
-      - Surface d'attaque réduite de 60%
-      - Incidents de sécurité diminués de 50%
-    
-    • Conformité améliorée :
-      - RGPD
-      - PCI DSS
-      - ISO 27001
+    3. Résultats concrets
+       • Sécurité
+         - Réduction surface d'attaque 60%
+         - Diminution incidents 50%
+         - Détection intrusions +75%
+       
+       • Performance
+         - Temps accès -40%
+         - Productivité +25%
+         - Coûts maintenance -30%
 
-    5. Retour sur investissement
-    • Réduction des coûts de sécurité de 30%
-    • Productivité améliorée de 25%
-    • Temps de réponse aux incidents divisé par 3`,
+    4. Évolutions futures
+       • IA pour authentification continue
+       • Automatisation des politiques
+       • Intégration cloud native
+       • Adaptation edge computing`,
     image: "https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg",
     date: "1 Mars 2024",
-    tags: ["Zero Trust", "Sécurité", "Architecture", "Identity", "Compliance"],
+    tags: ["Zero Trust", "Sécurité", "Architecture", "Identity"],
     url: "https://www.journaldunet.com/solutions/dsi/1498889-zero-trust-le-nouveau-paradigme-de-la-securite/",
     category: "Sécurité"
   }
