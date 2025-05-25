@@ -16,36 +16,60 @@ export interface Education {
 export const educationData: Education[] = [
   {
     id: 'bts-sio',
-    title: 'BTS SIO - Option SISR',
+    title: 'BTS SIO – Option SISR',
     school: 'IPSSI, Saint-Quentin-en-Yvelines',
-    logo: '/images/logo-jf.webp',
-    period: '2023-2025',
-    description: 'Services Informatiques aux Organisations - Solutions d\'Infrastructure, Systèmes et Réseaux',
+    logo: '/images/ipssi.webp',
+    period: '2024–2026',
+    description: 'Brevet de Technicien Supérieur Services Informatiques aux Organisations, spécialité Solutions d’Infrastructure, Systèmes et Réseaux. Formation orientée administration réseau, cybersécurité et gestion de systèmes d’information.',
     status: 'ongoing',
     skills: [
-      'Administration systèmes',
+      'Administration systèmes (Windows / Linux)',
+      'Gestion de réseaux (Cisco, Mikrotik)',
       'Sécurité des infrastructures',
-      'Virtualisation',
-      'Support technique'
+      'Virtualisation (VMware, Proxmox)',
+      'Support technique et maintenance',
+      'Supervision réseau (GLPI, Centreon)',
+      'Scripts d’automatisation (Bash, PowerShell)'
     ]
   },
   {
-    id: 'bts-snir',
-    title: 'BTS SNIR',
-    school: 'Lycée Vaucanson, Versailles',
-    logo: '/images/logo-jf.webp',
-    period: '2022-2023',
-    description: 'Systèmes Numériques option Informatique et Réseaux',
+    id: 'license-mpc',
+    title: 'Licence Mathématiques - Physique - Chimie (MPC)',
+    school: 'Université de Versailles Saint-Quentin-en-Yvelines (UVSQ)',
+    logo: '/images/UVSQ-logo.webp',
+    period: '2022–2023',
+    description: 'Première année de licence scientifique pluridisciplinaire avec une orientation vers les sciences du numérique. Approche théorique renforcée des mathématiques appliquées et de la physique.',
     status: 'incomplete',
-    reason: 'Réorientation'
+    reason: 'Réorientation vers une formation plus professionnalisante et technique (BTS SIO)'
+  },
+  {
+    id: 'but-rt',
+    title: 'BUT Réseaux & Télécommunications',
+    school: 'IUT de Vélizy – UVSQ',
+    logo: '/images/UVSQ-logo.webp',
+    period: '2021–2022',
+    description: 'Formation axée sur les réseaux informatiques, la téléphonie, la cybersécurité et les communications numériques. ',
+    status: 'incomplete',
+    reason: 'Réorientation vers une formation plus en adéquation avec mes objectifs professionnels'
+  },
+  {
+    id: 'cpge-tsi',
+    title: 'Classe Préparatoire aux Grandes Écoles – TSI',
+    school: 'Lycée Raspail, Paris 14ᵉ',
+    logo: '/images/logo-raspail.webp',
+    period: '2020–2021',
+    description: 'Prépa scientifique post-bac STI2D orientée vers l’ingénierie, les sciences industrielles et les mathématiques. Préparation aux concours d’écoles d’ingénieurs.',
+    status: 'completed',
+    reason: 'Réorientation pour me recentrer sur l’informatique appliquée',
+    mention: 'Assez Bien'
   },
   {
     id: 'bac-sti2d',
-    title: 'Bac STI2D - Option SIN',
+    title: 'Baccalauréat STI2D – Option SIN',
     school: 'Lycée Jules Ferry, Versailles',
     logo: '/images/logo-jf.webp',
-    period: '2021-2023',
-    description: 'Sciences et Technologies de l\'Industrie et du Développement Durable - Systèmes d\'Information et Numérique',
+    period: '2017–2020',
+    description: 'Sciences et Technologies de l’Industrie et du Développement Durable, spécialité Systèmes d’Information et Numérique. Apprentissage des bases de l’électronique, du développement et des systèmes embarqués.',
     status: 'completed',
     mention: 'Bien'
   }

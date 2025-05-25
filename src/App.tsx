@@ -9,6 +9,7 @@ import Skills from './components/sections/Skills';
 import Projects from './components/sections/Projects';
 import TechWatch from './components/sections/TechWatch';
 import Contact from './components/sections/Contact';
+import Education from './components/sections/Education';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Layout>
             <Hero />
             <About />
+            <Education />
             <Skills />
             <Projects />
             <TechWatch />
