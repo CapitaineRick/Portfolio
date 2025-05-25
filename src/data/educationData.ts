@@ -40,16 +40,6 @@ export const educationData: Education[] = [
     reason: 'Réorientation'
   },
   {
-    id: 'bts-sn',
-    title: 'BTS SN',
-    school: 'Lycée Vaucanson, Versailles',
-    logo: 'https://www.lyc-vaucanson-versailles.ac-versailles.fr/sites/lyc-vaucanson-versailles/local/cache-vignettes/L144xH144/siteon0-e0d79.png',
-    period: '2021-2022',
-    description: 'Systèmes Numériques option Électronique et Communication',
-    status: 'incomplete',
-    reason: 'Réorientation'
-  },
-  {
     id: 'bac-sti2d',
     title: 'Bac STI2D - Option SIN',
     school: 'Lycée Jules Ferry, Versailles',
