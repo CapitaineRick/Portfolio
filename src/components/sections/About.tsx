@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Award, Book, Code, Monitor, Server, Shield, Briefcase, GraduationCap, ChevronDown, ChevronUp, User, MapPin, Calendar, Mail, Phone, Globe, FileText } from 'lucide-react';
+import { Award, Book, Code, Monitor, Server, Shield, Briefcase, GraduationCap, ChevronDown, ChevronUp, User, MapPin, Calendar, Mail, Phone, Globe, FileText, ChevronRight } from 'lucide-react';
 import { educationData } from '../../data/educationData';
 
 const About: React.FC = () => {
