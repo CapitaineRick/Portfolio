@@ -53,7 +53,7 @@ export const educationData: Education[] = [
     id: 'bac-sti2d',
     title: 'Bac STI2D - Option SIN',
     school: 'Lycée Jules Ferry, Versailles',
-    logo: '/images/Logo_Lycée_Jules-Ferry__Versailles_.webp',
+    logo: '/public/images/Logo_Lycée_Jules-Ferry__Versailles_.webp',
     period: '2021-2023',
     description: 'Sciences et Technologies de l\'Industrie et du Développement Durable - Systèmes d\'Information et Numérique',
     status: 'completed',
