@@ -1,9 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import { GraduationCap, ChevronDown, ChevronUp, ChevronRight } from 'lucide-react';
+'use client';
+
+import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import { ChevronDown, ChevronUp, ChevronRight } from 'lucide-react';
 import { educationData } from '../../data/educationData';
 
 const Education: React.FC = () => {
-  const [showIncomplete, setShowIncomplete] = React.useState(false);
+  const [showIncomplete, setShowIncomplete] = useState(false);
   const educationRef = useRef<HTMLDivElement>(null);
 
   const completedEducation = educationData.filter(edu => edu.status === 'completed');
@@ -50,11 +53,15 @@ const Education: React.FC = () => {
       } rounded-xl p-6`}>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
-            <img 
-              src={education.logo}
-              alt={education.school}
-              className="w-24 h-auto"
-            />
+            <div className="relative w-24 h-auto">
+              <Image 
+                src={education.logo}
+                alt={education.school}
+                width={96}
+                height={96}
+                className="w-24 h-auto object-contain"
+              />
+            </div>
             <div>
               <h4 className="text-xl font-bold text-gray-900 dark:text-white">{education.title}</h4>
               <p className="text-gray-700 dark:text-gray-400">{education.school}</p>
@@ -120,7 +127,7 @@ const Education: React.FC = () => {
           <div className="relative">
             <div className="absolute left-8 top-0 h-full w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
 
-            {/* Formation en cours */}
+            {/* Formations en cours */}
             {ongoingEducation.map(renderEducation)}
 
             {/* Formations non terminées */}
