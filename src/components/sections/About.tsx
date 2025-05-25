@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Award, Book, Code, Monitor, Server, Shield, Briefcase, GraduationCap, ChevronDown, ChevronUp, User, MapPin, Calendar, Mail, Phone, Globe, FileText } from 'lucide-react';
-import { educationData } from '../data/educationData';
+import { educationData } from '../data/educationData.ts';
 
 const About: React.FC = () => {
   const [showPastEducation, setShowPastEducation] = React.useState(false);
