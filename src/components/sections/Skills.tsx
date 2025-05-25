@@ -69,7 +69,7 @@ const Skills: React.FC = () => {
             Compétences Techniques
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
             Découvrez mes compétences techniques acquises à travers ma formation et mes expériences professionnelles
           </p>
         </div>
@@ -85,14 +85,14 @@ const Skills: React.FC = () => {
             >
               <div className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-8">
+                <div className="relative bg-gray-800 rounded-2xl p-8">
                   <div className="flex items-center gap-4 mb-8">
-                    <div className="p-4 bg-orange-100 dark:bg-orange-900/30 rounded-xl">
-                      <category.icon className="w-8 h-8 text-orange-700 dark:text-orange-500" />
+                    <div className="p-4 bg-orange-900/30 rounded-xl">
+                      <category.icon className="w-8 h-8 text-orange-500" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{category.name}</h3>
-                      <p className="text-gray-700 dark:text-gray-400">
+                      <h3 className="text-2xl font-bold text-white">{category.name}</h3>
+                      <p className="text-gray-400">
                         {category.skills.length} compétences maîtrisées
                       </p>
                     </div>
@@ -105,10 +105,10 @@ const Skills: React.FC = () => {
                         className="relative group transition-all duration-300"
                       >
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-                        <div className="relative bg-white dark:bg-gray-800 rounded-xl p-6 h-full">
+                        <div className="relative bg-gray-800 rounded-xl p-6 h-full">
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-3">
-                              <div className="h-12 w-12 rounded-lg bg-gray-100 dark:bg-gray-700 p-2 flex items-center justify-center">
+                              <div className="h-12 w-12 rounded-lg bg-gray-700 p-2 flex items-center justify-center">
                                 <img 
                                   src={skill.logo} 
                                   alt={skill.name}
@@ -116,10 +116,10 @@ const Skills: React.FC = () => {
                                 />
                               </div>
                               <div>
-                                <h4 className="font-semibold text-gray-900 dark:text-white">{skill.name}</h4>
+                                <h4 className="font-semibold text-white">{skill.name}</h4>
                                 <div className="flex items-center gap-2">
                                   <div className={`h-2 w-2 rounded-full bg-gradient-to-r ${getSkillLevelColor(skill.level)}`} />
-                                  <span className="text-sm text-gray-700 dark:text-gray-400">
+                                  <span className="text-sm text-gray-400">
                                     {getSkillLevelText(skill.level)}
                                   </span>
                                 </div>
@@ -127,18 +127,18 @@ const Skills: React.FC = () => {
                             </div>
                             <button
                               onClick={() => toggleSkillExpansion(skill.name)}
-                              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                              className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
                             >
                               {expandedSkills[skill.name] ? (
-                                <ChevronUp className="w-5 h-5 text-gray-700 dark:text-gray-400" />
+                                <ChevronUp className="w-5 h-5 text-gray-400" />
                               ) : (
-                                <ChevronDown className="w-5 h-5 text-gray-700 dark:text-gray-400" />
+                                <ChevronDown className="w-5 h-5 text-gray-400" />
                               )}
                             </button>
                           </div>
 
                           <div className="mb-4">
-                            <div className="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
                               <div 
                                 className={`h-full rounded-full bg-gradient-to-r ${getSkillLevelColor(skill.level)} transition-all duration-300`}
                                 style={{ width: `${(skill.level / 3) * 100}%` }}
@@ -149,8 +149,8 @@ const Skills: React.FC = () => {
                           <div className={`overflow-hidden transition-all duration-300 ${
                             expandedSkills[skill.name] ? 'max-h-96' : 'max-h-0'
                           }`}>
-                            <div className="pt-4 border-t border-gray-300 dark:border-gray-700">
-                              <p className="text-sm text-gray-700 dark:text-gray-400">
+                            <div className="pt-4 border-t border-gray-700">
+                              <p className="text-sm text-gray-400">
                                 {skill.description}
                               </p>
                             </div>
