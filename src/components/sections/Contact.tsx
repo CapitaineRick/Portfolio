@@ -59,7 +59,7 @@ const Contact: React.FC = () => {
             Contact
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-800 dark:text-gray-300 max-w-3xl mx-auto font-medium">
+          <p className="text-lg text-gray-300 max-w-3xl mx-auto font-medium">
             N'hésitez pas à me contacter pour toute opportunité professionnelle ou collaboration technique
           </p>
         </div>
@@ -72,15 +72,15 @@ const Contact: React.FC = () => {
             <div className="md:w-1/2">
               <div className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-8">
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Envoyez-moi un message</h3>
-                  <p className="mb-6 text-gray-700 dark:text-gray-300">
+                <div className="relative bg-gray-800 rounded-2xl p-8">
+                  <h3 className="text-2xl font-semibold mb-4 text-white">Envoyez-moi un message</h3>
+                  <p className="mb-6 text-gray-300">
                     Je suis à l'écoute de vos propositions de stage, d'alternance ou de collaboration technique.
                   </p>
                   
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
                         Nom
                       </label>
                       <input
@@ -90,16 +90,16 @@ const Contact: React.FC = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl
-                                bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white
+                        className="w-full p-3 border border-gray-600 rounded-xl
+                                bg-gray-700 text-white
                                 focus:ring-2 focus:ring-orange-500 focus:border-transparent
-                                placeholder-gray-500 dark:placeholder-gray-400
+                                placeholder-gray-400
                                 transition-all duration-300"
                       />
                     </div>
                     
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
                         Email
                       </label>
                       <input
@@ -109,16 +109,16 @@ const Contact: React.FC = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl
-                                bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white
+                        className="w-full p-3 border border-gray-600 rounded-xl
+                                bg-gray-700 text-white
                                 focus:ring-2 focus:ring-orange-500 focus:border-transparent
-                                placeholder-gray-500 dark:placeholder-gray-400
+                                placeholder-gray-400
                                 transition-all duration-300"
                       />
                     </div>
                     
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
                         Message
                       </label>
                       <textarea
@@ -128,10 +128,10 @@ const Contact: React.FC = () => {
                         onChange={handleChange}
                         required
                         rows={5}
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl
-                                bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white
+                        className="w-full p-3 border border-gray-600 rounded-xl
+                                bg-gray-700 text-white
                                 focus:ring-2 focus:ring-orange-500 focus:border-transparent
-                                placeholder-gray-500 dark:placeholder-gray-400
+                                placeholder-gray-400
                                 transition-all duration-300"
                       />
                     </div>
@@ -166,22 +166,22 @@ const Contact: React.FC = () => {
             <div className="md:w-1/2">
               <div className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-8">
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Informations de contact</h3>
-                  <p className="mb-6 text-gray-700 dark:text-gray-300">
+                <div className="relative bg-gray-800 rounded-2xl p-8">
+                  <h3 className="text-2xl font-semibold mb-4 text-white">Informations de contact</h3>
+                  <p className="mb-6 text-gray-300">
                     Vous pouvez également me contacter directement via les coordonnées ci-dessous.
                   </p>
                   
                   <div className="space-y-6">
                     <div className="flex items-start">
-                      <div className="bg-orange-100 dark:bg-orange-900/30 p-3 rounded-xl mr-4">
-                        <Mail className="text-orange-700 dark:text-orange-500" size={24} />
+                      <div className="bg-orange-900/30 p-3 rounded-xl mr-4">
+                        <Mail className="text-orange-500" size={24} />
                       </div>
                       <div>
-                        <h4 className="text-lg font-medium text-gray-900 dark:text-white">Email</h4>
+                        <h4 className="text-lg font-medium text-white">Email</h4>
                         <a 
                           href="mailto:sebastien.78.fernandes@outlook.fr"
-                          className="text-orange-700 dark:text-orange-500 hover:underline"
+                          className="text-orange-400 hover:underline"
                         >
                           sebastien.78.fernandes@outlook.fr
                         </a>
@@ -189,16 +189,16 @@ const Contact: React.FC = () => {
                     </div>
                     
                     <div className="flex items-start">
-                      <div className="bg-orange-100 dark:bg-orange-900/30 p-3 rounded-xl mr-4">
-                        <Linkedin className="text-orange-700 dark:text-orange-500" size={24} />
+                      <div className="bg-orange-900/30 p-3 rounded-xl mr-4">
+                        <Linkedin className="text-orange-500" size={24} />
                       </div>
                       <div>
-                        <h4 className="text-lg font-medium text-gray-900 dark:text-white">LinkedIn</h4>
+                        <h4 className="text-lg font-medium text-white">LinkedIn</h4>
                         <a 
                           href="https://www.linkedin.com/in/s%C3%A9bastien-fernandes-566008232/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-orange-700 dark:text-orange-500 hover:underline"
+                          className="text-orange-400 hover:underline"
                         >
                           linkedin.com/in/sébastien-fernandes
                         </a>
@@ -206,11 +206,11 @@ const Contact: React.FC = () => {
                     </div>
                     
                     <div className="flex items-start">
-                      <div className="bg-orange-100 dark:bg-orange-900/30 p-3 rounded-xl mr-4">
-                        <File className="text-orange-700 dark:text-orange-500" size={24} />
+                      <div className="bg-orange-900/30 p-3 rounded-xl mr-4">
+                        <File className="text-orange-500" size={24} />
                       </div>
                       <div>
-                        <h4 className="text-lg font-medium text-gray-900 dark:text-white">Mon CV</h4>
+                        <h4 className="text-lg font-medium text-white">Mon CV</h4>
                         <button className="mt-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl hover:opacity-90 transition-all duration-300">
                           Télécharger mon CV
                         </button>

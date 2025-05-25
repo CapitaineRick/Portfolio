@@ -32,7 +32,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     if (project.pdfUrl) {
       const link = document.createElement('a');
       link.href = project.pdfUrl;
-      // Extraire le nom du fichier à partir de l'URL
       const fileName = project.pdfUrl.split('/').pop() || `${project.title}.pdf`;
       link.download = fileName;
       document.body.appendChild(link);
@@ -59,7 +58,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
         style={style}
       >
         <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
-        <div className="relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden">
+        <div className="relative bg-gray-800 rounded-2xl overflow-hidden">
           {/* Project Type Badge */}
           <div className="absolute top-4 right-4 z-10">
             <div className={`
@@ -107,10 +106,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
           
           {/* Content Section */}
           <div className="p-6">
-            <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-orange-500 transition-colors">
+            <h3 className="text-xl font-bold mb-3 text-white group-hover:text-orange-500 transition-colors">
               {project.title}
             </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6 line-clamp-3">
+            <p className="text-gray-300 mb-6 line-clamp-3">
               {project.description}
             </p>
             
@@ -120,8 +119,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   onClick={() => setShowFullscreen(true)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-xl 
                     ${project.pdfUrl 
-                      ? 'bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/50'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-600 cursor-not-allowed'
+                      ? 'bg-orange-900/30 text-orange-400 hover:bg-orange-900/50'
+                      : 'bg-gray-700 text-gray-600 cursor-not-allowed'
                     } font-medium transition-all duration-300 group/btn`}
                   disabled={!project.pdfUrl}
                   title={project.pdfUrl ? 'Voir le document' : 'Documentation non disponible'}
@@ -137,7 +136,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-500 hover:text-orange-500 transition-colors"
+                  className="p-2 rounded-xl bg-gray-700 text-gray-400 hover:text-orange-500 transition-colors"
                 >
                   <ExternalLink size={16} />
                 </a>
@@ -150,22 +149,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       {/* Fullscreen Documentation Modal */}
       {showFullscreen && project.pdfUrl && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-auto p-6">
+          <div className="bg-gray-800 rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-auto p-6">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{project.title}</h3>
+              <h3 className="text-2xl font-bold text-white">{project.title}</h3>
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleDownload}
-                  className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 
-                           hover:bg-orange-100 dark:hover:bg-orange-900/50 transition-colors"
+                  className="p-2 rounded-xl bg-orange-900/30 text-orange-400 
+                           hover:bg-orange-900/50 transition-colors"
                   title="Télécharger le PDF"
                 >
                   <Download size={20} />
                 </button>
                 <button
                   onClick={() => setShowFullscreen(false)}
-                  className="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
-                           hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  className="p-2 rounded-xl bg-gray-700 text-gray-300 
+                           hover:bg-gray-600 transition-colors"
                 >
                   <X size={20} />
                 </button>
@@ -174,7 +173,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
             {pdfError ? (
               <div className="flex flex-col items-center justify-center p-8 text-center">
-                <div className="text-red-500 dark:text-red-400 mb-4">{pdfError}</div>
+                <div className="text-red-400 mb-4">{pdfError}</div>
                 <button
                   onClick={handleDownload}
                   className="px-4 py-2 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors"
@@ -189,18 +188,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     <button
                       onClick={() => setPageNumber(Math.max(1, pageNumber - 1))}
                       disabled={pageNumber <= 1}
-                      className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
+                      className="p-2 rounded-xl bg-orange-900/30 text-orange-400
                                disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       <ChevronLeft size={20} />
                     </button>
-                    <span className="text-gray-700 dark:text-gray-300">
+                    <span className="text-gray-300">
                       Page {pageNumber} sur {numPages}
                     </span>
                     <button
                       onClick={() => setPageNumber(Math.min(numPages || 1, pageNumber + 1))}
                       disabled={pageNumber >= (numPages || 1)}
-                      className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400
+                      className="p-2 rounded-xl bg-orange-900/30 text-orange-400
                                disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       <ChevronRight size={20} />
@@ -213,16 +212,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   <div className="flex items-center gap-4">
                     <button 
                       onClick={() => setScale(Math.max(0.5, scale - 0.1))}
-                      className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg"
+                      className="px-3 py-1 bg-gray-700 text-gray-300 rounded-lg"
                     >
                       -
                     </button>
-                    <span className="text-gray-700 dark:text-gray-300 min-w-[60px] text-center">
+                    <span className="text-gray-300 min-w-[60px] text-center">
                       {Math.round(scale * 100)}%
                     </span>
                     <button 
                       onClick={() => setScale(Math.min(2.0, scale + 0.1))}
-                      className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg"
+                      className="px-3 py-1 bg-gray-700 text-gray-300 rounded-lg"
                     >
                       +
                     </button>
@@ -247,7 +246,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                       className="mx-auto"
                       renderTextLayer={true}
                       renderAnnotationLayer={true}
-                      height={800} // Increased height for better visibility
+                      height={800}
                     />
                   </Document>
                 </div>

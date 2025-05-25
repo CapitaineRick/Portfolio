@@ -37,7 +37,7 @@ const Education: React.FC = () => {
 
   const renderEducation = (education: typeof educationData[0]) => (
     <div className="relative pl-16 pb-8" key={education.id}>
-      <div className={`absolute left-6 top-3 w-4 h-4 rounded-full border-4 border-white dark:border-gray-800 ${
+      <div className={`absolute left-6 top-3 w-4 h-4 rounded-full border-4 border-gray-800 ${
         education.status === 'completed' 
           ? 'bg-green-500' 
           : education.status === 'ongoing'
@@ -46,10 +46,10 @@ const Education: React.FC = () => {
       }`}></div>
       <div className={`${
         education.status === 'completed'
-          ? 'bg-green-50 dark:bg-green-900/20'
+          ? 'bg-green-900/20'
           : education.status === 'ongoing'
-            ? 'bg-blue-50 dark:bg-blue-900/20'
-            : 'bg-red-50 dark:bg-red-900/20'
+            ? 'bg-blue-900/20'
+            : 'bg-red-900/20'
       } rounded-xl p-6`}>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
@@ -63,22 +63,22 @@ const Education: React.FC = () => {
               />
             </div>
             <div>
-              <h4 className="text-xl font-bold text-gray-900 dark:text-white">{education.title}</h4>
-              <p className="text-gray-700 dark:text-gray-400">{education.school}</p>
+              <h4 className="text-xl font-bold text-white">{education.title}</h4>
+              <p className="text-gray-400">{education.school}</p>
             </div>
           </div>
           <span className={`px-4 py-2 rounded-full text-sm ${
             education.status === 'completed'
-              ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+              ? 'bg-green-900/30 text-green-400'
               : education.status === 'ongoing'
-                ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400'
-                : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
+                ? 'bg-blue-900/30 text-blue-400'
+                : 'bg-red-900/30 text-red-400'
           }`}>
             {education.period}
           </span>
         </div>
         <div className="space-y-4">
-          <p className="text-sm text-gray-700 dark:text-gray-400">
+          <p className="text-sm text-gray-400">
             {education.description}
           </p>
           {education.skills && (
@@ -87,21 +87,21 @@ const Education: React.FC = () => {
                 <div key={index} className="flex items-center gap-2">
                   <ChevronRight className={`w-4 h-4 ${
                     education.status === 'completed'
-                      ? 'text-green-700 dark:text-green-500'
-                      : 'text-blue-700 dark:text-blue-500'
+                      ? 'text-green-500'
+                      : 'text-blue-500'
                   }`} />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">{skill}</span>
+                  <span className="text-sm text-gray-300">{skill}</span>
                 </div>
               ))}
             </div>
           )}
           {education.mention && (
-            <div className="inline-flex px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm">
+            <div className="inline-flex px-4 py-2 bg-green-900/30 text-green-400 rounded-full text-sm">
               Mention {education.mention}
             </div>
           )}
           {education.reason && (
-            <div className="inline-flex px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm">
+            <div className="inline-flex px-4 py-2 bg-red-900/30 text-red-400 rounded-full text-sm">
               Non validé - {education.reason}
             </div>
           )}
@@ -134,7 +134,7 @@ const Education: React.FC = () => {
             <div className="relative pl-16">
               <button
                 onClick={() => setShowIncomplete(!showIncomplete)}
-                className="flex items-center gap-2 text-gray-700 dark:text-gray-400 hover:text-orange-500 transition-colors"
+                className="flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-colors"
               >
                 {showIncomplete ? (
                   <>
