@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { GraduationCap, ChevronDown, ChevronUp, ChevronRight } from 'lucide-react';
 import { educationData } from '../../data/educationData';
 
 const Education: React.FC = () => {
-  const [showIncomplete, setShowIncomplete] = useState(false);
+  const [showIncomplete, setShowIncomplete] = React.useState(false);
   const educationRef = useRef<HTMLDivElement>(null);
 
   const completedEducation = educationData.filter(edu => edu.status === 'completed');
