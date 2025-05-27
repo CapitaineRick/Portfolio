@@ -57,7 +57,8 @@ const Skills: React.FC = () => {
     switch (level) {
       case 3: return 'Expert';
       case 2: return 'Intermédiaire';
-      default: return 'Débutant';
+      case 1: return 'Débutant';
+      default: return 'En formation';
     }
   };
 

@@ -6,6 +6,36 @@ export const skillsData = [
     icon: Wrench,
     skills: [
       {
+        name: 'Windows Server',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/2048px-Windows_logo_-_2012.svg.png',
+        level: 2,
+        description: 'Configuration et maintenance'
+      },
+      {
+        name: 'Windows 11',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/2048px-Windows_logo_-_2012.svg.png',
+        level: 2,
+        description: 'Configuration et maintenance'
+      },{
+        name: 'Windows 10',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/2048px-Windows_logo_-_2012.svg.png',
+        level: 2,
+        description: 'Configuration et maintenance'
+      },
+      {
+        name: 'Linux',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/1200px-Tux.svg.png',
+        level: 2,
+        description: 'Administration système'
+      },
+ 
+      {
+        name: 'RDP',
+        logo: 'https://cdn-icons-png.flaticon.com/512/603/603201.png',
+        level: 2,
+        description: 'Connexion distante sécurisée'
+      },
+      {
         name: 'GLPI',
         logo: 'https://www.sparks-formation.com/wp-content/uploads/2020/07/logo-glpi.png',
         level: 1,
@@ -14,32 +44,8 @@ export const skillsData = [
       {
         name: 'Active Directory',
         logo: 'https://cdn-icons-png.flaticon.com/512/2784/2784487.png',
-        level: 3,
+        level: 1,
         description: 'Administration des utilisateurs et GPO'
-      },
-      {
-        name: 'Windows Server',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/2048px-Windows_logo_-_2012.svg.png',
-        level: 3,
-        description: 'Configuration et maintenance'
-      },
-      {
-        name: 'Linux',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/1200px-Tux.svg.png',
-        level: 3,
-        description: 'Administration système'
-      },
-      {
-        name: 'VirtualBox',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/0/00/Virtualbox_logo.png',
-        level: 3,
-        description: 'Virtualisation locale'
-      },
-      {
-        name: 'RDP',
-        logo: 'https://cdn-icons-png.flaticon.com/512/603/603201.png',
-        level: 2,
-        description: 'Connexion distante sécurisée'
       }
     ]
   },
@@ -50,14 +56,8 @@ export const skillsData = [
       {
         name: 'Proxmox',
         logo: 'https://www.proxmox.com/images/proxmox/Proxmox_logo_standard_hex_400px.png',
-        level: 3,
+        level: 2,
         description: 'Virtualisation et clustering'
-      },
-      {
-        name: 'pfSense',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/PfSense_logo.png/1200px-PfSense_logo.png',
-        level: 3,
-        description: 'Pare-feu et routage'
       },
       {
         name: 'Cisco',
@@ -72,6 +72,12 @@ export const skillsData = [
         description: 'Virtualisation'
       },
       {
+        name: 'VirtualBox',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/0/00/Virtualbox_logo.png',
+        level: 2,
+        description: 'Virtualisation'
+      },
+      {
         name: 'DNS',
         logo: 'https://cdn-icons-png.flaticon.com/512/2620/2620427.png',
         level: 2,
@@ -82,7 +88,13 @@ export const skillsData = [
         logo: 'https://cdn-icons-png.flaticon.com/512/9354/9354390.png',
         level: 2,
         description: 'Attribution automatique des adresses IP'
-      }
+      },
+      {
+        name: 'pfSense',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/PfSense_logo.png/1200px-PfSense_logo.png',
+        level: 1,
+        description: 'Pare-feu et routage'
+      },
     ]
   },
   {

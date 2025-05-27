@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Send, Mail, Linkedin, File } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const contactRef = useRef<HTMLDivElement>(null);
@@ -15,19 +16,27 @@ const Contact: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulate form submission
-    setTimeout(() => {
-      setFormStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-      
-      // Reset status after 3 seconds
-      setTimeout(() => {
-        setFormStatus('idle');
-      }, 3000);
-    }, 1000);
-  };
+
+
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  
+  emailjs.send(
+    'service_krdwbss',
+    'template_uvldull',
+    formData,
+    'CFXC5Rk1dCMIux3BE'
+  ).then(() => {
+    setFormStatus('success');
+    setFormData({ name: '', email: '', message: '' });
+    setTimeout(() => setFormStatus('idle'), 3000);
+  }).catch(() => {
+    setFormStatus('error');
+    setTimeout(() => setFormStatus('idle'), 3000);
+  });
+};
+
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -211,9 +220,14 @@ const Contact: React.FC = () => {
                       </div>
                       <div>
                         <h4 className="text-lg font-medium text-white">Mon CV</h4>
-                        <button className="mt-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl hover:opacity-90 transition-all duration-300">
-                          Télécharger mon CV
-                        </button>
+                  <a
+                    href="/public/docs/fernandes-sebastien-cv.pdf"
+                    download
+                    className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                  >
+                    
+                    Télécharger mon CV
+                  </a>
                       </div>
                     </div>
                   </div>
