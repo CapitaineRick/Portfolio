@@ -1,39 +1,54 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { projectsData } from '../../data/projectsData';
 import ProjectCard from '../ui/ProjectCard';
 
 const Projects: React.FC = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
-          
-          const cards = entry.target.querySelectorAll('.project-card');
-          cards.forEach((card, index) => {
-            setTimeout(() => {
-              card.classList.add('opacity-100', 'scale-100');
-              card.classList.remove('opacity-0', 'scale-95');
-            }, 50 * index);
-          });
-        }
-      },
-      { threshold: 0.1 }
+  const allProjects = [...projectsData.enterprise, ...projectsData.school];
+  const tags = Array.from(new Set(allProjects.flatMap(project => project.tags || [])));
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags(prev =>
+      prev.includes(tag)
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
     );
+  };
 
-    if (projectsRef.current) {
-      observer.observe(projectsRef.current);
-    }
+  // Réinitialiser à la page 1 à chaque changement de filtre
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedTags]);
 
-    return () => {
-      if (projectsRef.current) {
-        observer.unobserve(projectsRef.current);
-      }
-    };
-  }, []);
+  const filteredProjects = selectedTags.length === 0
+    ? allProjects
+    : allProjects.filter(project =>
+        project.tags?.some(tag => selectedTags.includes(tag))
+      );
+
+  const projectsPerPage = 9;
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+  const currentProjects = filteredProjects.slice(
+    (currentPage - 1) * projectsPerPage,
+    currentPage * projectsPerPage
+  );
+
+useEffect(() => {
+  const cards = document.querySelectorAll('.project-card');
+  cards.forEach((card, index) => {
+    card.classList.remove('opacity-100', 'scale-100');
+    card.classList.add('opacity-0', 'scale-95');
+
+    setTimeout(() => {
+      card.classList.add('opacity-100', 'scale-100');
+      card.classList.remove('opacity-0', 'scale-95');
+    }, 50 * index);
+  });
+}, [currentProjects]);
+
 
   return (
     <section id="projects" className="py-16 flex items-center justify-center relative overflow-hidden">
@@ -48,27 +63,60 @@ const Projects: React.FC = () => {
           </p>
         </div>
 
-        <div 
-          ref={projectsRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300 opacity-0 translate-y-10"
-        >
-          {projectsData.enterprise.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              isEnterprise={true}
-              className="project-card opacity-0 scale-95 transition-all duration-300"
-            />
+        {/* Filtres par tags */}
+        <div className="flex flex-wrap justify-center gap-3 mb-10">
+          {tags.map(tag => (
+            <button
+              key={tag}
+              onClick={() => toggleTag(tag)}
+              className={`px-4 py-2 rounded-full border transition duration-200 ${
+                selectedTags.includes(tag)
+                  ? 'bg-orange-500 text-white border-orange-500'
+                  : 'bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700'
+              }`}
+            >
+              {tag}
+            </button>
           ))}
-          {projectsData.school.map((project) => (
+        </div>
+
+        {/* Projets affichés */}
+        <div
+          ref={projectsRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+>
+          {currentProjects.map((project) => (
             <ProjectCard
               key={project.id}
               project={project}
-              isEnterprise={false}
+              isEnterprise={projectsData.enterprise.includes(project)}
               className="project-card opacity-0 scale-95 transition-all duration-300"
             />
           ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="mt-10 flex justify-center items-center gap-4">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 rounded bg-gray-700 text-white disabled:opacity-40"
+            >
+              Précédent
+            </button>
+            <span className="text-gray-300">
+              Page {currentPage} / {totalPages}
+            </span>
+            <button
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 rounded bg-gray-700 text-white disabled:opacity-40"
+            >
+              Suivant
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

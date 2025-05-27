@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Server, ArrowRight, Terminal, Shield, Network } from 'lucide-react';
 
+
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
 

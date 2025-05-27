@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { educationData } from "../../data/educationData";
 
+
 const About: React.FC = () => {
   const [showPastEducation, setShowPastEducation] = React.useState(false);
   const [showCertifications, setShowCertifications] = React.useState(false);
