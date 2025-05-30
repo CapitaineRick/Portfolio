@@ -31,7 +31,7 @@ export const projectsData = {
       title: 'Proxmox',
       description: 'Installation et configuration de Proxmox VE',
       image: '/images/proxmox-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/Install_Proxmox.pdf',
       tags: ['Hyperviseur', 'Virtualisation', 'Baremetal', 'Clustering']
     },
     {
@@ -39,15 +39,23 @@ export const projectsData = {
       title: 'Docker',
       description: 'Installation et configuration de Docker',
       image: '/images/Docker-Logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/Install_Docker.pdf',
       tags: ['Docker', 'Linux', 'Conteneurisation', 'DevOps']
+    },
+    {
+      id: 'Windows  server 2025',
+      title: 'Windows Server 2025',
+      description: 'Installation et configuration Windows server 2025',
+      image: '/images/win10-logo.webp',
+      pdfUrl: '/docs/Install_Win_S2025.pdf',
+      tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
     },
     {
       id: 'Windows 10',
       title: 'Windows 10',
       description: 'Installation et configuration Windows 10',
       image: '/images/win10-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/Install_Win10.pdf',
       tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
     }, 
     {
@@ -55,7 +63,7 @@ export const projectsData = {
       title: 'Windows 11',
       description: 'Installation et configuration Windows 11',
       image: '/images/win11-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/Install_Win11.pdf',
       tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
     },
     {
@@ -63,7 +71,7 @@ export const projectsData = {
       title: 'Ubuntu Linux',
       description: 'Installation et configuration de Ubuntu Linux',
       image: '/images/Ubuntu-Logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/Install_Ubuntu.pdf',
       tags: ['OS', 'Linux', 'Serveur', 'Administration système']
     },
     {
@@ -79,7 +87,7 @@ export const projectsData = {
       title: 'Kali Linux',
       description: 'Installation et configuration de Kali Linux',
       image: '/images/kali-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/Install_Kali.pdf',
       tags: ['Linux', 'Cybersécurité', 'Hacking', 'Pentesting', 'OS']
     },
     {
@@ -95,7 +103,7 @@ export const projectsData = {
       title: 'Debian 12 Linux',
       description: 'Installation et configuration de Debian 12',
       image: '/images/debian12-logo.webp',
-      pdfUrl: '',
+      pdfUrl: '/docs/Install-debian12.pdf',
       tags: ['Linux', 'OS', 'Serveur', 'Administration système']
     },
     {
