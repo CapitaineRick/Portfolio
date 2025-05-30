@@ -6,7 +6,9 @@ interface ProjectCardProps {
   tags: string[];
   icon?: React.ReactNode;
   disabled?: boolean;
+  url?: string; // ← nouveau
 }
+
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,

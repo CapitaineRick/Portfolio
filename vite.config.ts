@@ -11,5 +11,13 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
-  }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        // nécessaire pour les workers dans certaines configs
+        manualChunks: undefined,
+      },
+    },
+  },
 });
