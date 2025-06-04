@@ -6,7 +6,7 @@ export const projectsData = {
       description: 'Stage de première année, support utilisateur, infographie du parc et administration système',
       image: '/images/knds-logo.webp',
       pdfUrl: '',
-      tags: ['Netbox', 'VoIP/ToIP', 'AVAYA', 'Support N1/2']
+      tags: ['Gestion de parc', 'VoIP/ToIP', 'AVAYA', 'Support']
     },
   ],
   school: [
@@ -32,7 +32,7 @@ export const projectsData = {
       description: 'Installation et configuration de Proxmox VE',
       image: '/images/proxmox-logo.webp',
       pdfUrl: '/docs/Install_Proxmox.pdf',
-      tags: ['Hyperviseur', 'Virtualisation', 'Baremetal', 'Clustering']
+      tags: ['Hyperviseur', 'Virtualisation', 'Clustering']
     },
     {
       id: 'Docker',
@@ -40,7 +40,7 @@ export const projectsData = {
       description: 'Installation et configuration de Docker',
       image: '/images/Docker-Logo.webp',
       pdfUrl: '/docs/Install_Docker.pdf',
-      tags: ['Docker', 'Linux', 'Conteneurisation', 'DevOps']
+      tags: ['Docker', 'Linux', 'Conteneurisation']
     },
     {
       id: 'Windows  server 2025',
@@ -80,7 +80,7 @@ export const projectsData = {
       description: 'Installation et configuration de HAproxy',
       image: '/images/haproxy-logo.webp',
       pdfUrl: '/docs/installation-haproxy.pdf',
-      tags: ['Proxy', 'Reverse-proxy', 'Haute Disponibilité', 'Load Balancing', 'Web']
+      tags: ['Haute Disponibilité', 'Load Balancing']
     },
     {
       id: 'Kali',
@@ -112,7 +112,7 @@ export const projectsData = {
       description: 'Installation et configuration GLPI',
       image: '/images/logo-glpi.webp',
       pdfUrl: '',
-      tags: ['GLPI', 'Support', 'Ticketing', 'Inventaire', 'ITSM']
+      tags: ['Support', 'Inventaire']
     },
     {
       id: 'monitoring',
@@ -120,7 +120,7 @@ export const projectsData = {
       description: 'Installation et configuration Zabbix',
       image: '/images/Zabbix_logo.webp',
       pdfUrl: '',
-      tags: ['Monitoring', 'Surveillance', 'Alertes', 'Administration système']
+      tags: ['Monitoring', 'Administration système']
     },
     {
       id: 'Apache2',
@@ -128,7 +128,7 @@ export const projectsData = {
       description: 'Installation et configuration de Apache2 et module',
       image: '/images/apache-logo.webp',
       pdfUrl: '/docs/Install_Apache2.pdf',
-      tags: ['Proxy', 'Reverse-proxy', 'Haute Disponibilité', 'Load Balancing', 'Web','WAF']
+      tags: ['Haute Disponibilité', 'Load Balancing', 'Web','WAF']
     },
   ]
 };
