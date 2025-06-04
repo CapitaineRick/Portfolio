@@ -6,25 +6,25 @@ export const projectsData = {
       description: 'Stage de première année, support utilisateur, infographie du parc et administration système',
       image: '/images/knds-logo.webp',
       pdfUrl: '',
-      tags: ['Netbox', 'VoIP/ToIP', 'AVAYA', 'Support utilisateur', 'Active Directory']
+      tags: ['Netbox', 'VoIP/ToIP', 'AVAYA', 'Support N1/2']
     },
-    {
-      id: 'knds-details',
-      title: 'Stage KNDS - Versailles',
-      description: 'Support utilisateur niveau 1 et 2, gestion du parc informatique, administration système et réseau',
-      image: '/images/knds-logo.webp',
-      pdfUrl: '',
-      tags: ['Support N1/N2', 'Gestion de parc', 'Active Directory', 'AVAYA', 'VoIP/ToIP']
-    }
   ],
   school: [
-    {
-      id: 'pfsense',
-      title: 'pfSense',
-      description: 'Installation et configuration de pfSense',
-      image: '/images/pfsense-logo.webp',
-      pdfUrl: '',
-      tags: ['Firewall', 'Réseau', 'Sécurité', 'VPN', 'Routage']
+      {
+      id: 'ap1',
+      title: 'AP-1',
+      description: "Création de l'entreprise revive",
+      image: '',
+      pdfUrl: '/docs/AP2.pdf',
+      tags: []
+    },
+      {
+      id: 'ap2',
+      title: 'AP-2',
+      description: 'Problématique de la M2L',
+      image: '',
+      pdfUrl: '/docs/AP2.pdf',
+      tags: ['Windows', 'Active Directory', 'Déploiement logiciel']
     },
     {
       id: 'Proxmox',
@@ -46,7 +46,7 @@ export const projectsData = {
       id: 'Windows  server 2025',
       title: 'Windows Server 2025',
       description: 'Installation et configuration Windows server 2025',
-      image: '/images/win10-logo.webp',
+      image: '/images/winS25-logo.webp',
       pdfUrl: '/docs/Install_Win_S2025.pdf',
       tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
     },
@@ -123,28 +123,12 @@ export const projectsData = {
       tags: ['Monitoring', 'Surveillance', 'Alertes', 'Administration système']
     },
     {
-      id: 'projet-reseau',
-      title: 'Projet Réseau',
-      description: 'Déploiement du réseau informatique d\'une petite entreprise',
-      image: '/images/network-project.webp',
-      pdfUrl: '',
-      tags: ['Réseau', 'Routage', 'VLAN', 'Switching', 'Firewall']
+      id: 'Apache2',
+      title: 'Apache2',
+      description: 'Installation et configuration de Apache2 et module',
+      image: '/images/apache-logo.webp',
+      pdfUrl: '/docs/Install_Apache2.pdf',
+      tags: ['Proxy', 'Reverse-proxy', 'Haute Disponibilité', 'Load Balancing', 'Web','WAF']
     },
-    {
-      id: 'projet-web',
-      title: 'Projet Web',
-      description: 'Création d\'un site Web en anglais (HTML, CSS)',
-      image: '/images/web-project.webp',
-      pdfUrl: '',
-      tags: ['HTML', 'CSS', 'Web', 'Développement']
-    },
-    {
-      id: 'projet-cybersec',
-      title: 'Projets Cybersécurité',
-      description: 'Parsing de protocoles réseaux avec Python et Scapy',
-      image: '/images/cybersec-project.webp',
-      pdfUrl: '',
-      tags: ['Python', 'Scapy', 'Cybersécurité', 'Réseau', 'Interception']
-    }
   ]
 };

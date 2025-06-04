@@ -101,6 +101,10 @@ const Education: React.FC = () => {
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-orange-500" />
+                      <span>Culture Economique Juridique et Managérial </span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-orange-500" />
                       <span>Anglais technique</span>
                     </li>
                     <li className="flex items-center gap-2">
@@ -127,7 +131,7 @@ const Education: React.FC = () => {
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-orange-500" />
-                      <span>120 crédits ECTS</span>
+                      <span>120 crédits ECTS (60/an)</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-orange-500" />
@@ -264,7 +268,7 @@ const Education: React.FC = () => {
                     <div className="grid grid-cols-1 gap-2">
                       <div className="flex items-center gap-2 text-sm text-gray-300">
                         <ChevronRight className="w-4 h-4 text-orange-500" />
-                        <span>Administrateur systèmes et réseaux</span>
+                        <span>Administrateur réseaux</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-gray-300">
                         <ChevronRight className="w-4 h-4 text-orange-500" />

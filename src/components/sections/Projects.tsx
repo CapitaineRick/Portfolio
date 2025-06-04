@@ -7,8 +7,26 @@ const Projects: React.FC = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const allProjects = [...projectsData.enterprise, ...projectsData.school];
-  const tags = Array.from(new Set(allProjects.flatMap(project => project.tags || [])));
+  // Injecte les tags "Entreprise" et "Ecole" sans modifier la source
+  const enterpriseProjects = projectsData.enterprise.map(p => ({
+    ...p,
+    tags: [...(p.tags || []), 'Entreprise'],
+  }));
+
+  const schoolProjects = projectsData.school.map(p => ({
+    ...p,
+    tags: [...(p.tags || []), 'Ecole'],
+  }));
+
+  const allProjects = [...enterpriseProjects, ...schoolProjects];
+
+  // Priorité : Entreprise, Ecole, puis les autres en ordre alphabétique
+  const priorityTags = ['Entreprise', 'Ecole'];
+  const otherTags = Array.from(
+    new Set(allProjects.flatMap(project => project.tags || []))
+  ).filter(tag => !priorityTags.includes(tag)).sort();
+
+  const tags = [...priorityTags, ...otherTags];
 
   const toggleTag = (tag: string) => {
     setSelectedTags(prev =>
@@ -18,7 +36,6 @@ const Projects: React.FC = () => {
     );
   };
 
-  // Réinitialiser à la page 1 à chaque changement de filtre
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedTags]);
@@ -36,19 +53,18 @@ const Projects: React.FC = () => {
     currentPage * projectsPerPage
   );
 
-useEffect(() => {
-  const cards = document.querySelectorAll('.project-card');
-  cards.forEach((card, index) => {
-    card.classList.remove('opacity-100', 'scale-100');
-    card.classList.add('opacity-0', 'scale-95');
+  useEffect(() => {
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach((card, index) => {
+      card.classList.remove('opacity-100', 'scale-100');
+      card.classList.add('opacity-0', 'scale-95');
 
-    setTimeout(() => {
-      card.classList.add('opacity-100', 'scale-100');
-      card.classList.remove('opacity-0', 'scale-95');
-    }, 50 * index);
-  });
-}, [currentProjects]);
-
+      setTimeout(() => {
+        card.classList.add('opacity-100', 'scale-100');
+        card.classList.remove('opacity-0', 'scale-95');
+      }, 50 * index);
+    });
+  }, [currentProjects]);
 
   return (
     <section id="projects" className="py-16 flex items-center justify-center relative overflow-hidden">
@@ -84,12 +100,12 @@ useEffect(() => {
         <div
           ref={projectsRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
->
+        >
           {currentProjects.map((project) => (
             <ProjectCard
               key={project.id}
               project={project}
-              isEnterprise={projectsData.enterprise.includes(project)}
+              isEnterprise={project.tags?.includes('Entreprise')}
               className="project-card opacity-0 scale-95 transition-all duration-300"
             />
           ))}

@@ -6,9 +6,8 @@ interface ProjectCardProps {
   tags: string[];
   icon?: React.ReactNode;
   disabled?: boolean;
-  url?: string; // ← nouveau
+  url?: string; // ← lien vers le PDF ou autre ressource
 }
-
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
@@ -16,6 +15,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   tags,
   icon,
   disabled = false,
+  url,
 }) => {
   return (
     <div className="relative w-full max-w-sm group">
@@ -53,16 +53,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {/* Bouton bas */}
         <div className="bg-zinc-800 p-4">
-          <button
-            className={`w-full px-4 py-2 text-sm rounded-xl transition ${
+          {disabled || !url ? (
+            <button
+              className="w-full px-4 py-2 text-sm rounded-xl bg-zinc-700 text-zinc-500 cursor-not-allowed"
               disabled
-                ? "bg-zinc-700 text-zinc-500 cursor-not-allowed"
-                : "bg-purple-600 hover:bg-purple-700 text-white"
-            }`}
-            disabled={disabled}
-          >
-            ↗ Voir le document
-          </button>
+            >
+              ↗ Voir le document
+            </button>
+          ) : (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full px-4 py-2 text-sm rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-center transition"
+            >
+              ↗ Voir le document
+            </a>
+          )}
         </div>
       </div>
     </div>

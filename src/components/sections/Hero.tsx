@@ -104,16 +104,16 @@ const Hero: React.FC = () => {
                 <div className="text-sm text-gray-400">Années d'études</div>
               </div>
               <div className="p-6 rounded-xl bg-gray-800/80 backdrop-blur shadow-lg border border-gray-700">
-                <div className="font-bold text-3xl text-orange-400">15+</div>
+                <div className="font-bold text-3xl text-orange-400">10+</div>
                 <div className="text-sm text-gray-400">Projets réalisés</div>
               </div>
               <div className="p-6 rounded-xl bg-gray-800/80 backdrop-blur shadow-lg border border-gray-700">
-                <div className="font-bold text-3xl text-orange-400">3+</div>
+                <div className="font-bold text-3xl text-orange-400">-</div>
                 <div className="text-sm text-gray-400">Certifications</div>
-              </div>
+              </div> 
               <div className="p-6 rounded-xl bg-gray-800/80 backdrop-blur shadow-lg border border-gray-700">
                 <div className="font-bold text-3xl text-orange-400">2</div>
-                <div className="text-sm text-gray-400">Stages effectués</div>
+                <div className="text-sm text-gray-400">Expérience Professionel</div>
               </div>
             </div>
           </div>

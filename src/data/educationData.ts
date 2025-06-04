@@ -14,6 +14,7 @@ export interface Education {
 }
 
 export const educationData: Education[] = [
+  // ton contenu ici
   {
     id: 'bts-sio',
     title: 'BTS SIO – Option SISR',
@@ -24,11 +25,11 @@ export const educationData: Education[] = [
     status: 'ongoing',
     skills: [
       'Administration systèmes (Windows / Linux)',
-      'Gestion de réseaux (Cisco, Mikrotik)',
-      'Sécurité des infrastructures',
+      'Gestion de réseaux (Cisco)',
+      'Sécurité des infrastructures (Proxy)',
       'Virtualisation (VMware, Proxmox)',
-      'Support technique et maintenance',
-      'Supervision réseau (GLPI, Centreon)',
+      'Support utilisateur (GLPI)',
+      'Supervision réseau (Zabbix)',
       'Scripts d’automatisation (Bash, PowerShell)'
     ]
   },
@@ -61,7 +62,17 @@ export const educationData: Education[] = [
     description: 'Prépa scientifique post-bac STI2D orientée vers l’ingénierie, les sciences industrielles et les mathématiques. Préparation aux concours d’écoles d’ingénieurs.',
     status: 'completed',
     reason: 'Réorientation pour me recentrer sur l’informatique appliquée',
-    mention: 'Assez Bien'
+    mention: 'Assez Bien',
+    skills: [
+      'Mathématiques avancées (algèbre, analyse, probabilités)',
+      'Physique appliquée (mécanique, électromagnétisme, thermodynamique)',
+      'Informatique fondamentale (algorithmique, structures de données)',
+      'Modélisation et simulation (Scilab, Python)',
+      'Systèmes automatisés (chaînes d’énergie et d’information)',
+      'Électrotechnique (circuits, lois fondamentales, moteurs)',
+      'Méthodologie de résolution de problèmes complexes',
+      'Travail en autonomie et gestion de projet scientifique'
+    ]
   },
   {
     id: 'bac-sti2d',
@@ -71,6 +82,15 @@ export const educationData: Education[] = [
     period: '2017–2020',
     description: 'Sciences et Technologies de l’Industrie et du Développement Durable, spécialité Systèmes d’Information et Numérique. Apprentissage des bases de l’électronique, du développement et des systèmes embarqués.',
     status: 'completed',
-    mention: 'Bien'
+    mention: 'Bien',
+    skills: [
+      'Initiation à l’électronique (capteurs, actionneurs)',
+      'Programmation embarquée (Arduino)',
+      'Réseaux de base (adressage IP, communication client/serveur)',
+      'Conception de systèmes (schémas fonctionnels, chaînes d’énergie et d’information)',
+      'Initiation aux langages (Python, C, HTML/CSS)',
+      'Culture technologique (analyse de systèmes, innovation durable)'
+    ]
+
   }
 ];

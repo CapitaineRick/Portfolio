@@ -156,7 +156,7 @@ const About: React.FC = () => {
                     </div>
                     <div className="bg-gray-700/50 rounded-xl p-4 text-center">
                       <div className="text-2xl font-bold text-orange-500">
-                        3+
+                        -
                       </div>
                       <div className="text-sm text-gray-400">
                         Certifications
@@ -166,7 +166,7 @@ const About: React.FC = () => {
                       <div className="text-2xl font-bold text-orange-500">
                         2
                       </div>
-                      <div className="text-sm text-gray-400">Stages</div>
+                      <div className="text-sm text-gray-400">Expérience professionnelle</div>
                     </div>
                   </div>
 
@@ -260,13 +260,13 @@ const About: React.FC = () => {
                           <li className="flex items-center gap-3">
                             <div className="w-2 h-2 rounded-full bg-purple-500"></div>
                             <span className="text-gray-300">
-                              Veille technologique
+                              Impressions 3D
                             </span>
                           </li>
                           <li className="flex items-center gap-3">
                             <div className="w-2 h-2 rounded-full bg-purple-500"></div>
                             <span className="text-gray-300">
-                              Administration système
+                              Volley-ball
                             </span>
                           </li>
                         </ul>
@@ -320,6 +320,22 @@ const About: React.FC = () => {
                           <p className="text-sm text-gray-400">
                             {education.description}
                           </p>
+{education.id === "bts-sio" && (
+  <div className="bg-zinc-800 p-4">
+      <a
+        href=""
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block w-full px-4 py-2 text-sm rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-center transition"
+      >
+        ↗ Tableau de Synthese
+      </a>
+  </div>
+)}
+
+
+
+
                           {education.skills && (
                             <div className="grid grid-cols-2 gap-4 mt-4">
                               {education.skills.map((skill, index) => (
@@ -430,6 +446,22 @@ const About: React.FC = () => {
                           {education.mention && (
                             <div className="mt-4 inline-flex px-4 py-2 bg-green-900/30 text-green-400 rounded-full text-sm">
                               Mention {education.mention}
+                            </div>
+                            
+                          )}
+                                                    {education.skills && (
+                            <div className="grid grid-cols-2 gap-4 mt-4">
+                              {education.skills.map((skill, index) => (
+                                <div
+                                  key={index}
+                                  className="flex items-center gap-2"
+                                >
+                                  <ChevronRight className="w-4 h-4 text-blue-500" />
+                                  <span className="text-sm text-gray-300">
+                                    {skill}
+                                  </span>
+                                </div>
+                              ))}
                             </div>
                           )}
                         </div>
