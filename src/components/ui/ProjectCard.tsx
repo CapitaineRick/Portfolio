@@ -149,7 +149,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {project.documents ? (
-                  <div className="relative\" ref={dropdownRef}>
+                  <div className="relative" ref={dropdownRef}>
                     <button
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                       className="flex items-center gap-2 px-4 py-2 rounded-xl 
@@ -164,7 +164,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     {isDropdownOpen && (
                       <div 
                         className="absolute left-0 mt-2 w-64 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden"
-                        style={{ zIndex: 9999 }}
+                        style={{ 
+                          zIndex: 9999,
+                          position: 'absolute',
+                          top: '100%',
+                          left: '0'
+                        }}
                       >
                         {project.documents.map((doc, index) => (
                           <button
