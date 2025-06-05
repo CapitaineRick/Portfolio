@@ -38,7 +38,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
-  const cardRef = React.useRef<HTMLDivElement>(null);
 
   const handleDownload = () => {
     if (selectedDocument) {
@@ -89,7 +88,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   return (
     <>
       <div 
-        ref={cardRef}
         className={`group relative ${className}`}
         style={style}
       >
@@ -150,9 +148,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             </p>
             
             <div className="flex items-center justify-between">
-              <div className="relative inline-block">
+              <div className="relative">
                 {project.documents ? (
-                  <div className="relative">
+                  <div>
                     <button
                       ref={buttonRef}
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -168,7 +166,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     {isDropdownOpen && (
                       <div 
                         ref={dropdownRef}
-                        className="absolute left-0 mt-2 w-[300px] bg-gray-800 rounded-xl shadow-lg border border-gray-700 z-50"
+                        className="fixed mt-2 w-[300px] bg-gray-800 rounded-xl shadow-lg border border-gray-700 z-[9999]"
                         style={{
                           maxHeight: '300px',
                           overflowY: 'auto'
