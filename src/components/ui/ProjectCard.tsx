@@ -166,10 +166,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     {isDropdownOpen && (
                       <div 
                         ref={dropdownRef}
-                        className="fixed mt-2 w-[300px] bg-gray-800 rounded-xl shadow-lg border border-gray-700 z-[9999]"
                         style={{
+                          position: 'absolute',
+                          top: '100%',
+                          left: '0',
+                          marginTop: '0.5rem',
+                          width: '300px',
                           maxHeight: '300px',
-                          overflowY: 'auto'
+                          overflowY: 'auto',
+                          backgroundColor: 'rgb(31, 41, 55)',
+                          borderRadius: '0.75rem',
+                          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                          border: '1px solid rgb(55, 65, 81)',
+                          zIndex: 50
                         }}
                       >
                         {project.documents.map((doc, index) => (
