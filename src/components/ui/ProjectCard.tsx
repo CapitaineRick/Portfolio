@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, Download, ChevronLeft, ChevronRight, FileText, ChevronDown } from 'lucide-react';
-import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page } from 'react-pdf';
 
-interface Document {
+interface DocumentItem {
   title: string;
   url: string;
   description?: string;
@@ -16,7 +15,7 @@ interface Project {
   image: string;
   tags: string[];
   demoUrl?: string;
-  documents?: Document[];
+  documents?: DocumentItem[];
   pdfUrl?: string;
 }
 
@@ -28,22 +27,43 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, className = '', style }) => {
-  const { setSelectedProject, setSelectedCategory } = useProject();
   const [showFullscreen, setShowFullscreen] = useState(false);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1.0);
   const [pdfError, setPdfError] = useState<string | null>(null);
-  const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = React.useRef<HTMLDivElement>(null);
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
+  const [selectedDocument, setSelectedDocument] = useState<DocumentItem | null>(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
+          buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleDocumentSelect = (doc: DocumentItem) => {
+    setSelectedDocument(doc);
+    setShowFullscreen(true);
+    setShowDropdown(false);
+    setPageNumber(1);
+    setPdfError(null);
+  };
 
   const handleDownload = () => {
-    if (selectedDocument) {
+    const fileUrl = selectedDocument?.url || project.pdfUrl;
+    if (fileUrl) {
       const link = document.createElement('a');
-      link.href = selectedDocument.url;
-      const fileName = selectedDocument.url.split('/').pop() || `${selectedDocument.title}.pdf`;
+      link.href = fileUrl;
+      const fileName = fileUrl.split('/').pop() || 'document.pdf';
       link.download = fileName;
       document.body.appendChild(link);
       link.click();
@@ -57,60 +77,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     setPdfError(null);
   }
 
-  function onDocumentLoadError(error: Error) {
-    console.error('Error loading PDF:', error);
-    setPdfError('Impossible de charger le PDF. Veuillez réessayer plus tard.');
-  }
-
-  const handleDocumentSelect = (doc: Document) => {
-    setSelectedDocument(doc);
-    setShowFullscreen(true);
-    setIsDropdownOpen(false);
-  };
-
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
-          buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    if (isDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isDropdownOpen]);
-
   return (
     <>
-      <div 
-        className={`group relative ${className}`}
-        style={style}
-      >
+      <div className={`group relative ${className}`} style={style}>
         <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
         <div className="relative bg-gray-800 rounded-2xl overflow-hidden">
-          {/* Project Type Badge */}
+          {/* Badge */}
           <div className="absolute top-4 right-4 z-10">
-            <div className={`
-              p-2 rounded-xl backdrop-blur-md
-              ${isEnterprise 
-                ? 'bg-orange-500/90 text-white' 
-                : 'bg-blue-500/90 text-white'
-              }
-            `}>
-              {isEnterprise ? (
-                <Briefcase className="w-5 h-5" />
-              ) : (
-                <GraduationCap className="w-5 h-5" />
-              )}
+            <div className={`p-2 rounded-xl backdrop-blur-md ${
+              isEnterprise ? 'bg-orange-500/90 text-white' : 'bg-blue-500/90 text-white'
+            }`}>
+              {isEnterprise ? <Briefcase className="w-5 h-5" /> : <GraduationCap className="w-5 h-5" />}
             </div>
           </div>
 
-          {/* Image Section */}
+          {/* Image */}
           <div className="relative h-48 overflow-hidden">
             <img 
               src={project.image} 
@@ -121,10 +102,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
               <div className="absolute bottom-4 left-4 right-4">
                 <div className="flex flex-wrap gap-2">
                   {project.tags.slice(0, 3).map(tag => (
-                    <span 
-                      key={tag} 
-                      className="px-2 py-1 text-xs rounded-lg bg-white/20 backdrop-blur-sm text-white"
-                    >
+                    <span key={tag} className="px-2 py-1 text-xs rounded-lg bg-white/20 backdrop-blur-sm text-white">
                       {tag}
                     </span>
                   ))}
@@ -137,8 +115,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
               </div>
             </div>
           </div>
-          
-          {/* Content Section */}
+
+          {/* Content */}
           <div className="p-6">
             <h3 className="text-xl font-bold mb-3 text-white group-hover:text-orange-500 transition-colors">
               {project.title}
@@ -146,40 +124,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             <p className="text-gray-300 mb-6 line-clamp-3">
               {project.description}
             </p>
-            
+
             <div className="flex items-center justify-between">
               <div className="relative">
                 {project.documents ? (
-                  <div>
+                  <>
                     <button
                       ref={buttonRef}
-                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                      className="flex items-center gap-2 px-4 py-2 rounded-xl 
-                        bg-orange-900/30 text-orange-400 hover:bg-orange-900/50
-                        font-medium transition-all duration-300"
+                      onClick={() => setShowDropdown(!showDropdown)}
+                      className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 text-orange-400 hover:bg-orange-900/50 font-medium transition-all duration-300"
                     >
                       <FileText className="w-4 h-4" />
                       Sélectionner un document
-                      <ChevronDown className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
                     </button>
-                    
-                    {isDropdownOpen && (
-                      <div 
+
+                    {showDropdown && (
+                      <div
                         ref={dropdownRef}
-                        style={{
-                          position: 'absolute',
-                          top: '100%',
-                          left: '0',
-                          marginTop: '0.5rem',
-                          width: '300px',
-                          maxHeight: '300px',
-                          overflowY: 'auto',
-                          backgroundColor: 'rgb(31, 41, 55)',
-                          borderRadius: '0.75rem',
-                          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                          border: '1px solid rgb(55, 65, 81)',
-                          zIndex: 50
-                        }}
+                        className="absolute top-full left-0 mt-2 w-72 max-h-96 overflow-y-auto bg-gray-800 rounded-xl border border-gray-700 shadow-xl z-50"
                       >
                         {project.documents.map((doc, index) => (
                           <button
@@ -188,35 +151,31 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                             className="w-full px-4 py-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-center gap-2 border-b border-gray-700 last:border-0"
                           >
                             <FileText className="w-4 h-4 flex-shrink-0" />
-                            <div className="flex-1 min-w-0">
-                              <div className="font-medium truncate">{doc.title}</div>
+                            <div>
+                              <div className="font-medium">{doc.title}</div>
                               {doc.description && (
-                                <div className="text-xs text-gray-400 truncate">{doc.description}</div>
+                                <div className="text-xs text-gray-400">{doc.description}</div>
                               )}
                             </div>
                           </button>
                         ))}
                       </div>
                     )}
-                  </div>
+                  </>
                 ) : (
-                  <button
-                    onClick={() => project.pdfUrl && setShowFullscreen(true)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-xl 
-                      ${project.pdfUrl 
-                        ? 'bg-orange-900/30 text-orange-400 hover:bg-orange-900/50'
-                        : 'bg-gray-700 text-gray-600 cursor-not-allowed'
-                      } font-medium transition-all duration-300 group/btn`}
-                    disabled={!project.pdfUrl}
-                    title={project.pdfUrl ? 'Voir le document' : 'Documentation non disponible'}
-                  >
-                    <Maximize2 className="w-4 h-4" />
-                    Voir le document
-                    <ArrowRight className="transition-transform group-hover/btn:translate-x-1" size={16} />
-                  </button>
+                  project.pdfUrl && (
+                    <button
+                      onClick={() => setShowFullscreen(true)}
+                      className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 text-orange-400 hover:bg-orange-900/50 font-medium transition-all duration-300"
+                    >
+                      <Maximize2 className="w-4 h-4" />
+                      Voir le document
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  )
                 )}
               </div>
-              
+
               {project.demoUrl && (
                 <a
                   href={project.demoUrl}
@@ -232,7 +191,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
         </div>
       </div>
 
-      {/* Fullscreen Documentation Modal */}
+      {/* PDF Viewer Modal */}
       {showFullscreen && (selectedDocument?.url || project.pdfUrl) && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
           <div className="bg-gray-800 rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-auto p-6">
@@ -243,8 +202,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleDownload}
-                  className="p-2 rounded-xl bg-orange-900/30 text-orange-400 
-                           hover:bg-orange-900/50 transition-colors"
+                  className="p-2 rounded-xl bg-orange-900/30 text-orange-400 hover:bg-orange-900/50 transition-colors"
                   title="Télécharger le PDF"
                 >
                   <Download size={20} />
@@ -254,95 +212,78 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     setShowFullscreen(false);
                     setSelectedDocument(null);
                   }}
-                  className="p-2 rounded-xl bg-gray-700 text-gray-300 
-                           hover:bg-gray-600 transition-colors"
+                  className="p-2 rounded-xl bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors"
                 >
                   <X size={20} />
                 </button>
               </div>
             </div>
 
-            {pdfError ? (
-              <div className="flex flex-col items-center justify-center p-8 text-center">
-                <div className="text-red-400 mb-4">{pdfError}</div>
+            <div className="flex justify-center mb-4">
+              <div className="flex items-center gap-4">
                 <button
-                  onClick={handleDownload}
-                  className="px-4 py-2 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors"
+                  onClick={() => setPageNumber(Math.max(1, pageNumber - 1))}
+                  disabled={pageNumber <= 1}
+                  className="p-2 rounded-xl bg-orange-900/30 text-orange-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
-                  Télécharger le PDF
+                  <ChevronLeft size={20} />
+                </button>
+                <span className="text-gray-300">
+                  Page {pageNumber} sur {numPages}
+                </span>
+                <button
+                  onClick={() => setPageNumber(Math.min(numPages || 1, pageNumber + 1))}
+                  disabled={pageNumber >= (numPages || 1)}
+                  className="p-2 rounded-xl bg-orange-900/30 text-orange-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  <ChevronRight size={20} />
                 </button>
               </div>
-            ) : (
-              <>
-                <div className="flex justify-center mb-4">
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={() => setPageNumber(Math.max(1, pageNumber - 1))}
-                      disabled={pageNumber <= 1}
-                      className="p-2 rounded-xl bg-orange-900/30 text-orange-400
-                               disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                      <ChevronLeft size={20} />
-                    </button>
-                    <span className="text-gray-300">
-                      Page {pageNumber} sur {numPages}
-                    </span>
-                    <button
-                      onClick={() => setPageNumber(Math.min(numPages || 1, pageNumber + 1))}
-                      disabled={pageNumber >= (numPages || 1)}
-                      className="p-2 rounded-xl bg-orange-900/30 text-orange-400
-                               disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                      <ChevronRight size={20} />
-                    </button>
+            </div>
+
+            <div className="flex justify-center mb-4">
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => setScale(Math.max(0.5, scale - 0.1))}
+                  className="px-3 py-1 bg-gray-700 text-gray-300 rounded-lg"
+                >
+                  -
+                </button>
+                <span className="text-gray-300 min-w-[60px] text-center">
+                  {Math.round(scale * 100)}%
+                </span>
+                <button 
+                  onClick={() => setScale(Math.min(2.0, scale + 0.1))}
+                  className="px-3 py-1 bg-gray-700 text-gray-300 rounded-lg"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div className="flex justify-center">
+              <Document
+                file={selectedDocument?.url || project.pdfUrl}
+                onLoadSuccess={onDocumentLoadSuccess}
+                onLoadError={(error) => {
+                  console.error('Error loading PDF:', error);
+                  setPdfError('Impossible de charger le PDF. Veuillez réessayer plus tard.');
+                }}
+                loading={
+                  <div className="flex items-center justify-center p-8">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
                   </div>
-                </div>
-                
-                {/* Zoom controls */}
-                <div className="flex justify-center mb-4">
-                  <div className="flex items-center gap-4">
-                    <button 
-                      onClick={() => setScale(Math.max(0.5, scale - 0.1))}
-                      className="px-3 py-1 bg-gray-700 text-gray-300 rounded-lg"
-                    >
-                      -
-                    </button>
-                    <span className="text-gray-300 min-w-[60px] text-center">
-                      {Math.round(scale * 100)}%
-                    </span>
-                    <button 
-                      onClick={() => setScale(Math.min(2.0, scale + 0.1))}
-                      className="px-3 py-1 bg-gray-700 text-gray-300 rounded-lg"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                
-                <div className="flex justify-center">
-                  <Document
-                    file={selectedDocument?.url || project.pdfUrl}
-                    onLoadSuccess={onDocumentLoadSuccess}
-                    onLoadError={onDocumentLoadError}
-                    loading={
-                      <div className="flex items-center justify-center p-8">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
-                      </div>
-                    }
-                    className="mx-auto"
-                  >
-                    <Page
-                      pageNumber={pageNumber}
-                      scale={scale}
-                      className="mx-auto"
-                      renderTextLayer={true}
-                      renderAnnotationLayer={true}
-                      height={800}
-                    />
-                  </Document>
-                </div>
-              </>
-            )}
+                }
+              >
+                <Page
+                  pageNumber={pageNumber}
+                  scale={scale}
+                  renderTextLayer={true}
+                  renderAnnotationLayer={true}
+                  className="mx-auto"
+                />
+              </Document>
+            </div>
           </div>
         </div>
       )}
