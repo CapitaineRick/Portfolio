@@ -142,7 +142,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     {showDropdown && (
                       <div
                         ref={dropdownRef}
-                        className="absolute top-full left-0 mt-2 w-72 max-h-96 overflow-y-auto bg-gray-800 rounded-xl border border-gray-700 shadow-xl z-50"
+                        className="absolute top-full left-0 mt-2 w-72 max-h-96 overflow-y-auto bg-gray-800 rounded-xl border border-gray-700 shadow-xl z-100"
                       >
                         {project.documents.map((doc, index) => (
                           <button
