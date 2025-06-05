@@ -36,6 +36,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [pdfError, setPdfError] = useState<string | null>(null);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
 
   const handleDownload = () => {
     if (selectedDocument) {
@@ -69,18 +70,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   // Close dropdown when clicking outside
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (!target.closest('.dropdown-container')) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
     };
 
     if (isDropdownOpen) {
-      document.addEventListener('click', handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isDropdownOpen]);
 
@@ -149,7 +149,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {project.documents ? (
-                  <div className="relative dropdown-container">
+                  <div className="relative" ref={dropdownRef}>
                     <button
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                       className="flex items-center gap-2 px-4 py-2 rounded-xl 
@@ -162,7 +162,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     </button>
                     
                     {isDropdownOpen && (
-                      <div className="fixed z-50 mt-2 w-64 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden">
+                      <div 
+                        className="absolute left-0 mt-2 w-64 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden"
+                        style={{ zIndex: 9999 }}
+                      >
                         {project.documents.map((doc, index) => (
                           <button
                             key={index}
