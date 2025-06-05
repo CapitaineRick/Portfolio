@@ -38,6 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -50,22 +51,37 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     const updateDropdownPosition = () => {
       if (buttonRef.current && showDropdown) {
         const rect = buttonRef.current.getBoundingClientRect();
+        const cardRect = cardRef.current?.getBoundingClientRect();
+        
+        // Ensure dropdown doesn't go off-screen
+        const maxWidth = window.innerWidth;
+        let left = rect.left;
+        if (left + 288 > maxWidth) { // 288px is dropdown width (w-72)
+          left = maxWidth - 288;
+        }
+
         setDropdownPosition({
-          top: rect.bottom + window.scrollY + 8,
-          left: rect.left + window.scrollX
+          top: rect.bottom + 8,
+          left: left
         });
       }
     };
 
+    const handleScroll = () => {
+      if (showDropdown) {
+        updateDropdownPosition();
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('scroll', updateDropdownPosition);
+    document.addEventListener('scroll', handleScroll, true);
     window.addEventListener('resize', updateDropdownPosition);
 
     updateDropdownPosition();
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('scroll', updateDropdownPosition);
+      document.removeEventListener('scroll', handleScroll, true);
       window.removeEventListener('resize', updateDropdownPosition);
     };
   }, [showDropdown]);
@@ -97,9 +113,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     setPdfError(null);
   }
 
+  const toggleDropdown = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowDropdown(!showDropdown);
+  };
+
   return (
     <>
-      <div className={`group relative ${className}`} style={style}>
+      <div className={`group relative ${className}`} style={style} ref={cardRef}>
         <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
         <div className="relative bg-gray-800 rounded-2xl overflow-hidden">
           {/* Badge */}
@@ -151,7 +172,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   <>
                     <button
                       ref={buttonRef}
-                      onClick={() => setShowDropdown(!showDropdown)}
+                      onClick={toggleDropdown}
                       className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 text-orange-400 hover:bg-orange-900/50 font-medium transition-all duration-300"
                     >
                       <FileText className="w-4 h-4" />
@@ -164,8 +185,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                         ref={dropdownRef}
                         style={{
                           position: 'fixed',
-                          top: dropdownPosition.top,
-                          left: dropdownPosition.left,
+                          top: `${dropdownPosition.top}px`,
+                          left: `${dropdownPosition.left}px`,
                         }}
                         className="w-72 max-h-96 overflow-y-auto bg-gray-800 rounded-xl border border-gray-700 shadow-xl z-[9999]"
                       >
