@@ -38,6 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
+  const cardRef = React.useRef<HTMLDivElement>(null);
 
   const handleDownload = () => {
     if (selectedDocument) {
@@ -88,6 +89,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   return (
     <>
       <div 
+        ref={cardRef}
         className={`group relative ${className}`}
         style={style}
       >
@@ -148,7 +150,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             </p>
             
             <div className="flex items-center justify-between">
-              <div className="relative">
+              <div className="relative inline-block">
                 {project.documents ? (
                   <div className="relative">
                     <button
@@ -166,19 +168,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     {isDropdownOpen && (
                       <div 
                         ref={dropdownRef}
+                        className="absolute left-0 mt-2 w-[300px] bg-gray-800 rounded-xl shadow-lg border border-gray-700 z-50"
                         style={{
-                          position: 'absolute',
-                          top: '100%',
-                          left: '0',
-                          marginTop: '0.5rem',
                           maxHeight: '300px',
-                          overflowY: 'auto',
-                          zIndex: 1000,
-                          width: '300px',
-                          backgroundColor: '#1f2937',
-                          borderRadius: '0.75rem',
-                          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                          border: '1px solid rgba(75, 85, 99, 0.4)'
+                          overflowY: 'auto'
                         }}
                       >
                         {project.documents.map((doc, index) => (
