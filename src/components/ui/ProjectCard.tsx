@@ -35,35 +35,38 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [selectedDocument, setSelectedDocument] = useState<DocumentItem | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
-  
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const updateDropdownPosition = () => {
+      if (buttonRef.current && showDropdown) {
+        const rect = buttonRef.current.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const dropdownWidth = 288; // w-72 = 18rem = 288px
+
+        let left = rect.left;
+        // Prevent dropdown from going off the right edge
+        if (left + dropdownWidth > viewportWidth) {
+          left = viewportWidth - dropdownWidth - 16; // 16px padding
+        }
+        // Prevent dropdown from going off the left edge
+        if (left < 16) {
+          left = 16;
+        }
+
+        setDropdownPosition({
+          top: rect.bottom + window.scrollY + 8,
+          left: left
+        });
+      }
+    };
+
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
           buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
         setShowDropdown(false);
-      }
-    };
-
-    const updateDropdownPosition = () => {
-      if (buttonRef.current && showDropdown) {
-        const rect = buttonRef.current.getBoundingClientRect();
-        const cardRect = cardRef.current?.getBoundingClientRect();
-        
-        // Ensure dropdown doesn't go off-screen
-        const maxWidth = window.innerWidth;
-        let left = rect.left;
-        if (left + 288 > maxWidth) { // 288px is dropdown width (w-72)
-          left = maxWidth - 288;
-        }
-
-        setDropdownPosition({
-          top: rect.bottom + 8,
-          left: left
-        });
       }
     };
 
@@ -73,16 +76,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       }
     };
 
+    const handleResize = () => {
+      if (showDropdown) {
+        updateDropdownPosition();
+      }
+    };
+
+    if (showDropdown) {
+      updateDropdownPosition();
+    }
+
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('scroll', handleScroll, true);
-    window.addEventListener('resize', updateDropdownPosition);
-
-    updateDropdownPosition();
+    window.addEventListener('resize', handleResize);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('scroll', handleScroll, true);
-      window.removeEventListener('resize', updateDropdownPosition);
+      window.removeEventListener('resize', handleResize);
     };
   }, [showDropdown]);
 
@@ -120,7 +131,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
   return (
     <>
-      <div className={`group relative ${className}`} style={style} ref={cardRef}>
+      <div className={`group relative ${className}`} style={style}>
         <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
         <div className="relative bg-gray-800 rounded-2xl overflow-hidden">
           {/* Badge */}
@@ -169,45 +180,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             <div className="flex items-center justify-between">
               <div className="relative">
                 {project.documents ? (
-                  <>
-                    <button
-                      ref={buttonRef}
-                      onClick={toggleDropdown}
-                      className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 text-orange-400 hover:bg-orange-900/50 font-medium transition-all duration-300"
-                    >
-                      <FileText className="w-4 h-4" />
-                      Sélectionner un document
-                      <ChevronDown className={`w-4 h-4 transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
-                    </button>
-
-                    {showDropdown && (
-                      <div
-                        ref={dropdownRef}
-                        style={{
-                          position: 'fixed',
-                          top: `${dropdownPosition.top}px`,
-                          left: `${dropdownPosition.left}px`,
-                        }}
-                        className="w-72 max-h-96 overflow-y-auto bg-gray-800 rounded-xl border border-gray-700 shadow-xl z-[9999]"
-                      >
-                        {project.documents.map((doc, index) => (
-                          <button
-                            key={index}
-                            onClick={() => handleDocumentSelect(doc)}
-                            className="w-full px-4 py-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-center gap-2 border-b border-gray-700 last:border-0"
-                          >
-                            <FileText className="w-4 h-4 flex-shrink-0" />
-                            <div>
-                              <div className="font-medium">{doc.title}</div>
-                              {doc.description && (
-                                <div className="text-xs text-gray-400">{doc.description}</div>
-                              )}
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </>
+                  <button
+                    ref={buttonRef}
+                    onClick={toggleDropdown}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 text-orange-400 hover:bg-orange-900/50 font-medium transition-all duration-300"
+                  >
+                    <FileText className="w-4 h-4" />
+                    Sélectionner un document
+                    <ChevronDown className={`w-4 h-4 transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
+                  </button>
                 ) : (
                   project.pdfUrl && (
                     <button
@@ -236,6 +217,36 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
           </div>
         </div>
       </div>
+
+      {/* Dropdown Portal */}
+      {showDropdown && project.documents && (
+        <div
+          ref={dropdownRef}
+          style={{
+            position: 'fixed',
+            top: `${dropdownPosition.top}px`,
+            left: `${dropdownPosition.left}px`,
+            zIndex: 9999
+          }}
+          className="w-72 bg-gray-800 rounded-xl border border-gray-700 shadow-xl overflow-hidden"
+        >
+          {project.documents.map((doc, index) => (
+            <button
+              key={index}
+              onClick={() => handleDocumentSelect(doc)}
+              className="w-full px-4 py-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-center gap-2 border-b border-gray-700 last:border-0"
+            >
+              <FileText className="w-4 h-4 flex-shrink-0" />
+              <div>
+                <div className="font-medium">{doc.title}</div>
+                {doc.description && (
+                  <div className="text-xs text-gray-400">{doc.description}</div>
+                )}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* PDF Viewer Modal */}
       {showFullscreen && (selectedDocument?.url || project.pdfUrl) && (
