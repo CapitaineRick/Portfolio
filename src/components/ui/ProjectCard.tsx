@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, Download, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, Download, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page } from 'react-pdf';
+
+interface Document {
+  title: string;
+  url: string;
+  description?: string;
+}
 
 interface Project {
   id: string;
@@ -10,7 +16,8 @@ interface Project {
   image: string;
   tags: string[];
   demoUrl?: string;
-  pdfUrl: string;
+  documents?: Document[];
+  pdfUrl?: string;
 }
 
 interface ProjectCardProps {
@@ -27,12 +34,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1.0);
   const [pdfError, setPdfError] = useState<string | null>(null);
+  const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
 
   const handleDownload = () => {
-    if (project.pdfUrl) {
+    if (selectedDocument) {
       const link = document.createElement('a');
-      link.href = project.pdfUrl;
-      const fileName = project.pdfUrl.split('/').pop() || `${project.title}.pdf`;
+      link.href = selectedDocument.url;
+      const fileName = selectedDocument.url.split('/').pop() || `${selectedDocument.title}.pdf`;
       link.download = fileName;
       document.body.appendChild(link);
       link.click();
@@ -50,6 +58,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     console.error('Error loading PDF:', error);
     setPdfError('Impossible de charger le PDF. Veuillez réessayer plus tard.');
   }
+
+  const handleDocumentSelect = (doc: Document) => {
+    setSelectedDocument(doc);
+    setShowFullscreen(true);
+  };
 
   return (
     <>
@@ -115,20 +128,38 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setShowFullscreen(true)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl 
-                    ${project.pdfUrl 
-                      ? 'bg-orange-900/30 text-orange-400 hover:bg-orange-900/50'
-                      : 'bg-gray-700 text-gray-600 cursor-not-allowed'
-                    } font-medium transition-all duration-300 group/btn`}
-                  disabled={!project.pdfUrl}
-                  title={project.pdfUrl ? 'Voir le document' : 'Documentation non disponible'}
-                >
-                  <Maximize2 className="w-4 h-4" />
-                  Voir le document
-                  <ArrowRight className="transition-transform group-hover/btn:translate-x-1" size={16} />
-                </button>
+                {project.documents ? (
+                  <div className="flex flex-col gap-2">
+                    {project.documents.map((doc, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleDocumentSelect(doc)}
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl 
+                          bg-orange-900/30 text-orange-400 hover:bg-orange-900/50
+                          font-medium transition-all duration-300 group/btn"
+                      >
+                        <FileText className="w-4 h-4" />
+                        {doc.title}
+                        <ArrowRight className="transition-transform group-hover/btn:translate-x-1" size={16} />
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => project.pdfUrl && setShowFullscreen(true)}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-xl 
+                      ${project.pdfUrl 
+                        ? 'bg-orange-900/30 text-orange-400 hover:bg-orange-900/50'
+                        : 'bg-gray-700 text-gray-600 cursor-not-allowed'
+                      } font-medium transition-all duration-300 group/btn`}
+                    disabled={!project.pdfUrl}
+                    title={project.pdfUrl ? 'Voir le document' : 'Documentation non disponible'}
+                  >
+                    <Maximize2 className="w-4 h-4" />
+                    Voir le document
+                    <ArrowRight className="transition-transform group-hover/btn:translate-x-1" size={16} />
+                  </button>
+                )}
               </div>
               
               {project.demoUrl && (
@@ -147,11 +178,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       </div>
 
       {/* Fullscreen Documentation Modal */}
-      {showFullscreen && project.pdfUrl && (
+      {showFullscreen && (selectedDocument?.url || project.pdfUrl) && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
           <div className="bg-gray-800 rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-auto p-6">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-bold text-white">{project.title}</h3>
+              <h3 className="text-2xl font-bold text-white">
+                {selectedDocument?.title || project.title}
+              </h3>
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleDownload}
@@ -162,7 +195,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   <Download size={20} />
                 </button>
                 <button
-                  onClick={() => setShowFullscreen(false)}
+                  onClick={() => {
+                    setShowFullscreen(false);
+                    setSelectedDocument(null);
+                  }}
                   className="p-2 rounded-xl bg-gray-700 text-gray-300 
                            hover:bg-gray-600 transition-colors"
                 >
@@ -230,7 +266,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                 
                 <div className="flex justify-center">
                   <Document
-                    file={project.pdfUrl}
+                    file={selectedDocument?.url || project.pdfUrl}
                     onLoadSuccess={onDocumentLoadSuccess}
                     onLoadError={onDocumentLoadError}
                     loading={
