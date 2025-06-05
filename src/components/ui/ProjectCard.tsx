@@ -66,6 +66,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     setIsDropdownOpen(false);
   };
 
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.dropdown-container')) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
   return (
     <>
       <div 
@@ -131,7 +149,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {project.documents ? (
-                  <div className="relative">
+                  <div className="relative dropdown-container">
                     <button
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                       className="flex items-center gap-2 px-4 py-2 rounded-xl 
@@ -144,7 +162,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     </button>
                     
                     {isDropdownOpen && (
-                      <div className="absolute z-20 mt-2 w-64 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden">
+                      <div className="fixed z-50 mt-2 w-64 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden">
                         {project.documents.map((doc, index) => (
                           <button
                             key={index}
