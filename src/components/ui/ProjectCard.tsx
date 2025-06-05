@@ -147,9 +147,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             </p>
             
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 relative">
+              <div className="flex items-center gap-2 relative" style={{ zIndex: 40 }}>
                 {project.documents ? (
-                  <div className="relative\" ref={dropdownRef}>
+                  <div className="relative" ref={dropdownRef}>
                     <button
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                       className="flex items-center gap-2 px-4 py-2 rounded-xl 
