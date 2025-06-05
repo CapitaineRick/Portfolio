@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, Download, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
+import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, Download, ChevronLeft, ChevronRight, FileText, ChevronDown } from 'lucide-react';
 import { useProject } from '../../contexts/ProjectContext';
 import { Document, Page } from 'react-pdf';
 
@@ -35,6 +35,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [scale, setScale] = useState(1.0);
   const [pdfError, setPdfError] = useState<string | null>(null);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleDownload = () => {
     if (selectedDocument) {
@@ -62,6 +63,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const handleDocumentSelect = (doc: Document) => {
     setSelectedDocument(doc);
     setShowFullscreen(true);
+    setIsDropdownOpen(false);
   };
 
   return (
@@ -129,20 +131,37 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {project.documents ? (
-                  <div className="flex flex-col gap-2">
-                    {project.documents.map((doc, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleDocumentSelect(doc)}
-                        className="flex items-center gap-2 px-4 py-2 rounded-xl 
-                          bg-orange-900/30 text-orange-400 hover:bg-orange-900/50
-                          font-medium transition-all duration-300 group/btn"
-                      >
-                        <FileText className="w-4 h-4" />
-                        {doc.title}
-                        <ArrowRight className="transition-transform group-hover/btn:translate-x-1" size={16} />
-                      </button>
-                    ))}
+                  <div className="relative">
+                    <button
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      className="flex items-center gap-2 px-4 py-2 rounded-xl 
+                        bg-orange-900/30 text-orange-400 hover:bg-orange-900/50
+                        font-medium transition-all duration-300"
+                    >
+                      <FileText className="w-4 h-4" />
+                      Sélectionner un document
+                      <ChevronDown className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    
+                    {isDropdownOpen && (
+                      <div className="absolute z-20 mt-2 w-64 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden">
+                        {project.documents.map((doc, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handleDocumentSelect(doc)}
+                            className="w-full px-4 py-2 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-center gap-2"
+                          >
+                            <FileText className="w-4 h-4" />
+                            <div>
+                              <div className="font-medium">{doc.title}</div>
+                              {doc.description && (
+                                <div className="text-xs text-gray-400">{doc.description}</div>
+                              )}
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <button
