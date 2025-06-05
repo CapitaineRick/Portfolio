@@ -166,19 +166,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     {isDropdownOpen && (
                       <div 
                         ref={dropdownRef}
-                        className="absolute top-full left-0 mt-2 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden z-50 w-64"
+                        style={{
+                          position: 'absolute',
+                          top: '100%',
+                          left: '0',
+                          marginTop: '0.5rem',
+                          maxHeight: '300px',
+                          overflowY: 'auto',
+                          zIndex: 1000,
+                          width: '300px',
+                          backgroundColor: '#1f2937',
+                          borderRadius: '0.75rem',
+                          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                          border: '1px solid rgba(75, 85, 99, 0.4)'
+                        }}
                       >
                         {project.documents.map((doc, index) => (
                           <button
                             key={index}
                             onClick={() => handleDocumentSelect(doc)}
-                            className="w-full px-4 py-2 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-center gap-2"
+                            className="w-full px-4 py-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-center gap-2 border-b border-gray-700 last:border-0"
                           >
-                            <FileText className="w-4 h-4" />
-                            <div>
-                              <div className="font-medium">{doc.title}</div>
+                            <FileText className="w-4 h-4 flex-shrink-0" />
+                            <div className="flex-1 min-w-0">
+                              <div className="font-medium truncate">{doc.title}</div>
                               {doc.description && (
-                                <div className="text-xs text-gray-400">{doc.description}</div>
+                                <div className="text-xs text-gray-400 truncate">{doc.description}</div>
                               )}
                             </div>
                           </button>
