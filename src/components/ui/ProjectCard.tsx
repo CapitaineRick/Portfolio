@@ -67,7 +67,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     setIsDropdownOpen(false);
   };
 
-  // Close dropdown when clicking outside
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -147,9 +146,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             </p>
             
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 relative" style={{ zIndex: 40 }}>
+              <div className="relative" ref={dropdownRef}>
                 {project.documents ? (
-                  <div className="relative\" ref={dropdownRef}>
+                  <div className="relative">
                     <button
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                       className="flex items-center gap-2 px-4 py-2 rounded-xl 
@@ -165,10 +164,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                       <div 
                         className="absolute left-0 mt-2 w-64 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden"
                         style={{ 
-                          zIndex: 50,
-                          position: 'absolute',
-                          top: '100%',
-                          left: '0'
+                          position: 'fixed',
+                          zIndex: 999
                         }}
                       >
                         {project.documents.map((doc, index) => (
@@ -224,7 +221,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
       {/* Fullscreen Documentation Modal */}
       {showFullscreen && (selectedDocument?.url || project.pdfUrl) && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center p-4">
           <div className="bg-gray-800 rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-auto p-6">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-bold text-white">
