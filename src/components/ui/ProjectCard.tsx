@@ -34,6 +34,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [pdfError, setPdfError] = useState<string | null>(null);
   const [selectedDocument, setSelectedDocument] = useState<DocumentItem | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -46,9 +47,28 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       }
     };
 
+    const updateDropdownPosition = () => {
+      if (buttonRef.current && showDropdown) {
+        const rect = buttonRef.current.getBoundingClientRect();
+        setDropdownPosition({
+          top: rect.bottom + window.scrollY + 8,
+          left: rect.left + window.scrollX
+        });
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    document.addEventListener('scroll', updateDropdownPosition);
+    window.addEventListener('resize', updateDropdownPosition);
+
+    updateDropdownPosition();
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('scroll', updateDropdownPosition);
+      window.removeEventListener('resize', updateDropdownPosition);
+    };
+  }, [showDropdown]);
 
   const handleDocumentSelect = (doc: DocumentItem) => {
     setSelectedDocument(doc);
@@ -144,7 +164,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                         ref={dropdownRef}
                         style={{
                           position: 'fixed',
-                          transform: buttonRef.current ? `translate(${buttonRef.current.offsetLeft}px, ${buttonRef.current.offsetTop + buttonRef.current.offsetHeight + 8}px)` : 'none'
+                          top: dropdownPosition.top,
+                          left: dropdownPosition.left,
                         }}
                         className="w-72 max-h-96 overflow-y-auto bg-gray-800 rounded-xl border border-gray-700 shadow-xl z-[9999]"
                       >
