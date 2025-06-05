@@ -21,7 +21,7 @@ const Projects: React.FC = () => {
   const allProjects = [...enterpriseProjects, ...schoolProjects];
 
   // Priorité : Entreprise, Ecole, puis les autres en ordre alphabétique
-  const priorityTags = ['Entreprise', 'Ecole'];
+  const priorityTags = ['Entreprise', 'Ecole','Personnel'];
   const otherTags = Array.from(
     new Set(allProjects.flatMap(project => project.tags || []))
   ).filter(tag => !priorityTags.includes(tag)).sort();
