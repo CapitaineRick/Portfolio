@@ -10,11 +10,11 @@ export const projectsData = {
     },
   ],
   school: [
-      {
+    {
       id: 'ap1',
       title: 'AP-1',
       description: "Création de l'entreprise revive",
-      image: '/images/logo_revive_nobg.png',
+      image: '/docs/AP1/logo_revive_nobg.png',
       documents: [
         {
           title: 'Présentation Revive',
@@ -64,11 +64,11 @@ export const projectsData = {
       ],
       tags: ['Gestion de projet', 'Entrepreneuriat', 'Documentation']
     },
-      {
+    {
       id: 'ap2',
       title: 'AP-2',
       description: 'Problématique de la M2L',
-      image: '',
+      image: '/images/m2l-logo.webp',
       pdfUrl: '/docs/AP2.pdf',
       tags: ['Windows', 'Active Directory', 'Déploiement logiciel']
     },
