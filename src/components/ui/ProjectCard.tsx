@@ -35,65 +35,81 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [selectedDocument, setSelectedDocument] = useState<DocumentItem | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
+  const [containerRect, setContainerRect] = useState<DOMRect | null>(null);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const updateDropdownPosition = () => {
-      if (buttonRef.current && showDropdown) {
-        const rect = buttonRef.current.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const dropdownWidth = 288; // w-72 = 18rem = 288px
+    const updatePositions = () => {
+      if (buttonRef.current && cardRef.current && showDropdown) {
+        const buttonRect = buttonRef.current.getBoundingClientRect();
+        const cardRect = cardRef.current.getBoundingClientRect();
+        setContainerRect(cardRect);
 
-        let left = rect.left;
+        // Calculate dropdown position relative to viewport
+        const dropdownWidth = 288; // w-72 = 18rem = 288px
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        let left = buttonRect.left;
+        let top = buttonRect.bottom + 8; // 8px gap
+
         // Prevent dropdown from going off the right edge
         if (left + dropdownWidth > viewportWidth) {
-          left = viewportWidth - dropdownWidth - 16; // 16px padding
+          left = viewportWidth - dropdownWidth - 16;
         }
+
         // Prevent dropdown from going off the left edge
         if (left < 16) {
           left = 16;
         }
 
+        // If dropdown would go off bottom of viewport, position it above the button
+        if (top + 300 > viewportHeight) { // 300px is approximate max height of dropdown
+          top = buttonRect.top - 300 - 8;
+        }
+
         setDropdownPosition({
-          top: rect.bottom + window.scrollY + 8,
+          top: top + window.scrollY,
           left: left
         });
       }
     };
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
-          buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
-        setShowDropdown(false);
-      }
-    };
-
     const handleScroll = () => {
       if (showDropdown) {
-        updateDropdownPosition();
+        updatePositions();
       }
     };
 
     const handleResize = () => {
       if (showDropdown) {
-        updateDropdownPosition();
+        updatePositions();
+      }
+    };
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && 
+          !dropdownRef.current.contains(event.target as Node) &&
+          buttonRef.current && 
+          !buttonRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
       }
     };
 
     if (showDropdown) {
-      updateDropdownPosition();
+      updatePositions();
+      document.addEventListener('scroll', handleScroll, true);
+      window.addEventListener('resize', handleResize);
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('scroll', handleScroll, true);
-    window.addEventListener('resize', handleResize);
-
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('scroll', handleScroll, true);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showDropdown]);
 
@@ -131,10 +147,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
   return (
     <>
-      <div className={`group relative ${className}`} style={style}>
+      <div 
+        ref={cardRef}
+        className={`group relative ${className}`} 
+        style={style}
+      >
         <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
         <div className="relative bg-gray-800 rounded-2xl overflow-hidden">
-          {/* Badge */}
           <div className="absolute top-4 right-4 z-10">
             <div className={`p-2 rounded-xl backdrop-blur-md ${
               isEnterprise ? 'bg-orange-500/90 text-white' : 'bg-blue-500/90 text-white'
@@ -143,7 +162,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             </div>
           </div>
 
-          {/* Image */}
           <div className="relative h-48 overflow-hidden">
             <img 
               src={project.image} 
@@ -168,7 +186,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             </div>
           </div>
 
-          {/* Content */}
           <div className="p-6">
             <h3 className="text-xl font-bold mb-3 text-white group-hover:text-orange-500 transition-colors">
               {project.title}
@@ -218,7 +235,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
         </div>
       </div>
 
-      {/* Dropdown Portal */}
+      {/* Fixed Dropdown */}
       {showDropdown && project.documents && (
         <div
           ref={dropdownRef}
@@ -226,9 +243,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             position: 'fixed',
             top: `${dropdownPosition.top}px`,
             left: `${dropdownPosition.left}px`,
-            zIndex: 9999
+            zIndex: 9999,
+            maxHeight: '300px',
+            overflowY: 'auto'
           }}
-          className="w-72 bg-gray-800 rounded-xl border border-gray-700 shadow-xl overflow-hidden"
+          className="w-72 bg-gray-800 rounded-xl border border-gray-700 shadow-xl"
         >
           {project.documents.map((doc, index) => (
             <button
