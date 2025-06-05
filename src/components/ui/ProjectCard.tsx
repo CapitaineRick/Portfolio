@@ -38,7 +38,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
-  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
 
   const handleDownload = () => {
     if (selectedDocument) {
@@ -69,26 +68,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     setIsDropdownOpen(false);
   };
 
-  const updateDropdownPosition = () => {
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-      
-      setDropdownPosition({
-        top: rect.bottom + scrollTop,
-        left: rect.left + scrollLeft
-      });
-    }
-  };
-
-  const toggleDropdown = () => {
-    if (!isDropdownOpen) {
-      updateDropdownPosition();
-    }
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
@@ -97,20 +76,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       }
     };
 
-    const handleScroll = () => {
-      if (isDropdownOpen) {
-        updateDropdownPosition();
-      }
-    };
-
     if (isDropdownOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-      window.addEventListener('scroll', handleScroll);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('scroll', handleScroll);
     };
   }, [isDropdownOpen]);
 
@@ -182,7 +153,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   <div className="relative">
                     <button
                       ref={buttonRef}
-                      onClick={toggleDropdown}
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                       className="flex items-center gap-2 px-4 py-2 rounded-xl 
                         bg-orange-900/30 text-orange-400 hover:bg-orange-900/50
                         font-medium transition-all duration-300"
@@ -195,11 +166,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     {isDropdownOpen && (
                       <div 
                         ref={dropdownRef}
-                        className="fixed bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden z-[999] w-64"
-                        style={{
-                          top: `${dropdownPosition.top}px`,
-                          left: `${dropdownPosition.left}px`
-                        }}
+                        className="absolute top-full left-0 mt-2 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden z-50 w-64"
                       >
                         {project.documents.map((doc, index) => (
                           <button
@@ -254,7 +221,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
       {/* Fullscreen Documentation Modal */}
       {showFullscreen && (selectedDocument?.url || project.pdfUrl) && (
-        <div className="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
           <div className="bg-gray-800 rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-auto p-6">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-bold text-white">
