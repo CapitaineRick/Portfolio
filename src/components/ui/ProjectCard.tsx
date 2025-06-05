@@ -37,6 +37,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
 
   const handleDownload = () => {
     if (selectedDocument) {
@@ -69,7 +70,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
+          buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
     };
@@ -82,6 +84,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isDropdownOpen]);
+
+  const getDropdownPosition = () => {
+    if (!buttonRef.current) return {};
+    
+    const rect = buttonRef.current.getBoundingClientRect();
+    return {
+      top: `${rect.bottom + 8}px`,
+      left: `${rect.left}px`,
+    };
+  };
 
   return (
     <>
@@ -146,10 +158,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             </p>
             
             <div className="flex items-center justify-between">
-              <div className="relative" ref={dropdownRef}>
+              <div className="relative">
                 {project.documents ? (
                   <div className="relative">
                     <button
+                      ref={buttonRef}
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                       className="flex items-center gap-2 px-4 py-2 rounded-xl 
                         bg-orange-900/30 text-orange-400 hover:bg-orange-900/50
@@ -162,11 +175,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     
                     {isDropdownOpen && (
                       <div 
-                        className="absolute left-0 mt-2 w-64 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden"
-                        style={{ 
-                          position: 'fixed',
-                          zIndex: 999
-                        }}
+                        ref={dropdownRef}
+                        className="fixed bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden z-[999] w-64"
+                        style={getDropdownPosition()}
                       >
                         {project.documents.map((doc, index) => (
                           <button
