@@ -21,7 +21,7 @@ section {
   );
   background-size: 200% 200%;
   animation: gradientMove 15s ease infinite;
-  min-height: auto; /* Changé de min-h-screen à auto */
+  min-height: auto; /* Hauteur dynamique par défaut */
 }
 
 /* Section colors */
@@ -67,7 +67,7 @@ section#documentation {
 section#techwatch {
   --tw-gradient-from: theme('colors.rose.900' / 5%);
   --tw-gradient-to: theme('colors.pink.900' / 5%);
-  /* Pas de min-h-screen ni flex pour s'adapter au contenu */
+  /* Hauteur dynamique qui s'adapte au contenu */
 }
 
 section#contact {
