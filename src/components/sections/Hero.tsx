@@ -5,42 +5,6 @@ const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const [activeSkill, setActiveSkill] = useState(0);
 
-  const skills = [
-    {
-      icon: Database,
-      label: "Base de données",
-      description: "MySQL, PostgreSQL",
-      gradient: "from-blue-500 to-cyan-500"
-    },
-    {
-      icon: Cloud,
-      label: "Cloud",
-      description: "AWS, Azure, Docker",
-      gradient: "from-purple-500 to-pink-500"
-    },
-    {
-      icon: Shield,
-      label: "Sécurité",
-      description: "Cybersécurité, Firewall",
-      gradient: "from-red-500 to-orange-500"
-    },
-    {
-      icon: Network,
-      label: "Réseaux",
-      description: "TCP/IP, VPN, VLAN",
-      gradient: "from-green-500 to-teal-500"
-    }
-  ];
-
-  const techIcons = [
-    { icon: Database, delay: 0 },
-    { icon: Cloud, delay: 200 },
-    { icon: Cpu, delay: 400 },
-    { icon: HardDrive, delay: 600 },
-    { icon: Wifi, delay: 800 },
-    { icon: Lock, delay: 1000 },
-    { icon: Code, delay: 1200 },
-  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
