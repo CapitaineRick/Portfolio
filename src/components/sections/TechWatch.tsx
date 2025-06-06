@@ -41,8 +41,8 @@ const TechWatch: React.FC = () => {
 
   return (
     <section id="techwatch">
-      {/* Conteneur principal avec padding */}
-      <div className="py-16 relative z-10">
+      {/* Conteneur avec fond adaptatif */}
+      <div className="techwatch-background py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Header avec statistiques */}
           <div className="text-center mb-16">
