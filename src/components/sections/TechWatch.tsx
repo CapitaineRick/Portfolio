@@ -88,26 +88,28 @@ const TechWatch: React.FC = () => {
           </div>
         </div>
         
-        {/* Articles Grid */}
+        {/* Articles Grid avec Masonry Layout */}
         <div 
           ref={watchRef}
           className="transition-all duration-300 opacity-0 translate-y-10"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="columns-1 lg:columns-2 gap-8 space-y-8">
             {filteredArticles.map((item, index) => (
               <article 
                 key={item.title}
-                className="relative group"
+                className={`relative group break-inside-avoid mb-8 transition-all duration-500 ease-in-out ${
+                  expandedCard === item.title ? 'transform scale-[1.02]' : ''
+                }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Card Background Effect */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 
                 {/* Card Content */}
-                <div className="relative bg-gray-800 rounded-2xl overflow-hidden h-full flex flex-col">
+                <div className="relative bg-gray-800 rounded-2xl overflow-hidden">
                   
                   {/* Image Header */}
-                  <div className="relative h-48 overflow-hidden flex-shrink-0">
+                  <div className="relative h-48 overflow-hidden">
                     <img 
                       src={item.image} 
                       alt={item.title}
@@ -153,30 +155,37 @@ const TechWatch: React.FC = () => {
                   </div>
                   
                   {/* Card Body */}
-                  <div className="p-6 flex-grow flex flex-col">
+                  <div className="p-6">
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-white group-hover:text-orange-500 transition-colors mb-4 line-clamp-2">
+                    <h3 className="text-xl font-bold text-white group-hover:text-orange-500 transition-colors mb-4">
                       {item.title}
                     </h3>
 
-                    {/* Description */}
-                    <div className="flex-grow mb-6">
+                    {/* Description avec hauteur dynamique */}
+                    <div className="mb-6">
                       <div 
-                        className={`text-sm text-gray-300 leading-relaxed transition-all duration-300 overflow-hidden ${
-                          expandedCard === item.title ? 'max-h-none' : 'max-h-32'
+                        className={`text-sm text-gray-300 leading-relaxed transition-all duration-500 ease-in-out overflow-hidden ${
+                          expandedCard === item.title 
+                            ? 'max-h-none opacity-100' 
+                            : 'max-h-24 opacity-90'
                         }`}
                       >
                         <div className="whitespace-pre-wrap font-sans">
                           {expandedCard === item.title 
                             ? item.description 
-                            : item.description.substring(0, 200) + (item.description.length > 200 ? '...' : '')
+                            : item.description.substring(0, 150) + (item.description.length > 150 ? '...' : '')
                           }
                         </div>
                       </div>
+                      
+                      {/* Fade effect pour le texte tronqué */}
+                      {expandedCard !== item.title && item.description.length > 150 && (
+                        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-gray-800 to-transparent pointer-events-none"></div>
+                      )}
                     </div>
 
                     {/* Actions */}
-                    <div className="flex justify-between items-center pt-4 border-t border-gray-700 flex-shrink-0">
+                    <div className="flex justify-between items-center pt-4 border-t border-gray-700">
                       <button
                         onClick={() => toggleCard(item.title)}
                         className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 
