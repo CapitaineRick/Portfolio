@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Users, Zap, Target, Rocket, Star } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Users, Zap, Target, Rocket, Star, Brain, Eye, Heart, Sparkles, Crown, Trophy, Lightning, Flame } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -7,23 +7,27 @@ const Hero: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentText, setCurrentText] = useState(0);
+  const [glitchActive, setGlitchActive] = useState(false);
+  const [particleCount, setParticleCount] = useState(0);
 
   const dynamicTexts = [
-    "Administrateur Systèmes & Réseaux",
-    "Futur Expert en Cybersécurité", 
-    "Spécialiste Infrastructure IT",
-    "Passionné de Pentesting"
+    { text: "🔥 Futur Expert Cybersécurité", color: "from-red-400 via-orange-500 to-yellow-400" },
+    { text: "⚡ Administrateur Systèmes Elite", color: "from-blue-400 via-purple-500 to-pink-400" },
+    { text: "🚀 Spécialiste Infrastructure", color: "from-green-400 via-teal-500 to-blue-400" },
+    { text: "🎯 Pentester en Formation", color: "from-purple-400 via-pink-500 to-red-400" }
   ];
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 500);
+    const timer = setTimeout(() => setIsLoaded(true), 300);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentText((prev) => (prev + 1) % dynamicTexts.length);
-    }, 3000);
+      setGlitchActive(true);
+      setTimeout(() => setGlitchActive(false), 200);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -36,7 +40,7 @@ const Hero: React.FC = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Matrix Rain Effect amélioré
+  // Système de particules avancé
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -47,42 +51,68 @@ const Hero: React.FC = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
-    const matrixArray = matrix.split("");
+    const particles: Array<{
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+      color: string;
+      life: number;
+      maxLife: number;
+    }> = [];
 
-    const fontSize = 12;
-    const columns = canvas.width / fontSize;
+    const colors = ['#f97316', '#a855f7', '#3b82f6', '#10b981', '#ef4444', '#f59e0b', '#8b5cf6'];
 
-    const drops: number[] = [];
-    for (let x = 0; x < columns; x++) {
-      drops[x] = 1;
+    function createParticle(x: number, y: number) {
+      particles.push({
+        x,
+        y,
+        vx: (Math.random() - 0.5) * 2,
+        vy: (Math.random() - 0.5) * 2,
+        size: Math.random() * 3 + 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        life: 0,
+        maxLife: Math.random() * 100 + 50
+      });
     }
 
-    function draw() {
+    function animate() {
       if (!ctx || !canvas) return;
       
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.font = fontSize + 'px monospace';
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
-        
-        // Couleurs variées pour plus de dynamisme
-        const colors = ['#f97316', '#a855f7', '#3b82f6', '#10b981', '#ef4444'];
-        ctx.fillStyle = colors[i % colors.length];
-        
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
+      // Créer des particules aléatoirement
+      if (Math.random() < 0.3) {
+        createParticle(Math.random() * canvas.width, Math.random() * canvas.height);
       }
+
+      // Animer les particules
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life++;
+
+        const alpha = 1 - (p.life / p.maxLife);
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (p.life >= p.maxLife) {
+          particles.splice(i, 1);
+        }
+      }
+
+      ctx.globalAlpha = 1;
+      setParticleCount(particles.length);
+      requestAnimationFrame(animate);
     }
 
-    const interval = setInterval(draw, 50);
+    animate();
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
@@ -92,7 +122,6 @@ const Hero: React.FC = () => {
     window.addEventListener('resize', handleResize);
 
     return () => {
-      clearInterval(interval);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -114,154 +143,207 @@ const Hero: React.FC = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      style={{
+        background: `
+          radial-gradient(circle at 20% 80%, rgba(249, 115, 22, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+          linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)
+        `
+      }}
     >
-      {/* Matrix Canvas Background */}
+      {/* Canvas de particules */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-60"
         style={{ zIndex: 1 }}
       />
 
-      {/* Gradient interactif qui suit la souris */}
+      {/* Gradient interactif ultra-dynamique */}
       <div 
-        className="absolute inset-0 transition-all duration-700 ease-out pointer-events-none"
+        className="absolute inset-0 transition-all duration-300 ease-out pointer-events-none"
         style={{ 
           zIndex: 2,
-          background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, 
-            rgba(249, 115, 22, 0.15), 
-            rgba(168, 85, 247, 0.1), 
-            rgba(59, 130, 246, 0.05),
-            transparent 70%)`
+          background: `
+            radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, 
+              rgba(249, 115, 22, 0.4), 
+              rgba(168, 85, 247, 0.3), 
+              rgba(59, 130, 246, 0.2),
+              transparent 60%),
+            conic-gradient(from ${mousePosition.x * 0.1}deg at 50% 50%, 
+              rgba(249, 115, 22, 0.1), 
+              rgba(168, 85, 247, 0.1), 
+              rgba(59, 130, 246, 0.1),
+              rgba(249, 115, 22, 0.1))
+          `
         }} 
       />
 
-      {/* Particules flottantes */}
+      {/* Éléments décoratifs flottants */}
       <div className="absolute inset-0" style={{ zIndex: 2 }}>
-        {[...Array(20)].map((_, i) => (
+        {[...Array(15)].map((_, i) => (
           <div
             key={i}
-            className={`absolute w-1 h-1 rounded-full animate-pulse opacity-40`}
+            className={`absolute animate-pulse opacity-60`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              backgroundColor: ['#f97316', '#a855f7', '#3b82f6', '#10b981'][i % 4],
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${3 + Math.random() * 4}s`
             }}
-          />
+          >
+            {i % 4 === 0 && <Sparkles className="w-4 h-4 text-yellow-400" />}
+            {i % 4 === 1 && <Star className="w-3 h-3 text-purple-400" />}
+            {i % 4 === 2 && <Zap className="w-3 h-3 text-blue-400" />}
+            {i % 4 === 3 && <Crown className="w-4 h-4 text-orange-400" />}
+          </div>
         ))}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative" style={{ zIndex: 3 }}>
-        <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`transition-all duration-1500 ${isLoaded ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-20 scale-95'}`}>
           
-          {/* Header central avec animation spectaculaire */}
-          <div className="text-center mb-16">
-            {/* Badge d'introduction animé */}
-            <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-orange-500/20 to-purple-500/20 backdrop-blur-xl border border-orange-500/30 text-orange-400 text-lg font-medium shadow-2xl hover:shadow-orange-500/25 transition-all duration-500 hover:scale-105 mb-8">
-              <Zap className="w-6 h-6 animate-pulse text-yellow-400" />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-400 to-purple-400">
-                Bienvenue dans mon univers tech
+          {/* Header spectaculaire avec animations */}
+          <div className="text-center mb-20">
+            {/* Badge d'introduction ultra-dynamique */}
+            <div className="inline-flex items-center gap-4 px-10 py-5 rounded-full bg-gradient-to-r from-orange-500/30 via-purple-500/30 to-blue-500/30 backdrop-blur-2xl border-2 border-orange-500/50 text-white text-xl font-bold shadow-2xl hover:shadow-orange-500/50 transition-all duration-700 hover:scale-110 hover:rotate-1 mb-12 group">
+              <Brain className="w-8 h-8 animate-pulse text-yellow-400 group-hover:animate-spin" />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-300 via-yellow-300 to-purple-300 animate-pulse">
+                ✨ Bienvenue dans l'Excellence Tech ✨
               </span>
-              <Star className="w-6 h-6 animate-spin text-purple-400" />
+              <Eye className="w-8 h-8 animate-bounce text-cyan-400 group-hover:animate-ping" />
             </div>
 
-            {/* Titre principal avec effet wow */}
-            <div className="relative mb-8">
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
-                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-yellow-400 to-orange-600 animate-pulse">
+            {/* Titre principal avec effet glitch */}
+            <div className="relative mb-12">
+              <h1 className={`text-7xl md:text-8xl lg:text-9xl font-black mb-8 leading-none transition-all duration-500 ${glitchActive ? 'animate-pulse' : ''}`}>
+                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-500 hover:from-red-500 hover:via-yellow-400 hover:to-orange-600 transition-all duration-700 transform hover:scale-105 cursor-default">
                   Sébastien
                 </span>
-                <span className="block text-white relative">
+                <span className="block text-white relative transform hover:scale-105 transition-all duration-700 cursor-default">
                   Fernandes
-                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-orange-500 via-yellow-400 to-purple-500 rounded-full animate-pulse"></div>
+                  <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-48 h-2 bg-gradient-to-r from-orange-500 via-yellow-400 via-purple-500 to-blue-500 rounded-full animate-pulse shadow-lg"></div>
+                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-pink-500 to-cyan-500 rounded-full animate-ping"></div>
                 </span>
               </h1>
               
-              {/* Texte dynamique qui change */}
-              <div className="h-16 flex items-center justify-center">
-                <p className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-500">
-                  {dynamicTexts[currentText]}
+              {/* Texte dynamique avec transitions spectaculaires */}
+              <div className="h-20 flex items-center justify-center relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse rounded-2xl"></div>
+                <p className={`text-3xl md:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r ${dynamicTexts[currentText].color} transition-all duration-1000 transform ${glitchActive ? 'scale-110' : 'scale-100'} relative z-10`}>
+                  {dynamicTexts[currentText].text}
                 </p>
               </div>
             </div>
 
-            {/* Description captivante */}
-            <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-4xl mx-auto mb-12 font-medium">
-              🚀 Étudiant BTS SIO SISR passionné par l'infrastructure IT et la cybersécurité. 
-              <br />
-              <span className="text-orange-400">En quête d'excellence technique</span> et 
-              <span className="text-purple-400"> d'innovation constante</span>.
-            </p>
+            {/* Description ultra-engageante */}
+            <div className="relative mb-16">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-purple-500/10 to-blue-500/10 rounded-3xl blur-xl"></div>
+              <p className="relative text-2xl md:text-3xl text-gray-200 leading-relaxed max-w-5xl mx-auto font-medium bg-gray-900/30 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50">
+                🚀 <span className="text-orange-400 font-bold">Étudiant BTS SIO SISR</span> avec une passion dévorante pour 
+                <span className="text-purple-400 font-bold"> l'infrastructure IT</span> et 
+                <span className="text-blue-400 font-bold"> la cybersécurité</span>.
+                <br />
+                <span className="text-yellow-400 font-bold">🎯 Mission :</span> Devenir un expert reconnu en pentesting et sécurité des systèmes !
+              </p>
+            </div>
 
-            {/* Boutons d'action spectaculaires */}
-            <div className="flex flex-wrap gap-6 justify-center mb-16">
+            {/* Boutons d'action ultra-spectaculaires */}
+            <div className="flex flex-wrap gap-8 justify-center mb-20">
               <button 
                 onClick={scrollToProjects}
-                className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-2xl
-                          hover:from-orange-600 hover:to-purple-600 transform hover:scale-110 hover:-translate-y-2
-                          transition-all duration-300 shadow-2xl hover:shadow-orange-500/50
-                          flex items-center gap-4 font-bold text-lg overflow-hidden"
+                className="group relative px-12 py-6 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white rounded-2xl
+                          hover:from-orange-600 hover:via-red-600 hover:to-pink-600 transform hover:scale-125 hover:-translate-y-4 hover:rotate-2
+                          transition-all duration-500 shadow-2xl hover:shadow-orange-500/60
+                          flex items-center gap-4 font-black text-xl overflow-hidden border-2 border-orange-400/50"
               >
-                <Rocket className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-                <span>Explorer mes projets</span>
-                <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-pink-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                <Rocket className="w-8 h-8 group-hover:rotate-45 group-hover:scale-125 transition-all duration-500" />
+                <span className="relative z-10">🚀 Découvrir mes Projets</span>
+                <Lightning className="w-8 h-8 group-hover:-rotate-12 group-hover:scale-125 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 opacity-0 group-hover:opacity-30 transition-all duration-500 animate-pulse"></div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 to-pink-500 rounded-2xl blur opacity-0 group-hover:opacity-50 transition-all duration-500"></div>
               </button>
               
               <button 
                 onClick={scrollToContact}
-                className="group relative px-10 py-5 border-3 border-orange-500 text-orange-400 bg-gray-900/50
-                          hover:bg-orange-500 hover:text-white rounded-2xl backdrop-blur-xl
-                          transform hover:scale-110 hover:-translate-y-2 transition-all duration-300
-                          flex items-center gap-4 font-bold text-lg shadow-2xl hover:shadow-orange-500/50"
+                className="group relative px-12 py-6 border-4 border-purple-500 text-purple-400 bg-gray-900/50
+                          hover:bg-purple-500 hover:text-white hover:border-purple-400 rounded-2xl backdrop-blur-xl
+                          transform hover:scale-125 hover:-translate-y-4 hover:-rotate-2 transition-all duration-500
+                          flex items-center gap-4 font-black text-xl shadow-2xl hover:shadow-purple-500/60 overflow-hidden"
               >
-                <Target className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />
-                <span>Collaborons ensemble</span>
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <Target className="w-8 h-8 group-hover:rotate-180 group-hover:scale-125 transition-all duration-500" />
+                <span className="relative z-10">💼 Collaborons !</span>
+                <Heart className="w-8 h-8 group-hover:scale-125 group-hover:animate-pulse transition-all duration-500 text-red-400" />
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-20 transition-all duration-500"></div>
               </button>
             </div>
           </div>
 
-          {/* Grille de compétences interactive */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            {/* Expertise technique */}
-            <div className="lg:col-span-2">
+          {/* Grille de compétences ultra-interactive */}
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 mb-20">
+            {/* Compétences principales */}
+            <div className="xl:col-span-3">
               <div className="relative group">
-                <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur-lg opacity-30 group-hover:opacity-60 transition duration-500"></div>
-                <div className="relative bg-gray-800/60 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-500">
-                  <h3 className="text-3xl font-bold text-white mb-6 flex items-center gap-4">
-                    <Code className="w-8 h-8 text-orange-500" />
-                    <span>Expertise Technique</span>
-                    <div className="flex-1 h-px bg-gradient-to-r from-orange-500 to-transparent"></div>
+                <div className="absolute -inset-4 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 rounded-3xl blur-2xl opacity-30 group-hover:opacity-70 transition-all duration-700 animate-pulse"></div>
+                <div className="relative bg-gray-900/70 backdrop-blur-2xl rounded-3xl p-10 border-2 border-gray-700/50 hover:border-gray-600/70 transition-all duration-700">
+                  <h3 className="text-4xl font-black text-white mb-8 flex items-center gap-6">
+                    <Code className="w-12 h-12 text-orange-500 animate-pulse" />
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-purple-400">
+                      🔥 Arsenal Technique
+                    </span>
+                    <Flame className="w-12 h-12 text-red-500 animate-bounce" />
                   </h3>
                   
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                     {[
-                      { icon: Server, label: 'Infrastructure', color: 'orange', skills: ['Windows Server', 'Linux', 'Virtualisation'] },
-                      { icon: Shield, label: 'Cybersécurité', color: 'blue', skills: ['Pentesting', 'Audit', 'Sécurisation'] },
-                      { icon: Network, label: 'Réseaux', color: 'green', skills: ['Cisco', 'TCP/IP', 'VLAN'] },
-                      { icon: Terminal, label: 'DevOps', color: 'purple', skills: ['Scripts', 'Automation', 'Monitoring'] }
+                      { 
+                        icon: Server, 
+                        label: '⚡ Infrastructure', 
+                        color: 'from-orange-500 to-red-500',
+                        skills: ['Windows Server 2025', 'Linux Ubuntu/Debian', 'Proxmox VE'],
+                        emoji: '🏗️'
+                      },
+                      { 
+                        icon: Shield, 
+                        label: '🛡️ Cybersécurité', 
+                        color: 'from-blue-500 to-cyan-500',
+                        skills: ['Kali Linux', 'Wireshark', 'Audit Sécurité'],
+                        emoji: '🔒'
+                      },
+                      { 
+                        icon: Network, 
+                        label: '🌐 Réseaux', 
+                        color: 'from-green-500 to-emerald-500',
+                        skills: ['Cisco Packet Tracer', 'TCP/IP', 'VLAN'],
+                        emoji: '📡'
+                      },
+                      { 
+                        icon: Terminal, 
+                        label: '🤖 DevOps', 
+                        color: 'from-purple-500 to-pink-500',
+                        skills: ['Bash/PowerShell', 'Docker', 'Automation'],
+                        emoji: '⚙️'
+                      }
                     ].map((item, index) => (
                       <div
                         key={index}
-                        className="group/card relative p-6 rounded-2xl bg-gray-900/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 hover:scale-105 hover:-translate-y-2 cursor-pointer"
+                        className="group/card relative p-8 rounded-2xl bg-gray-800/60 border-2 border-gray-700/50 hover:border-gray-600/70 transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer overflow-hidden"
                       >
-                        <item.icon className={`w-12 h-12 mb-4 mx-auto transition-all duration-300 group-hover/card:scale-125 group-hover/card:rotate-6 ${
-                          item.color === 'orange' ? 'text-orange-500' :
-                          item.color === 'blue' ? 'text-blue-500' :
-                          item.color === 'green' ? 'text-green-500' : 'text-purple-500'
-                        }`} />
-                        <h4 className="font-bold text-white text-center mb-3 group-hover/card:text-orange-300 transition-colors">
-                          {item.label}
-                        </h4>
-                        <div className="space-y-1">
-                          {item.skills.map((skill, skillIndex) => (
-                            <div key={skillIndex} className="text-xs text-gray-400 text-center bg-gray-800/50 px-2 py-1 rounded-lg group-hover/card:bg-gray-700/50 group-hover/card:text-gray-300 transition-all duration-300">
-                              {skill}
-                            </div>
-                          ))}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover/card:opacity-20 transition-all duration-500`}></div>
+                        <div className="relative z-10">
+                          <div className="text-4xl mb-4 text-center">{item.emoji}</div>
+                          <item.icon className={`w-16 h-16 mb-6 mx-auto transition-all duration-500 group-hover/card:scale-125 group-hover/card:rotate-12 bg-gradient-to-br ${item.color} p-3 rounded-xl text-white`} />
+                          <h4 className="font-black text-white text-center mb-4 text-lg group-hover/card:text-orange-300 transition-colors">
+                            {item.label}
+                          </h4>
+                          <div className="space-y-2">
+                            {item.skills.map((skill, skillIndex) => (
+                              <div key={skillIndex} className="text-sm text-gray-300 text-center bg-gray-900/50 px-3 py-2 rounded-xl group-hover/card:bg-gray-700/70 group-hover/card:text-white transition-all duration-300 font-medium">
+                                {skill}
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -270,39 +352,46 @@ const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* Stats impressionnantes */}
-            <div className="space-y-6">
+            {/* Stats et objectifs */}
+            <div className="space-y-8">
+              {/* Stats dynamiques */}
               <div className="relative group">
-                <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 to-green-500 rounded-3xl blur-lg opacity-30 group-hover:opacity-60 transition duration-500"></div>
-                <div className="relative bg-gray-800/60 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-500">
-                  <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                    <Database className="w-7 h-7 text-blue-500" />
-                    <span>En chiffres</span>
+                <div className="absolute -inset-4 bg-gradient-to-r from-green-500 to-blue-500 rounded-3xl blur-2xl opacity-30 group-hover:opacity-70 transition-all duration-700"></div>
+                <div className="relative bg-gray-900/70 backdrop-blur-2xl rounded-3xl p-8 border-2 border-gray-700/50 hover:border-gray-600/70 transition-all duration-700">
+                  <h3 className="text-2xl font-black text-white mb-6 flex items-center gap-3">
+                    <Trophy className="w-8 h-8 text-yellow-500 animate-bounce" />
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-400">
+                      📊 Achievements
+                    </span>
                   </h3>
                   
                   <div className="space-y-6">
                     {[
-                      { value: "2+", label: "Années BTS SIO", color: "orange", icon: "🎓" },
-                      { value: "20+", label: "Projets réalisés", color: "purple", icon: "🚀" },
-                      { value: "10+", label: "Technologies", color: "blue", icon: "⚡" },
-                      { value: "2", label: "Expériences pro", color: "green", icon: "💼" }
+                      { value: "2+", label: "Années BTS SIO", color: "from-orange-400 to-red-500", icon: "🎓", progress: 85 },
+                      { value: "25+", label: "Projets Tech", color: "from-purple-400 to-pink-500", icon: "🚀", progress: 92 },
+                      { value: "15+", label: "Technologies", color: "from-blue-400 to-cyan-500", icon: "⚡", progress: 78 },
+                      { value: "2", label: "Expériences Pro", color: "from-green-400 to-emerald-500", icon: "💼", progress: 100 }
                     ].map((stat, index) => (
                       <div 
                         key={index}
-                        className="group/stat flex items-center gap-4 p-4 rounded-xl bg-gray-900/50 hover:bg-gray-900/70 transition-all duration-300 hover:scale-105 cursor-pointer"
+                        className="group/stat relative p-6 rounded-2xl bg-gray-800/60 hover:bg-gray-800/80 transition-all duration-500 hover:scale-105 cursor-pointer border border-gray-700/50 hover:border-gray-600/70 overflow-hidden"
                       >
-                        <div className="text-2xl">{stat.icon}</div>
-                        <div className="flex-1">
-                          <div className={`font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r ${
-                            stat.color === 'orange' ? 'from-orange-400 to-orange-600' :
-                            stat.color === 'purple' ? 'from-purple-400 to-purple-600' :
-                            stat.color === 'blue' ? 'from-blue-400 to-blue-600' :
-                            'from-green-400 to-green-600'
-                          }`}>
-                            {stat.value}
-                          </div>
-                          <div className="text-sm text-gray-400 group-hover/stat:text-gray-300 transition-colors">
-                            {stat.label}
+                        <div className={`absolute inset-0 bg-gradient-to-r ${stat.color} opacity-0 group-hover/stat:opacity-10 transition-all duration-500`}></div>
+                        <div className="relative z-10 flex items-center gap-4">
+                          <div className="text-3xl">{stat.icon}</div>
+                          <div className="flex-1">
+                            <div className={`font-black text-3xl bg-clip-text text-transparent bg-gradient-to-r ${stat.color} mb-1`}>
+                              {stat.value}
+                            </div>
+                            <div className="text-sm text-gray-300 group-hover/stat:text-white transition-colors font-medium">
+                              {stat.label}
+                            </div>
+                            <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
+                              <div 
+                                className={`h-2 rounded-full bg-gradient-to-r ${stat.color} transition-all duration-1000`}
+                                style={{ width: `${stat.progress}%` }}
+                              ></div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -311,21 +400,27 @@ const Hero: React.FC = () => {
                 </div>
               </div>
 
-              {/* Call to action */}
+              {/* Objectif 2025 */}
               <div className="relative group">
-                <div className="absolute -inset-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-3xl blur-lg opacity-30 group-hover:opacity-60 transition duration-500"></div>
-                <div className="relative bg-gray-800/60 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-500 text-center">
-                  <h3 className="text-xl font-bold text-white mb-4">🎯 Objectif 2025</h3>
-                  <p className="text-gray-300 mb-6">
-                    Décrocher une alternance en cybersécurité pour devenir expert en pentesting
-                  </p>
-                  <div className="flex justify-center gap-3">
-                    <span className="px-4 py-2 bg-green-900/30 text-green-400 rounded-full text-sm border border-green-500/30 flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                      Disponible
+                <div className="absolute -inset-4 bg-gradient-to-r from-pink-500 to-purple-500 rounded-3xl blur-2xl opacity-30 group-hover:opacity-70 transition-all duration-700 animate-pulse"></div>
+                <div className="relative bg-gray-900/70 backdrop-blur-2xl rounded-3xl p-8 border-2 border-gray-700/50 hover:border-gray-600/70 transition-all duration-700 text-center">
+                  <h3 className="text-2xl font-black text-white mb-4 flex items-center justify-center gap-3">
+                    <Target className="w-8 h-8 text-pink-500 animate-spin" />
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400">
+                      🎯 Mission 2025
                     </span>
-                    <span className="px-4 py-2 bg-blue-900/30 text-blue-400 rounded-full text-sm border border-blue-500/30">
-                      Île-de-France
+                  </h3>
+                  <p className="text-gray-200 mb-6 font-medium text-lg">
+                    🔥 Décrocher une alternance en <span className="text-orange-400 font-bold">cybersécurité</span> pour devenir 
+                    <span className="text-purple-400 font-bold"> expert pentester</span> !
+                  </p>
+                  <div className="flex justify-center gap-4 flex-wrap">
+                    <span className="px-6 py-3 bg-green-900/40 text-green-300 rounded-full text-sm border-2 border-green-500/50 flex items-center gap-3 font-bold">
+                      <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                      ✅ Disponible Immédiatement
+                    </span>
+                    <span className="px-6 py-3 bg-blue-900/40 text-blue-300 rounded-full text-sm border-2 border-blue-500/50 font-bold">
+                      📍 Île-de-France
                     </span>
                   </div>
                 </div>
@@ -333,11 +428,19 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Scroll indicator animé */}
+          {/* Indicateur de scroll ultra-stylé */}
           <div className="text-center">
-            <div className="inline-flex flex-col items-center gap-2 text-gray-400 hover:text-orange-400 transition-colors cursor-pointer animate-bounce">
-              <span className="text-sm font-medium">Découvrir la suite</span>
-              <ArrowRight className="w-5 h-5 rotate-90" />
+            <div className="inline-flex flex-col items-center gap-4 text-gray-300 hover:text-orange-400 transition-all duration-500 cursor-pointer group">
+              <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-purple-400 group-hover:from-yellow-400 group-hover:to-pink-400 transition-all duration-500">
+                ⬇️ Explorez mon univers tech ⬇️
+              </span>
+              <div className="relative">
+                <ArrowRight className="w-8 h-8 rotate-90 animate-bounce group-hover:animate-pulse group-hover:scale-125 transition-all duration-500" />
+                <div className="absolute inset-0 bg-orange-500 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-all duration-500"></div>
+              </div>
+              <div className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors">
+                {particleCount} particules actives
+              </div>
             </div>
           </div>
         </div>
