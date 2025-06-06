@@ -18,6 +18,7 @@ import {
   Globe,
   FileText,
   ChevronRight,
+  ExternalLink,
 } from "lucide-react";
 import { educationData } from "../../data/educationData";
 
@@ -320,21 +321,25 @@ const About: React.FC = () => {
                           <p className="text-sm text-gray-400">
                             {education.description}
                           </p>
-{education.id === "bts-sio" && (
-  <div className="bg-zinc-800 p-4">
-      <a
-        href=""
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block w-full px-4 py-2 text-sm rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-center transition"
-      >
-        ↗ Tableau de Synthese
-      </a>
-  </div>
-)}
-
-
-
+                          {education.id === "bts-sio" && (
+                            <div className="mt-6">
+                              <div className="relative group/button">
+                                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl blur opacity-75 group-hover/button:opacity-100 transition duration-300"></div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="relative flex items-center justify-center gap-2 w-full px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-xl transition-all duration-300 group-hover/button:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <FileText className="w-5 h-5 text-purple-400" />
+                                    <span className="font-medium">Tableau de Synthèse</span>
+                                    <ExternalLink className="w-4 h-4 text-purple-400 group-hover/button:translate-x-1 transition-transform" />
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          )}
 
                           {education.skills && (
                             <div className="grid grid-cols-2 gap-4 mt-4">
@@ -449,7 +454,7 @@ const About: React.FC = () => {
                             </div>
                             
                           )}
-                                                    {education.skills && (
+                          {education.skills && (
                             <div className="grid grid-cols-2 gap-4 mt-4">
                               {education.skills.map((skill, index) => (
                                 <div
