@@ -176,10 +176,7 @@ const Hero: React.FC = () => {
               Étudiant en BTS SIO SISR, je développe mes compétences en administration système, 
               sécurité réseau et infrastructure informatique.
             </p>
-            
-            {/* Bouton animé avec effet de mouvement */}
-            <div className="relative inline-block">
-  
+ 
 
                 {/* Particules qui s'échappent au hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
