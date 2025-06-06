@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Cloud, Cpu, HardDrive, Wifi, Lock, Monitor, Zap, Globe } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Cloud, Cpu, HardDrive, Wifi, Lock, Monitor, Zap, Globe, GraduationCap, Briefcase } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -212,7 +212,10 @@ const Hero: React.FC = () => {
                 <div className={`relative p-8 rounded-2xl bg-gradient-to-br ${skills[activeSkill].gradient} bg-opacity-10 border border-white/10`}>
                   <div className="flex items-center gap-6 mb-4">
                     <div className={`p-4 rounded-xl bg-gradient-to-br ${skills[activeSkill].gradient} shadow-lg`}>
-                      <skills[activeSkill].icon className="w-8 h-8 text-white" />
+                      {(() => {
+                        const IconComponent = skills[activeSkill].icon;
+                        return <IconComponent className="w-8 h-8 text-white" />;
+                      })()}
                     </div>
                     <div>
                       <h4 className="text-2xl font-bold text-white">{skills[activeSkill].label}</h4>
@@ -234,26 +237,29 @@ const Hero: React.FC = () => {
 
               {/* Skill Navigation */}
               <div className="grid grid-cols-3 gap-3">
-                {skills.map((skill, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveSkill(index)}
-                    className={`group p-4 rounded-xl transition-all duration-300 ${
-                      activeSkill === index
-                        ? `bg-gradient-to-br ${skill.gradient} shadow-lg scale-105`
-                        : 'bg-gray-700/50 hover:bg-gray-700 hover:scale-105'
-                    }`}
-                  >
-                    <skill.icon className={`w-6 h-6 mx-auto mb-2 ${
-                      activeSkill === index ? 'text-white' : 'text-gray-400 group-hover:text-white'
-                    } transition-colors`} />
-                    <div className={`text-xs font-medium ${
-                      activeSkill === index ? 'text-white' : 'text-gray-400 group-hover:text-white'
-                    } transition-colors`}>
-                      {skill.label}
-                    </div>
-                  </button>
-                ))}
+                {skills.map((skill, index) => {
+                  const SkillIcon = skill.icon;
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => setActiveSkill(index)}
+                      className={`group p-4 rounded-xl transition-all duration-300 ${
+                        activeSkill === index
+                          ? `bg-gradient-to-br ${skill.gradient} shadow-lg scale-105`
+                          : 'bg-gray-700/50 hover:bg-gray-700 hover:scale-105'
+                      }`}
+                    >
+                      <SkillIcon className={`w-6 h-6 mx-auto mb-2 ${
+                        activeSkill === index ? 'text-white' : 'text-gray-400 group-hover:text-white'
+                      } transition-colors`} />
+                      <div className={`text-xs font-medium ${
+                        activeSkill === index ? 'text-white' : 'text-gray-400 group-hover:text-white'
+                      } transition-colors`}>
+                        {skill.label}
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
 
               {/* Progress Indicators */}
