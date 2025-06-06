@@ -89,23 +89,24 @@ const Skills: React.FC = () => {
                         className="relative group transition-all duration-300"
                       >
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-                        <div className="relative bg-gray-800 rounded-xl p-6 h-full">
+                        <div className="relative bg-gray-800 rounded-xl p-6 h-full flex flex-col">
                           <div className="flex items-center justify-between mb-4">
-                            <div className="flex items-center gap-3">
-                              <div className="h-12 w-12 rounded-lg bg-gray-700 p-2 flex items-center justify-center">
+                            <div className="flex items-center gap-3 flex-1 min-w-0">
+                              <div className="h-12 w-12 rounded-lg bg-gray-700 p-2 flex items-center justify-center flex-shrink-0">
                                 <img 
                                   src={skill.logo} 
                                   alt={skill.name}
                                   className="w-full h-full object-contain"
                                 />
                               </div>
-                              <div>
-                                <h4 className="font-semibold text-white">{skill.name}</h4>
+                              <div className="min-w-0 flex-1">
+                                <h4 className="font-semibold text-white truncate">{skill.name}</h4>
                               </div>
                             </div>
                             <button
                               onClick={() => toggleSkillExpansion(skill.name)}
-                              className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+                              className="p-2 hover:bg-gray-700 rounded-lg transition-colors flex-shrink-0 ml-2"
+                              aria-label={`${expandedSkills[skill.name] ? 'Masquer' : 'Afficher'} la description de ${skill.name}`}
                             >
                               {expandedSkills[skill.name] ? (
                                 <ChevronUp className="w-5 h-5 text-gray-400" />
