@@ -52,12 +52,11 @@ const Hero: React.FC = () => {
     function animate() {
       if (!ctx || !canvas) return;
       
-      // Effacement plus agressif pour éliminer les traces
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Créer des particules aléatoirement (réduit la fréquence)
-      if (Math.random() < 0.2) {
+      // Créer des particules aléatoirement
+      if (Math.random() < 0.4) {
         createParticle(Math.random() * canvas.width, Math.random() * canvas.height);
       }
 
@@ -78,11 +77,11 @@ const Hero: React.FC = () => {
         ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Suppression de l'effet de traînée pour éviter les traces
-        // ctx.globalAlpha = alpha * 0.3;
-        // ctx.beginPath();
-        // ctx.arc(p.x - p.vx * 3, p.y - p.vy * 3, size * 0.5, 0, Math.PI * 2);
-        // ctx.fill();
+        // Effet de traînée
+        ctx.globalAlpha = alpha * 0.3;
+        ctx.beginPath();
+        ctx.arc(p.x - p.vx * 3, p.y - p.vy * 3, size * 0.5, 0, Math.PI * 2);
+        ctx.fill();
 
         if (p.life >= p.maxLife) {
           particles.splice(i, 1);
