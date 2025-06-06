@@ -146,7 +146,10 @@ const Hero: React.FC = () => {
                 <div className="relative">
                   <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${skills[currentSkill].color} p-1 transition-all duration-500`}>
                     <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center">
-                      <skills[currentSkill].icon className="w-12 h-12 text-white" />
+                      {(() => {
+                        const CurrentIcon = skills[currentSkill].icon;
+                        return <CurrentIcon className="w-12 h-12 text-white" />;
+                      })()}
                     </div>
                   </div>
                   
@@ -166,6 +169,8 @@ const Hero: React.FC = () => {
                   const x = Math.cos((angle * Math.PI) / 180) * radius;
                   const y = Math.sin((angle * Math.PI) / 180) * radius;
                   
+                  const SkillIcon = skill.icon;
+                  
                   return (
                     <div
                       key={index}
@@ -178,7 +183,7 @@ const Hero: React.FC = () => {
                     >
                       <div className={`w-full h-full rounded-full bg-gradient-to-br ${skill.color} p-0.5`}>
                         <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center">
-                          <skill.icon className="w-6 h-6 text-white" />
+                          <SkillIcon className="w-6 h-6 text-white" />
                         </div>
                       </div>
                     </div>
