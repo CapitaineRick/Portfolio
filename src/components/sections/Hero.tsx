@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
     setTimeout(() => setIsVisible(true), 500);
   }, []);
 
-  // Système de particules spectaculaire
+  // Système de particules avec traînées qui s'effacent
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -31,6 +31,7 @@ const Hero: React.FC = () => {
       life: number;
       maxLife: number;
       pulse: number;
+      trail: Array<{ x: number; y: number; age: number }>;
     }> = [];
 
     const colors = ['#f97316', '#a855f7', '#3b82f6', '#10b981', '#ef4444', '#f59e0b', '#8b5cf6'];
@@ -45,29 +46,60 @@ const Hero: React.FC = () => {
         color: colors[Math.floor(Math.random() * colors.length)],
         life: 0,
         maxLife: Math.random() * 120 + 80,
-        pulse: Math.random() * Math.PI * 2
+        pulse: Math.random() * Math.PI * 2,
+        trail: []
       });
     }
 
     function animate() {
       if (!ctx || !canvas) return;
       
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
+      // Effacement progressif du canvas pour créer l'effet de traînée qui s'estompe
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Créer des particules aléatoirement
-      if (Math.random() < 0.4) {
+      if (Math.random() < 0.3) {
         createParticle(Math.random() * canvas.width, Math.random() * canvas.height);
       }
 
       // Animer les particules
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
+        
+        // Ajouter la position actuelle à la traînée
+        p.trail.push({ x: p.x, y: p.y, age: 0 });
+        
+        // Limiter la longueur de la traînée et vieillir les points
+        if (p.trail.length > 15) {
+          p.trail.shift();
+        }
+        
+        // Vieillir tous les points de la traînée
+        p.trail.forEach(point => point.age++);
+        
+        // Mettre à jour la position
         p.x += p.vx;
         p.y += p.vy;
         p.life++;
         p.pulse += 0.1;
 
+        // Dessiner la traînée avec effet de fondu
+        for (let j = 0; j < p.trail.length; j++) {
+          const trailPoint = p.trail[j];
+          const trailAlpha = (1 - (trailPoint.age / 15)) * (1 - (p.life / p.maxLife)) * 0.6;
+          const trailSize = p.size * (1 - (trailPoint.age / 15)) * 0.7;
+          
+          if (trailAlpha > 0.01) {
+            ctx.globalAlpha = trailAlpha;
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(trailPoint.x, trailPoint.y, trailSize, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        // Dessiner la particule principale
         const alpha = Math.sin(p.pulse) * 0.3 + 0.7 * (1 - (p.life / p.maxLife));
         const size = p.size * (Math.sin(p.pulse * 0.5) * 0.3 + 1);
         
@@ -77,12 +109,13 @@ const Hero: React.FC = () => {
         ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Effet de traînée
+        // Effet de lueur autour de la particule
         ctx.globalAlpha = alpha * 0.3;
         ctx.beginPath();
-        ctx.arc(p.x - p.vx * 3, p.y - p.vy * 3, size * 0.5, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, size * 2, 0, Math.PI * 2);
         ctx.fill();
 
+        // Supprimer les particules mortes
         if (p.life >= p.maxLife) {
           particles.splice(i, 1);
         }
