@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, Code, Monitor, Database, Cpu, Wifi, Lock, Zap, Brain, Rocket, Star, Lightning } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network, Code, Monitor, Database, Cpu, Wifi, Lock, Zap, Brain, Rocket, Star, CloudLightning as Lightning } from 'lucide-react';
 
 interface Particle {
   id: number;
