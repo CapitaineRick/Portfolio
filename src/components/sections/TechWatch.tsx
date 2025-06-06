@@ -75,7 +75,7 @@ const TechWatch: React.FC = () => {
                   onClick={() => setSelectedCategory(selectedCategory === category ? null : category)}
                   className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                     selectedCategory === category
-                      ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg transform scale-105'
+                      ? 'bg-gradient-to-r h-full from-orange-500 to-purple-500 text-white shadow-lg transform scale-105'
                       : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:scale-105'
                   }`}
                 >
