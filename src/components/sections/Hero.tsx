@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Users, Zap, Target, Rocket, Star, Brain, Eye, Heart, Sparkles, Crown, Trophy, Lightning, Flame } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Users, Zap, Target, Rocket, Star, Brain, Eye, Heart, Sparkles, Crown, Trophy, CloudLightning as Lightning, Flame } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
