@@ -21,6 +21,7 @@ section {
   );
   background-size: 200% 200%;
   animation: gradientMove 15s ease infinite;
+  background-attachment: local;
 }
 
 /* Section colors */
@@ -66,7 +67,11 @@ section#documentation {
 section#techwatch {
   --tw-gradient-from: theme('colors.rose.900' / 5%);
   --tw-gradient-to: theme('colors.pink.900' / 5%);
-  /* Hauteur dynamique qui s'adapte au contenu */
+  /* Fond dynamique qui s'adapte au contenu */
+  min-height: 100vh;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 section#contact {
