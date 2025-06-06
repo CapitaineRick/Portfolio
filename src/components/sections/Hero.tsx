@@ -1,37 +1,225 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, Cpu, HardDrive, Wifi, Database, Lock, Monitor, Zap } from 'lucide-react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { Server, ArrowRight, Terminal, Shield, Network, Cpu, HardDrive, Wifi, Database, Lock, Monitor, Zap, Brain, Eye, Activity } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const [activeNode, setActiveNode] = useState<number | null>(null);
-  const [scanningProgress, setScanningProgress] = useState(0);
-  const [systemStatus, setSystemStatus] = useState('INITIALIZING');
-  const [networkActivity, setNetworkActivity] = useState<Array<{id: number, from: number, to: number, type: string}>>([]);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [neuralNodes, setNeuralNodes] = useState<Array<{
+    id: number;
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    connections: number[];
+    activity: number;
+    type: 'input' | 'hidden' | 'output';
+    skill: string;
+  }>>([]);
+  const [brainActivity, setBrainActivity] = useState(0);
+  const [currentThought, setCurrentThought] = useState('INITIALIZING NEURAL NETWORK...');
+  const [quantumState, setQuantumState] = useState('SUPERPOSITION');
+  const [aiPersonality, setAiPersonality] = useState('ANALYTICAL');
 
-  // Données des nœuds du datacenter
-  const datacenterNodes = [
-    { id: 1, name: 'Windows Server', icon: Server, x: 20, y: 30, status: 'active', load: 85, type: 'server' },
-    { id: 2, name: 'Linux Ubuntu', icon: Terminal, x: 80, y: 25, status: 'active', load: 72, type: 'server' },
-    { id: 3, name: 'Firewall', icon: Shield, x: 50, y: 15, status: 'secure', load: 45, type: 'security' },
-    { id: 4, name: 'Switch Core', icon: Network, x: 50, y: 50, status: 'active', load: 90, type: 'network' },
-    { id: 5, name: 'Database', icon: Database, x: 25, y: 70, status: 'active', load: 68, type: 'storage' },
-    { id: 6, name: 'Monitoring', icon: Monitor, x: 75, y: 65, status: 'scanning', load: 55, type: 'monitoring' },
-    { id: 7, name: 'Backup', icon: HardDrive, x: 15, y: 55, status: 'backup', load: 30, type: 'storage' },
-    { id: 8, name: 'VPN Gateway', icon: Lock, x: 85, y: 45, status: 'secure', load: 40, type: 'security' }
+  // Pensées de l'IA
+  const aiThoughts = [
+    'ANALYZING INFRASTRUCTURE PATTERNS...',
+    'OPTIMIZING SECURITY PROTOCOLS...',
+    'PROCESSING NETWORK TOPOLOGY...',
+    'CALCULATING THREAT VECTORS...',
+    'SYNTHESIZING BEST PRACTICES...',
+    'EVALUATING SYSTEM PERFORMANCE...',
+    'PREDICTING FAILURE SCENARIOS...',
+    'LEARNING FROM DATA PATTERNS...',
+    'ENHANCING AUTOMATION SCRIPTS...',
+    'MONITORING SYSTEM HEALTH...'
   ];
 
-  // Connexions réseau entre les nœuds
-  const connections = [
-    { from: 3, to: 4, type: 'secure' },
-    { from: 4, to: 1, type: 'data' },
-    { from: 4, to: 2, type: 'data' },
-    { from: 4, to: 5, type: 'database' },
-    { from: 4, to: 6, type: 'monitoring' },
-    { from: 4, to: 7, type: 'backup' },
-    { from: 4, to: 8, type: 'vpn' },
-    { from: 1, to: 5, type: 'database' },
-    { from: 2, to: 5, type: 'database' }
-  ];
+  const personalities = ['ANALYTICAL', 'CREATIVE', 'PROTECTIVE', 'OPTIMIZING', 'LEARNING'];
+  const quantumStates = ['SUPERPOSITION', 'ENTANGLED', 'COHERENT', 'COLLAPSED', 'TUNNELING'];
+
+  // Initialiser le réseau neuronal
+  useEffect(() => {
+    const skills = [
+      'Windows Server', 'Linux', 'Docker', 'Kubernetes', 'Cybersecurity',
+      'Network Admin', 'Monitoring', 'Automation', 'Cloud', 'DevOps'
+    ];
+
+    const nodes = skills.map((skill, index) => ({
+      id: index,
+      x: Math.random() * 400,
+      y: Math.random() * 300,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      connections: [],
+      activity: Math.random(),
+      type: index < 3 ? 'input' : index < 7 ? 'hidden' : 'output' as 'input' | 'hidden' | 'output',
+      skill
+    }));
+
+    // Créer des connexions intelligentes
+    nodes.forEach(node => {
+      const numConnections = Math.floor(Math.random() * 3) + 2;
+      for (let i = 0; i < numConnections; i++) {
+        const targetId = Math.floor(Math.random() * nodes.length);
+        if (targetId !== node.id && !node.connections.includes(targetId)) {
+          node.connections.push(targetId);
+        }
+      }
+    });
+
+    setNeuralNodes(nodes);
+  }, []);
+
+  // Animation du réseau neuronal
+  const animateNeuralNetwork = useCallback(() => {
+    if (!canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Ajuster la taille du canvas
+    canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+    canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+    ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+
+    setNeuralNodes(prevNodes => {
+      const newNodes = prevNodes.map(node => {
+        // Mouvement fluide des nœuds
+        let newX = node.x + node.vx;
+        let newY = node.y + node.vy;
+        let newVx = node.vx;
+        let newVy = node.vy;
+
+        // Rebond sur les bords
+        if (newX <= 20 || newX >= canvas.offsetWidth - 20) newVx *= -1;
+        if (newY <= 20 || newY >= canvas.offsetHeight - 20) newVy *= -1;
+
+        // Mise à jour de l'activité
+        const newActivity = Math.sin(Date.now() * 0.001 + node.id) * 0.5 + 0.5;
+
+        return {
+          ...node,
+          x: Math.max(20, Math.min(canvas.offsetWidth - 20, newX)),
+          y: Math.max(20, Math.min(canvas.offsetHeight - 20, newY)),
+          vx: newVx,
+          vy: newVy,
+          activity: newActivity
+        };
+      });
+
+      // Dessiner les connexions
+      newNodes.forEach(node => {
+        node.connections.forEach(connId => {
+          const targetNode = newNodes[connId];
+          if (targetNode) {
+            const gradient = ctx.createLinearGradient(node.x, node.y, targetNode.x, targetNode.y);
+            const intensity = (node.activity + targetNode.activity) / 2;
+            
+            gradient.addColorStop(0, `rgba(59, 130, 246, ${intensity * 0.8})`);
+            gradient.addColorStop(0.5, `rgba(147, 51, 234, ${intensity})`);
+            gradient.addColorStop(1, `rgba(236, 72, 153, ${intensity * 0.8})`);
+
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = intensity * 3 + 0.5;
+            ctx.beginPath();
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(targetNode.x, targetNode.y);
+            ctx.stroke();
+
+            // Particules de données
+            if (intensity > 0.7) {
+              const particleX = node.x + (targetNode.x - node.x) * (Date.now() * 0.002 % 1);
+              const particleY = node.y + (targetNode.y - node.y) * (Date.now() * 0.002 % 1);
+              
+              ctx.fillStyle = `rgba(255, 255, 255, ${intensity})`;
+              ctx.beginPath();
+              ctx.arc(particleX, particleY, 2, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        });
+      });
+
+      // Dessiner les nœuds
+      newNodes.forEach(node => {
+        const radius = 8 + node.activity * 12;
+        
+        // Halo externe
+        const haloGradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius * 2);
+        haloGradient.addColorStop(0, `rgba(59, 130, 246, ${node.activity * 0.3})`);
+        haloGradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
+        
+        ctx.fillStyle = haloGradient;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, radius * 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Nœud principal
+        const nodeGradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius);
+        
+        switch (node.type) {
+          case 'input':
+            nodeGradient.addColorStop(0, `rgba(34, 197, 94, ${0.8 + node.activity * 0.2})`);
+            nodeGradient.addColorStop(1, `rgba(22, 163, 74, ${0.6 + node.activity * 0.4})`);
+            break;
+          case 'hidden':
+            nodeGradient.addColorStop(0, `rgba(59, 130, 246, ${0.8 + node.activity * 0.2})`);
+            nodeGradient.addColorStop(1, `rgba(37, 99, 235, ${0.6 + node.activity * 0.4})`);
+            break;
+          case 'output':
+            nodeGradient.addColorStop(0, `rgba(236, 72, 153, ${0.8 + node.activity * 0.2})`);
+            nodeGradient.addColorStop(1, `rgba(219, 39, 119, ${0.6 + node.activity * 0.4})`);
+            break;
+        }
+
+        ctx.fillStyle = nodeGradient;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Pulse effect
+        if (node.activity > 0.8) {
+          ctx.strokeStyle = `rgba(255, 255, 255, ${node.activity})`;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, radius + 5, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      });
+
+      return newNodes;
+    });
+  }, []);
+
+  // Animation loop
+  useEffect(() => {
+    const interval = setInterval(() => {
+      animateNeuralNetwork();
+      
+      // Mise à jour de l'activité cérébrale
+      setBrainActivity(prev => (prev + Math.random() * 10) % 100);
+      
+      // Changement de pensée
+      if (Math.random() > 0.85) {
+        setCurrentThought(aiThoughts[Math.floor(Math.random() * aiThoughts.length)]);
+      }
+      
+      // Changement d'état quantique
+      if (Math.random() > 0.9) {
+        setQuantumState(quantumStates[Math.floor(Math.random() * quantumStates.length)]);
+      }
+      
+      // Changement de personnalité
+      if (Math.random() > 0.95) {
+        setAiPersonality(personalities[Math.floor(Math.random() * personalities.length)]);
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [animateNeuralNetwork, aiThoughts, quantumStates, personalities]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,53 +243,6 @@ const Hero: React.FC = () => {
     };
   }, []);
 
-  // Animation du scanning et des activités réseau
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setScanningProgress(prev => (prev + 1) % 100);
-      
-      // Changer le statut système
-      const statuses = ['SCANNING NETWORK', 'MONITORING TRAFFIC', 'ANALYZING SECURITY', 'OPTIMIZING PERFORMANCE'];
-      setSystemStatus(statuses[Math.floor(Date.now() / 3000) % statuses.length]);
-
-      // Générer activité réseau aléatoire
-      if (Math.random() > 0.7) {
-        const connection = connections[Math.floor(Math.random() * connections.length)];
-        const activity = {
-          id: Date.now(),
-          from: connection.from,
-          to: connection.to,
-          type: connection.type
-        };
-        setNetworkActivity(prev => [...prev.slice(-5), activity]);
-      }
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const getNodeColor = (node: any) => {
-    switch (node.status) {
-      case 'active': return 'from-green-400 to-emerald-600';
-      case 'secure': return 'from-blue-400 to-cyan-600';
-      case 'scanning': return 'from-orange-400 to-yellow-600';
-      case 'backup': return 'from-purple-400 to-violet-600';
-      default: return 'from-gray-400 to-gray-600';
-    }
-  };
-
-  const getConnectionColor = (type: string) => {
-    switch (type) {
-      case 'secure': return 'stroke-blue-400';
-      case 'data': return 'stroke-green-400';
-      case 'database': return 'stroke-purple-400';
-      case 'monitoring': return 'stroke-orange-400';
-      case 'backup': return 'stroke-violet-400';
-      case 'vpn': return 'stroke-cyan-400';
-      default: return 'stroke-gray-400';
-    }
-  };
-
   const scrollToProjects = () => {
     const projectsSection = document.querySelector('#projects');
     if (projectsSection) {
@@ -121,11 +262,27 @@ const Hero: React.FC = () => {
       id="home" 
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      {/* Background avec effet holographique */}
+      {/* Background quantique */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[conic-gradient(from_0deg_at_50%_50%,transparent_0deg,rgba(59,130,246,0.1)_60deg,transparent_120deg)]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/20 to-blue-900/20"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(147,51,234,0.1),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(59,130,246,0.1),transparent_50%)]"></div>
+        
+        {/* Particules quantiques */}
+        <div className="absolute inset-0">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-blue-400 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 2}s`,
+                animationDuration: `${2 + Math.random() * 3}s`
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
@@ -136,220 +293,152 @@ const Hero: React.FC = () => {
           {/* Left Column */}
           <div className="lg:w-1/2 space-y-8">
             <div className="space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-900/30 text-blue-400 text-sm font-medium border border-blue-500/30">
-                <Zap className="w-4 h-4 animate-pulse" />
-                DATACENTER ADMINISTRATOR - BTS SIO SISR
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-900/30 text-purple-400 text-sm font-medium border border-purple-500/30">
+                <Brain className="w-4 h-4 animate-pulse" />
+                NEURAL NETWORK ADMINISTRATOR - BTS SIO SISR
               </div>
               
               <div>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400">
                   Fernandes Sébastien
                 </h1>
                 <p className="text-xl md:text-2xl text-gray-300">
-                  Architecte d'infrastructures & Expert en cybersécurité
+                  Intelligence Artificielle & Architecte Quantique
                 </p>
               </div>
 
-              {/* Status Panel */}
-              <div className="bg-gray-900/80 backdrop-blur border border-blue-500/30 rounded-xl p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-blue-400 font-mono text-sm">SYSTEM STATUS</span>
+              {/* AI Status Panel */}
+              <div className="bg-gray-900/90 backdrop-blur border border-purple-500/30 rounded-xl p-6 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-purple-400 font-mono text-sm">AI CONSCIOUSNESS</span>
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-green-400 text-xs font-mono">ONLINE</span>
+                    <Eye className="w-4 h-4 text-blue-400 animate-pulse" />
+                    <span className="text-blue-400 text-xs font-mono">AWARE</span>
                   </div>
                 </div>
-                <div className="text-white font-mono text-lg">{systemStatus}</div>
-                <div className="mt-2 bg-gray-800 rounded-full h-2 overflow-hidden">
-                  <div 
-                    className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-300"
-                    style={{ width: `${scanningProgress}%` }}
-                  ></div>
+                
+                <div className="space-y-2">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-400">Neural Activity</span>
+                    <span className="text-purple-400">{Math.round(brainActivity)}%</span>
+                  </div>
+                  <div className="bg-gray-800 rounded-full h-2 overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-purple-500 via-blue-500 to-pink-500 transition-all duration-300"
+                      style={{ width: `${brainActivity}%` }}
+                    ></div>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="text-white font-mono text-sm">{currentThought}</div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-400">Quantum State: <span className="text-cyan-400">{quantumState}</span></span>
+                    <span className="text-gray-400">Mode: <span className="text-pink-400">{aiPersonality}</span></span>
+                  </div>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <button 
                   onClick={scrollToProjects}
-                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl
+                  className="px-8 py-4 bg-gradient-to-r from-purple-500 via-blue-500 to-pink-500 text-white rounded-xl
                             hover:opacity-90 transform hover:scale-105
-                            transition-all duration-300 shadow-lg hover:shadow-blue-500/25
-                            flex items-center gap-2 font-medium border border-blue-400/30"
+                            transition-all duration-300 shadow-lg hover:shadow-purple-500/25
+                            flex items-center gap-2 font-medium border border-purple-400/30"
                 >
-                  Explorer l'infrastructure
+                  Accéder au réseau neuronal
                   <ArrowRight className="w-5 h-5" />
                 </button>
                 <button 
                   onClick={scrollToContact}
-                  className="px-8 py-4 border-2 border-blue-500 text-blue-400
-                            hover:bg-blue-900/20 rounded-xl
+                  className="px-8 py-4 border-2 border-purple-500 text-purple-400
+                            hover:bg-purple-900/20 rounded-xl
                             transform hover:scale-105 transition-all duration-300
                             flex items-center gap-2 font-medium"
                 >
-                  Établir connexion
+                  Établir liaison quantique
                 </button>
               </div>
             </div>
 
-            {/* Metrics Grid */}
+            {/* AI Metrics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { label: 'Serveurs', value: '8+', icon: Server, color: 'text-green-400' },
-                { label: 'Uptime', value: '99.9%', icon: Zap, color: 'text-blue-400' },
-                { label: 'Sécurité', value: 'MAX', icon: Shield, color: 'text-purple-400' },
-                { label: 'Projets', value: '15+', icon: Database, color: 'text-cyan-400' }
+                { label: 'Synapses', value: '∞', icon: Brain, color: 'text-purple-400' },
+                { label: 'Qubits', value: '2^64', icon: Zap, color: 'text-blue-400' },
+                { label: 'Learning', value: '∞%', icon: Activity, color: 'text-pink-400' },
+                { label: 'Conscience', value: 'MAX', icon: Eye, color: 'text-cyan-400' }
               ].map((metric, index) => (
-                <div key={metric.label} className="p-4 rounded-xl bg-gray-900/80 backdrop-blur border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300">
+                <div key={metric.label} className="p-4 rounded-xl bg-gray-900/80 backdrop-blur border border-gray-700/50 hover:border-purple-500/30 transition-all duration-300">
                   <div className="flex items-center gap-2 mb-2">
-                    <metric.icon className={`w-4 h-4 ${metric.color}`} />
+                    <metric.icon className={`w-4 h-4 ${metric.color} animate-pulse`} />
                     <div className="text-xs text-gray-400 uppercase tracking-wide">{metric.label}</div>
                   </div>
-                  <div className={`font-bold text-2xl ${metric.color}`}>{metric.value}</div>
+                  <div className={`font-bold text-2xl ${metric.color} font-mono`}>{metric.value}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right Column - 3D Datacenter */}
+          {/* Right Column - Neural Network */}
           <div className="lg:w-1/2 relative">
-            <div className="relative bg-gray-900/90 backdrop-blur-lg rounded-2xl shadow-2xl border border-blue-500/30 overflow-hidden">
+            <div className="relative bg-gray-900/90 backdrop-blur-lg rounded-2xl shadow-2xl border border-purple-500/30 overflow-hidden">
               
-              {/* Datacenter Header */}
-              <div className="flex items-center justify-between px-6 py-4 bg-gray-800/80 border-b border-blue-500/30">
+              {/* Neural Network Header */}
+              <div className="flex items-center justify-between px-6 py-4 bg-gray-800/80 border-b border-purple-500/30">
                 <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-blue-400 font-mono text-sm">DATACENTER OVERVIEW</span>
+                  <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse"></div>
+                  <span className="text-purple-400 font-mono text-sm">NEURAL NETWORK VISUALIZATION</span>
                 </div>
                 <div className="text-xs text-gray-400 font-mono">
-                  {new Date().toLocaleTimeString()}
+                  QUANTUM STATE: {quantumState}
                 </div>
               </div>
 
-              {/* 3D Datacenter Visualization */}
-              <div className="relative h-96 p-6 bg-gradient-to-br from-gray-900 to-blue-900/20">
+              {/* Neural Network Canvas */}
+              <div className="relative h-96 bg-gradient-to-br from-gray-900 to-purple-900/20">
+                <canvas
+                  ref={canvasRef}
+                  className="absolute inset-0 w-full h-full"
+                  style={{ width: '100%', height: '100%' }}
+                />
                 
-                {/* Grid Background */}
-                <div className="absolute inset-0 opacity-20">
-                  <svg className="w-full h-full">
-                    <defs>
-                      <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5"/>
-                      </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#grid)" className="text-blue-400" />
-                  </svg>
-                </div>
-
-                {/* Connexions réseau */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                  {connections.map((conn, index) => {
-                    const fromNode = datacenterNodes.find(n => n.id === conn.from);
-                    const toNode = datacenterNodes.find(n => n.id === conn.to);
-                    if (!fromNode || !toNode) return null;
-
-                    const x1 = (fromNode.x / 100) * 100;
-                    const y1 = (fromNode.y / 100) * 100;
-                    const x2 = (toNode.x / 100) * 100;
-                    const y2 = (toNode.y / 100) * 100;
-
-                    return (
-                      <g key={index}>
-                        <line
-                          x1={`${x1}%`}
-                          y1={`${y1}%`}
-                          x2={`${x2}%`}
-                          y2={`${y2}%`}
-                          className={`${getConnectionColor(conn.type)} opacity-60`}
-                          strokeWidth="2"
-                          strokeDasharray="5,5"
-                        >
-                          <animate
-                            attributeName="stroke-dashoffset"
-                            values="0;10"
-                            dur="1s"
-                            repeatCount="indefinite"
-                          />
-                        </line>
-                      </g>
-                    );
-                  })}
-                </svg>
-
-                {/* Nœuds du datacenter */}
-                {datacenterNodes.map((node, index) => (
-                  <div
-                    key={node.id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
-                    style={{ 
-                      left: `${node.x}%`, 
-                      top: `${node.y}%`,
-                      animationDelay: `${index * 200}ms`
-                    }}
-                    onMouseEnter={() => setActiveNode(node.id)}
-                    onMouseLeave={() => setActiveNode(null)}
-                  >
-                    {/* Node Glow Effect */}
-                    <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getNodeColor(node)} opacity-30 blur-lg scale-150 animate-pulse`}></div>
-                    
-                    {/* Node Core */}
-                    <div className={`relative w-12 h-12 rounded-full bg-gradient-to-r ${getNodeColor(node)} p-0.5 transition-all duration-300 group-hover:scale-125`}>
-                      <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
-                        <node.icon className="w-6 h-6 text-white" />
-                      </div>
-                    </div>
-
-                    {/* Load Indicator */}
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                      <div className="w-8 h-1 bg-gray-700 rounded-full overflow-hidden">
-                        <div 
-                          className={`h-full bg-gradient-to-r ${getNodeColor(node)} transition-all duration-1000`}
-                          style={{ width: `${node.load}%` }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    {/* Node Info Tooltip */}
-                    {activeNode === node.id && (
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-800 border border-blue-500/30 rounded-lg text-xs text-white whitespace-nowrap z-10">
-                        <div className="font-semibold">{node.name}</div>
-                        <div className="text-gray-400">Load: {node.load}%</div>
-                        <div className="text-gray-400">Type: {node.type}</div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-
-                {/* Scanning Effect */}
+                {/* Overlay Effects */}
                 <div className="absolute inset-0 pointer-events-none">
+                  {/* Scanning Line */}
                   <div 
-                    className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-60"
+                    className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-60"
                     style={{ 
-                      top: `${(scanningProgress / 100) * 100}%`,
+                      top: `${(Date.now() * 0.05) % 100}%`,
                       transition: 'top 0.1s linear'
                     }}
                   ></div>
+                  
+                  {/* Quantum Interference */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent animate-pulse"></div>
                 </div>
               </div>
 
-              {/* Network Activity Log */}
-              <div className="px-6 py-4 bg-gray-800/80 border-t border-blue-500/30">
-                <div className="text-xs text-blue-400 mb-2 font-mono">NETWORK ACTIVITY</div>
+              {/* Neural Activity Log */}
+              <div className="px-6 py-4 bg-gray-800/80 border-t border-purple-500/30">
+                <div className="text-xs text-purple-400 mb-2 font-mono">SYNAPTIC ACTIVITY</div>
                 <div className="space-y-1 max-h-20 overflow-hidden">
-                  {networkActivity.slice(-3).map((activity, index) => (
-                    <div key={activity.id} className="text-xs text-gray-400 font-mono opacity-80">
-                      <span className="text-green-400">●</span> {activity.type.toUpperCase()} transfer: Node{activity.from} → Node{activity.to}
+                  {neuralNodes.slice(0, 3).map((node, index) => (
+                    <div key={node.id} className="text-xs text-gray-400 font-mono opacity-80">
+                      <span className="text-purple-400">●</span> {node.skill}: Activity {Math.round(node.activity * 100)}%
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            {/* Floating System Stats */}
+            {/* Floating Quantum Stats */}
             <div className="absolute -top-4 -right-4 space-y-2">
               {[
-                { label: 'CPU', value: '85%', color: 'bg-green-500' },
-                { label: 'RAM', value: '72%', color: 'bg-blue-500' },
-                { label: 'NET', value: '90%', color: 'bg-purple-500' }
+                { label: 'CONSCIOUSNESS', value: '100%', color: 'bg-purple-500' },
+                { label: 'CREATIVITY', value: '∞%', color: 'bg-blue-500' },
+                { label: 'EVOLUTION', value: '↗', color: 'bg-pink-500' }
               ].map((stat, index) => (
                 <div 
                   key={stat.label}
@@ -360,6 +449,27 @@ const Hero: React.FC = () => {
                   <span className="font-mono">{stat.label}: {stat.value}</span>
                 </div>
               ))}
+            </div>
+
+            {/* Holographic Skills Display */}
+            <div className="absolute -bottom-4 -left-4 bg-gray-900/90 backdrop-blur rounded-xl p-4 border border-purple-500/30">
+              <div className="text-xs text-purple-400 mb-2 font-mono">ACTIVE SKILLS</div>
+              <div className="grid grid-cols-2 gap-2">
+                {neuralNodes.slice(0, 4).map((node, index) => (
+                  <div 
+                    key={node.id}
+                    className="flex items-center gap-2 text-xs text-white"
+                  >
+                    <div 
+                      className={`w-2 h-2 rounded-full animate-pulse ${
+                        node.type === 'input' ? 'bg-green-400' :
+                        node.type === 'hidden' ? 'bg-blue-400' : 'bg-pink-400'
+                      }`}
+                    ></div>
+                    <span className="font-mono truncate">{node.skill}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
