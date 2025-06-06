@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
   }, []);
 
   // Fonction pour assombrir une couleur hexadécimale
-  const darkenColor = (color: string, factor: number = 0.6): string => {
+  const darkenColor = (color: string, factor: number = 0.3): string => {
     // Convertir la couleur hex en RGB
     const hex = color.replace('#', '');
     const r = parseInt(hex.substr(0, 2), 16);
@@ -59,13 +59,13 @@ const Hero: React.FC = () => {
       particles.push({
         x,
         y,
-        vx: (Math.random() - 0.5) * 3,
-        vy: (Math.random() - 0.5) * 3,
-        size: Math.random() * 4 + 2,
+        vx: (Math.random() - 0.5) * 4,
+        vy: (Math.random() - 0.5) * 4,
+        size: Math.random() * 5 + 3,
         color: baseColor,
-        darkColor: darkenColor(baseColor, 0.4), // Version plus foncée pour la traînée
+        darkColor: darkenColor(baseColor, 0.3), // Version plus foncée pour la traînée
         life: 0,
-        maxLife: Math.random() * 120 + 80,
+        maxLife: Math.random() * 150 + 100,
         pulse: Math.random() * Math.PI * 2,
         trail: []
       });
@@ -75,11 +75,11 @@ const Hero: React.FC = () => {
       if (!ctx || !canvas) return;
       
       // Effacement progressif du canvas pour créer l'effet de traînée qui s'estompe
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Créer des particules aléatoirement
-      if (Math.random() < 0.3) {
+      if (Math.random() < 0.4) {
         createParticle(Math.random() * canvas.width, Math.random() * canvas.height);
       }
 
@@ -91,7 +91,7 @@ const Hero: React.FC = () => {
         p.trail.push({ x: p.x, y: p.y, age: 0 });
         
         // Limiter la longueur de la traînée et vieillir les points
-        if (p.trail.length > 15) {
+        if (p.trail.length > 20) {
           p.trail.shift();
         }
         
@@ -107,20 +107,27 @@ const Hero: React.FC = () => {
         // Dessiner la traînée avec la couleur plus foncée
         for (let j = 0; j < p.trail.length; j++) {
           const trailPoint = p.trail[j];
-          const trailAlpha = (1 - (trailPoint.age / 15)) * (1 - (p.life / p.maxLife)) * 0.6;
-          const trailSize = p.size * (1 - (trailPoint.age / 15)) * 0.7;
+          const trailAlpha = (1 - (trailPoint.age / 20)) * (1 - (p.life / p.maxLife)) * 0.8;
+          const trailSize = p.size * (1 - (trailPoint.age / 20)) * 0.6;
           
-          if (trailAlpha > 0.01) {
+          if (trailAlpha > 0.02) {
             ctx.globalAlpha = trailAlpha;
             ctx.fillStyle = p.darkColor; // Utiliser la couleur plus foncée pour la traînée
             ctx.beginPath();
             ctx.arc(trailPoint.x, trailPoint.y, trailSize, 0, Math.PI * 2);
             ctx.fill();
+            
+            // Ajouter un effet de lueur pour la traînée
+            ctx.globalAlpha = trailAlpha * 0.3;
+            ctx.fillStyle = p.darkColor;
+            ctx.beginPath();
+            ctx.arc(trailPoint.x, trailPoint.y, trailSize * 1.5, 0, Math.PI * 2);
+            ctx.fill();
           }
         }
 
         // Dessiner la particule principale avec la couleur originale
-        const alpha = Math.sin(p.pulse) * 0.3 + 0.7 * (1 - (p.life / p.maxLife));
+        const alpha = Math.sin(p.pulse) * 0.3 + 0.8 * (1 - (p.life / p.maxLife));
         const size = p.size * (Math.sin(p.pulse * 0.5) * 0.3 + 1);
         
         ctx.globalAlpha = alpha;
@@ -130,10 +137,10 @@ const Hero: React.FC = () => {
         ctx.fill();
 
         // Effet de lueur autour de la particule avec la couleur originale
-        ctx.globalAlpha = alpha * 0.3;
+        ctx.globalAlpha = alpha * 0.4;
         ctx.fillStyle = p.color;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, size * 2, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, size * 2.5, 0, Math.PI * 2);
         ctx.fill();
 
         // Supprimer les particules mortes
