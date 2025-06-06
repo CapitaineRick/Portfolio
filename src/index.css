@@ -59,17 +59,12 @@ section#projects {
 }
 
 section#techwatch {
-  --tw-gradient-from: theme('colors.rose.900' / 5%);
-  --tw-gradient-to: theme('colors.pink.900' / 5%);
-  /* Configuration spéciale pour la veille - SUPPRESSION DES OVERRIDES */
-  min-height: 100vh;
-  /* Retour aux valeurs par défaut pour permettre l'expansion */
-  align-items: center;
-  justify-content: center;
-  /* Fond qui s'adapte au contenu */
-  background-attachment: scroll;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  /* SUPPRESSION COMPLÈTE DU FOND */
+  background: none !important;
+  background-image: none !important;
+  animation: none !important;
+  --tw-gradient-from: transparent;
+  --tw-gradient-to: transparent;
 }
 
 section#contact {
@@ -203,30 +198,4 @@ img {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-/* Solution alternative pour le fond de la section veille */
-section#techwatch {
-  position: relative;
-  background: linear-gradient(135deg, 
-    rgba(244, 63, 94, 0.05) 0%, 
-    rgba(236, 72, 153, 0.05) 50%, 
-    rgba(219, 39, 119, 0.05) 100%
-  );
-  background-attachment: fixed;
-  background-size: 400% 400%;
-  animation: gradientMove 15s ease infinite;
-}
-
-/* Overlay pour assurer la couverture complète */
-section#techwatch::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: inherit;
-  z-index: -1;
-  min-height: 100%;
 }
