@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ExternalLink, Calendar, Tag, BookOpen, ArrowRight, Bell, TrendingUp, Eye, Clock, Star, Filter, Search, X, Rss, Globe, Bookmark } from 'lucide-react';
+import { ExternalLink, Calendar, Tag, BookOpen, ArrowRight, Bell, TrendingUp, Eye, Clock, Star, Filter, Search, X, Rss, Globe, Bookmark, Monitor, Shield, Users, Zap } from 'lucide-react';
 import { techWatchData } from '../../data/techWatchData';
 
 const TechWatch: React.FC = () => {
@@ -45,97 +45,242 @@ const TechWatch: React.FC = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-8 rounded-full"></div>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Suivi des innovations et tendances technologiques dans les domaines de l'infrastructure, de la sécurité et des systèmes
+            Suivi actif des innovations et tendances technologiques dans les domaines de l'infrastructure, de la sécurité et des systèmes
           </p>
         </div>
 
-        {/* Sources et Méthodes */}
+        {/* Méthodologie de veille */}
+        <div className="mb-16">
+          <div className="relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
+            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-3xl p-8">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-white mb-4">Ma Méthodologie de Veille</h3>
+                <p className="text-gray-300 max-w-3xl mx-auto">
+                  Approche structurée et systématique pour rester à jour avec les évolutions technologiques
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* Sources */}
+                <div className="bg-gray-700/50 rounded-2xl p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-blue-900/30 rounded-lg">
+                      <Rss className="w-5 h-5 text-blue-500" />
+                    </div>
+                    <h4 className="font-bold text-white">Sources</h4>
+                  </div>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                      <span>Blogs techniques (ZDNet, JDN)</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                      <span>ANSSI & CERT-FR</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                      <span>Documentation officielle</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                      <span>Reddit r/sysadmin</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                      <span>LinkedIn Tech</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Outils */}
+                <div className="bg-gray-700/50 rounded-2xl p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-purple-900/30 rounded-lg">
+                      <Monitor className="w-5 h-5 text-purple-500" />
+                    </div>
+                    <h4 className="font-bold text-white">Outils</h4>
+                  </div>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                      <span>Feedly (agrégateur RSS)</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                      <span>Google Alerts</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                      <span>Notion (organisation)</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                      <span>Pocket (sauvegarde)</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                      <span>Twitter/X Tech</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Fréquence */}
+                <div className="bg-gray-700/50 rounded-2xl p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-orange-900/30 rounded-lg">
+                      <Clock className="w-5 h-5 text-orange-500" />
+                    </div>
+                    <h4 className="font-bold text-white">Fréquence</h4>
+                  </div>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
+                      <span>Quotidien (30 min/jour)</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
+                      <span>Synthèse hebdomadaire</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
+                      <span>Alertes temps réel</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
+                      <span>Revue mensuelle</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
+                      <span>Veille événementielle</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Traitement */}
+                <div className="bg-gray-700/50 rounded-2xl p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-green-900/30 rounded-lg">
+                      <Zap className="w-5 h-5 text-green-500" />
+                    </div>
+                    <h4 className="font-bold text-white">Traitement</h4>
+                  </div>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                      <span>Tri par pertinence</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                      <span>Analyse d'impact</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                      <span>Synthèse structurée</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                      <span>Archivage organisé</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                      <span>Partage sélectif</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Domaines de veille */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
+            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 h-full">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 bg-red-900/30 rounded-xl">
+                  <Shield className="w-6 h-6 text-red-500" />
+                </div>
+                <h3 className="text-lg font-bold text-white">Cybersécurité</h3>
+              </div>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="text-sm">Nouvelles vulnérabilités</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="text-sm">Techniques d'attaque</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="text-sm">Solutions de protection</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="text-sm">Réglementations</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
             <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 h-full">
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 bg-blue-900/30 rounded-xl">
-                  <Rss className="w-6 h-6 text-blue-500" />
+                  <Monitor className="w-6 h-6 text-blue-500" />
                 </div>
-                <h3 className="text-lg font-bold text-white">Sources</h3>
+                <h3 className="text-lg font-bold text-white">Infrastructure</h3>
               </div>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm">Blogs techniques spécialisés</span>
+                  <span className="text-sm">Virtualisation & Cloud</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm">Bulletins de sécurité (ANSSI, CERT)</span>
+                  <span className="text-sm">Conteneurisation</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm">Documentation officielle</span>
+                  <span className="text-sm">Automatisation</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm">Communautés professionnelles</span>
+                  <span className="text-sm">Monitoring</span>
                 </li>
               </ul>
             </div>
           </div>
 
           <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
             <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 h-full">
               <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-purple-900/30 rounded-xl">
-                  <Eye className="w-6 h-6 text-purple-500" />
+                <div className="p-3 bg-green-900/30 rounded-xl">
+                  <TrendingUp className="w-6 h-6 text-green-500" />
                 </div>
-                <h3 className="text-lg font-bold text-white">Méthode</h3>
+                <h3 className="text-lg font-bold text-white">Tendances</h3>
               </div>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span className="text-sm">Surveillance quotidienne</span>
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-sm">Intelligence Artificielle</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span className="text-sm">Analyse et synthèse</span>
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-sm">Edge Computing</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span className="text-sm">Évaluation de l'impact</span>
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-sm">Zero Trust</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span className="text-sm">Documentation structurée</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 h-full">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-orange-900/30 rounded-xl">
-                  <TrendingUp className="w-6 h-6 text-orange-500" />
-                </div>
-                <h3 className="text-lg font-bold text-white">Objectifs</h3>
-              </div>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                  <span className="text-sm">Anticiper les évolutions</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                  <span className="text-sm">Identifier les menaces</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                  <span className="text-sm">Découvrir les innovations</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                  <span className="text-sm">Maintenir l'expertise</span>
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-sm">DevSecOps</span>
                 </li>
               </ul>
             </div>
