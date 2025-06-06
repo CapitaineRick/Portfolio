@@ -11,74 +11,23 @@ html {
   @apply transition-all duration-300 ease-in-out;
 }
 
-/* Section styling */
+/* Section styling - FOND NEUTRE POUR TOUTES LES SECTIONS */
 section {
   @apply relative overflow-hidden transition-all duration-300 ease-in-out py-16;
-  background-image: radial-gradient(
-    circle at center,
-    var(--tw-gradient-from) 0%,
-    var(--tw-gradient-to) 100%
-  );
-  background-size: 200% 200%;
-  animation: gradientMove 15s ease infinite;
+  /* SUPPRESSION COMPLÈTE DE TOUS LES FONDS COLORÉS */
+  background: none !important;
+  background-image: none !important;
+  animation: none !important;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Section colors */
-section {
-  --tw-gradient-from: theme('colors.gray.900' / 5%);
-  --tw-gradient-to: theme('colors.gray.900' / 5%);
-}
-
-section#home {
-  --tw-gradient-from: theme('colors.orange.900' / 5%);
-  --tw-gradient-to: theme('colors.purple.900' / 5%);
-}
-
-section#about {
-  --tw-gradient-from: theme('colors.blue.900' / 5%);
-  --tw-gradient-to: theme('colors.purple.900' / 5%);
-}
-
-section#education {
-  --tw-gradient-from: theme('colors.purple.900' / 5%);
-  --tw-gradient-to: theme('colors.blue.900' / 5%);
-}
-
-section#skills {
-  --tw-gradient-from: theme('colors.green.900' / 5%);
-  --tw-gradient-to: theme('colors.emerald.900' / 5%);
-}
-
-section#projects {
-  --tw-gradient-from: theme('colors.orange.900' / 5%);
-  --tw-gradient-to: theme('colors.red.900' / 5%);
-}
-
-section#techwatch {
-  /* SUPPRESSION COMPLÈTE DU FOND */
-  background: none !important;
-  background-image: none !important;
-  animation: none !important;
-  --tw-gradient-from: transparent;
-  --tw-gradient-to: transparent;
-}
-
-section#contact {
-  --tw-gradient-from: theme('colors.emerald.900' / 5%);
-  --tw-gradient-to: theme('colors.green.900' / 5%);
-}
+/* SUPPRESSION DE TOUTES LES COULEURS DE SECTION */
+/* Plus aucun fond coloré pour aucune section */
 
 /* Animations */
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 @keyframes blob {
   0% { transform: translate(0px, 0px) scale(1); }
   33% { transform: translate(30px, -50px) scale(1.1); }
