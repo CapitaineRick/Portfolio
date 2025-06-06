@@ -21,7 +21,6 @@ section {
   );
   background-size: 200% 200%;
   animation: gradientMove 15s ease infinite;
-  min-height: auto; /* Hauteur dynamique par défaut */
 }
 
 /* Section colors */
@@ -33,7 +32,7 @@ section {
 section#home {
   --tw-gradient-from: theme('colors.orange.900' / 5%);
   --tw-gradient-to: theme('colors.purple.900' / 5%);
-  @apply min-h-screen flex items-center justify-center; /* Garde min-h-screen pour hero */
+  @apply min-h-screen flex items-center justify-center;
 }
 
 section#about {
