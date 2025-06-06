@@ -11,19 +11,9 @@ html {
   @apply transition-all duration-300 ease-in-out;
 }
 
-/* Section styling de base */
+/* Section styling */
 section {
-  @apply relative overflow-hidden transition-all duration-300 ease-in-out py-16;
-}
-
-/* Sections avec fond fixe et centrage */
-section#home,
-section#about,
-section#education,
-section#skills,
-section#projects,
-section#contact {
-  @apply min-h-screen flex items-center justify-center;
+  @apply relative overflow-hidden transition-all duration-300 ease-in-out min-h-screen py-16 flex items-center justify-center;
   background-image: radial-gradient(
     circle at center,
     var(--tw-gradient-from) 0%,
@@ -33,23 +23,12 @@ section#contact {
   animation: gradientMove 15s ease infinite;
 }
 
-/* Section veille avec fond adaptatif */
-section#techwatch {
-  background: linear-gradient(
-    135deg,
-    rgba(136, 19, 55, 0.08) 0%,    /* rose-900 */
-    rgba(190, 24, 93, 0.12) 25%,   /* pink-600 */
-    rgba(124, 58, 237, 0.10) 50%,  /* violet-600 */
-    rgba(234, 88, 12, 0.14) 75%,   /* orange-600 */
-    rgba(136, 19, 55, 0.08) 100%   /* rose-900 */
-  );
-  background-size: 400% 400%;
-  animation: techWatchGradient 25s ease infinite;
-  min-height: auto;
-  padding: 4rem 0;
+/* Section colors */
+section {
+  --tw-gradient-from: theme('colors.gray.900' / 5%);
+  --tw-gradient-to: theme('colors.gray.900' / 5%);
 }
 
-/* Section colors pour les sections fixes */
 section#home {
   --tw-gradient-from: theme('colors.orange.900' / 5%);
   --tw-gradient-to: theme('colors.purple.900' / 5%);
@@ -75,6 +54,11 @@ section#projects {
   --tw-gradient-to: theme('colors.red.900' / 5%);
 }
 
+section#techwatch {
+  --tw-gradient-from: theme('colors.rose.900' / 5%);
+  --tw-gradient-to: theme('colors.pink.900' / 5%);
+}
+
 section#contact {
   --tw-gradient-from: theme('colors.emerald.900' / 5%);
   --tw-gradient-to: theme('colors.green.900' / 5%);
@@ -85,25 +69,6 @@ section#contact {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
-}
-
-/* Animation spécifique pour la veille */
-@keyframes techWatchGradient {
-  0% { 
-    background-position: 0% 50%; 
-  }
-  25% { 
-    background-position: 100% 50%; 
-  }
-  50% { 
-    background-position: 100% 100%; 
-  }
-  75% { 
-    background-position: 0% 100%; 
-  }
-  100% { 
-    background-position: 0% 50%; 
-  }
 }
 
 @keyframes blob {
