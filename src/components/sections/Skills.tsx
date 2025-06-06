@@ -45,23 +45,6 @@ const Skills: React.FC = () => {
     };
   }, []);
 
-  const getSkillLevelColor = (level: number) => {
-    switch (level) {
-      case 3: return 'from-green-500 to-emerald-500';
-      case 2: return 'from-yellow-500 to-orange-500';
-      default: return 'from-blue-500 to-purple-500';
-    }
-  };
-
-  const getSkillLevelText = (level: number) => {
-    switch (level) {
-      case 3: return 'Expert';
-      case 2: return 'Intermédiaire';
-      case 1: return 'Débutant';
-      default: return 'En formation';
-    }
-  };
-
   return (
     <section id="skills" className="py-16 md:py-24 flex items-center justify-center relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -99,7 +82,7 @@ const Skills: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {category.skills.map((skill, skillIndex) => (
                       <div 
                         key={skillIndex}
@@ -118,12 +101,6 @@ const Skills: React.FC = () => {
                               </div>
                               <div>
                                 <h4 className="font-semibold text-white">{skill.name}</h4>
-                                <div className="flex items-center gap-2">
-                                  <div className={`h-2 w-2 rounded-full bg-gradient-to-r ${getSkillLevelColor(skill.level)}`} />
-                                  <span className="text-sm text-gray-400">
-                                    {getSkillLevelText(skill.level)}
-                                  </span>
-                                </div>
                               </div>
                             </div>
                             <button
@@ -138,20 +115,11 @@ const Skills: React.FC = () => {
                             </button>
                           </div>
 
-                          <div className="mb-4">
-                            <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                              <div 
-                                className={`h-full rounded-full bg-gradient-to-r ${getSkillLevelColor(skill.level)} transition-all duration-300`}
-                                style={{ width: `${(skill.level / 3) * 100}%` }}
-                              />
-                            </div>
-                          </div>
-
                           <div className={`overflow-hidden transition-all duration-300 ${
-                            expandedSkills[skill.name] ? 'max-h-96' : 'max-h-0'
+                            expandedSkills[skill.name] ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                           }`}>
                             <div className="pt-4 border-t border-gray-700">
-                              <p className="text-sm text-gray-400">
+                              <p className="text-sm text-gray-300 leading-relaxed">
                                 {skill.description}
                               </p>
                             </div>
