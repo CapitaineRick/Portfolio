@@ -82,15 +82,19 @@ const Skills: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {/* Grille avec hauteurs égales */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                     {category.skills.map((skill, skillIndex) => (
                       <div 
                         key={skillIndex}
-                        className="relative group transition-all duration-300"
+                        className="relative group transition-all duration-300 h-full"
                       >
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-                        <div className="relative bg-gray-800 rounded-xl p-6 h-full flex flex-col">
-                          <div className="flex items-center justify-between mb-4">
+                        
+                        {/* Carte avec hauteur flexible et structure en colonnes */}
+                        <div className="relative bg-gray-800 rounded-xl p-6 h-full flex flex-col min-h-[200px]">
+                          {/* En-tête fixe */}
+                          <div className="flex items-start justify-between mb-4 flex-shrink-0">
                             <div className="flex items-center gap-3 flex-1 min-w-0">
                               <div className="h-12 w-12 rounded-lg bg-gray-700 p-2 flex items-center justify-center flex-shrink-0">
                                 <img 
@@ -100,7 +104,9 @@ const Skills: React.FC = () => {
                                 />
                               </div>
                               <div className="min-w-0 flex-1">
-                                <h4 className="font-semibold text-white truncate">{skill.name}</h4>
+                                <h4 className="font-semibold text-white text-base leading-tight">
+                                  {skill.name}
+                                </h4>
                               </div>
                             </div>
                             <button
@@ -116,13 +122,16 @@ const Skills: React.FC = () => {
                             </button>
                           </div>
 
-                          <div className={`overflow-hidden transition-all duration-300 ${
-                            expandedSkills[skill.name] ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                          }`}>
-                            <div className="pt-4 border-t border-gray-700">
-                              <p className="text-sm text-gray-300 leading-relaxed">
-                                {skill.description}
-                              </p>
+                          {/* Contenu extensible */}
+                          <div className="flex-1 flex flex-col">
+                            <div className={`overflow-hidden transition-all duration-300 ${
+                              expandedSkills[skill.name] ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                            }`}>
+                              <div className="pt-4 border-t border-gray-700">
+                                <p className="text-sm text-gray-300 leading-relaxed">
+                                  {skill.description}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
