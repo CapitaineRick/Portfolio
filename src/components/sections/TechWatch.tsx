@@ -51,48 +51,6 @@ const TechWatch: React.FC = () => {
           <p className="text-lg text-gray-300 max-w-3xl mx-auto font-medium mb-12">
             Suivi des dernières innovations en cybersécurité, infrastructure et technologies émergentes
           </p>
-
-          {/* Statistiques de veille */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-              <div className="relative bg-gray-800 p-6 rounded-2xl text-center">
-                <div className="flex items-center justify-center mb-4">
-                  <div className="p-3 bg-orange-900/30 rounded-xl">
-                    <Bell className="text-orange-500" size={24} />
-                  </div>
-                </div>
-                <div className="text-3xl font-bold text-white mb-2">{techWatchData.length}</div>
-                <div className="text-sm text-gray-400">Articles analysés</div>
-              </div>
-            </div>
-
-            <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-              <div className="relative bg-gray-800 p-6 rounded-2xl text-center">
-                <div className="flex items-center justify-center mb-4">
-                  <div className="p-3 bg-purple-900/30 rounded-xl">
-                    <Rss className="text-purple-500" size={24} />
-                  </div>
-                </div>
-                <div className="text-3xl font-bold text-white mb-2">{categories.length}</div>
-                <div className="text-sm text-gray-400">Domaines suivis</div>
-              </div>
-            </div>
-
-            <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-              <div className="relative bg-gray-800 p-6 rounded-2xl text-center">
-                <div className="flex items-center justify-center mb-4">
-                  <div className="p-3 bg-blue-900/30 rounded-xl">
-                    <BookOpen className="text-blue-500" size={24} />
-                  </div>
-                </div>
-                <div className="text-3xl font-bold text-white mb-2">24/7</div>
-                <div className="text-sm text-gray-400">Surveillance active</div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Filtres par catégorie - Style moderne */}
