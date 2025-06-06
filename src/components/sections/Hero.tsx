@@ -189,11 +189,7 @@ const Hero: React.FC = () => {
                           after:absolute after:inset-0 after:bg-white/20 after:translate-x-[-100%] after:skew-x-12 after:transition-transform after:duration-700
                           hover:after:translate-x-[100%]"
               >
-                <span className="relative z-10 transition-all duration-300 group-hover:scale-105">
-                  Découvrir mon portfolio
-                </span>
-                <ArrowRight className="w-5 h-5 relative z-10 transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" />
-                
+
                 {/* Particules qui s'échappent au hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-orange-300 rounded-full animate-ping"></div>
