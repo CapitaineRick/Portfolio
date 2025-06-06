@@ -13,7 +13,7 @@ html {
 
 /* Section styling */
 section {
-  @apply relative overflow-hidden transition-all duration-300 ease-in-out min-h-screen py-16 flex items-center justify-center;
+  @apply relative overflow-hidden transition-all duration-300 ease-in-out py-16;
   background-image: radial-gradient(
     circle at center,
     var(--tw-gradient-from) 0%,
@@ -21,6 +21,10 @@ section {
   );
   background-size: 200% 200%;
   animation: gradientMove 15s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Section colors */
@@ -57,6 +61,11 @@ section#projects {
 section#techwatch {
   --tw-gradient-from: theme('colors.rose.900' / 5%);
   --tw-gradient-to: theme('colors.pink.900' / 5%);
+  /* Permet à la section de grandir avec le contenu */
+  min-height: auto;
+  align-items: flex-start;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 section#contact {
