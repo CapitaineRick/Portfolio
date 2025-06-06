@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Users } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -107,7 +107,7 @@ const Hero: React.FC = () => {
       {/* Matrix Canvas Background */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-15"
         style={{ zIndex: 1 }}
       />
 
@@ -124,21 +124,25 @@ const Hero: React.FC = () => {
             <div className="space-y-6 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-900/30 text-orange-400 text-sm font-medium border border-orange-500/30">
                 <Server className="w-4 h-4" />
-                BTS SIO SISR - Administrateur Systèmes & Réseaux
+                BTS SIO SISR • Futur Expert en Cybersécurité
               </div>
               
               <div>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-orange-400">
-                    Fernandes
+                    Sébastien
                   </span>
                   <br />
                   <span className="text-white">
-                    Sébastien
+                    Fernandes
                   </span>
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-                  Étudiant passionné par l'infrastructure IT & la cybersécurité
+                <p className="text-xl md:text-2xl text-gray-300 leading-relaxed mb-4">
+                  Administrateur Systèmes & Réseaux passionné par la cybersécurité
+                </p>
+                <p className="text-lg text-gray-400 leading-relaxed">
+                  Spécialisé en infrastructure IT, sécurisation des systèmes et administration réseau. 
+                  En formation pour devenir expert en pentesting et audit de sécurité.
                 </p>
               </div>
 
@@ -150,7 +154,7 @@ const Hero: React.FC = () => {
                             transition-all duration-300 shadow-lg hover:shadow-orange-500/25
                             flex items-center gap-2 font-medium"
                 >
-                  Découvrir mes projets
+                  Découvrir mes réalisations
                   <ArrowRight className="w-5 h-5" />
                 </button>
                 <button 
@@ -160,86 +164,103 @@ const Hero: React.FC = () => {
                             transform hover:scale-105 transition-all duration-300
                             flex items-center gap-2 font-medium backdrop-blur-sm"
                 >
-                  Me contacter
+                  Opportunités pro
                 </button>
               </div>
             </div>
 
             {/* Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="p-6 rounded-xl bg-gray-800/80 backdrop-blur shadow-lg border border-gray-700/50">
+              <div className="p-6 rounded-xl bg-gray-800/80 backdrop-blur shadow-lg border border-gray-700/50 hover:border-orange-500/50 transition-colors">
                 <div className="font-bold text-3xl text-orange-400">2+</div>
-                <div className="text-sm text-gray-400">Années d'études</div>
+                <div className="text-sm text-gray-400">Années BTS SIO</div>
               </div>
-              <div className="p-6 rounded-xl bg-gray-800/80 backdrop-blur shadow-lg border border-gray-700/50">
-                <div className="font-bold text-3xl text-orange-400">15+</div>
-                <div className="text-sm text-gray-400">Projets réalisés</div>
+              <div className="p-6 rounded-xl bg-gray-800/80 backdrop-blur shadow-lg border border-gray-700/50 hover:border-orange-500/50 transition-colors">
+                <div className="font-bold text-3xl text-orange-400">20+</div>
+                <div className="text-sm text-gray-400">Projets techniques</div>
               </div>
-              <div className="p-6 rounded-xl bg-gray-800/80 backdrop-blur shadow-lg border border-gray-700/50">
-                <div className="font-bold text-3xl text-orange-400">-</div>
-                <div className="text-sm text-gray-400">Certifications</div>
+              <div className="p-6 rounded-xl bg-gray-800/80 backdrop-blur shadow-lg border border-gray-700/50 hover:border-orange-500/50 transition-colors">
+                <div className="font-bold text-3xl text-orange-400">5+</div>
+                <div className="text-sm text-gray-400">Technologies maîtrisées</div>
               </div> 
-              <div className="p-6 rounded-xl bg-gray-800/80 backdrop-blur shadow-lg border border-gray-700/50">
+              <div className="p-6 rounded-xl bg-gray-800/80 backdrop-blur shadow-lg border border-gray-700/50 hover:border-orange-500/50 transition-colors">
                 <div className="font-bold text-3xl text-orange-400">2</div>
-                <div className="text-sm text-gray-400">Expériences Pro</div>
+                <div className="text-sm text-gray-400">Expériences pro</div>
               </div>
             </div>
           </div>
 
-          {/* Right Column - Skills Showcase */}
+          {/* Right Column - Expertise Showcase */}
           <div className="lg:w-1/2 relative">
             <div className="relative bg-gray-800/30 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-gray-700/50">
               <div className="space-y-8">
-                {/* Featured Skills */}
+                {/* Header */}
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold text-white mb-2">Domaines d'expertise</h3>
+                  <p className="text-gray-400">Technologies et compétences techniques</p>
+                </div>
+
+                {/* Expertise Grid */}
                 <div className="grid grid-cols-2 gap-6">
                   {[
                     { 
                       icon: Server, 
                       label: 'Infrastructure', 
                       gradient: 'from-orange-500 to-red-500',
-                      description: 'Administration système Windows & Linux'
+                      description: 'Windows Server, Linux, Virtualisation',
+                      skills: ['Active Directory', 'Proxmox', 'VMware']
                     },
                     { 
                       icon: Shield, 
-                      label: 'Sécurité', 
+                      label: 'Cybersécurité', 
                       gradient: 'from-blue-500 to-cyan-500',
-                      description: 'Protection et audit des systèmes'
+                      description: 'Audit, Pentesting, Sécurisation',
+                      skills: ['Kali Linux', 'Wireshark', 'VPN']
                     },
                     { 
                       icon: Network, 
                       label: 'Réseaux', 
                       gradient: 'from-green-500 to-emerald-500',
-                      description: 'Configuration et maintenance'
+                      description: 'Cisco, TCP/IP, Supervision',
+                      skills: ['Routage', 'VLAN', 'Zabbix']
                     },
                     { 
                       icon: Terminal, 
-                      label: 'DevOps', 
+                      label: 'Automatisation', 
                       gradient: 'from-purple-500 to-pink-500',
-                      description: 'Automatisation et scripts'
+                      description: 'Scripts, DevOps, Monitoring',
+                      skills: ['Bash', 'PowerShell', 'Python']
                     }
                   ].map((item, index) => (
                     <div
                       key={index}
-                      className="relative group transition-all duration-300"
+                      className="relative group transition-all duration-300 hover:scale-105"
                     >
                       <div className={`
-                        w-full aspect-square rounded-2xl
+                        w-full rounded-2xl
                         bg-gradient-to-br ${item.gradient}
                         p-0.5 transition-all duration-300
-                        group-hover:scale-105 cursor-pointer
+                        cursor-pointer
                       `}>
                         <div className="w-full h-full rounded-2xl bg-gray-800 p-6
                                       flex flex-col items-center justify-center gap-4
-                                      border border-gray-700">
-                          <item.icon className="w-12 h-12 text-white transition-transform duration-300
-                                              group-hover:scale-110 group-hover:rotate-6" />
+                                      border border-gray-700 hover:border-gray-600 transition-colors">
+                          <item.icon className="w-10 h-10 text-white transition-transform duration-300
+                                              group-hover:scale-110" />
                           <div className="text-center">
-                            <div className="font-medium text-white mb-1">
+                            <div className="font-bold text-white mb-2 text-lg">
                               {item.label}
                             </div>
-                            <p className="text-xs text-gray-400">
+                            <p className="text-xs text-gray-400 mb-3 leading-tight">
                               {item.description}
                             </p>
+                            <div className="space-y-1">
+                              {item.skills.map((skill, skillIndex) => (
+                                <div key={skillIndex} className="text-xs text-gray-500 bg-gray-700/50 px-2 py-1 rounded">
+                                  {skill}
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -247,25 +268,41 @@ const Hero: React.FC = () => {
                   ))}
                 </div>
 
-                {/* Current Focus */}
+                {/* Objectifs professionnels */}
                 <div className="bg-gradient-to-br from-orange-500/5 to-purple-500/5 rounded-xl p-6 border border-gray-700/50">
-                  <h3 className="text-lg font-semibold mb-4 text-white">
-                    Objectifs professionnels
-                  </h3>
+                  <h4 className="text-lg font-semibold mb-4 text-white flex items-center gap-2">
+                    <Users className="w-5 h-5 text-orange-500" />
+                    Objectifs de carrière
+                  </h4>
                   <ul className="space-y-3">
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                      Devenir expert en sécurité des systèmes
+                    <li className="flex items-center gap-3 text-sm text-gray-300">
+                      <div className="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0"></div>
+                      <span><strong>Court terme :</strong> Administrateur systèmes & réseaux</span>
                     </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                      Spécialisation en pentesting
+                    <li className="flex items-center gap-3 text-sm text-gray-300">
+                      <div className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></div>
+                      <span><strong>Moyen terme :</strong> Expert en cybersécurité</span>
                     </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                      Certification en cybersécurité
+                    <li className="flex items-center gap-3 text-sm text-gray-300">
+                      <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
+                      <span><strong>Long terme :</strong> Pentester / Consultant sécurité</span>
                     </li>
                   </ul>
+                </div>
+
+                {/* Call to action secondaire */}
+                <div className="text-center">
+                  <p className="text-sm text-gray-400 mb-3">
+                    Recherche d'opportunités en alternance ou stage
+                  </p>
+                  <div className="flex justify-center gap-3">
+                    <span className="px-3 py-1 bg-green-900/30 text-green-400 rounded-full text-xs">
+                      Disponible immédiatement
+                    </span>
+                    <span className="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-xs">
+                      Mobilité Île-de-France
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
