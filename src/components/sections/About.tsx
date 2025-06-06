@@ -322,18 +322,16 @@ const About: React.FC = () => {
                             {education.description}
                           </p>
                           {education.id === "bts-sio" && (
-                            <div className="mt-6 p-4 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-xl border border-blue-800/30">
-                              <a
-                                href=""
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
-                              >
-                                <FileText className="w-4 h-4" />
-                                <span>Tableau de Synthèse</span>
-                                <ExternalLink className="w-4 h-4" />
-                              </a>
-                            </div>
+                            <a
+                              href=""
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-3 px-4 py-2 mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                            >
+                              <FileText className="w-4 h-4" />
+                              <span>Tableau de Synthèse</span>
+                              <ExternalLink className="w-4 h-4" />
+                            </a>
                           )}
 
                           {education.skills && (
