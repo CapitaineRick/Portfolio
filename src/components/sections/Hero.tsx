@@ -155,26 +155,6 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column - Amélioré */}
-          <div className="lg:w-1/2 relative">
-            {/* Floating Tech Icons */}
-            <div className="absolute inset-0 pointer-events-none">
-              {techIcons.map((item, index) => (
-                <div
-                  key={index}
-                  className="absolute animate-pulse"
-                  style={{
-                    top: `${Math.random() * 80 + 10}%`,
-                    left: `${Math.random() * 80 + 10}%`,
-                    animationDelay: `${item.delay}ms`,
-                    animationDuration: `${2000 + Math.random() * 1000}ms`
-                  }}
-                >
-                  <item.icon className="w-6 h-6 text-orange-500/30" />
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </section>
