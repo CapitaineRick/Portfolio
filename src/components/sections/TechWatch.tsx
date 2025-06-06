@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ExternalLink, Calendar, Tag, BookOpen, ArrowRight, Bell, TrendingUp, Eye, Clock, Star, Filter, Search, X, Rss, Globe, Bookmark, Monitor, Shield, Users, Zap } from 'lucide-react';
+import { ExternalLink, Calendar, Globe, Shield, Monitor, TrendingUp, Clock, Rss, Zap, BookOpen } from 'lucide-react';
 import { techWatchData } from '../../data/techWatchData';
 
 const TechWatch: React.FC = () => {
@@ -45,244 +45,95 @@ const TechWatch: React.FC = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-8 rounded-full"></div>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Suivi actif des innovations et tendances technologiques dans les domaines de l'infrastructure, de la sécurité et des systèmes
+            Suivi actif des innovations technologiques en cybersécurité, infrastructure et systèmes
           </p>
         </div>
 
-        {/* Méthodologie de veille */}
+        {/* Méthode de veille - Version simplifiée */}
         <div className="mb-16">
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
             <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-3xl p-8">
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-4">Ma Méthodologie de Veille</h3>
-                <p className="text-gray-300 max-w-3xl mx-auto">
-                  Approche structurée et systématique pour rester à jour avec les évolutions technologiques
-                </p>
+                <h3 className="text-2xl font-bold text-white mb-4">Ma Méthode de Veille</h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Sources */}
-                <div className="bg-gray-700/50 rounded-2xl p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-blue-900/30 rounded-lg">
-                      <Rss className="w-5 h-5 text-blue-500" />
-                    </div>
-                    <h4 className="font-bold text-white">Sources</h4>
+                <div className="text-center">
+                  <div className="p-4 bg-blue-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                    <Rss className="w-8 h-8 text-blue-500" />
                   </div>
-                  <ul className="space-y-2 text-sm text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                      <span>Blogs techniques (ZDNet, JDN)</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                      <span>ANSSI & CERT-FR</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                      <span>Documentation officielle</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                      <span>Reddit r/sysadmin</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                      <span>LinkedIn Tech</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Outils */}
-                <div className="bg-gray-700/50 rounded-2xl p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-purple-900/30 rounded-lg">
-                      <Monitor className="w-5 h-5 text-purple-500" />
-                    </div>
-                    <h4 className="font-bold text-white">Outils</h4>
-                  </div>
-                  <ul className="space-y-2 text-sm text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-                      <span>Feedly (agrégateur RSS)</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-                      <span>Google Alerts</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-                      <span>Notion (organisation)</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-                      <span>Pocket (sauvegarde)</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-                      <span>Twitter/X Tech</span>
-                    </li>
-                  </ul>
+                  <h4 className="font-bold text-white mb-3">Sources</h4>
+                  <p className="text-gray-300 text-sm">
+                    Blogs techniques, ANSSI, documentation officielle, Reddit, LinkedIn
+                  </p>
                 </div>
 
                 {/* Fréquence */}
-                <div className="bg-gray-700/50 rounded-2xl p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-orange-900/30 rounded-lg">
-                      <Clock className="w-5 h-5 text-orange-500" />
-                    </div>
-                    <h4 className="font-bold text-white">Fréquence</h4>
+                <div className="text-center">
+                  <div className="p-4 bg-orange-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                    <Clock className="w-8 h-8 text-orange-500" />
                   </div>
-                  <ul className="space-y-2 text-sm text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
-                      <span>Quotidien (30 min/jour)</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
-                      <span>Synthèse hebdomadaire</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
-                      <span>Alertes temps réel</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
-                      <span>Revue mensuelle</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
-                      <span>Veille événementielle</span>
-                    </li>
-                  </ul>
+                  <h4 className="font-bold text-white mb-3">Fréquence</h4>
+                  <p className="text-gray-300 text-sm">
+                    Quotidien (30 min), synthèse hebdomadaire, alertes temps réel
+                  </p>
                 </div>
 
                 {/* Traitement */}
-                <div className="bg-gray-700/50 rounded-2xl p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-green-900/30 rounded-lg">
-                      <Zap className="w-5 h-5 text-green-500" />
-                    </div>
-                    <h4 className="font-bold text-white">Traitement</h4>
+                <div className="text-center">
+                  <div className="p-4 bg-green-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                    <Zap className="w-8 h-8 text-green-500" />
                   </div>
-                  <ul className="space-y-2 text-sm text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                      <span>Tri par pertinence</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                      <span>Analyse d'impact</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                      <span>Synthèse structurée</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                      <span>Archivage organisé</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                      <span>Partage sélectif</span>
-                    </li>
-                  </ul>
+                  <h4 className="font-bold text-white mb-3">Traitement</h4>
+                  <p className="text-gray-300 text-sm">
+                    Tri par pertinence, analyse d'impact, synthèse structurée
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Domaines de veille */}
+        {/* Domaines de veille - Version simplifiée */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 h-full">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-red-900/30 rounded-xl">
-                  <Shield className="w-6 h-6 text-red-500" />
-                </div>
-                <h3 className="text-lg font-bold text-white">Cybersécurité</h3>
+            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 text-center">
+              <div className="p-4 bg-red-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <Shield className="w-8 h-8 text-red-500" />
               </div>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                  <span className="text-sm">Nouvelles vulnérabilités</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                  <span className="text-sm">Techniques d'attaque</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                  <span className="text-sm">Solutions de protection</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                  <span className="text-sm">Réglementations</span>
-                </li>
-              </ul>
+              <h3 className="text-lg font-bold text-white mb-3">Cybersécurité</h3>
+              <p className="text-gray-300 text-sm">
+                Vulnérabilités, attaques, protections, réglementations
+              </p>
             </div>
           </div>
 
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 h-full">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-blue-900/30 rounded-xl">
-                  <Monitor className="w-6 h-6 text-blue-500" />
-                </div>
-                <h3 className="text-lg font-bold text-white">Infrastructure</h3>
+            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 text-center">
+              <div className="p-4 bg-blue-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <Monitor className="w-8 h-8 text-blue-500" />
               </div>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm">Virtualisation & Cloud</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm">Conteneurisation</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm">Automatisation</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm">Monitoring</span>
-                </li>
-              </ul>
+              <h3 className="text-lg font-bold text-white mb-3">Infrastructure</h3>
+              <p className="text-gray-300 text-sm">
+                Cloud, conteneurs, automatisation, monitoring
+              </p>
             </div>
           </div>
 
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 h-full">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-green-900/30 rounded-xl">
-                  <TrendingUp className="w-6 h-6 text-green-500" />
-                </div>
-                <h3 className="text-lg font-bold text-white">Tendances</h3>
+            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 text-center">
+              <div className="p-4 bg-green-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <TrendingUp className="w-8 h-8 text-green-500" />
               </div>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-sm">Intelligence Artificielle</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-sm">Edge Computing</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-sm">Zero Trust</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-sm">DevSecOps</span>
-                </li>
-              </ul>
+              <h3 className="text-lg font-bold text-white mb-3">Tendances</h3>
+              <p className="text-gray-300 text-sm">
+                IA, Edge Computing, Zero Trust, DevSecOps
+              </p>
             </div>
           </div>
         </div>
@@ -297,7 +148,7 @@ const TechWatch: React.FC = () => {
                 : 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-600'
             }`}
           >
-            Toutes les catégories
+            Tous
           </button>
           {categories.map(category => (
             <button
@@ -314,20 +165,20 @@ const TechWatch: React.FC = () => {
           ))}
         </div>
         
-        {/* Articles en cartes compactes */}
+        {/* Articles */}
         <div 
           ref={watchRef}
           className="transition-all duration-300 opacity-0 translate-y-10"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {filteredArticles.map((item, index) => (
+            {filteredArticles.map((item) => (
               <div 
                 key={item.title}
                 className="relative group cursor-pointer"
                 onClick={() => setExpandedCard(expandedCard === item.title ? null : item.title)}
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-                <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl overflow-hidden h-full">
+                <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl overflow-hidden">
                   {/* Header avec image */}
                   <div className="relative h-48">
                     <img 
@@ -352,7 +203,7 @@ const TechWatch: React.FC = () => {
 
                   {/* Contenu */}
                   <div className="p-6">
-                    <h3 className="text-lg font-bold text-white mb-3 line-clamp-2 group-hover:text-orange-400 transition-colors">
+                    <h3 className="text-lg font-bold text-white mb-3 group-hover:text-orange-400 transition-colors">
                       {item.title}
                     </h3>
 
@@ -373,7 +224,7 @@ const TechWatch: React.FC = () => {
                       )}
                     </div>
 
-                    {/* Aperçu de la description */}
+                    {/* Description */}
                     <div className={`transition-all duration-300 ${
                       expandedCard === item.title ? 'max-h-none' : 'max-h-20 overflow-hidden'
                     }`}>
@@ -415,20 +266,6 @@ const TechWatch: React.FC = () => {
               </div>
             ))}
           </div>
-
-          {/* Message si aucun article */}
-          {filteredArticles.length === 0 && (
-            <div className="text-center py-16">
-              <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-gray-500 to-gray-600 rounded-2xl blur opacity-30"></div>
-                <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-12">
-                  <Bookmark className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold text-gray-400 mb-2">Aucun article dans cette catégorie</h3>
-                  <p className="text-gray-500">La veille continue, de nouveaux contenus arrivent régulièrement</p>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </section>
