@@ -83,7 +83,7 @@ const Hero: React.FC = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
     >
       {/* Background Effects */}
       <div className="absolute inset-0">
@@ -150,30 +150,27 @@ const Hero: React.FC = () => {
 
           {/* Section de crédibilité */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            {keyStrengths.map((strength, index) => {
-              const IconComponent = strength.icon;
-              return (
-                <div 
-                  key={index}
-                  className="group relative"
-                  style={{ animationDelay: `${index * 200}ms` }}
-                >
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                  <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-8 h-full">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="p-3 bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-xl">
-                        <IconComponent className="w-8 h-8 text-orange-500" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white">{strength.title}</h3>
-                        <span className="text-sm text-orange-400 font-medium">{strength.highlight}</span>
-                      </div>
+            {keyStrengths.map((strength, index) => (
+              <div 
+                key={index}
+                className="group relative"
+                style={{ animationDelay: `${index * 200}ms` }}
+              >
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-8 h-full">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-xl">
+                      <strength.icon className="w-8 h-8 text-orange-500" />
                     </div>
-                    <p className="text-gray-300 leading-relaxed">{strength.desc}</p>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">{strength.title}</h3>
+                      <span className="text-sm text-orange-400 font-medium">{strength.highlight}</span>
+                    </div>
                   </div>
+                  <p className="text-gray-300 leading-relaxed">{strength.desc}</p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
 
           {/* Témoignage et social proof */}
