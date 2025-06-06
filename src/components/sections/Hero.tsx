@@ -406,10 +406,10 @@ const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative" style={{ zIndex: 4 }}>
         <div 
           ref={heroRef}
-          className="flex flex-col lg:flex-row items-center gap-12"
+          className="flex flex-col lg:flex-row items-center gap-16"
         >
           {/* Colonne gauche - Contenu principal */}
-          <div className="lg:w-1/2 space-y-8">
+          <div className="lg:w-2/5 space-y-8">
             {/* Badge avec effet néon pulsant */}
             <div className="relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gray-900/90 backdrop-blur-sm border-2 border-cyan-500/50 text-cyan-400 text-sm font-medium overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
@@ -595,37 +595,40 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Colonne droite - Interface futuriste révolutionnaire */}
-          <div className="lg:w-1/2 relative">
-            {/* Hologramme central ultra-complexe */}
-            <div className="relative w-96 h-96 mx-auto">
+          {/* Colonne droite - Interface futuriste révolutionnaire AGRANDIE */}
+          <div className="lg:w-3/5 relative">
+            {/* Hologramme central ultra-complexe PLUS GRAND */}
+            <div className="relative w-[600px] h-[600px] mx-auto">
               {/* Cercles concentriques avec effets de profondeur */}
               <div className="absolute inset-0 rounded-full border-2 border-cyan-500/40 animate-spin" style={{ animationDuration: '30s' }}>
-                <div className="absolute top-0 left-1/2 w-2 h-2 bg-cyan-400 rounded-full transform -translate-x-1/2 -translate-y-1"></div>
+                <div className="absolute top-0 left-1/2 w-3 h-3 bg-cyan-400 rounded-full transform -translate-x-1/2 -translate-y-1"></div>
               </div>
-              <div className="absolute inset-4 rounded-full border border-purple-500/40 animate-spin" style={{ animationDuration: '25s', animationDirection: 'reverse' }}>
-                <div className="absolute top-0 left-1/2 w-1.5 h-1.5 bg-purple-400 rounded-full transform -translate-x-1/2 -translate-y-1"></div>
+              <div className="absolute inset-8 rounded-full border border-purple-500/40 animate-spin" style={{ animationDuration: '25s', animationDirection: 'reverse' }}>
+                <div className="absolute top-0 left-1/2 w-2.5 h-2.5 bg-purple-400 rounded-full transform -translate-x-1/2 -translate-y-1"></div>
               </div>
-              <div className="absolute inset-8 rounded-full border border-pink-500/40 animate-spin" style={{ animationDuration: '20s' }}>
-                <div className="absolute top-0 left-1/2 w-1 h-1 bg-pink-400 rounded-full transform -translate-x-1/2 -translate-y-1"></div>
+              <div className="absolute inset-16 rounded-full border border-pink-500/40 animate-spin" style={{ animationDuration: '20s' }}>
+                <div className="absolute top-0 left-1/2 w-2 h-2 bg-pink-400 rounded-full transform -translate-x-1/2 -translate-y-1"></div>
               </div>
-              <div className="absolute inset-12 rounded-full border border-green-500/40 animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}>
-                <div className="absolute top-0 left-1/2 w-0.5 h-0.5 bg-green-400 rounded-full transform -translate-x-1/2 -translate-y-1"></div>
+              <div className="absolute inset-24 rounded-full border border-green-500/40 animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}>
+                <div className="absolute top-0 left-1/2 w-1.5 h-1.5 bg-green-400 rounded-full transform -translate-x-1/2 -translate-y-1"></div>
+              </div>
+              <div className="absolute inset-32 rounded-full border border-yellow-500/40 animate-spin" style={{ animationDuration: '12s' }}>
+                <div className="absolute top-0 left-1/2 w-1 h-1 bg-yellow-400 rounded-full transform -translate-x-1/2 -translate-y-1"></div>
               </div>
               
-              {/* Centre avec logo personnel animé */}
-              <div className="absolute inset-20 rounded-full bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg border-2 border-cyan-500/50 flex items-center justify-center overflow-hidden">
+              {/* Centre avec logo personnel animé PLUS GRAND */}
+              <div className="absolute inset-40 rounded-full bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg border-2 border-cyan-500/50 flex items-center justify-center overflow-hidden">
                 <div className="relative">
-                  {/* Icônes orbitales avec trajectoires complexes */}
+                  {/* Icônes orbitales avec trajectoires complexes PLUS GRANDES */}
                   {[
-                    { icon: Server, angle: 0, radius: 70, color: '#f97316', speed: 1 },
-                    { icon: Shield, angle: 45, radius: 70, color: '#3b82f6', speed: -1.2 },
-                    { icon: Network, angle: 90, radius: 70, color: '#10b981', speed: 0.8 },
-                    { icon: Database, angle: 135, radius: 70, color: '#8b5cf6', speed: -0.9 },
-                    { icon: Terminal, angle: 180, radius: 70, color: '#ef4444', speed: 1.1 },
-                    { icon: Cpu, angle: 225, radius: 70, color: '#f59e0b', speed: -0.7 },
-                    { icon: Brain, angle: 270, radius: 70, color: '#ec4899', speed: 1.3 },
-                    { icon: Rocket, angle: 315, radius: 70, color: '#06b6d4', speed: -1.4 }
+                    { icon: Server, angle: 0, radius: 120, color: '#f97316', speed: 1 },
+                    { icon: Shield, angle: 45, radius: 120, color: '#3b82f6', speed: -1.2 },
+                    { icon: Network, angle: 90, radius: 120, color: '#10b981', speed: 0.8 },
+                    { icon: Database, angle: 135, radius: 120, color: '#8b5cf6', speed: -0.9 },
+                    { icon: Terminal, angle: 180, radius: 120, color: '#ef4444', speed: 1.1 },
+                    { icon: Cpu, angle: 225, radius: 120, color: '#f59e0b', speed: -0.7 },
+                    { icon: Brain, angle: 270, radius: 120, color: '#ec4899', speed: 1.3 },
+                    { icon: Rocket, angle: 315, radius: 120, color: '#06b6d4', speed: -1.4 }
                   ].map((item, index) => {
                     const time = Date.now() * 0.001;
                     const radian = ((item.angle + time * item.speed * 20) * Math.PI) / 180;
@@ -635,27 +638,27 @@ const Hero: React.FC = () => {
                     return (
                       <div
                         key={index}
-                        className="absolute w-14 h-14 rounded-full flex items-center justify-center border-2 backdrop-blur-sm transition-all duration-300 hover:scale-125"
+                        className="absolute w-20 h-20 rounded-full flex items-center justify-center border-2 backdrop-blur-sm transition-all duration-300 hover:scale-125"
                         style={{
-                          left: `calc(50% + ${x}px - 28px)`,
-                          top: `calc(50% + ${y}px - 28px)`,
+                          left: `calc(50% + ${x}px - 40px)`,
+                          top: `calc(50% + ${y}px - 40px)`,
                           borderColor: item.color,
                           backgroundColor: `${item.color}30`,
-                          boxShadow: `0 0 20px ${item.color}50`,
+                          boxShadow: `0 0 30px ${item.color}50`,
                           animation: `pulse 2s infinite alternate`,
                           animationDelay: `${index * 0.2}s`
                         }}
                       >
                         <item.icon 
-                          className="w-7 h-7" 
+                          className="w-10 h-10" 
                           style={{ color: item.color }}
                         />
                       </div>
                     );
                   })}
                   
-                  {/* Centre avec initiales et effet holographique */}
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-2xl relative overflow-hidden">
+                  {/* Centre avec initiales et effet holographique PLUS GRAND */}
+                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-4xl relative overflow-hidden">
                     <span className="relative z-10">SF</span>
                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-purple-400 animate-pulse opacity-50"></div>
                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent transform rotate-45 animate-spin" style={{ animationDuration: '3s' }}></div>
@@ -664,8 +667,8 @@ const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* Panneau de contrôle futuriste */}
-            <div className="absolute top-0 right-0 space-y-3">
+            {/* Panneau de contrôle futuriste REPOSITIONNÉ */}
+            <div className="absolute top-0 right-0 space-y-4">
               {[
                 { label: 'System Status', value: 'ONLINE', color: 'text-green-400', icon: '●' },
                 { label: 'Security Level', value: 'MAXIMUM', color: 'text-cyan-400', icon: '🛡️' },
@@ -674,18 +677,42 @@ const Hero: React.FC = () => {
               ].map((stat, index) => (
                 <div 
                   key={index}
-                  className="bg-gray-900/90 backdrop-blur-sm border border-gray-700/50 rounded-lg p-3 min-w-[120px] hover:border-cyan-500/50 transition-all duration-300"
+                  className="bg-gray-900/90 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 min-w-[140px] hover:border-cyan-500/50 transition-all duration-300"
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs">{stat.icon}</span>
-                    <div className="text-xs text-gray-400">{stat.label}</div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm">{stat.icon}</span>
+                    <div className="text-sm text-gray-400">{stat.label}</div>
                   </div>
-                  <div className={`text-sm font-bold ${stat.color}`}>{stat.value}</div>
-                  <div className="w-full h-1 bg-gray-800 rounded-full mt-1 overflow-hidden">
+                  <div className={`text-base font-bold ${stat.color}`}>{stat.value}</div>
+                  <div className="w-full h-1.5 bg-gray-800 rounded-full mt-2 overflow-hidden">
                     <div 
                       className={`h-full bg-gradient-to-r from-cyan-500 to-purple-500 transition-all duration-1000`}
                       style={{ width: stat.label === 'Performance' ? `${energyLevel}%` : '100%' }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Panneau de données en temps réel NOUVEAU */}
+            <div className="absolute bottom-0 left-0 space-y-3">
+              {[
+                { label: 'CPU Usage', value: `${Math.floor(Math.random() * 30 + 20)}%`, color: 'text-orange-400' },
+                { label: 'Memory', value: `${Math.floor(Math.random() * 40 + 40)}%`, color: 'text-blue-400' },
+                { label: 'Network', value: `${Math.floor(Math.random() * 50 + 30)}%`, color: 'text-green-400' },
+                { label: 'Storage', value: `${Math.floor(Math.random() * 20 + 60)}%`, color: 'text-purple-400' }
+              ].map((metric, index) => (
+                <div 
+                  key={index}
+                  className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-3 min-w-[120px] hover:border-cyan-500/30 transition-all duration-300"
+                >
+                  <div className="text-xs text-gray-400 mb-1">{metric.label}</div>
+                  <div className={`text-sm font-bold ${metric.color}`}>{metric.value}</div>
+                  <div className="w-full h-1 bg-gray-800 rounded-full mt-1 overflow-hidden">
+                    <div 
+                      className={`h-full bg-gradient-to-r from-cyan-500 to-purple-500 transition-all duration-2000`}
+                      style={{ width: metric.value }}
                     />
                   </div>
                 </div>
