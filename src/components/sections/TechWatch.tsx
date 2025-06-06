@@ -36,7 +36,7 @@ const TechWatch: React.FC = () => {
   }, []);
 
   return (
-    <section id="techwatch" className="py-16 flex items-center justify-center relative overflow-hidden">
+    <section id="techwatch" className="py-16 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header */}
         <div className="text-center mb-16">
