@@ -14,7 +14,6 @@ html {
 /* Section styling de base */
 section {
   @apply relative overflow-hidden transition-all duration-300 ease-in-out py-16;
-  background-attachment: local;
 }
 
 /* Sections avec fond fixe et centrage */
@@ -34,30 +33,60 @@ section#contact {
   animation: gradientMove 15s ease infinite;
 }
 
-/* Section veille avec fond dynamique adaptatif */
+/* Section veille avec fond complètement indépendant */
 section#techwatch {
-  /* Fond qui s'adapte au contenu de la section */
+  /* Suppression de tous les héritages */
+  background: none !important;
+  background-image: none !important;
+  animation: none !important;
+  min-height: auto;
+  padding: 0;
+}
+
+/* Conteneur avec fond pour la section veille */
+section#techwatch::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: linear-gradient(
     135deg,
-    theme('colors.rose.900' / 8%) 0%,
-    theme('colors.pink.900' / 8%) 25%,
-    theme('colors.purple.900' / 8%) 50%,
-    theme('colors.orange.900' / 8%) 75%,
-    theme('colors.rose.900' / 8%) 100%
+    #881337 0%,    /* rose-900 */
+    #be185d 25%,   /* pink-600 */
+    #7c3aed 50%,   /* violet-600 */
+    #ea580c 75%,   /* orange-600 */
+    #881337 100%   /* rose-900 */
   );
   background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
-  min-height: auto; /* Hauteur adaptative */
-  padding: 4rem 0; /* Padding généreux */
+  animation: techWatchGradient 25s ease infinite;
+  z-index: -1;
+  opacity: 0.1;
 }
 
 /* Animation spécifique pour la veille */
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  25% { background-position: 100% 50%; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0% 100%; }
-  100% { background-position: 0% 50%; }
+@keyframes techWatchGradient {
+  0% { 
+    background-position: 0% 50%; 
+    opacity: 0.08;
+  }
+  25% { 
+    background-position: 100% 50%; 
+    opacity: 0.12;
+  }
+  50% { 
+    background-position: 100% 100%; 
+    opacity: 0.1;
+  }
+  75% { 
+    background-position: 0% 100%; 
+    opacity: 0.14;
+  }
+  100% { 
+    background-position: 0% 50%; 
+    opacity: 0.08;
+  }
 }
 
 /* Section colors pour les sections fixes */
