@@ -178,16 +178,26 @@ const Hero: React.FC = () => {
             </p>
           </div>
         </div>
+      </div>
 
-        {/* Indicateur de scroll animé */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <button 
-            onClick={scrollToAbout}
-            className="p-3 rounded-full bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 text-orange-400 hover:text-orange-300 hover:scale-110 transition-all duration-300 shadow-xl"
-          >
-            <ChevronDown className="w-6 h-6" />
-          </button>
+      {/* Indicateur de scroll animé - repositionné */}
+      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center space-y-3">
+        <div className="text-gray-400 text-sm font-medium tracking-wider uppercase">
+          Découvrir
         </div>
+        <button 
+          onClick={scrollToAbout}
+          className="group relative p-4 rounded-full bg-gradient-to-r from-orange-500/20 to-purple-500/20 backdrop-blur-xl border border-orange-500/30 text-orange-400 hover:text-orange-300 transition-all duration-500 shadow-2xl hover:shadow-orange-500/25 hover:scale-110"
+        >
+          <ChevronDown className="w-6 h-6 animate-bounce" />
+          
+          {/* Effet de halo */}
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-purple-500/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+          
+          {/* Cercles animés */}
+          <div className="absolute inset-0 rounded-full border border-orange-500/20 animate-ping"></div>
+          <div className="absolute inset-2 rounded-full border border-purple-500/20 animate-ping" style={{ animationDelay: '0.5s' }}></div>
+        </button>
       </div>
     </section>
   );
