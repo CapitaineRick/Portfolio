@@ -1,53 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Cloud, Cpu, HardDrive, Wifi, Lock, Monitor, Zap, Globe, GraduationCap, Briefcase } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Cloud, Cpu, HardDrive, Wifi, Lock, Monitor, Zap, Globe, GraduationCap, Briefcase, Award, Target, TrendingUp, CheckCircle } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const [activeSkill, setActiveSkill] = useState(0);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
-  const skills = [
-    { 
-      icon: Server, 
-      label: 'Infrastructure', 
-      gradient: 'from-orange-500 to-red-500',
-      description: 'Administration système Windows & Linux',
-      technologies: ['Windows Server', 'Linux', 'VMware', 'Proxmox']
+  const testimonials = [
+    {
+      text: "Sébastien a démontré une excellente maîtrise technique et une grande autonomie lors de son stage.",
+      author: "Responsable IT - KNDS",
+      role: "Maître de stage"
     },
-    { 
-      icon: Shield, 
-      label: 'Sécurité', 
-      gradient: 'from-blue-500 to-cyan-500',
-      description: 'Protection et audit des systèmes',
-      technologies: ['Pare-feu', 'VPN', 'Wireshark', 'Kali Linux']
-    },
-    { 
-      icon: Network, 
-      label: 'Réseaux', 
-      gradient: 'from-green-500 to-emerald-500',
-      description: 'Configuration et maintenance',
-      technologies: ['Cisco', 'TCP/IP', 'VLAN', 'DNS/DHCP']
-    },
-    { 
-      icon: Terminal, 
-      label: 'DevOps', 
-      gradient: 'from-purple-500 to-pink-500',
-      description: 'Automatisation et scripts',
-      technologies: ['Bash', 'PowerShell', 'Python', 'Docker']
-    },
-    { 
-      icon: Database, 
-      label: 'Bases de données', 
-      gradient: 'from-indigo-500 to-purple-500',
-      description: 'Gestion et administration',
-      technologies: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis']
-    },
-    { 
-      icon: Monitor, 
-      label: 'Supervision', 
-      gradient: 'from-teal-500 to-green-500',
-      description: 'Monitoring et alertes',
-      technologies: ['Zabbix', 'Nagios', 'Grafana', 'GLPI']
+    {
+      text: "Étudiant rigoureux avec une approche méthodique des problématiques système et réseau.",
+      author: "Formateur IPSSI",
+      role: "Enseignant BTS SIO"
     }
+  ];
+
+  const achievements = [
+    { icon: Award, label: "BTS SIO SISR", desc: "En cours - IPSSI" },
+    { icon: Target, label: "Stage KNDS", desc: "Support & Infrastructure" },
+    { icon: TrendingUp, label: "15+ Projets", desc: "Techniques réalisés" },
+    { icon: CheckCircle, label: "Certifications", desc: "En préparation" }
   ];
 
   useEffect(() => {
@@ -74,11 +49,11 @@ const Hero: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveSkill((prev) => (prev + 1) % skills.length);
-    }, 3000);
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 4000);
 
     return () => clearInterval(interval);
-  }, [skills.length]);
+  }, [testimonials.length]);
 
   const scrollToProjects = () => {
     const projectsSection = document.querySelector('#projects');
@@ -99,27 +74,11 @@ const Hero: React.FC = () => {
       id="home" 
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      {/* Background Elements Enhanced */}
+      {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-0 -left-4 w-96 h-96 bg-orange-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
         <div className="absolute -bottom-8 -right-4 w-96 h-96 bg-blue-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
         <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-purple-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000" />
-        
-        {/* Floating Tech Icons */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 animate-bounce" style={{ animationDelay: '0s', animationDuration: '3s' }}>
-            <Code className="w-8 h-8 text-orange-500/30" />
-          </div>
-          <div className="absolute top-40 right-20 animate-bounce" style={{ animationDelay: '1s', animationDuration: '4s' }}>
-            <Database className="w-6 h-6 text-blue-500/30" />
-          </div>
-          <div className="absolute bottom-40 left-20 animate-bounce" style={{ animationDelay: '2s', animationDuration: '3.5s' }}>
-            <Cloud className="w-7 h-7 text-purple-500/30" />
-          </div>
-          <div className="absolute bottom-20 right-10 animate-bounce" style={{ animationDelay: '0.5s', animationDuration: '4.5s' }}>
-            <Wifi className="w-5 h-5 text-green-500/30" />
-          </div>
-        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
@@ -127,173 +86,177 @@ const Hero: React.FC = () => {
           ref={heroRef}
           className="flex flex-col lg:flex-row items-center gap-16 transition-all duration-300 opacity-0 translate-y-10"
         >
-          {/* Left Column - Enhanced */}
+          {/* Left Column - Value Proposition */}
           <div className="lg:w-1/2 space-y-8">
+            {/* Badge professionnel */}
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-orange-900/40 to-purple-900/40 backdrop-blur-sm border border-orange-500/30 text-orange-400 text-sm font-medium">
+              <Server className="w-5 h-5" />
+              Futur Administrateur Systèmes & Réseaux
+            </div>
+            
+            {/* Proposition de valeur principale */}
             <div className="space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-orange-900/40 to-purple-900/40 backdrop-blur-sm border border-orange-500/30 text-orange-400 text-sm font-medium">
-                <Server className="w-5 h-5" />
-                BTS SIO SISR - Administrateur Systèmes & Réseaux
-              </div>
-              
-              <div>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-orange-400 to-purple-600 leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-orange-400 to-purple-600">
                   Fernandes Sébastien
-                </h1>
-                <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-                  Étudiant passionné par l'<span className="text-orange-400 font-semibold">infrastructure IT</span> & la <span className="text-purple-400 font-semibold">cybersécurité</span>
+                </span>
+              </h1>
+              
+              <div className="space-y-4">
+                <h2 className="text-2xl md:text-3xl font-semibold text-white">
+                  Votre prochain talent en <span className="text-orange-400">infrastructure IT</span>
+                </h2>
+                <p className="text-xl text-gray-300 leading-relaxed max-w-2xl">
+                  Étudiant BTS SIO SISR passionné, je transforme les défis techniques en solutions robustes. 
+                  Spécialisé en administration système, sécurité réseau et support utilisateur.
                 </p>
-              </div>
-
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                <button 
-                  onClick={scrollToProjects}
-                  className="group px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl
-                            hover:opacity-90 transform hover:scale-105
-                            transition-all duration-300 shadow-lg hover:shadow-orange-500/25
-                            flex items-center gap-3 font-medium relative overflow-hidden"
-                >
-                  <span className="relative z-10">Découvrir mes projets</span>
-                  <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </button>
-                <button 
-                  onClick={scrollToContact}
-                  className="group px-8 py-4 border-2 border-orange-500 text-orange-400 bg-orange-500/5
-                            hover:bg-orange-500 hover:text-white rounded-xl
-                            transform hover:scale-105 transition-all duration-300
-                            flex items-center gap-3 font-medium backdrop-blur-sm"
-                >
-                  <span>Me contacter</span>
-                  <div className="w-2 h-2 rounded-full bg-current animate-pulse"></div>
-                </button>
               </div>
             </div>
 
-            {/* Enhanced Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { value: '2+', label: 'Années d\'études', icon: GraduationCap },
-                { value: '15+', label: 'Projets réalisés', icon: Zap },
-                { value: '20+', label: 'Technologies', icon: Globe },
-                { value: '2', label: 'Expérience Pro', icon: Briefcase }
-              ].map((stat, index) => (
-                <div key={index} className="group p-6 rounded-xl bg-gray-800/60 backdrop-blur-sm shadow-lg border border-gray-700/50 hover:border-orange-500/50 transition-all duration-300 hover:scale-105">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="font-bold text-3xl text-orange-400 group-hover:text-orange-300 transition-colors">
-                      {stat.value}
-                    </div>
-                    <stat.icon className="w-6 h-6 text-gray-500 group-hover:text-orange-400 transition-colors" />
-                  </div>
-                  <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
-                    {stat.label}
+            {/* Proposition de valeur unique */}
+            <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <Zap className="w-5 h-5 text-orange-500" />
+                Pourquoi me choisir ?
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <div className="font-medium text-white">Formation technique solide</div>
+                    <div className="text-sm text-gray-400">BTS SIO SISR + expérience terrain</div>
                   </div>
                 </div>
-              ))}
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <div className="font-medium text-white">Autonomie & rigueur</div>
+                    <div className="text-sm text-gray-400">Gestion de projets complexes</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <div className="font-medium text-white">Veille technologique</div>
+                    <div className="text-sm text-gray-400">Toujours à jour des innovations</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <div className="font-medium text-white">Passion cybersécurité</div>
+                    <div className="text-sm text-gray-400">Objectif : expert sécurité</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Call to Action */}
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              <button 
+                onClick={scrollToProjects}
+                className="group px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl
+                          hover:opacity-90 transform hover:scale-105
+                          transition-all duration-300 shadow-lg hover:shadow-orange-500/25
+                          flex items-center gap-3 font-medium relative overflow-hidden"
+              >
+                <span className="relative z-10">Voir mes réalisations</span>
+                <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+              </button>
+              <button 
+                onClick={scrollToContact}
+                className="group px-8 py-4 border-2 border-orange-500 text-orange-400 bg-orange-500/5
+                          hover:bg-orange-500 hover:text-white rounded-xl
+                          transform hover:scale-105 transition-all duration-300
+                          flex items-center gap-3 font-medium backdrop-blur-sm"
+              >
+                <span>Discutons de votre projet</span>
+                <div className="w-2 h-2 rounded-full bg-current animate-pulse"></div>
+              </button>
             </div>
           </div>
 
-          {/* Right Column - Completely Redesigned */}
+          {/* Right Column - Crédibilité & Social Proof */}
           <div className="lg:w-1/2 relative">
-            {/* Background Effects */}
-            <div className="absolute -top-20 -right-20 w-80 h-80 bg-orange-500/10 rounded-full filter blur-3xl"></div>
-            <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-500/10 rounded-full filter blur-3xl"></div>
-            
-            {/* Main Interactive Panel */}
-            <div className="relative bg-gray-800/40 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-gray-700/50">
+            <div className="space-y-8">
               
-              {/* Header */}
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">Domaines d'expertise</h3>
-                <p className="text-gray-400">Technologies et compétences maîtrisées</p>
-              </div>
-
-              {/* Active Skill Display */}
-              <div className="mb-8">
-                <div className={`relative p-8 rounded-2xl bg-gradient-to-br ${skills[activeSkill].gradient} bg-opacity-10 border border-white/10`}>
-                  <div className="flex items-center gap-6 mb-4">
-                    <div className={`p-4 rounded-xl bg-gradient-to-br ${skills[activeSkill].gradient} shadow-lg`}>
-                      {(() => {
-                        const IconComponent = skills[activeSkill].icon;
-                        return <IconComponent className="w-8 h-8 text-white" />;
-                      })()}
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-bold text-white">{skills[activeSkill].label}</h4>
-                      <p className="text-gray-300">{skills[activeSkill].description}</p>
-                    </div>
+              {/* Achievements Grid */}
+              <div className="grid grid-cols-2 gap-4">
+                {achievements.map((achievement, index) => (
+                  <div key={index} className="group p-6 rounded-xl bg-gray-800/60 backdrop-blur-sm shadow-lg border border-gray-700/50 hover:border-orange-500/50 transition-all duration-300 hover:scale-105">
+                    <achievement.icon className="w-8 h-8 text-orange-500 mb-3 group-hover:scale-110 transition-transform" />
+                    <div className="font-bold text-white mb-1">{achievement.label}</div>
+                    <div className="text-sm text-gray-400">{achievement.desc}</div>
                   </div>
-                  
-                  {/* Technologies */}
-                  <div className="grid grid-cols-2 gap-3">
-                    {skills[activeSkill].technologies.map((tech, index) => (
-                      <div key={index} className="flex items-center gap-2 text-sm text-gray-300">
-                        <div className="w-2 h-2 rounded-full bg-current opacity-60"></div>
-                        <span>{tech}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Skill Navigation */}
-              <div className="grid grid-cols-3 gap-3">
-                {skills.map((skill, index) => {
-                  const SkillIcon = skill.icon;
-                  return (
-                    <button
-                      key={index}
-                      onClick={() => setActiveSkill(index)}
-                      className={`group p-4 rounded-xl transition-all duration-300 ${
-                        activeSkill === index
-                          ? `bg-gradient-to-br ${skill.gradient} shadow-lg scale-105`
-                          : 'bg-gray-700/50 hover:bg-gray-700 hover:scale-105'
-                      }`}
-                    >
-                      <SkillIcon className={`w-6 h-6 mx-auto mb-2 ${
-                        activeSkill === index ? 'text-white' : 'text-gray-400 group-hover:text-white'
-                      } transition-colors`} />
-                      <div className={`text-xs font-medium ${
-                        activeSkill === index ? 'text-white' : 'text-gray-400 group-hover:text-white'
-                      } transition-colors`}>
-                        {skill.label}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Progress Indicators */}
-              <div className="flex justify-center gap-2 mt-6">
-                {skills.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      activeSkill === index ? 'bg-orange-500 w-8' : 'bg-gray-600'
-                    }`}
-                  />
                 ))}
               </div>
 
-              {/* Current Focus */}
-              <div className="mt-8 p-6 bg-gradient-to-br from-orange-500/5 to-purple-500/5 rounded-xl border border-gray-700/50">
-                <h4 className="text-lg font-semibold mb-4 text-white flex items-center gap-2">
-                  <Zap className="w-5 h-5 text-orange-500" />
-                  Objectifs 2024-2025
-                </h4>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3 text-sm text-gray-300">
-                    <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></div>
-                    Certification cybersécurité
-                  </li>
-                  <li className="flex items-center gap-3 text-sm text-gray-300">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-                    Spécialisation pentesting
-                  </li>
-                  <li className="flex items-center gap-3 text-sm text-gray-300">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                    Expertise cloud computing
-                  </li>
-                </ul>
+              {/* Testimonial Carousel */}
+              <div className="relative bg-gray-800/40 backdrop-blur-xl rounded-2xl p-8 border border-gray-700/50">
+                <div className="text-center">
+                  <div className="text-4xl text-orange-500 mb-4">"</div>
+                  <blockquote className="text-lg text-gray-300 mb-6 italic leading-relaxed">
+                    {testimonials[currentTestimonial].text}
+                  </blockquote>
+                  <div className="border-t border-gray-700 pt-4">
+                    <div className="font-semibold text-white">
+                      {testimonials[currentTestimonial].author}
+                    </div>
+                    <div className="text-sm text-orange-400">
+                      {testimonials[currentTestimonial].role}
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Testimonial indicators */}
+                <div className="flex justify-center gap-2 mt-6">
+                  {testimonials.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentTestimonial(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        currentTestimonial === index ? 'bg-orange-500 w-8' : 'bg-gray-600'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Compétences clés */}
+              <div className="bg-gray-800/40 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50">
+                <h3 className="text-xl font-bold text-white mb-4 text-center">Compétences techniques</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { icon: Server, label: 'Windows Server', level: 85 },
+                    { icon: Shield, label: 'Cybersécurité', level: 75 },
+                    { icon: Network, label: 'Réseaux Cisco', level: 80 },
+                    { icon: Terminal, label: 'Scripting', level: 70 }
+                  ].map((skill, index) => (
+                    <div key={index} className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <skill.icon className="w-4 h-4 text-orange-500" />
+                        <span className="text-sm font-medium text-white">{skill.label}</span>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div 
+                          className="bg-gradient-to-r from-orange-500 to-purple-500 h-2 rounded-full transition-all duration-1000"
+                          style={{ width: `${skill.level}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Disponibilité */}
+              <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 rounded-xl p-6 border border-green-500/30">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                  <span className="font-semibold text-white">Disponible pour alternance</span>
+                </div>
+                <p className="text-sm text-gray-300">
+                  Recherche active d'une alternance en administration système/réseau pour septembre 2024
+                </p>
               </div>
             </div>
           </div>
