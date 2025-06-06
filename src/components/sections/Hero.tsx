@@ -5,12 +5,13 @@ const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const mousePos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 500);
   }, []);
 
-  // Système de particules avec traînées qui s'effacent
+  // Système de particules avec évitement de la souris
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -32,16 +33,34 @@ const Hero: React.FC = () => {
       maxLife: number;
       pulse: number;
       trail: Array<{ x: number; y: number; age: number }>;
+      baseVx: number;
+      baseVy: number;
     }> = [];
 
     const colors = ['#f97316', '#a855f7', '#3b82f6', '#10b981', '#ef4444', '#f59e0b', '#8b5cf6'];
 
+    // Suivi de la souris
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mousePos.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    };
+
+    canvas.addEventListener('mousemove', handleMouseMove);
+
     function createParticle(x: number, y: number) {
+      const baseVx = (Math.random() - 0.5) * 2;
+      const baseVy = (Math.random() - 0.5) * 2;
+      
       particles.push({
         x,
         y,
-        vx: (Math.random() - 0.5) * 3,
-        vy: (Math.random() - 0.5) * 3,
+        vx: baseVx,
+        vy: baseVy,
+        baseVx,
+        baseVy,
         size: Math.random() * 4 + 2,
         color: colors[Math.floor(Math.random() * colors.length)],
         life: 0,
@@ -67,6 +86,37 @@ const Hero: React.FC = () => {
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         
+        // Calcul de la distance à la souris
+        const dx = mousePos.current.x - p.x;
+        const dy = mousePos.current.y - p.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const avoidanceRadius = 100; // Rayon d'évitement
+        
+        // Force d'évitement
+        let avoidanceForceX = 0;
+        let avoidanceForceY = 0;
+        
+        if (distance < avoidanceRadius && distance > 0) {
+          const force = (avoidanceRadius - distance) / avoidanceRadius;
+          const angle = Math.atan2(dy, dx);
+          
+          // Force qui repousse la particule de la souris
+          avoidanceForceX = -Math.cos(angle) * force * 3;
+          avoidanceForceY = -Math.sin(angle) * force * 3;
+        }
+        
+        // Application des forces
+        p.vx = p.baseVx + avoidanceForceX;
+        p.vy = p.baseVy + avoidanceForceY;
+        
+        // Limitation de la vitesse
+        const maxSpeed = 5;
+        const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        if (speed > maxSpeed) {
+          p.vx = (p.vx / speed) * maxSpeed;
+          p.vy = (p.vy / speed) * maxSpeed;
+        }
+        
         // Ajouter la position actuelle à la traînée
         p.trail.push({ x: p.x, y: p.y, age: 0 });
         
@@ -83,6 +133,18 @@ const Hero: React.FC = () => {
         p.y += p.vy;
         p.life++;
         p.pulse += 0.1;
+
+        // Rebond sur les bords
+        if (p.x < 0 || p.x > canvas.width) {
+          p.vx *= -1;
+          p.baseVx *= -1;
+          p.x = Math.max(0, Math.min(canvas.width, p.x));
+        }
+        if (p.y < 0 || p.y > canvas.height) {
+          p.vy *= -1;
+          p.baseVy *= -1;
+          p.y = Math.max(0, Math.min(canvas.height, p.y));
+        }
 
         // Dessiner la traînée avec effet de fondu
         for (let j = 0; j < p.trail.length; j++) {
@@ -136,6 +198,7 @@ const Hero: React.FC = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      canvas.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
@@ -203,7 +266,7 @@ const Hero: React.FC = () => {
             </p>
           </div>
 
-          {/* Remplace tout le contenu en dessous par quelque chose de simple */}
+          {/* Contenu simple */}
           <div className="space-y-8">
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Étudiant en BTS SIO SISR, je développe mes compétences en administration système, 
@@ -214,7 +277,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Indicateur de scroll animé - repositionné */}
-      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center space-y-3">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center space-y-3">
         <div className="text-gray-400 text-sm font-medium tracking-wider uppercase">
           Découvrir
         </div>
