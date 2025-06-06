@@ -1,34 +1,44 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Cloud, Cpu, HardDrive, Wifi, Lock, Monitor, Zap, Globe, GraduationCap, Briefcase, Award, Target, TrendingUp, CheckCircle } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network, Award, Target, TrendingUp, CheckCircle, Zap, Clock, Users, Star, Download, Eye, MessageCircle, Calendar } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [currentStat, setCurrentStat] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const testimonials = [
-    {
-      text: "Sébastien a démontré une excellente maîtrise technique et une grande autonomie lors de son stage.",
-      author: "Responsable IT - KNDS",
-      role: "Maître de stage"
-    },
-    {
-      text: "Étudiant rigoureux avec une approche méthodique des problématiques système et réseau.",
-      author: "Formateur IPSSI",
-      role: "Enseignant BTS SIO"
-    }
+  const stats = [
+    { number: "2+", label: "Années d'études", desc: "BTS SIO SISR" },
+    { number: "15+", label: "Projets réalisés", desc: "Infrastructure & Sécurité" },
+    { number: "100%", label: "Motivation", desc: "Passion pour l'IT" },
+    { number: "24/7", label: "Disponibilité", desc: "Veille technologique" }
   ];
 
-  const achievements = [
-    { icon: Award, label: "BTS SIO SISR", desc: "En cours - IPSSI" },
-    { icon: Target, label: "Stage KNDS", desc: "Support & Infrastructure" },
-    { icon: TrendingUp, label: "15+ Projets", desc: "Techniques réalisés" },
-    { icon: CheckCircle, label: "Certifications", desc: "En préparation" }
+  const keyStrengths = [
+    {
+      icon: Shield,
+      title: "Sécurité & Infrastructure",
+      desc: "Expertise en administration système Windows/Linux, virtualisation et cybersécurité",
+      highlight: "Compétence clé recherchée"
+    },
+    {
+      icon: Target,
+      title: "Résolution de problèmes",
+      desc: "Approche méthodique pour diagnostiquer et résoudre les incidents techniques",
+      highlight: "Autonomie prouvée"
+    },
+    {
+      icon: TrendingUp,
+      title: "Évolution continue",
+      desc: "Veille technologique active et formation permanente aux nouvelles technologies",
+      highlight: "Adaptabilité"
+    }
   ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          setIsVisible(true);
           entry.target.classList.add('opacity-100', 'translate-y-0');
           entry.target.classList.remove('opacity-0', 'translate-y-10');
         }
@@ -48,12 +58,13 @@ const Hero: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
+    if (isVisible) {
+      const interval = setInterval(() => {
+        setCurrentStat((prev) => (prev + 1) % stats.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [isVisible, stats.length]);
 
   const scrollToProjects = () => {
     const projectsSection = document.querySelector('#projects');
@@ -72,9 +83,9 @@ const Hero: React.FC = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
     >
-      {/* Background Elements */}
+      {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-0 -left-4 w-96 h-96 bg-orange-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
         <div className="absolute -bottom-8 -right-4 w-96 h-96 bg-blue-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
@@ -84,180 +95,165 @@ const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
         <div 
           ref={heroRef}
-          className="flex flex-col lg:flex-row items-center gap-16 transition-all duration-300 opacity-0 translate-y-10"
+          className="transition-all duration-1000 opacity-0 translate-y-10"
         >
-          {/* Left Column - Value Proposition */}
-          <div className="lg:w-1/2 space-y-8">
-            {/* Badge professionnel */}
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-orange-900/40 to-purple-900/40 backdrop-blur-sm border border-orange-500/30 text-orange-400 text-sm font-medium">
-              <Server className="w-5 h-5" />
-              Futur Administrateur Systèmes & Réseaux
-            </div>
-            
-            {/* Proposition de valeur principale */}
-            <div className="space-y-6 text-center lg:text-left">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-orange-400 to-purple-600">
-                  Fernandes Sébastien
-                </span>
-              </h1>
-              
-              <div className="space-y-4">
-                <h2 className="text-2xl md:text-3xl font-semibold text-white">
-                  Votre prochain talent en <span className="text-orange-400">infrastructure IT</span>
-                </h2>
-                <p className="text-xl text-gray-300 leading-relaxed max-w-2xl">
-                  Étudiant BTS SIO SISR passionné, je transforme les défis techniques en solutions robustes. 
-                  Spécialisé en administration système, sécurité réseau et support utilisateur.
-                </p>
-              </div>
+          {/* Header avec impact immédiat */}
+          <div className="text-center mb-16">
+            {/* Badge de disponibilité */}
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-green-900/40 to-emerald-900/40 backdrop-blur-sm border border-green-500/50 text-green-400 text-sm font-medium mb-8">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+              Disponible immédiatement pour alternance
             </div>
 
-            {/* Proposition de valeur unique */}
-            <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50">
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <Zap className="w-5 h-5 text-orange-500" />
-                Pourquoi me choisir ?
+            {/* Titre principal avec impact */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-orange-400 to-purple-500">
+                Fernandes
+              </span>
+              <br />
+              <span className="text-white">Sébastien</span>
+            </h1>
+
+            {/* Proposition de valeur claire */}
+            <div className="max-w-4xl mx-auto mb-8">
+              <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
+                Votre futur <span className="text-orange-400">Administrateur Systèmes & Réseaux</span>
+              </h2>
+              <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
+                Étudiant BTS SIO SISR avec une expertise pratique en infrastructure IT, 
+                prêt à apporter de la valeur à votre équipe dès le premier jour.
+              </p>
+            </div>
+
+            {/* Stats dynamiques */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+              {stats.map((stat, index) => (
+                <div 
+                  key={index}
+                  className={`p-6 rounded-2xl backdrop-blur-sm border transition-all duration-500 ${
+                    currentStat === index 
+                      ? 'bg-gradient-to-br from-orange-500/20 to-purple-500/20 border-orange-500/50 scale-105' 
+                      : 'bg-gray-800/60 border-gray-700/50'
+                  }`}
+                >
+                  <div className={`text-3xl md:text-4xl font-bold mb-2 ${
+                    currentStat === index ? 'text-orange-400' : 'text-white'
+                  }`}>
+                    {stat.number}
+                  </div>
+                  <div className="text-sm font-medium text-gray-300 mb-1">{stat.label}</div>
+                  <div className="text-xs text-gray-400">{stat.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Section de crédibilité */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            {keyStrengths.map((strength, index) => (
+              <div 
+                key={index}
+                className="group relative"
+                style={{ animationDelay: `${index * 200}ms` }}
+              >
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-8 h-full">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-xl">
+                      <strength.icon className="w-8 h-8 text-orange-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">{strength.title}</h3>
+                      <span className="text-sm text-orange-400 font-medium">{strength.highlight}</span>
+                    </div>
+                  </div>
+                  <p className="text-gray-300 leading-relaxed">{strength.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Témoignage et social proof */}
+          <div className="bg-gray-800/60 backdrop-blur-xl rounded-3xl p-8 mb-12 border border-gray-700/50">
+            <div className="text-center">
+              <div className="flex justify-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-6 h-6 text-yellow-500 fill-current" />
+                ))}
+              </div>
+              <blockquote className="text-xl md:text-2xl text-gray-300 mb-6 italic leading-relaxed">
+                "Sébastien a démontré une excellente maîtrise technique et une grande autonomie 
+                lors de son stage. Sa capacité d'adaptation et sa rigueur en font un profil très prometteur."
+              </blockquote>
+              <div className="border-t border-gray-700 pt-6">
+                <div className="font-bold text-white text-lg">Responsable IT - KNDS</div>
+                <div className="text-orange-400">Maître de stage</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action principal */}
+          <div className="text-center space-y-8">
+            <div className="space-y-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-white">
+                Prêt à renforcer votre équipe IT ?
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <div className="font-medium text-white">Formation technique solide</div>
-                    <div className="text-sm text-gray-400">BTS SIO SISR + expérience terrain</div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <div className="font-medium text-white">Autonomie & rigueur</div>
-                    <div className="text-sm text-gray-400">Gestion de projets complexes</div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <div className="font-medium text-white">Veille technologique</div>
-                    <div className="text-sm text-gray-400">Toujours à jour des innovations</div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <div className="font-medium text-white">Passion cybersécurité</div>
-                    <div className="text-sm text-gray-400">Objectif : expert sécurité</div>
-                  </div>
-                </div>
-              </div>
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                Découvrez comment mes compétences peuvent contribuer au succès de vos projets d'infrastructure.
+              </p>
             </div>
 
-            {/* Call to Action */}
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button 
                 onClick={scrollToProjects}
                 className="group px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl
                           hover:opacity-90 transform hover:scale-105
                           transition-all duration-300 shadow-lg hover:shadow-orange-500/25
-                          flex items-center gap-3 font-medium relative overflow-hidden"
+                          flex items-center gap-3 font-medium text-lg min-w-[250px] justify-center"
               >
-                <span className="relative z-10">Voir mes réalisations</span>
-                <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                <Eye className="w-5 h-5" />
+                <span>Voir mes réalisations</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
+              
               <button 
                 onClick={scrollToContact}
                 className="group px-8 py-4 border-2 border-orange-500 text-orange-400 bg-orange-500/5
                           hover:bg-orange-500 hover:text-white rounded-xl
                           transform hover:scale-105 transition-all duration-300
-                          flex items-center gap-3 font-medium backdrop-blur-sm"
+                          flex items-center gap-3 font-medium text-lg min-w-[250px] justify-center backdrop-blur-sm"
               >
-                <span>Discutons de votre projet</span>
-                <div className="w-2 h-2 rounded-full bg-current animate-pulse"></div>
+                <MessageCircle className="w-5 h-5" />
+                <span>Planifier un entretien</span>
               </button>
             </div>
-          </div>
 
-          {/* Right Column - Crédibilité & Social Proof */}
-          <div className="lg:w-1/2 relative">
-            <div className="space-y-8">
+            {/* Quick actions */}
+            <div className="flex flex-wrap justify-center gap-4 pt-8">
+              <a
+                href="/public/docs/fernandes-sebastien-cv.pdf"
+                download
+                className="flex items-center gap-2 px-6 py-3 bg-gray-800/60 text-gray-300 rounded-xl
+                          hover:bg-gray-700 hover:text-white transition-all duration-300
+                          backdrop-blur-sm border border-gray-700/50"
+              >
+                <Download className="w-4 h-4" />
+                <span>Télécharger CV</span>
+              </a>
               
-              {/* Achievements Grid */}
-              <div className="grid grid-cols-2 gap-4">
-                {achievements.map((achievement, index) => (
-                  <div key={index} className="group p-6 rounded-xl bg-gray-800/60 backdrop-blur-sm shadow-lg border border-gray-700/50 hover:border-orange-500/50 transition-all duration-300 hover:scale-105">
-                    <achievement.icon className="w-8 h-8 text-orange-500 mb-3 group-hover:scale-110 transition-transform" />
-                    <div className="font-bold text-white mb-1">{achievement.label}</div>
-                    <div className="text-sm text-gray-400">{achievement.desc}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Testimonial Carousel */}
-              <div className="relative bg-gray-800/40 backdrop-blur-xl rounded-2xl p-8 border border-gray-700/50">
-                <div className="text-center">
-                  <div className="text-4xl text-orange-500 mb-4">"</div>
-                  <blockquote className="text-lg text-gray-300 mb-6 italic leading-relaxed">
-                    {testimonials[currentTestimonial].text}
-                  </blockquote>
-                  <div className="border-t border-gray-700 pt-4">
-                    <div className="font-semibold text-white">
-                      {testimonials[currentTestimonial].author}
-                    </div>
-                    <div className="text-sm text-orange-400">
-                      {testimonials[currentTestimonial].role}
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Testimonial indicators */}
-                <div className="flex justify-center gap-2 mt-6">
-                  {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentTestimonial(index)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        currentTestimonial === index ? 'bg-orange-500 w-8' : 'bg-gray-600'
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Compétences clés */}
-              <div className="bg-gray-800/40 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50">
-                <h3 className="text-xl font-bold text-white mb-4 text-center">Compétences techniques</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { icon: Server, label: 'Windows Server', level: 85 },
-                    { icon: Shield, label: 'Cybersécurité', level: 75 },
-                    { icon: Network, label: 'Réseaux Cisco', level: 80 },
-                    { icon: Terminal, label: 'Scripting', level: 70 }
-                  ].map((skill, index) => (
-                    <div key={index} className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <skill.icon className="w-4 h-4 text-orange-500" />
-                        <span className="text-sm font-medium text-white">{skill.label}</span>
-                      </div>
-                      <div className="w-full bg-gray-700 rounded-full h-2">
-                        <div 
-                          className="bg-gradient-to-r from-orange-500 to-purple-500 h-2 rounded-full transition-all duration-1000"
-                          style={{ width: `${skill.level}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Disponibilité */}
-              <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 rounded-xl p-6 border border-green-500/30">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                  <span className="font-semibold text-white">Disponible pour alternance</span>
-                </div>
-                <p className="text-sm text-gray-300">
-                  Recherche active d'une alternance en administration système/réseau pour septembre 2024
-                </p>
-              </div>
+              <a
+                href="https://www.linkedin.com/in/s%C3%A9bastien-fernandes-566008232/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 bg-gray-800/60 text-gray-300 rounded-xl
+                          hover:bg-gray-700 hover:text-white transition-all duration-300
+                          backdrop-blur-sm border border-gray-700/50"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
             </div>
           </div>
         </div>
