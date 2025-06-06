@@ -57,12 +57,10 @@ const Hero: React.FC = () => {
       observer.observe(heroRef.current);
     }
 
-  
     return () => {
       if (heroRef.current) {
         observer.unobserve(heroRef.current);
       }
-      clearInterval(interval);
     };
   }, []);
 
@@ -175,10 +173,6 @@ const Hero: React.FC = () => {
                   <item.icon className="w-6 h-6 text-orange-500/30" />
                 </div>
               ))}
-            </div>
-
-                </div>
-              </div>
             </div>
           </div>
         </div>
