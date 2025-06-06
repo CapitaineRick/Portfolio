@@ -1,19 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { skillsData } from '../../data/skillsData';
-import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const Skills: React.FC = () => {
   const { theme } = useTheme();
   const skillsRef = useRef<HTMLDivElement>(null);
-  const [expandedSkills, setExpandedSkills] = useState<{[key: string]: boolean}>({});
-
-  const toggleSkillExpansion = (skillName: string) => {
-    setExpandedSkills(prev => ({
-      ...prev,
-      [skillName]: !prev[skillName]
-    }));
-  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -92,47 +83,28 @@ const Skills: React.FC = () => {
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
                         
                         {/* Carte avec hauteur flexible et structure en colonnes */}
-                        <div className="relative bg-gray-800 rounded-xl p-6 h-full flex flex-col min-h-[200px]">
-                          {/* En-tête fixe */}
-                          <div className="flex items-start justify-between mb-4 flex-shrink-0">
-                            <div className="flex items-center gap-3 flex-1 min-w-0">
-                              <div className="h-12 w-12 rounded-lg bg-gray-700 p-2 flex items-center justify-center flex-shrink-0">
-                                <img 
-                                  src={skill.logo} 
-                                  alt={skill.name}
-                                  className="w-full h-full object-contain"
-                                />
-                              </div>
-                              <div className="min-w-0 flex-1">
-                                <h4 className="font-semibold text-white text-base leading-tight">
-                                  {skill.name}
-                                </h4>
-                              </div>
+                        <div className="relative bg-gray-800 rounded-xl p-6 h-full flex flex-col">
+                          {/* En-tête avec logo et nom */}
+                          <div className="flex items-center gap-3 mb-4 flex-shrink-0">
+                            <div className="h-12 w-12 rounded-lg bg-gray-700 p-2 flex items-center justify-center flex-shrink-0">
+                              <img 
+                                src={skill.logo} 
+                                alt={skill.name}
+                                className="w-full h-full object-contain"
+                              />
                             </div>
-                            <button
-                              onClick={() => toggleSkillExpansion(skill.name)}
-                              className="p-2 hover:bg-gray-700 rounded-lg transition-colors flex-shrink-0 ml-2"
-                              aria-label={`${expandedSkills[skill.name] ? 'Masquer' : 'Afficher'} la description de ${skill.name}`}
-                            >
-                              {expandedSkills[skill.name] ? (
-                                <ChevronUp className="w-5 h-5 text-gray-400" />
-                              ) : (
-                                <ChevronDown className="w-5 h-5 text-gray-400" />
-                              )}
-                            </button>
+                            <div className="min-w-0 flex-1">
+                              <h4 className="font-semibold text-white text-base leading-tight">
+                                {skill.name}
+                              </h4>
+                            </div>
                           </div>
 
-                          {/* Contenu extensible */}
-                          <div className="flex-1 flex flex-col">
-                            <div className={`overflow-hidden transition-all duration-300 ${
-                              expandedSkills[skill.name] ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                            }`}>
-                              <div className="pt-4 border-t border-gray-700">
-                                <p className="text-sm text-gray-300 leading-relaxed">
-                                  {skill.description}
-                                </p>
-                              </div>
-                            </div>
+                          {/* Description toujours visible */}
+                          <div className="flex-1 pt-4 border-t border-gray-700">
+                            <p className="text-sm text-gray-300 leading-relaxed">
+                              {skill.description}
+                            </p>
                           </div>
                         </div>
                       </div>
