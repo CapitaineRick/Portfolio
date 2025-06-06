@@ -5,36 +5,6 @@ const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const [activeSkill, setActiveSkill] = useState(0);
 
-  const skills = [
-    { 
-      icon: Server, 
-      label: 'Infrastructure', 
-      gradient: 'from-orange-500 to-red-500',
-      description: 'Administration système Windows & Linux',
-      details: ['Windows Server 2019/2022', 'Ubuntu/Debian', 'Active Directory', 'Virtualisation']
-    },
-    { 
-      icon: Shield, 
-      label: 'Sécurité', 
-      gradient: 'from-blue-500 to-cyan-500',
-      description: 'Protection et audit des systèmes',
-      details: ['Pare-feu', 'VPN', 'Monitoring', 'Audit sécurité']
-    },
-    { 
-      icon: Network, 
-      label: 'Réseaux', 
-      gradient: 'from-green-500 to-emerald-500',
-      description: 'Configuration et maintenance',
-      details: ['Cisco', 'VLAN', 'Routage', 'DNS/DHCP']
-    },
-    { 
-      icon: Terminal, 
-      label: 'DevOps', 
-      gradient: 'from-purple-500 to-pink-500',
-      description: 'Automatisation et scripts',
-      details: ['Bash/PowerShell', 'Docker', 'Ansible', 'CI/CD']
-    }
-  ];
 
   const techIcons = [
     { icon: Database, delay: 0 },
