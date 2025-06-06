@@ -44,7 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     const updateDropdownPosition = () => {
       if (buttonRef.current && showDropdown) {
         const buttonRect = buttonRef.current.getBoundingClientRect();
-        const dropdownWidth = 288; // w-72
+        const dropdownWidth = 320; // Augmenté pour plus d'espace
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
         
@@ -53,17 +53,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
         
         // Ajuster si le dropdown dépasse à droite
         if (left + dropdownWidth > viewportWidth - 16) {
-          left = viewportWidth - dropdownWidth - 16;
+          left = Math.max(16, viewportWidth - dropdownWidth - 16);
+        }
+        
+        // Ajuster si le dropdown dépasse à gauche
+        if (left < 16) {
+          left = 16;
         }
         
         // Ajuster si le dropdown dépasse en bas
-        if (top + 320 > viewportHeight) { // 320px = max-height + padding
-          top = buttonRect.top - 320 - 8;
+        const maxDropdownHeight = 400;
+        if (top + maxDropdownHeight > viewportHeight - 16) {
+          top = Math.max(16, buttonRect.top - maxDropdownHeight - 8);
         }
         
         setDropdownPosition({
           top: Math.max(16, top),
-          left: Math.max(16, left)
+          left: left
         });
       }
     };
@@ -71,7 +77,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
       
-      // Ne pas fermer si on clique dans le dropdown ou sur le bouton
       if (dropdownRef.current?.contains(target) || 
           buttonRef.current?.contains(target)) {
         return;
@@ -81,7 +86,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     };
 
     const handleScroll = (event: Event) => {
-      // Ne pas fermer le dropdown si on scroll à l'intérieur
       if (dropdownRef.current?.contains(event.target as Node)) {
         return;
       }
@@ -160,29 +164,37 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
           zIndex: 9999,
           pointerEvents: 'auto'
         }}
-        className="w-72 bg-gray-800 rounded-xl border border-gray-700 shadow-2xl"
+        className="w-80 bg-gray-800 rounded-xl border border-gray-700 shadow-2xl backdrop-blur-sm"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="max-h-80 overflow-y-auto overscroll-contain">
-          {project.documents.map((doc, index) => (
-            <button
-              key={index}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                handleDocumentSelect(doc);
-              }}
-              className="w-full px-4 py-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-center gap-2 border-b border-gray-700 last:border-0 first:rounded-t-xl last:rounded-b-xl focus:outline-none focus:bg-gray-700"
-            >
-              <FileText className="w-4 h-4 flex-shrink-0" />
-              <div className="flex-1 min-w-0">
-                <div className="font-medium truncate">{doc.title}</div>
-                {doc.description && (
-                  <div className="text-xs text-gray-400 truncate">{doc.description}</div>
-                )}
-              </div>
-            </button>
-          ))}
+        <div className="max-h-96 overflow-y-auto overscroll-contain">
+          <div className="p-2">
+            {project.documents.map((doc, index) => (
+              <button
+                key={index}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleDocumentSelect(doc);
+                }}
+                className="w-full p-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-start gap-3 rounded-lg mb-1 last:mb-0 focus:outline-none focus:bg-gray-700 focus:ring-2 focus:ring-orange-500"
+              >
+                <div className="flex-shrink-0 mt-0.5">
+                  <FileText className="w-4 h-4 text-orange-500" />
+                </div>
+                <div className="flex-1 min-w-0 space-y-1">
+                  <div className="font-medium text-sm leading-tight break-words">
+                    {doc.title}
+                  </div>
+                  {doc.description && (
+                    <div className="text-xs text-gray-400 leading-tight break-words">
+                      {doc.description}
+                    </div>
+                  )}
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
       </div>,
       document.body
@@ -246,7 +258,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 text-orange-400 hover:bg-orange-900/50 font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
                   >
                     <FileText className="w-4 h-4" />
-                    Sélectionner un document
+                    <span className="text-sm">Documents</span>
                     <ChevronDown className={`w-4 h-4 transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
                   </button>
                 ) : (
