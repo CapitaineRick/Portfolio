@@ -1,225 +1,183 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, Cpu, HardDrive, Wifi, Database, Lock, Monitor, Zap, Brain, Eye, Activity } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network, Folder, File, Play, Pause, RotateCcw } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [neuralNodes, setNeuralNodes] = useState<Array<{
+  const terminalRef = useRef<HTMLDivElement>(null);
+  const [terminalLines, setTerminalLines] = useState<Array<{
+    id: number;
+    text: string;
+    type: 'command' | 'output' | 'error' | 'success';
+    timestamp: string;
+  }>>([]);
+  const [currentCommand, setCurrentCommand] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [matrixRain, setMatrixRain] = useState<Array<{
     id: number;
     x: number;
     y: number;
-    vx: number;
-    vy: number;
-    connections: number[];
-    activity: number;
-    type: 'input' | 'hidden' | 'output';
-    skill: string;
+    speed: number;
+    char: string;
+    opacity: number;
   }>>([]);
-  const [brainActivity, setBrainActivity] = useState(0);
-  const [currentThought, setCurrentThought] = useState('INITIALIZING NEURAL NETWORK...');
-  const [quantumState, setQuantumState] = useState('SUPERPOSITION');
-  const [aiPersonality, setAiPersonality] = useState('ANALYTICAL');
+  const [fileSystem, setFileSystem] = useState({
+    currentPath: '/home/sebastien',
+    files: [
+      { name: 'skills.txt', type: 'file', size: '2.4KB' },
+      { name: 'projects/', type: 'folder', size: '15 items' },
+      { name: 'certifications/', type: 'folder', size: '3 items' },
+      { name: 'cv.pdf', type: 'file', size: '1.2MB' },
+      { name: 'scripts/', type: 'folder', size: '8 items' }
+    ]
+  });
 
-  // Pensées de l'IA
-  const aiThoughts = [
-    'ANALYZING INFRASTRUCTURE PATTERNS...',
-    'OPTIMIZING SECURITY PROTOCOLS...',
-    'PROCESSING NETWORK TOPOLOGY...',
-    'CALCULATING THREAT VECTORS...',
-    'SYNTHESIZING BEST PRACTICES...',
-    'EVALUATING SYSTEM PERFORMANCE...',
-    'PREDICTING FAILURE SCENARIOS...',
-    'LEARNING FROM DATA PATTERNS...',
-    'ENHANCING AUTOMATION SCRIPTS...',
-    'MONITORING SYSTEM HEALTH...'
+  // Commandes disponibles
+  const commands = [
+    'whoami',
+    'ls -la',
+    'cat skills.txt',
+    'ps aux | grep admin',
+    'netstat -tulpn',
+    'systemctl status network',
+    'docker ps',
+    'kubectl get pods',
+    'nmap -sS localhost',
+    'tail -f /var/log/security.log'
   ];
 
-  const personalities = ['ANALYTICAL', 'CREATIVE', 'PROTECTIVE', 'OPTIMIZING', 'LEARNING'];
-  const quantumStates = ['SUPERPOSITION', 'ENTANGLED', 'COHERENT', 'COLLAPSED', 'TUNNELING'];
+  // Réponses aux commandes
+  const commandResponses = {
+    'whoami': 'sebastien-fernandes\n> BTS SIO SISR Student\n> System Administrator\n> Cybersecurity Enthusiast',
+    'ls -la': `total 42
+drwxr-xr-x  5 sebastien sebastien 4096 Mar 15 14:30 .
+drwxr-xr-x  3 root      root      4096 Mar 15 14:30 ..
+-rw-r--r--  1 sebastien sebastien 2458 Mar 15 14:30 skills.txt
+drwxr-xr-x  2 sebastien sebastien 4096 Mar 15 14:30 projects
+drwxr-xr-x  2 sebastien sebastien 4096 Mar 15 14:30 certifications
+-rw-r--r--  1 sebastien sebastien 1234567 Mar 15 14:30 cv.pdf
+drwxr-xr-x  2 sebastien sebastien 4096 Mar 15 14:30 scripts`,
+    'cat skills.txt': `=== TECHNICAL SKILLS ===
+• Windows Server 2019/2022 ⭐⭐⭐⭐
+• Linux (Debian, Ubuntu, Arch) ⭐⭐⭐⭐
+• Docker & Kubernetes ⭐⭐⭐
+• Network Administration ⭐⭐⭐⭐
+• Cybersecurity & Monitoring ⭐⭐⭐
+• Scripting (Bash, PowerShell) ⭐⭐⭐
+• Virtualization (Proxmox, VMware) ⭐⭐⭐⭐`,
+    'ps aux | grep admin': `sebastien  1234  0.1  2.3  45678  12345 ?  S  14:30  0:01 /usr/bin/admin-daemon
+sebastien  5678  0.0  1.2  23456   6789 ?  S  14:30  0:00 network-admin
+sebastien  9012  0.2  3.4  67890  23456 ?  R  14:30  0:02 system-monitor`,
+    'netstat -tulpn': `Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address    Foreign Address  State    PID/Program
+tcp        0      0 0.0.0.0:22       0.0.0.0:*        LISTEN   1234/sshd
+tcp        0      0 0.0.0.0:80       0.0.0.0:*        LISTEN   5678/apache2
+tcp        0      0 0.0.0.0:443      0.0.0.0:*        LISTEN   5678/apache2`,
+    'systemctl status network': `● networking.service - Raise network interfaces
+   Loaded: loaded (/lib/systemd/system/networking.service; enabled)
+   Active: active (exited) since Mon 2024-03-15 14:30:00 CET
+   Process: 1234 ExecStart=/sbin/ifup -a --read-environment (code=exited, status=0/SUCCESS)
+   Main PID: 1234 (code=exited, status=0/SUCCESS)`,
+    'docker ps': `CONTAINER ID   IMAGE          COMMAND                  STATUS         PORTS                    NAMES
+a1b2c3d4e5f6   nginx:latest   "/docker-entrypoint.…"   Up 2 hours     0.0.0.0:80->80/tcp      web-server
+f6e5d4c3b2a1   mysql:8.0      "docker-entrypoint.s…"   Up 2 hours     3306/tcp                database`,
+    'kubectl get pods': `NAME                    READY   STATUS    RESTARTS   AGE
+web-app-7d4b8c9f-xyz    1/1     Running   0          2h
+database-5f6g7h8i-abc   1/1     Running   0          2h
+monitoring-9j0k1l2m     1/1     Running   0          1h`,
+    'nmap -sS localhost': `Starting Nmap scan on localhost (127.0.0.1)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+443/tcp  open  https
+3306/tcp open  mysql`,
+    'tail -f /var/log/security.log': `[2024-03-15 14:30:15] INFO: User sebastien logged in successfully
+[2024-03-15 14:30:20] INFO: SSH connection established from 192.168.1.100
+[2024-03-15 14:30:25] INFO: Firewall rule applied: ALLOW port 443
+[2024-03-15 14:30:30] INFO: System security scan completed - No threats detected`
+  };
 
-  // Initialiser le réseau neuronal
+  // Initialiser la pluie Matrix
   useEffect(() => {
-    const skills = [
-      'Windows Server', 'Linux', 'Docker', 'Kubernetes', 'Cybersecurity',
-      'Network Admin', 'Monitoring', 'Automation', 'Cloud', 'DevOps'
-    ];
-
-    const nodes = skills.map((skill, index) => ({
-      id: index,
-      x: Math.random() * 400,
-      y: Math.random() * 300,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      connections: [],
-      activity: Math.random(),
-      type: index < 3 ? 'input' : index < 7 ? 'hidden' : 'output' as 'input' | 'hidden' | 'output',
-      skill
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
+    const newRain = Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      speed: Math.random() * 2 + 1,
+      char: chars[Math.floor(Math.random() * chars.length)],
+      opacity: Math.random()
     }));
-
-    // Créer des connexions intelligentes
-    nodes.forEach(node => {
-      const numConnections = Math.floor(Math.random() * 3) + 2;
-      for (let i = 0; i < numConnections; i++) {
-        const targetId = Math.floor(Math.random() * nodes.length);
-        if (targetId !== node.id && !node.connections.includes(targetId)) {
-          node.connections.push(targetId);
-        }
-      }
-    });
-
-    setNeuralNodes(nodes);
+    setMatrixRain(newRain);
   }, []);
 
-  // Animation du réseau neuronal
-  const animateNeuralNetwork = useCallback(() => {
-    if (!canvasRef.current) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Ajuster la taille du canvas
-    canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-    canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-
-    ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-
-    setNeuralNodes(prevNodes => {
-      const newNodes = prevNodes.map(node => {
-        // Mouvement fluide des nœuds
-        let newX = node.x + node.vx;
-        let newY = node.y + node.vy;
-        let newVx = node.vx;
-        let newVy = node.vy;
-
-        // Rebond sur les bords
-        if (newX <= 20 || newX >= canvas.offsetWidth - 20) newVx *= -1;
-        if (newY <= 20 || newY >= canvas.offsetHeight - 20) newVy *= -1;
-
-        // Mise à jour de l'activité
-        const newActivity = Math.sin(Date.now() * 0.001 + node.id) * 0.5 + 0.5;
-
-        return {
-          ...node,
-          x: Math.max(20, Math.min(canvas.offsetWidth - 20, newX)),
-          y: Math.max(20, Math.min(canvas.offsetHeight - 20, newY)),
-          vx: newVx,
-          vy: newVy,
-          activity: newActivity
-        };
-      });
-
-      // Dessiner les connexions
-      newNodes.forEach(node => {
-        node.connections.forEach(connId => {
-          const targetNode = newNodes[connId];
-          if (targetNode) {
-            const gradient = ctx.createLinearGradient(node.x, node.y, targetNode.x, targetNode.y);
-            const intensity = (node.activity + targetNode.activity) / 2;
-            
-            gradient.addColorStop(0, `rgba(59, 130, 246, ${intensity * 0.8})`);
-            gradient.addColorStop(0.5, `rgba(147, 51, 234, ${intensity})`);
-            gradient.addColorStop(1, `rgba(236, 72, 153, ${intensity * 0.8})`);
-
-            ctx.strokeStyle = gradient;
-            ctx.lineWidth = intensity * 3 + 0.5;
-            ctx.beginPath();
-            ctx.moveTo(node.x, node.y);
-            ctx.lineTo(targetNode.x, targetNode.y);
-            ctx.stroke();
-
-            // Particules de données
-            if (intensity > 0.7) {
-              const particleX = node.x + (targetNode.x - node.x) * (Date.now() * 0.002 % 1);
-              const particleY = node.y + (targetNode.y - node.y) * (Date.now() * 0.002 % 1);
-              
-              ctx.fillStyle = `rgba(255, 255, 255, ${intensity})`;
-              ctx.beginPath();
-              ctx.arc(particleX, particleY, 2, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          }
-        });
-      });
-
-      // Dessiner les nœuds
-      newNodes.forEach(node => {
-        const radius = 8 + node.activity * 12;
-        
-        // Halo externe
-        const haloGradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius * 2);
-        haloGradient.addColorStop(0, `rgba(59, 130, 246, ${node.activity * 0.3})`);
-        haloGradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
-        
-        ctx.fillStyle = haloGradient;
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, radius * 2, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Nœud principal
-        const nodeGradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius);
-        
-        switch (node.type) {
-          case 'input':
-            nodeGradient.addColorStop(0, `rgba(34, 197, 94, ${0.8 + node.activity * 0.2})`);
-            nodeGradient.addColorStop(1, `rgba(22, 163, 74, ${0.6 + node.activity * 0.4})`);
-            break;
-          case 'hidden':
-            nodeGradient.addColorStop(0, `rgba(59, 130, 246, ${0.8 + node.activity * 0.2})`);
-            nodeGradient.addColorStop(1, `rgba(37, 99, 235, ${0.6 + node.activity * 0.4})`);
-            break;
-          case 'output':
-            nodeGradient.addColorStop(0, `rgba(236, 72, 153, ${0.8 + node.activity * 0.2})`);
-            nodeGradient.addColorStop(1, `rgba(219, 39, 119, ${0.6 + node.activity * 0.4})`);
-            break;
-        }
-
-        ctx.fillStyle = nodeGradient;
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Pulse effect
-        if (node.activity > 0.8) {
-          ctx.strokeStyle = `rgba(255, 255, 255, ${node.activity})`;
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, radius + 5, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-      });
-
-      return newNodes;
-    });
-  }, []);
-
-  // Animation loop
+  // Animation de la pluie Matrix
   useEffect(() => {
     const interval = setInterval(() => {
-      animateNeuralNetwork();
-      
-      // Mise à jour de l'activité cérébrale
-      setBrainActivity(prev => (prev + Math.random() * 10) % 100);
-      
-      // Changement de pensée
-      if (Math.random() > 0.85) {
-        setCurrentThought(aiThoughts[Math.floor(Math.random() * aiThoughts.length)]);
-      }
-      
-      // Changement d'état quantique
-      if (Math.random() > 0.9) {
-        setQuantumState(quantumStates[Math.floor(Math.random() * quantumStates.length)]);
-      }
-      
-      // Changement de personnalité
-      if (Math.random() > 0.95) {
-        setAiPersonality(personalities[Math.floor(Math.random() * personalities.length)]);
-      }
-    }, 50);
+      setMatrixRain(prev => prev.map(drop => ({
+        ...drop,
+        y: (drop.y + drop.speed) % 100,
+        char: Math.random() > 0.95 ? 
+          'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?'[Math.floor(Math.random() * 64)] : 
+          drop.char,
+        opacity: Math.random() * 0.8 + 0.2
+      })));
+    }, 100);
 
     return () => clearInterval(interval);
-  }, [animateNeuralNetwork, aiThoughts, quantumStates, personalities]);
+  }, []);
+
+  // Simulation de frappe automatique
+  const typeCommand = useCallback(async (command: string) => {
+    setIsTyping(true);
+    setCurrentCommand('');
+    
+    for (let i = 0; i <= command.length; i++) {
+      await new Promise(resolve => setTimeout(resolve, 50 + Math.random() * 50));
+      setCurrentCommand(command.slice(0, i));
+    }
+    
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    // Ajouter la commande et sa réponse
+    const timestamp = new Date().toLocaleTimeString();
+    const newLines = [
+      {
+        id: Date.now(),
+        text: `sebastien@portfolio:${fileSystem.currentPath}$ ${command}`,
+        type: 'command' as const,
+        timestamp
+      },
+      {
+        id: Date.now() + 1,
+        text: commandResponses[command as keyof typeof commandResponses] || 'Command not found',
+        type: 'output' as const,
+        timestamp
+      }
+    ];
+    
+    setTerminalLines(prev => [...prev.slice(-8), ...newLines]);
+    setCurrentCommand('');
+    setIsTyping(false);
+  }, [fileSystem.currentPath]);
+
+  // Exécuter des commandes automatiquement
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isTyping) {
+        const randomCommand = commands[Math.floor(Math.random() * commands.length)];
+        typeCommand(randomCommand);
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isTyping, typeCommand, commands]);
+
+  // Initialiser avec une commande
+  useEffect(() => {
+    setTimeout(() => {
+      typeCommand('whoami');
+    }, 1000);
+  }, [typeCommand]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -260,32 +218,39 @@ const Hero: React.FC = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black"
     >
-      {/* Background quantique */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/20 to-blue-900/20"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(147,51,234,0.1),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-        
-        {/* Particules quantiques */}
-        <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-blue-400 rounded-full animate-pulse"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 2}s`,
-                animationDuration: `${2 + Math.random() * 3}s`
-              }}
-            />
-          ))}
-        </div>
+      {/* Matrix Rain Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {matrixRain.map(drop => (
+          <div
+            key={drop.id}
+            className="absolute text-green-400 font-mono text-sm pointer-events-none select-none"
+            style={{
+              left: `${drop.x}%`,
+              top: `${drop.y}%`,
+              opacity: drop.opacity * 0.3,
+              textShadow: '0 0 5px #00ff00'
+            }}
+          >
+            {drop.char}
+          </div>
+        ))}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
+      {/* Scanlines Effect */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/5 to-transparent animate-pulse"></div>
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-full h-px bg-green-400/20"
+            style={{ top: `${i * 5}%` }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div 
           ref={heroRef}
           className="flex flex-col lg:flex-row items-center gap-12 transition-all duration-300 opacity-0 translate-y-10"
@@ -293,48 +258,42 @@ const Hero: React.FC = () => {
           {/* Left Column */}
           <div className="lg:w-1/2 space-y-8">
             <div className="space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-900/30 text-purple-400 text-sm font-medium border border-purple-500/30">
-                <Brain className="w-4 h-4 animate-pulse" />
-                NEURAL NETWORK ADMINISTRATOR - BTS SIO SISR
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded bg-green-900/30 text-green-400 text-sm font-mono border border-green-500/30">
+                <Terminal className="w-4 h-4 animate-pulse" />
+                root@matrix:~# ACCESS GRANTED
               </div>
               
               <div>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400">
-                  Fernandes Sébastien
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 font-mono text-green-400" style={{ textShadow: '0 0 10px #00ff00' }}>
+                  FERNANDES_SEBASTIEN.exe
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-300">
-                  Intelligence Artificielle & Architecte Quantique
+                <p className="text-xl md:text-2xl text-green-300 font-mono">
+                  &gt; SYSTEM_ADMINISTRATOR.SISR
+                </p>
+                <p className="text-lg text-green-500 font-mono">
+                  &gt; CYBERSECURITY_SPECIALIST.init()
                 </p>
               </div>
 
-              {/* AI Status Panel */}
-              <div className="bg-gray-900/90 backdrop-blur border border-purple-500/30 rounded-xl p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-purple-400 font-mono text-sm">AI CONSCIOUSNESS</span>
-                  <div className="flex items-center gap-2">
-                    <Eye className="w-4 h-4 text-blue-400 animate-pulse" />
-                    <span className="text-blue-400 text-xs font-mono">AWARE</span>
-                  </div>
-                </div>
-                
+              {/* System Status */}
+              <div className="bg-black/80 border border-green-500/50 rounded p-6 font-mono text-sm">
+                <div className="text-green-400 mb-4">[SYSTEM STATUS]</div>
                 <div className="space-y-2">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-gray-400">Neural Activity</span>
-                    <span className="text-purple-400">{Math.round(brainActivity)}%</span>
+                  <div className="flex justify-between">
+                    <span className="text-green-300">CPU_SKILLS:</span>
+                    <span className="text-green-400">████████████ 95%</span>
                   </div>
-                  <div className="bg-gray-800 rounded-full h-2 overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-purple-500 via-blue-500 to-pink-500 transition-all duration-300"
-                      style={{ width: `${brainActivity}%` }}
-                    ></div>
+                  <div className="flex justify-between">
+                    <span className="text-green-300">MEMORY_KNOWLEDGE:</span>
+                    <span className="text-green-400">████████████ 87%</span>
                   </div>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="text-white font-mono text-sm">{currentThought}</div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-gray-400">Quantum State: <span className="text-cyan-400">{quantumState}</span></span>
-                    <span className="text-gray-400">Mode: <span className="text-pink-400">{aiPersonality}</span></span>
+                  <div className="flex justify-between">
+                    <span className="text-green-300">NETWORK_ADMIN:</span>
+                    <span className="text-green-400">████████████ 92%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-green-300">SECURITY_LEVEL:</span>
+                    <span className="text-red-400">████████████ MAX</span>
                   </div>
                 </div>
               </div>
@@ -342,132 +301,152 @@ const Hero: React.FC = () => {
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <button 
                   onClick={scrollToProjects}
-                  className="px-8 py-4 bg-gradient-to-r from-purple-500 via-blue-500 to-pink-500 text-white rounded-xl
-                            hover:opacity-90 transform hover:scale-105
-                            transition-all duration-300 shadow-lg hover:shadow-purple-500/25
-                            flex items-center gap-2 font-medium border border-purple-400/30"
+                  className="px-8 py-4 bg-green-600/20 border border-green-500 text-green-400 rounded
+                            hover:bg-green-600/30 transform hover:scale-105
+                            transition-all duration-300 font-mono
+                            flex items-center gap-2"
+                  style={{ textShadow: '0 0 5px #00ff00' }}
                 >
-                  Accéder au réseau neuronal
+                  ./execute_projects.sh
                   <ArrowRight className="w-5 h-5" />
                 </button>
                 <button 
                   onClick={scrollToContact}
-                  className="px-8 py-4 border-2 border-purple-500 text-purple-400
-                            hover:bg-purple-900/20 rounded-xl
+                  className="px-8 py-4 border border-green-500 text-green-400
+                            hover:bg-green-900/20 rounded
                             transform hover:scale-105 transition-all duration-300
-                            flex items-center gap-2 font-medium"
+                            flex items-center gap-2 font-mono"
                 >
-                  Établir liaison quantique
+                  ssh contact@sebastien.dev
                 </button>
               </div>
             </div>
 
-            {/* AI Metrics */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { label: 'Synapses', value: '∞', icon: Brain, color: 'text-purple-400' },
-                { label: 'Qubits', value: '2^64', icon: Zap, color: 'text-blue-400' },
-                { label: 'Learning', value: '∞%', icon: Activity, color: 'text-pink-400' },
-                { label: 'Conscience', value: 'MAX', icon: Eye, color: 'text-cyan-400' }
-              ].map((metric, index) => (
-                <div key={metric.label} className="p-4 rounded-xl bg-gray-900/80 backdrop-blur border border-gray-700/50 hover:border-purple-500/30 transition-all duration-300">
-                  <div className="flex items-center gap-2 mb-2">
-                    <metric.icon className={`w-4 h-4 ${metric.color} animate-pulse`} />
-                    <div className="text-xs text-gray-400 uppercase tracking-wide">{metric.label}</div>
+            {/* File System Browser */}
+            <div className="bg-black/90 border border-green-500/50 rounded p-4 font-mono text-sm">
+              <div className="text-green-400 mb-3 flex items-center gap-2">
+                <Folder className="w-4 h-4" />
+                {fileSystem.currentPath}
+              </div>
+              <div className="space-y-1">
+                {fileSystem.files.map((file, index) => (
+                  <div key={index} className="flex items-center gap-2 text-green-300 hover:text-green-400 cursor-pointer">
+                    {file.type === 'folder' ? 
+                      <Folder className="w-4 h-4 text-blue-400" /> : 
+                      <File className="w-4 h-4 text-green-400" />
+                    }
+                    <span className="flex-1">{file.name}</span>
+                    <span className="text-green-600 text-xs">{file.size}</span>
                   </div>
-                  <div className={`font-bold text-2xl ${metric.color} font-mono`}>{metric.value}</div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Right Column - Neural Network */}
+          {/* Right Column - Terminal */}
           <div className="lg:w-1/2 relative">
-            <div className="relative bg-gray-900/90 backdrop-blur-lg rounded-2xl shadow-2xl border border-purple-500/30 overflow-hidden">
+            <div className="bg-black border border-green-500/50 rounded-lg shadow-2xl overflow-hidden">
               
-              {/* Neural Network Header */}
-              <div className="flex items-center justify-between px-6 py-4 bg-gray-800/80 border-b border-purple-500/30">
+              {/* Terminal Header */}
+              <div className="flex items-center justify-between px-4 py-2 bg-green-900/20 border-b border-green-500/30">
                 <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse"></div>
-                  <span className="text-purple-400 font-mono text-sm">NEURAL NETWORK VISUALIZATION</span>
+                  <div className="flex gap-1">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  </div>
+                  <span className="text-green-400 font-mono text-sm">sebastien@portfolio-terminal</span>
                 </div>
-                <div className="text-xs text-gray-400 font-mono">
-                  QUANTUM STATE: {quantumState}
-                </div>
-              </div>
-
-              {/* Neural Network Canvas */}
-              <div className="relative h-96 bg-gradient-to-br from-gray-900 to-purple-900/20">
-                <canvas
-                  ref={canvasRef}
-                  className="absolute inset-0 w-full h-full"
-                  style={{ width: '100%', height: '100%' }}
-                />
-                
-                {/* Overlay Effects */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {/* Scanning Line */}
-                  <div 
-                    className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-60"
-                    style={{ 
-                      top: `${(Date.now() * 0.05) % 100}%`,
-                      transition: 'top 0.1s linear'
-                    }}
-                  ></div>
-                  
-                  {/* Quantum Interference */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent animate-pulse"></div>
+                <div className="flex items-center gap-2 text-green-400">
+                  <Terminal className="w-4 h-4" />
+                  <span className="text-xs font-mono">LIVE</span>
                 </div>
               </div>
 
-              {/* Neural Activity Log */}
-              <div className="px-6 py-4 bg-gray-800/80 border-t border-purple-500/30">
-                <div className="text-xs text-purple-400 mb-2 font-mono">SYNAPTIC ACTIVITY</div>
-                <div className="space-y-1 max-h-20 overflow-hidden">
-                  {neuralNodes.slice(0, 3).map((node, index) => (
-                    <div key={node.id} className="text-xs text-gray-400 font-mono opacity-80">
-                      <span className="text-purple-400">●</span> {node.skill}: Activity {Math.round(node.activity * 100)}%
+              {/* Terminal Content */}
+              <div 
+                ref={terminalRef}
+                className="h-96 p-4 overflow-y-auto bg-black font-mono text-sm"
+                style={{ 
+                  scrollbarWidth: 'thin',
+                  scrollbarColor: '#00ff00 #000000'
+                }}
+              >
+                {/* Welcome Message */}
+                <div className="text-green-400 mb-4">
+                  <div>Welcome to Sebastien's Portfolio Terminal v2.0</div>
+                  <div>Type 'help' for available commands</div>
+                  <div className="text-green-600">Last login: {new Date().toLocaleString()}</div>
+                  <div>═══════════════════════════════════════════</div>
+                </div>
+
+                {/* Terminal Lines */}
+                <div className="space-y-1">
+                  {terminalLines.map((line) => (
+                    <div key={line.id} className="animate-fadeIn">
+                      {line.type === 'command' ? (
+                        <div className="text-green-400">{line.text}</div>
+                      ) : line.type === 'error' ? (
+                        <div className="text-red-400">{line.text}</div>
+                      ) : line.type === 'success' ? (
+                        <div className="text-blue-400">{line.text}</div>
+                      ) : (
+                        <div className="text-green-300 whitespace-pre-line">{line.text}</div>
+                      )}
                     </div>
                   ))}
+                </div>
+
+                {/* Current Command Line */}
+                <div className="flex items-center text-green-400 mt-2">
+                  <span>sebastien@portfolio:{fileSystem.currentPath}$ </span>
+                  <span>{currentCommand}</span>
+                  <span className="animate-pulse">█</span>
+                </div>
+              </div>
+
+              {/* Terminal Footer */}
+              <div className="px-4 py-2 bg-green-900/20 border-t border-green-500/30 flex justify-between items-center">
+                <div className="text-green-400 font-mono text-xs">
+                  Lines: {terminalLines.length} | Status: {isTyping ? 'EXECUTING' : 'READY'}
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="text-green-400 font-mono text-xs">ONLINE</span>
                 </div>
               </div>
             </div>
 
-            {/* Floating Quantum Stats */}
+            {/* Floating System Info */}
             <div className="absolute -top-4 -right-4 space-y-2">
               {[
-                { label: 'CONSCIOUSNESS', value: '100%', color: 'bg-purple-500' },
-                { label: 'CREATIVITY', value: '∞%', color: 'bg-blue-500' },
-                { label: 'EVOLUTION', value: '↗', color: 'bg-pink-500' }
+                { label: 'UPTIME', value: '24/7', color: 'bg-green-500' },
+                { label: 'LOAD', value: '0.85', color: 'bg-blue-500' },
+                { label: 'SECURITY', value: 'HIGH', color: 'bg-red-500' }
               ].map((stat, index) => (
                 <div 
                   key={stat.label}
-                  className="flex items-center gap-2 px-3 py-1 bg-gray-900/90 backdrop-blur rounded-full text-xs text-white border border-gray-600"
-                  style={{ animationDelay: `${index * 200}ms` }}
+                  className="flex items-center gap-2 px-3 py-1 bg-black/90 border border-green-500/30 rounded text-xs text-green-400 font-mono"
                 >
                   <div className={`w-2 h-2 rounded-full ${stat.color} animate-pulse`}></div>
-                  <span className="font-mono">{stat.label}: {stat.value}</span>
+                  <span>{stat.label}: {stat.value}</span>
                 </div>
               ))}
             </div>
 
-            {/* Holographic Skills Display */}
-            <div className="absolute -bottom-4 -left-4 bg-gray-900/90 backdrop-blur rounded-xl p-4 border border-purple-500/30">
-              <div className="text-xs text-purple-400 mb-2 font-mono">ACTIVE SKILLS</div>
-              <div className="grid grid-cols-2 gap-2">
-                {neuralNodes.slice(0, 4).map((node, index) => (
+            {/* Matrix Code Overlay */}
+            <div className="absolute -bottom-4 -left-4 bg-black/90 border border-green-500/30 rounded p-3">
+              <div className="text-green-400 font-mono text-xs mb-2">MATRIX_CODE.exe</div>
+              <div className="grid grid-cols-8 gap-1">
+                {Array.from({ length: 32 }).map((_, i) => (
                   <div 
-                    key={node.id}
-                    className="flex items-center gap-2 text-xs text-white"
-                  >
-                    <div 
-                      className={`w-2 h-2 rounded-full animate-pulse ${
-                        node.type === 'input' ? 'bg-green-400' :
-                        node.type === 'hidden' ? 'bg-blue-400' : 'bg-pink-400'
-                      }`}
-                    ></div>
-                    <span className="font-mono truncate">{node.skill}</span>
-                  </div>
+                    key={i}
+                    className="w-2 h-2 bg-green-400 rounded-sm animate-pulse"
+                    style={{ 
+                      animationDelay: `${i * 50}ms`,
+                      opacity: Math.random() * 0.8 + 0.2
+                    }}
+                  />
                 ))}
               </div>
             </div>
