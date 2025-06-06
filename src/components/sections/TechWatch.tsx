@@ -40,9 +40,9 @@ const TechWatch: React.FC = () => {
   }, []);
 
   return (
-    <section id="techwatch">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Header avec statistiques */}
+    <section id="techwatch" className="py-16 md:py-24 bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-purple-600">
             Veille Technologique
@@ -53,74 +53,86 @@ const TechWatch: React.FC = () => {
           </p>
         </div>
 
-        {/* Filtres par catégorie - Style moderne */}
-        <div className="relative group mb-12">
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-          <div className="relative bg-gray-800 rounded-2xl p-6">
-            <h3 className="text-xl font-semibold text-white mb-4 text-center">Filtrer par domaine</h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              <button
-                onClick={() => setSelectedCategory(null)}
-                className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                  !selectedCategory
-                    ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg transform scale-105'
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:scale-105'
-                }`}
-              >
-                Tous les articles
-              </button>
-              {categories.map(category => (
+        {/* Filtres par catégorie */}
+        <div className="mb-12">
+          <div className="relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+            <div className="relative bg-gray-800 rounded-2xl p-6">
+              <h3 className="text-xl font-semibold text-white mb-4 text-center">Filtrer par domaine</h3>
+              <div className="flex flex-wrap justify-center gap-3">
                 <button
-                  key={category}
-                  onClick={() => setSelectedCategory(selectedCategory === category ? null : category)}
+                  onClick={() => setSelectedCategory(null)}
                   className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                    selectedCategory === category
-                      ? 'bg-gradient-to-r h-full from-orange-500 to-purple-500 text-white shadow-lg transform scale-105'
+                    !selectedCategory
+                      ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg transform scale-105'
                       : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:scale-105'
                   }`}
                 >
-                  {category}
+                  Tous les articles
                 </button>
-              ))}
+                {categories.map(category => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(selectedCategory === category ? null : category)}
+                    className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                      selectedCategory === category
+                        ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg transform scale-105'
+                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:scale-105'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
         
-        {/* Articles en grille moderne avec hauteurs uniformes */}
+        {/* Articles Grid */}
         <div 
           ref={watchRef}
           className="transition-all duration-300 opacity-0 translate-y-10"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {filteredArticles.map((item, index) => (
-              <div 
+              <article 
                 key={item.title}
                 className="relative group"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
+                {/* Card Background Effect */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative bg-gray-800 rounded-2xl overflow-hidden flex flex-col min-h-[600px]">
+                
+                {/* Card Content */}
+                <div className="relative bg-gray-800 rounded-2xl overflow-hidden h-full flex flex-col">
                   
-                  {/* Image et badges - Hauteur fixe */}
+                  {/* Image Header */}
                   <div className="relative h-48 overflow-hidden flex-shrink-0">
                     <img 
                       src={item.image} 
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
+                    
+                    {/* Image Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                      {/* Category Badge */}
                       <div className="absolute top-4 left-4">
                         <span className="px-3 py-1 rounded-full text-sm bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg">
                           {item.category}
                         </span>
                       </div>
+                      
+                      {/* Date Badge */}
                       <div className="absolute top-4 right-4">
                         <div className="flex items-center gap-2 text-sm text-white bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full">
                           <Calendar className="w-4 h-4" />
                           {item.date}
                         </div>
                       </div>
-                      <div className="absolute bottom-4 left-4">
+                      
+                      {/* Tags */}
+                      <div className="absolute bottom-4 left-4 right-4">
                         <div className="flex flex-wrap gap-2">
                           {item.tags.slice(0, 3).map(tag => (
                             <span 
@@ -140,31 +152,31 @@ const TechWatch: React.FC = () => {
                     </div>
                   </div>
                   
-                  {/* Contenu - Flex pour remplir l'espace */}
+                  {/* Card Body */}
                   <div className="p-6 flex-grow flex flex-col">
-                    {/* Titre - Hauteur fixe avec line-clamp */}
-                    <h3 className="text-xl font-bold text-white group-hover:text-orange-500 transition-colors mb-4 h-14 flex items-center">
-                      <span className="line-clamp-2">{item.title}</span>
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-white group-hover:text-orange-500 transition-colors mb-4 line-clamp-2">
+                      {item.title}
                     </h3>
 
-                    {/* Description - Prend l'espace restant */}
-                    <div className="flex-grow flex flex-col">
+                    {/* Description */}
+                    <div className="flex-grow mb-6">
                       <div 
-                        className={`text-sm text-gray-300 leading-relaxed transition-all duration-300 overflow-hidden flex-grow ${
-                          expandedCard === item.title ? 'max-h-none' : 'max-h-[200px]'
+                        className={`text-sm text-gray-300 leading-relaxed transition-all duration-300 overflow-hidden ${
+                          expandedCard === item.title ? 'max-h-none' : 'max-h-32'
                         }`}
                       >
-                        <pre className="whitespace-pre-wrap font-sans">
+                        <div className="whitespace-pre-wrap font-sans">
                           {expandedCard === item.title 
                             ? item.description 
-                            : item.description.substring(0, 300) + (item.description.length > 300 ? '...' : '')
+                            : item.description.substring(0, 200) + (item.description.length > 200 ? '...' : '')
                           }
-                        </pre>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Actions - Toujours en bas */}
-                    <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-700 flex-shrink-0">
+                    {/* Actions */}
+                    <div className="flex justify-between items-center pt-4 border-t border-gray-700 flex-shrink-0">
                       <button
                         onClick={() => toggleCard(item.title)}
                         className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 
@@ -198,7 +210,7 @@ const TechWatch: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
