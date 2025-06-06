@@ -1,74 +1,76 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Wifi, Zap, Lock, Monitor } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network, Play, Pause, RotateCcw } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const [activeNode, setActiveNode] = useState(0);
-  const [connectionProgress, setConnectionProgress] = useState(0);
+  const [terminalLines, setTerminalLines] = useState<string[]>([]);
+  const [currentCommand, setCurrentCommand] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [commandIndex, setCommandIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
 
-  const networkNodes = [
-    { 
-      id: 0, 
-      icon: Server, 
-      label: 'Infrastructure', 
-      level: 85, 
-      color: 'from-orange-500 to-red-500',
-      position: { x: 50, y: 20 },
-      connections: [1, 2, 3]
+  const commands = [
+    {
+      command: 'whoami',
+      output: ['sebastien@portfolio:~$ whoami', 'Sébastien Fernandes - Étudiant BTS SIO SISR', 'Passionné par l\'infrastructure et la cybersécurité', '']
     },
-    { 
-      id: 1, 
-      icon: Shield, 
-      label: 'Cybersécurité', 
-      level: 78, 
-      color: 'from-blue-500 to-cyan-500',
-      position: { x: 80, y: 40 },
-      connections: [0, 4, 5]
+    {
+      command: 'ls -la /skills/',
+      output: [
+        'sebastien@portfolio:~$ ls -la /skills/',
+        'total 42',
+        'drwxr-xr-x  7 sebastien sebastien 4096 Jan 15 14:30 .',
+        'drwxr-xr-x  3 sebastien sebastien 4096 Jan 15 14:30 ..',
+        '-rw-r--r--  1 sebastien sebastien  85% Jan 15 14:30 infrastructure.skill',
+        '-rw-r--r--  1 sebastien sebastien  82% Jan 15 14:30 reseaux.skill',
+        '-rw-r--r--  1 sebastien sebastien  78% Jan 15 14:30 cybersecurite.skill',
+        '-rw-r--r--  1 sebastien sebastien  75% Jan 15 14:30 scripting.skill',
+        '-rw-r--r--  1 sebastien sebastien  70% Jan 15 14:30 devops.skill',
+        ''
+      ]
     },
-    { 
-      id: 2, 
-      icon: Network, 
-      label: 'Réseaux', 
-      level: 82, 
-      color: 'from-green-500 to-emerald-500',
-      position: { x: 20, y: 50 },
-      connections: [0, 3, 6]
+    {
+      command: 'cat /etc/motivation.conf',
+      output: [
+        'sebastien@portfolio:~$ cat /etc/motivation.conf',
+        '# Configuration de motivation personnelle',
+        'OBJECTIF_PRINCIPAL="Devenir expert en cybersécurité"',
+        'PASSION="Administration système et réseaux"',
+        'APPRENTISSAGE_CONTINU=true',
+        'CURIOSITE_LEVEL=maximum',
+        'DETERMINATION=100%',
+        ''
+      ]
     },
-    { 
-      id: 3, 
-      icon: Terminal, 
-      label: 'Scripting', 
-      level: 75, 
-      color: 'from-purple-500 to-pink-500',
-      position: { x: 30, y: 80 },
-      connections: [0, 2, 4]
+    {
+      command: 'systemctl status passion.service',
+      output: [
+        'sebastien@portfolio:~$ systemctl status passion.service',
+        '● passion.service - Service de passion pour l\'informatique',
+        '   Loaded: loaded (/etc/systemd/system/passion.service; enabled)',
+        '   Active: active (running) since 2020-09-01 08:00:00 CEST; 4 years ago',
+        '   Main PID: 1337 (passion-daemon)',
+        '   Memory: ∞ MB',
+        '   CGroup: /system.slice/passion.service',
+        '           └─1337 /usr/bin/passion-daemon --mode=cybersecurity',
+        ''
+      ]
     },
-    { 
-      id: 4, 
-      icon: Code, 
-      label: 'DevOps', 
-      level: 70, 
-      color: 'from-yellow-500 to-orange-500',
-      position: { x: 70, y: 75 },
-      connections: [1, 3, 5]
-    },
-    { 
-      id: 5, 
-      icon: Database, 
-      label: 'Données', 
-      level: 68, 
-      color: 'from-indigo-500 to-purple-500',
-      position: { x: 85, y: 65 },
-      connections: [1, 4]
-    },
-    { 
-      id: 6, 
-      icon: Wifi, 
-      label: 'Cloud', 
-      level: 60, 
-      color: 'from-teal-500 to-blue-500',
-      position: { x: 15, y: 25 },
-      connections: [2]
+    {
+      command: 'ping -c 3 futur-emploi.com',
+      output: [
+        'sebastien@portfolio:~$ ping -c 3 futur-emploi.com',
+        'PING futur-emploi.com (192.168.1.100): 56 data bytes',
+        '64 bytes from 192.168.1.100: icmp_seq=0 time=1.337ms',
+        '64 bytes from 192.168.1.100: icmp_seq=1 time=0.420ms',
+        '64 bytes from 192.168.1.100: icmp_seq=2 time=0.069ms',
+        '',
+        '--- futur-emploi.com ping statistics ---',
+        '3 packets transmitted, 3 packets received, 0.0% packet loss',
+        'Connection établie avec succès! 🚀',
+        ''
+      ]
     }
   ];
 
@@ -95,20 +97,47 @@ const Hero: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (!isPlaying) return;
+
     const interval = setInterval(() => {
-      setActiveNode((prev) => (prev + 1) % networkNodes.length);
-      setConnectionProgress(0);
-    }, 4000);
+      const currentCmd = commands[commandIndex];
+      
+      if (!isTyping) {
+        // Commencer à taper la commande
+        setIsTyping(true);
+        setCurrentCommand('');
+        setCharIndex(0);
+      } else if (charIndex < currentCmd.command.length) {
+        // Continuer à taper la commande
+        setCurrentCommand(currentCmd.command.slice(0, charIndex + 1));
+        setCharIndex(charIndex + 1);
+      } else {
+        // Commande terminée, afficher la sortie
+        setTerminalLines(prev => [...prev, ...currentCmd.output]);
+        setCurrentCommand('');
+        setIsTyping(false);
+        setCharIndex(0);
+        setCommandIndex((commandIndex + 1) % commands.length);
+        
+        // Si on a fait tous les commands, attendre un peu avant de recommencer
+        if (commandIndex === commands.length - 1) {
+          setTimeout(() => {
+            setTerminalLines([]);
+          }, 3000);
+        }
+      }
+    }, isTyping ? 100 : 1500);
 
-    const progressInterval = setInterval(() => {
-      setConnectionProgress((prev) => (prev + 2) % 100);
-    }, 80);
+    return () => clearInterval(interval);
+  }, [commandIndex, charIndex, isTyping, isPlaying]);
 
-    return () => {
-      clearInterval(interval);
-      clearInterval(progressInterval);
-    };
-  }, [networkNodes.length]);
+  const resetTerminal = () => {
+    setTerminalLines([]);
+    setCurrentCommand('');
+    setCommandIndex(0);
+    setCharIndex(0);
+    setIsTyping(false);
+  };
 
   const scrollToProjects = () => {
     const projectsSection = document.querySelector('#projects');
@@ -123,8 +152,6 @@ const Hero: React.FC = () => {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  const currentNode = networkNodes[activeNode];
 
   return (
     <section 
@@ -203,159 +230,127 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column - Network Topology Visualization */}
+          {/* Right Column - Interactive Terminal */}
           <div className="lg:w-1/2 relative">
-            <div className="relative bg-gray-800/30 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-gray-700/50">
+            <div className="relative bg-gray-900/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-700/50 overflow-hidden">
               
-              {/* Network Topology */}
-              <div className="relative h-96 mb-8">
-                {/* Grid Background */}
-                <div className="absolute inset-0 opacity-20">
-                  <svg width="100%" height="100%" className="text-gray-600">
-                    <defs>
-                      <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5"/>
-                      </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#grid)" />
-                  </svg>
-                </div>
-
-                {/* Connections */}
-                <svg className="absolute inset-0 w-full h-full">
-                  {networkNodes.map(node => 
-                    node.connections.map(connId => {
-                      const targetNode = networkNodes.find(n => n.id === connId);
-                      if (!targetNode) return null;
-                      
-                      const isActiveConnection = node.id === activeNode || connId === activeNode;
-                      
-                      return (
-                        <line
-                          key={`${node.id}-${connId}`}
-                          x1={`${node.position.x}%`}
-                          y1={`${node.position.y}%`}
-                          x2={`${targetNode.position.x}%`}
-                          y2={`${targetNode.position.y}%`}
-                          stroke={isActiveConnection ? '#f97316' : '#374151'}
-                          strokeWidth={isActiveConnection ? '3' : '1'}
-                          strokeDasharray={isActiveConnection ? '5,5' : 'none'}
-                          className={isActiveConnection ? 'animate-pulse' : ''}
-                          opacity={isActiveConnection ? 1 : 0.3}
-                        />
-                      );
-                    })
-                  )}
-                </svg>
-
-                {/* Network Nodes */}
-                {networkNodes.map((node) => {
-                  const NodeIcon = node.icon;
-                  const isActive = node.id === activeNode;
-                  
-                  return (
-                    <div
-                      key={node.id}
-                      className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-500"
-                      style={{
-                        left: `${node.position.x}%`,
-                        top: `${node.position.y}%`,
-                        transform: `translate(-50%, -50%) scale(${isActive ? 1.2 : 1})`
-                      }}
-                      onClick={() => setActiveNode(node.id)}
-                    >
-                      {/* Node Pulse Effect */}
-                      {isActive && (
-                        <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${node.color} animate-ping opacity-75`} />
-                      )}
-                      
-                      {/* Node */}
-                      <div className={`relative w-16 h-16 rounded-full bg-gradient-to-r ${node.color} p-0.5 transition-all duration-300`}>
-                        <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center">
-                          <NodeIcon className="w-8 h-8 text-white" />
-                        </div>
-                      </div>
-                      
-                      {/* Node Label */}
-                      <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center">
-                        <div className={`text-xs font-medium transition-colors duration-300 ${
-                          isActive ? 'text-orange-400' : 'text-gray-400'
-                        }`}>
-                          {node.label}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-
-                {/* Data Flow Animation */}
-                {currentNode.connections.map((connId, index) => {
-                  const targetNode = networkNodes.find(n => n.id === connId);
-                  if (!targetNode) return null;
-                  
-                  return (
-                    <div
-                      key={`flow-${connId}`}
-                      className="absolute w-2 h-2 bg-orange-500 rounded-full animate-pulse"
-                      style={{
-                        left: `${currentNode.position.x + (targetNode.position.x - currentNode.position.x) * (connectionProgress / 100)}%`,
-                        top: `${currentNode.position.y + (targetNode.position.y - currentNode.position.y) * (connectionProgress / 100)}%`,
-                        animationDelay: `${index * 200}ms`
-                      }}
-                    />
-                  );
-                })}
-              </div>
-
-              {/* Active Node Info Panel */}
-              <div className="bg-gray-900/50 rounded-xl p-6 border border-gray-700">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${currentNode.color} p-0.5`}>
-                    <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center">
-                      {(() => {
-                        const CurrentIcon = currentNode.icon;
-                        return <CurrentIcon className="w-6 h-6 text-white" />;
-                      })()}
-                    </div>
+              {/* Terminal Header */}
+              <div className="flex items-center justify-between px-4 py-3 bg-gray-800 border-b border-gray-700">
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white">{currentNode.label}</h3>
-                    <p className="text-sm text-gray-400">Niveau de maîtrise</p>
+                  <div className="flex items-center gap-2 ml-4">
+                    <Terminal className="w-4 h-4 text-gray-400" />
+                    <span className="text-sm text-gray-400 font-mono">sebastien@portfolio</span>
                   </div>
                 </div>
                 
-                {/* Progress Bar */}
-                <div className="mb-4">
-                  <div className="flex justify-between text-sm text-gray-400 mb-2">
-                    <span>Progression</span>
-                    <span>{currentNode.level}%</span>
-                  </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div 
-                      className={`h-2 rounded-full bg-gradient-to-r ${currentNode.color} transition-all duration-1000`}
-                      style={{ width: `${currentNode.level}%` }}
-                    />
-                  </div>
+                {/* Terminal Controls */}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setIsPlaying(!isPlaying)}
+                    className="p-1 rounded hover:bg-gray-700 transition-colors"
+                    title={isPlaying ? "Pause" : "Play"}
+                  >
+                    {isPlaying ? (
+                      <Pause className="w-4 h-4 text-gray-400" />
+                    ) : (
+                      <Play className="w-4 h-4 text-gray-400" />
+                    )}
+                  </button>
+                  <button
+                    onClick={resetTerminal}
+                    className="p-1 rounded hover:bg-gray-700 transition-colors"
+                    title="Reset"
+                  >
+                    <RotateCcw className="w-4 h-4 text-gray-400" />
+                  </button>
                 </div>
+              </div>
 
-                {/* Network Status */}
-                <div className="grid grid-cols-3 gap-4 text-center">
-                  <div>
-                    <div className="text-lg font-bold text-green-400">{currentNode.connections.length}</div>
-                    <div className="text-xs text-gray-400">Connexions</div>
+              {/* Terminal Content */}
+              <div className="p-4 h-96 overflow-y-auto font-mono text-sm">
+                <div className="space-y-1">
+                  {/* Welcome Message */}
+                  <div className="text-green-400 mb-4">
+                    <div>Bienvenue dans mon environnement de travail!</div>
+                    <div className="text-gray-500">Tapez 'help' pour voir les commandes disponibles</div>
+                    <div className="text-gray-500">─────────────────────────────────────────</div>
                   </div>
-                  <div>
-                    <div className="text-lg font-bold text-blue-400">Active</div>
-                    <div className="text-xs text-gray-400">Statut</div>
-                  </div>
-                  <div>
-                    <div className="text-lg font-bold text-orange-400">
-                      <Zap className="w-5 h-5 mx-auto" />
+
+                  {/* Previous Commands Output */}
+                  {terminalLines.map((line, index) => (
+                    <div 
+                      key={index} 
+                      className={`${
+                        line.startsWith('sebastien@portfolio') 
+                          ? 'text-green-400' 
+                          : line.includes('●') || line.includes('PING') || line.includes('64 bytes')
+                            ? 'text-blue-400'
+                            : line.includes('=') || line.includes('%') || line.includes('🚀')
+                              ? 'text-yellow-400'
+                              : line.includes('active') || line.includes('enabled') || line.includes('success')
+                                ? 'text-green-400'
+                                : 'text-gray-300'
+                      }`}
+                    >
+                      {line}
                     </div>
-                    <div className="text-xs text-gray-400">En ligne</div>
+                  ))}
+
+                  {/* Current Command Being Typed */}
+                  {isTyping && (
+                    <div className="flex items-center">
+                      <span className="text-green-400">sebastien@portfolio:~$ </span>
+                      <span className="text-white">{currentCommand}</span>
+                      <span className="animate-pulse text-white">|</span>
+                    </div>
+                  )}
+
+                  {/* Cursor when waiting */}
+                  {!isTyping && terminalLines.length > 0 && (
+                    <div className="flex items-center">
+                      <span className="text-green-400">sebastien@portfolio:~$ </span>
+                      <span className="animate-pulse text-white">|</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Terminal Footer with System Info */}
+              <div className="px-4 py-2 bg-gray-800 border-t border-gray-700 text-xs text-gray-400 font-mono">
+                <div className="flex justify-between items-center">
+                  <div className="flex gap-4">
+                    <span>CPU: 🔥 Passion 100%</span>
+                    <span>RAM: 💡 Créativité ∞GB</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-green-400">●</span>
+                    <span>En ligne</span>
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Floating Skills Indicators */}
+            <div className="absolute -top-4 -right-4 space-y-2">
+              {[
+                { label: 'Linux', color: 'bg-yellow-500' },
+                { label: 'Network', color: 'bg-blue-500' },
+                { label: 'Security', color: 'bg-red-500' }
+              ].map((skill, index) => (
+                <div 
+                  key={skill.label}
+                  className="flex items-center gap-2 px-3 py-1 bg-gray-800/90 backdrop-blur rounded-full text-xs text-white border border-gray-600"
+                  style={{ animationDelay: `${index * 200}ms` }}
+                >
+                  <div className={`w-2 h-2 rounded-full ${skill.color} animate-pulse`}></div>
+                  <span>{skill.label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
