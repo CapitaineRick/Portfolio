@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, Download, ChevronLeft, ChevronRight, FileText, ChevronDown } from 'lucide-react';
 import { Document, Page } from 'react-pdf';
 
@@ -38,18 +39,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateDropdownPosition = () => {
       if (buttonRef.current && showDropdown) {
         const buttonRect = buttonRef.current.getBoundingClientRect();
-        const scrollY = window.scrollY;
-        const scrollX = window.scrollX;
         
         setDropdownPosition({
-          top: buttonRect.bottom + scrollY + 8,
-          left: buttonRect.left + scrollX
+          top: buttonRect.bottom + 8,
+          left: buttonRect.left
         });
       }
     };
@@ -115,10 +113,44 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     setShowDropdown(!showDropdown);
   };
 
+  // Dropdown component to be rendered in portal
+  const DropdownMenu = () => {
+    if (!showDropdown || !project.documents) return null;
+
+    return createPortal(
+      <div
+        ref={dropdownRef}
+        style={{
+          position: 'fixed',
+          top: `${dropdownPosition.top}px`,
+          left: `${dropdownPosition.left}px`,
+          zIndex: 9999
+        }}
+        className="w-72 bg-gray-800 rounded-xl border border-gray-700 shadow-xl max-h-80 overflow-y-auto"
+      >
+        {project.documents.map((doc, index) => (
+          <button
+            key={index}
+            onClick={() => handleDocumentSelect(doc)}
+            className="w-full px-4 py-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-center gap-2 border-b border-gray-700 last:border-0 first:rounded-t-xl last:rounded-b-xl"
+          >
+            <FileText className="w-4 h-4 flex-shrink-0" />
+            <div>
+              <div className="font-medium">{doc.title}</div>
+              {doc.description && (
+                <div className="text-xs text-gray-400">{doc.description}</div>
+              )}
+            </div>
+          </button>
+        ))}
+      </div>,
+      document.body
+    );
+  };
+
   return (
     <>
       <div 
-        ref={cardRef}
         className={`group relative ${className}`} 
         style={style}
       >
@@ -205,35 +237,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
         </div>
       </div>
 
-      {/* Dropdown Menu - Positioned outside card */}
-      {showDropdown && project.documents && (
-        <div
-          ref={dropdownRef}
-          style={{
-            position: 'fixed',
-            top: `${dropdownPosition.top}px`,
-            left: `${dropdownPosition.left}px`,
-            zIndex: 9999
-          }}
-          className="w-72 bg-gray-800 rounded-xl border border-gray-700 shadow-xl max-h-80 overflow-y-auto"
-        >
-          {project.documents.map((doc, index) => (
-            <button
-              key={index}
-              onClick={() => handleDocumentSelect(doc)}
-              className="w-full px-4 py-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-center gap-2 border-b border-gray-700 last:border-0 first:rounded-t-xl last:rounded-b-xl"
-            >
-              <FileText className="w-4 h-4 flex-shrink-0" />
-              <div>
-                <div className="font-medium">{doc.title}</div>
-                {doc.description && (
-                  <div className="text-xs text-gray-400">{doc.description}</div>
-                )}
-              </div>
-            </button>
-          ))}
-        </div>
-      )}
+      {/* Dropdown rendered in portal */}
+      <DropdownMenu />
 
       {/* PDF Viewer Modal */}
       {showFullscreen && (selectedDocument?.url || project.pdfUrl) && (
