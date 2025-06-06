@@ -176,19 +176,6 @@ const Hero: React.FC = () => {
               Étudiant en BTS SIO SISR, je développe mes compétences en administration système, 
               sécurité réseau et infrastructure informatique.
             </p>
- 
-
-                {/* Particules qui s'échappent au hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-orange-300 rounded-full animate-ping"></div>
-                  <div className="absolute top-1/4 right-1/4 w-1 h-1 bg-purple-300 rounded-full animate-pulse"></div>
-                  <div className="absolute bottom-1/4 left-1/4 w-1 h-1 bg-blue-300 rounded-full animate-bounce"></div>
-                </div>
-              </button>
-              
-              {/* Effet de halo autour du bouton */}
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-purple-500/30 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
-            </div>
           </div>
         </div>
 
