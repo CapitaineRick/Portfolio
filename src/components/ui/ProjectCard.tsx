@@ -39,29 +39,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateDropdownPosition = () => {
       if (buttonRef.current && showDropdown) {
         const buttonRect = buttonRef.current.getBoundingClientRect();
-        const dropdownWidth = 320; // Augmenté pour plus d'espace
+        const dropdownWidth = 320;
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
         
         let left = buttonRect.left;
         let top = buttonRect.bottom + 8;
         
-        // Ajuster si le dropdown dépasse à droite
         if (left + dropdownWidth > viewportWidth - 16) {
           left = Math.max(16, viewportWidth - dropdownWidth - 16);
         }
         
-        // Ajuster si le dropdown dépasse à gauche
         if (left < 16) {
           left = 16;
         }
         
-        // Ajuster si le dropdown dépasse en bas
         const maxDropdownHeight = 400;
         if (top + maxDropdownHeight > viewportHeight - 16) {
           top = Math.max(16, buttonRect.top - maxDropdownHeight - 8);
@@ -204,11 +202,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   return (
     <>
       <div 
+        ref={cardRef}
         className={`group relative ${className}`} 
         style={style}
       >
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
-        <div className="relative bg-gray-800 rounded-2xl overflow-hidden">
+        {/* Fond coloré adaptatif */}
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
+        
+        {/* Contenu de la carte avec hauteur flexible */}
+        <div className="relative bg-gray-800 rounded-2xl overflow-hidden flex flex-col h-full">
           <div className="absolute top-4 right-4 z-10">
             <div className={`p-2 rounded-xl backdrop-blur-md ${
               isEnterprise ? 'bg-orange-500/90 text-white' : 'bg-blue-500/90 text-white'
@@ -217,7 +219,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             </div>
           </div>
 
-          <div className="relative h-48 overflow-hidden">
+          {/* Image avec hauteur fixe */}
+          <div className="relative h-48 overflow-hidden flex-shrink-0">
             <img 
               src={project.image} 
               alt={project.title} 
@@ -241,15 +244,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
             </div>
           </div>
 
-          <div className="p-6">
+          {/* Contenu flexible */}
+          <div className="p-6 flex flex-col flex-grow">
             <h3 className="text-xl font-bold mb-3 text-white group-hover:text-orange-500 transition-colors">
               {project.title}
             </h3>
-            <p className="text-gray-300 mb-6 line-clamp-3">
-              {project.description}
-            </p>
+            
+            {/* Description avec hauteur flexible */}
+            <div className="flex-grow mb-6">
+              <p className="text-gray-300 leading-relaxed">
+                {project.description}
+              </p>
+            </div>
 
-            <div className="flex items-center justify-between">
+            {/* Boutons en bas */}
+            <div className="flex items-center justify-between mt-auto">
               <div className="relative">
                 {project.documents ? (
                   <button
