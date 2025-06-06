@@ -138,7 +138,10 @@ const Hero: React.FC = () => {
                 <div className={`absolute -inset-4 bg-gradient-to-r ${highlights[currentHighlight].color} rounded-2xl blur opacity-30 animate-pulse`}></div>
                 <div className="relative bg-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50">
                   <div className="flex items-center justify-center gap-4">
-                    <highlights[currentHighlight].icon className="w-8 h-8 text-white" />
+                    {(() => {
+                      const IconComponent = highlights[currentHighlight].icon;
+                      return <IconComponent className="w-8 h-8 text-white" />;
+                    })()}
                     <div className="text-left">
                       <div className="text-xl font-bold text-white">{highlights[currentHighlight].text}</div>
                       <div className="text-sm text-gray-400">{highlights[currentHighlight].subtext}</div>
