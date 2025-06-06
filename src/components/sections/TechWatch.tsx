@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ExternalLink, Calendar, Globe, Shield, Monitor, TrendingUp, Clock, Rss, Zap, BookOpen } from 'lucide-react';
+import { ExternalLink, Calendar, Globe } from 'lucide-react';
 import { techWatchData } from '../../data/techWatchData';
 
 const TechWatch: React.FC = () => {
@@ -47,95 +47,6 @@ const TechWatch: React.FC = () => {
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
             Suivi actif des innovations technologiques en cybersécurité, infrastructure et systèmes
           </p>
-        </div>
-
-        {/* Méthode de veille - Version simplifiée */}
-        <div className="mb-16">
-          <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
-            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-3xl p-8">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-4">Ma Méthode de Veille</h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Sources */}
-                <div className="text-center">
-                  <div className="p-4 bg-blue-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <Rss className="w-8 h-8 text-blue-500" />
-                  </div>
-                  <h4 className="font-bold text-white mb-3">Sources</h4>
-                  <p className="text-gray-300 text-sm">
-                    Blogs techniques, ANSSI, documentation officielle, Reddit, LinkedIn
-                  </p>
-                </div>
-
-                {/* Fréquence */}
-                <div className="text-center">
-                  <div className="p-4 bg-orange-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <Clock className="w-8 h-8 text-orange-500" />
-                  </div>
-                  <h4 className="font-bold text-white mb-3">Fréquence</h4>
-                  <p className="text-gray-300 text-sm">
-                    Quotidien (30 min), synthèse hebdomadaire, alertes temps réel
-                  </p>
-                </div>
-
-                {/* Traitement */}
-                <div className="text-center">
-                  <div className="p-4 bg-green-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <Zap className="w-8 h-8 text-green-500" />
-                  </div>
-                  <h4 className="font-bold text-white mb-3">Traitement</h4>
-                  <p className="text-gray-300 text-sm">
-                    Tri par pertinence, analyse d'impact, synthèse structurée
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Domaines de veille - Version simplifiée */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 text-center">
-              <div className="p-4 bg-red-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Shield className="w-8 h-8 text-red-500" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-3">Cybersécurité</h3>
-              <p className="text-gray-300 text-sm">
-                Vulnérabilités, attaques, protections, réglementations
-              </p>
-            </div>
-          </div>
-
-          <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 text-center">
-              <div className="p-4 bg-blue-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Monitor className="w-8 h-8 text-blue-500" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-3">Infrastructure</h3>
-              <p className="text-gray-300 text-sm">
-                Cloud, conteneurs, automatisation, monitoring
-              </p>
-            </div>
-          </div>
-
-          <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-            <div className="relative bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 text-center">
-              <div className="p-4 bg-green-900/30 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <TrendingUp className="w-8 h-8 text-green-500" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-3">Tendances</h3>
-              <p className="text-gray-300 text-sm">
-                IA, Edge Computing, Zero Trust, DevSecOps
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* Filtres par catégorie */}
