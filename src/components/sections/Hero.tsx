@@ -4,20 +4,10 @@ import { Server, ArrowRight, Terminal, Shield, Network, ChevronDown } from 'luci
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 500);
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   // Système de particules spectaculaire
@@ -123,13 +113,6 @@ const Hero: React.FC = () => {
     }
   };
 
-  const scrollToContact = () => {
-    const contactSection = document.querySelector('#contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section 
       id="home" 
@@ -149,28 +132,6 @@ const Hero: React.FC = () => {
         ref={canvasRef}
         className="absolute inset-0 opacity-70"
         style={{ zIndex: 1 }}
-      />
-
-      {/* Gradient interactif ultra-dynamique */}
-      <div 
-        className="absolute inset-0 transition-all duration-500 ease-out pointer-events-none"
-        style={{ 
-          zIndex: 2,
-          background: `
-            radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, 
-              rgba(249, 115, 22, 0.3), 
-              rgba(168, 85, 247, 0.25), 
-              rgba(59, 130, 246, 0.2),
-              rgba(16, 185, 129, 0.15),
-              transparent 70%),
-            conic-gradient(from ${mousePosition.x * 0.2}deg at 50% 50%, 
-              rgba(249, 115, 22, 0.1), 
-              rgba(168, 85, 247, 0.1), 
-              rgba(59, 130, 246, 0.1),
-              rgba(16, 185, 129, 0.1),
-              rgba(249, 115, 22, 0.1))
-          `
-        }} 
       />
 
       {/* Contenu principal centré */}
@@ -193,7 +154,7 @@ const Hero: React.FC = () => {
           
           {/* Titre principal spectaculaire */}
           <div className="mb-8">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 leading-none">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-none">
               <span className="block bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 drop-shadow-2xl">
                 Fernandes
               </span>
@@ -203,79 +164,29 @@ const Hero: React.FC = () => {
             </h1>
             
             {/* Sous-titre élégant */}
-            <p className="text-xl md:text-3xl lg:text-4xl text-gray-300 font-light leading-relaxed max-w-4xl mx-auto">
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-300 font-light leading-relaxed max-w-4xl mx-auto">
               Passionné par l'<span className="text-orange-400 font-medium">infrastructure IT</span> & 
               la <span className="text-purple-400 font-medium">cybersécurité</span>
             </p>
           </div>
 
-          {/* Compétences visuelles */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto">
-            {[
-              { icon: Server, label: 'Infrastructure', color: 'from-orange-500 to-red-500' },
-              { icon: Shield, label: 'Sécurité', color: 'from-blue-500 to-cyan-500' },
-              { icon: Network, label: 'Réseaux', color: 'from-green-500 to-emerald-500' },
-              { icon: Terminal, label: 'DevOps', color: 'from-purple-500 to-pink-500' }
-            ].map((skill, index) => (
-              <div
-                key={index}
-                className={`group relative p-6 rounded-2xl bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 hover:border-gray-600/50 transition-all duration-500 hover:scale-110 hover:rotate-2 cursor-pointer shadow-xl`}
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <div className={`w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br ${skill.color} p-3 group-hover:scale-110 transition-transform duration-300`}>
-                  <skill.icon className="w-full h-full text-white" />
-                </div>
-                <p className="text-white font-medium text-sm group-hover:text-orange-400 transition-colors">
-                  {skill.label}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Boutons d'action spectaculaires */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-            <button 
-              onClick={scrollToAbout}
-              className="group relative px-10 py-4 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-2xl font-bold text-lg
-                        hover:from-orange-600 hover:to-purple-600 transform hover:scale-110 hover:-rotate-1
-                        transition-all duration-300 shadow-2xl hover:shadow-orange-500/25
-                        flex items-center gap-3 overflow-hidden"
-            >
-              <span className="relative z-10">Découvrir mon parcours</span>
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform relative z-10" />
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </button>
+          {/* Remplace tout le contenu en dessous par quelque chose de simple */}
+          <div className="space-y-8">
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Étudiant en BTS SIO SISR, je développe mes compétences en administration système, 
+              sécurité réseau et infrastructure informatique.
+            </p>
             
             <button 
-              onClick={scrollToContact}
-              className="group px-10 py-4 border-2 border-orange-500 text-orange-400 rounded-2xl font-bold text-lg
-                        hover:bg-orange-500 hover:text-white transform hover:scale-110 hover:rotate-1
-                        transition-all duration-300 backdrop-blur-xl shadow-xl"
+              onClick={scrollToAbout}
+              className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl font-semibold text-lg
+                        hover:from-orange-600 hover:to-purple-600 transform hover:scale-105
+                        transition-all duration-300 shadow-xl hover:shadow-orange-500/25
+                        flex items-center gap-3 mx-auto"
             >
-              Me contacter
+              <span className="relative z-10">Découvrir mon portfolio</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10" />
             </button>
-          </div>
-
-          {/* Stats impressionnantes */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-12">
-            {[
-              { number: '2+', label: 'Années d\'études' },
-              { number: '15+', label: 'Projets réalisés' },
-              { number: '5+', label: 'Technologies' },
-              { number: '2', label: 'Expériences Pro' }
-            ].map((stat, index) => (
-              <div 
-                key={index}
-                className="text-center p-6 rounded-2xl bg-gray-800/30 backdrop-blur-xl border border-gray-700/50 hover:border-orange-500/50 transition-all duration-300 hover:scale-105 shadow-xl"
-              >
-                <div className="text-3xl md:text-4xl font-black text-orange-400 mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-sm text-gray-400 font-medium">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
 
