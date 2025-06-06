@@ -177,46 +177,6 @@ const Hero: React.FC = () => {
               ))}
             </div>
 
-            {/* Main Card */}
-            <div className="relative bg-gray-800/40 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-gray-700/50 overflow-hidden">
-              {/* Animated Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-purple-500/5 to-blue-500/5 animate-pulse"></div>
-              
-              <div className="relative space-y-8">
-                {/* Interactive Skills Grid */}
-                <div className="grid grid-cols-2 gap-4">
-                  {skills.map((skill, index) => (
-                    <div
-                      key={index}
-                      className={`relative group transition-all duration-500 cursor-pointer ${
-                        activeSkill === index ? 'scale-105' : 'hover:scale-102'
-                      }`}
-                      onMouseEnter={() => setActiveSkill(index)}
-                    >
-                      <div className={`
-                        w-full aspect-square rounded-2xl
-                        bg-gradient-to-br ${skill.gradient}
-                        p-0.5 transition-all duration-500
-                        ${activeSkill === index ? 'shadow-2xl shadow-orange-500/25' : ''}
-                      `}>
-                        <div className="w-full h-full rounded-2xl bg-gray-800/90 p-4
-                                      flex flex-col items-center justify-center gap-3
-                                      border border-gray-700/50">
-                          <skill.icon className={`w-8 h-8 text-white transition-all duration-500 ${
-                            activeSkill === index ? 'scale-110 rotate-6' : ''
-                          }`} />
-                          <div className="text-center">
-                            <div className="font-medium text-white text-sm mb-1">
-                              {skill.label}
-                            </div>
-                            <p className="text-xs text-gray-400 leading-tight">
-                              {skill.description}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </div>
             </div>
