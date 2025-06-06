@@ -128,7 +128,7 @@ const TechWatch: React.FC = () => {
           </div>
         </div>
         
-        {/* Articles en grille moderne */}
+        {/* Articles en grille moderne avec hauteurs uniformes */}
         <div 
           ref={watchRef}
           className="transition-all duration-300 opacity-0 translate-y-10"
@@ -141,10 +141,10 @@ const TechWatch: React.FC = () => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative bg-gray-800 rounded-2xl overflow-hidden h-full flex flex-col">
+                <div className="relative bg-gray-800 rounded-2xl overflow-hidden flex flex-col min-h-[600px]">
                   
-                  {/* Image et badges */}
-                  <div className="relative h-48 overflow-hidden">
+                  {/* Image et badges - Hauteur fixe */}
+                  <div className="relative h-48 overflow-hidden flex-shrink-0">
                     <img 
                       src={item.image} 
                       alt={item.title}
@@ -182,26 +182,31 @@ const TechWatch: React.FC = () => {
                     </div>
                   </div>
                   
-                  {/* Contenu */}
+                  {/* Contenu - Flex pour remplir l'espace */}
                   <div className="p-6 flex-grow flex flex-col">
-                    <h3 className="text-xl font-bold text-white group-hover:text-orange-500 transition-colors mb-4 line-clamp-2">
-                      {item.title}
+                    {/* Titre - Hauteur fixe avec line-clamp */}
+                    <h3 className="text-xl font-bold text-white group-hover:text-orange-500 transition-colors mb-4 h-14 flex items-center">
+                      <span className="line-clamp-2">{item.title}</span>
                     </h3>
 
-                    <div className="flex-grow">
+                    {/* Description - Prend l'espace restant */}
+                    <div className="flex-grow flex flex-col">
                       <div 
-                        className={`text-sm text-gray-300 leading-relaxed transition-all duration-300 overflow-hidden ${
-                          expandedCard === item.title ? 'max-h-[500px]' : 'max-h-[120px]'
+                        className={`text-sm text-gray-300 leading-relaxed transition-all duration-300 overflow-hidden flex-grow ${
+                          expandedCard === item.title ? 'max-h-none' : 'max-h-[200px]'
                         }`}
                       >
                         <pre className="whitespace-pre-wrap font-sans">
-                          {item.description}
+                          {expandedCard === item.title 
+                            ? item.description 
+                            : item.description.substring(0, 300) + (item.description.length > 300 ? '...' : '')
+                          }
                         </pre>
                       </div>
                     </div>
 
-                    {/* Actions */}
-                    <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-700">
+                    {/* Actions - Toujours en bas */}
+                    <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-700 flex-shrink-0">
                       <button
                         onClick={() => toggleCard(item.title)}
                         className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 
