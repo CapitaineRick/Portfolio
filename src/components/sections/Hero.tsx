@@ -177,16 +177,34 @@ const Hero: React.FC = () => {
               sécurité réseau et infrastructure informatique.
             </p>
             
-            <button 
-              onClick={scrollToAbout}
-              className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl font-semibold text-lg
-                        hover:from-orange-600 hover:to-purple-600 transform hover:scale-105
-                        transition-all duration-300 shadow-xl hover:shadow-orange-500/25
-                        flex items-center gap-3 mx-auto"
-            >
-              <span className="relative z-10">Découvrir mon portfolio</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10" />
-            </button>
+            {/* Bouton animé avec effet de mouvement */}
+            <div className="relative inline-block">
+              <button 
+                onClick={scrollToAbout}
+                className="group relative overflow-hidden px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl font-semibold text-lg
+                          transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-orange-500/30
+                          flex items-center gap-3 mx-auto
+                          before:absolute before:inset-0 before:bg-gradient-to-r before:from-purple-500 before:to-orange-500 before:opacity-0 before:transition-opacity before:duration-500
+                          hover:before:opacity-100 hover:scale-110 hover:-translate-y-1
+                          after:absolute after:inset-0 after:bg-white/20 after:translate-x-[-100%] after:skew-x-12 after:transition-transform after:duration-700
+                          hover:after:translate-x-[100%]"
+              >
+                <span className="relative z-10 transition-all duration-300 group-hover:scale-105">
+                  Découvrir mon portfolio
+                </span>
+                <ArrowRight className="w-5 h-5 relative z-10 transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" />
+                
+                {/* Particules qui s'échappent au hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-orange-300 rounded-full animate-ping"></div>
+                  <div className="absolute top-1/4 right-1/4 w-1 h-1 bg-purple-300 rounded-full animate-pulse"></div>
+                  <div className="absolute bottom-1/4 left-1/4 w-1 h-1 bg-blue-300 rounded-full animate-bounce"></div>
+                </div>
+              </button>
+              
+              {/* Effet de halo autour du bouton */}
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-purple-500/30 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+            </div>
           </div>
         </div>
 
