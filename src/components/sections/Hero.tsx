@@ -177,6 +177,10 @@ const Hero: React.FC = () => {
               sécurité réseau et infrastructure informatique.
             </p>
             
+            {/* Bouton animé avec effet de mouvement */}
+            <div className="relative inline-block">
+  
+
                 {/* Particules qui s'échappent au hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-orange-300 rounded-full animate-ping"></div>
