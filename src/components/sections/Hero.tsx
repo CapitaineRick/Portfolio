@@ -1,18 +1,75 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Wifi } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Wifi, Zap, Lock, Monitor } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const [currentSkill, setCurrentSkill] = useState(0);
+  const [activeNode, setActiveNode] = useState(0);
+  const [connectionProgress, setConnectionProgress] = useState(0);
 
-  const skills = [
-    { icon: Server, label: 'Infrastructure', color: 'from-orange-500 to-red-500', description: 'Windows & Linux' },
-    { icon: Shield, label: 'Sécurité', color: 'from-blue-500 to-cyan-500', description: 'Audit & Protection' },
-    { icon: Network, label: 'Réseaux', color: 'from-green-500 to-emerald-500', description: 'Cisco & Config' },
-    { icon: Terminal, label: 'Scripts', color: 'from-purple-500 to-pink-500', description: 'Bash & PowerShell' },
-    { icon: Code, label: 'DevOps', color: 'from-yellow-500 to-orange-500', description: 'Docker & K8s' },
-    { icon: Database, label: 'Données', color: 'from-indigo-500 to-purple-500', description: 'MySQL & NoSQL' },
-    { icon: Wifi, label: 'Cloud', color: 'from-teal-500 to-blue-500', description: 'AWS & Azure' }
+  const networkNodes = [
+    { 
+      id: 0, 
+      icon: Server, 
+      label: 'Infrastructure', 
+      level: 85, 
+      color: 'from-orange-500 to-red-500',
+      position: { x: 50, y: 20 },
+      connections: [1, 2, 3]
+    },
+    { 
+      id: 1, 
+      icon: Shield, 
+      label: 'Cybersécurité', 
+      level: 78, 
+      color: 'from-blue-500 to-cyan-500',
+      position: { x: 80, y: 40 },
+      connections: [0, 4, 5]
+    },
+    { 
+      id: 2, 
+      icon: Network, 
+      label: 'Réseaux', 
+      level: 82, 
+      color: 'from-green-500 to-emerald-500',
+      position: { x: 20, y: 50 },
+      connections: [0, 3, 6]
+    },
+    { 
+      id: 3, 
+      icon: Terminal, 
+      label: 'Scripting', 
+      level: 75, 
+      color: 'from-purple-500 to-pink-500',
+      position: { x: 30, y: 80 },
+      connections: [0, 2, 4]
+    },
+    { 
+      id: 4, 
+      icon: Code, 
+      label: 'DevOps', 
+      level: 70, 
+      color: 'from-yellow-500 to-orange-500',
+      position: { x: 70, y: 75 },
+      connections: [1, 3, 5]
+    },
+    { 
+      id: 5, 
+      icon: Database, 
+      label: 'Données', 
+      level: 68, 
+      color: 'from-indigo-500 to-purple-500',
+      position: { x: 85, y: 65 },
+      connections: [1, 4]
+    },
+    { 
+      id: 6, 
+      icon: Wifi, 
+      label: 'Cloud', 
+      level: 60, 
+      color: 'from-teal-500 to-blue-500',
+      position: { x: 15, y: 25 },
+      connections: [2]
+    }
   ];
 
   useEffect(() => {
@@ -39,11 +96,19 @@ const Hero: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSkill((prev) => (prev + 1) % skills.length);
-    }, 3000);
+      setActiveNode((prev) => (prev + 1) % networkNodes.length);
+      setConnectionProgress(0);
+    }, 4000);
 
-    return () => clearInterval(interval);
-  }, [skills.length]);
+    const progressInterval = setInterval(() => {
+      setConnectionProgress((prev) => (prev + 2) % 100);
+    }, 80);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(progressInterval);
+    };
+  }, [networkNodes.length]);
 
   const scrollToProjects = () => {
     const projectsSection = document.querySelector('#projects');
@@ -58,6 +123,8 @@ const Hero: React.FC = () => {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  const currentNode = networkNodes[activeNode];
 
   return (
     <section 
@@ -136,95 +203,156 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column - Version Unique */}
+          {/* Right Column - Network Topology Visualization */}
           <div className="lg:w-1/2 relative">
             <div className="relative bg-gray-800/30 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-gray-700/50">
               
-              {/* Skill Carousel Central */}
-              <div className="relative h-80 flex items-center justify-center mb-8">
-                {/* Cercle central avec skill actuelle */}
-                <div className="relative">
-                  <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${skills[currentSkill].color} p-1 transition-all duration-500`}>
-                    <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center">
-                      {(() => {
-                        const CurrentIcon = skills[currentSkill].icon;
-                        return <CurrentIcon className="w-12 h-12 text-white" />;
-                      })()}
-                    </div>
-                  </div>
-                  
-                  {/* Label de la skill actuelle */}
-                  <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center">
-                    <h3 className="text-xl font-bold text-white mb-1">{skills[currentSkill].label}</h3>
-                    <p className="text-sm text-gray-400">{skills[currentSkill].description}</p>
-                  </div>
+              {/* Network Topology */}
+              <div className="relative h-96 mb-8">
+                {/* Grid Background */}
+                <div className="absolute inset-0 opacity-20">
+                  <svg width="100%" height="100%" className="text-gray-600">
+                    <defs>
+                      <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                  </svg>
                 </div>
 
-                {/* Skills en orbite */}
-                {skills.map((skill, index) => {
-                  if (index === currentSkill) return null;
-                  
-                  const angle = (index * 360) / skills.length;
-                  const radius = 120;
-                  const x = Math.cos((angle * Math.PI) / 180) * radius;
-                  const y = Math.sin((angle * Math.PI) / 180) * radius;
-                  
-                  const SkillIcon = skill.icon;
+                {/* Connections */}
+                <svg className="absolute inset-0 w-full h-full">
+                  {networkNodes.map(node => 
+                    node.connections.map(connId => {
+                      const targetNode = networkNodes.find(n => n.id === connId);
+                      if (!targetNode) return null;
+                      
+                      const isActiveConnection = node.id === activeNode || connId === activeNode;
+                      
+                      return (
+                        <line
+                          key={`${node.id}-${connId}`}
+                          x1={`${node.position.x}%`}
+                          y1={`${node.position.y}%`}
+                          x2={`${targetNode.position.x}%`}
+                          y2={`${targetNode.position.y}%`}
+                          stroke={isActiveConnection ? '#f97316' : '#374151'}
+                          strokeWidth={isActiveConnection ? '3' : '1'}
+                          strokeDasharray={isActiveConnection ? '5,5' : 'none'}
+                          className={isActiveConnection ? 'animate-pulse' : ''}
+                          opacity={isActiveConnection ? 1 : 0.3}
+                        />
+                      );
+                    })
+                  )}
+                </svg>
+
+                {/* Network Nodes */}
+                {networkNodes.map((node) => {
+                  const NodeIcon = node.icon;
+                  const isActive = node.id === activeNode;
                   
                   return (
                     <div
-                      key={index}
-                      className="absolute w-12 h-12 transition-all duration-500 cursor-pointer hover:scale-110"
+                      key={node.id}
+                      className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-500"
                       style={{
-                        transform: `translate(${x}px, ${y}px)`,
-                        opacity: 0.6
+                        left: `${node.position.x}%`,
+                        top: `${node.position.y}%`,
+                        transform: `translate(-50%, -50%) scale(${isActive ? 1.2 : 1})`
                       }}
-                      onClick={() => setCurrentSkill(index)}
+                      onClick={() => setActiveNode(node.id)}
                     >
-                      <div className={`w-full h-full rounded-full bg-gradient-to-br ${skill.color} p-0.5`}>
+                      {/* Node Pulse Effect */}
+                      {isActive && (
+                        <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${node.color} animate-ping opacity-75`} />
+                      )}
+                      
+                      {/* Node */}
+                      <div className={`relative w-16 h-16 rounded-full bg-gradient-to-r ${node.color} p-0.5 transition-all duration-300`}>
                         <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center">
-                          <SkillIcon className="w-6 h-6 text-white" />
+                          <NodeIcon className="w-8 h-8 text-white" />
+                        </div>
+                      </div>
+                      
+                      {/* Node Label */}
+                      <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center">
+                        <div className={`text-xs font-medium transition-colors duration-300 ${
+                          isActive ? 'text-orange-400' : 'text-gray-400'
+                        }`}>
+                          {node.label}
                         </div>
                       </div>
                     </div>
                   );
                 })}
+
+                {/* Data Flow Animation */}
+                {currentNode.connections.map((connId, index) => {
+                  const targetNode = networkNodes.find(n => n.id === connId);
+                  if (!targetNode) return null;
+                  
+                  return (
+                    <div
+                      key={`flow-${connId}`}
+                      className="absolute w-2 h-2 bg-orange-500 rounded-full animate-pulse"
+                      style={{
+                        left: `${currentNode.position.x + (targetNode.position.x - currentNode.position.x) * (connectionProgress / 100)}%`,
+                        top: `${currentNode.position.y + (targetNode.position.y - currentNode.position.y) * (connectionProgress / 100)}%`,
+                        animationDelay: `${index * 200}ms`
+                      }}
+                    />
+                  );
+                })}
               </div>
 
-              {/* Indicateurs de progression */}
-              <div className="flex justify-center gap-2 mb-6">
-                {skills.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSkill(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentSkill 
-                        ? 'bg-orange-500 scale-125' 
-                        : 'bg-gray-600 hover:bg-gray-500'
-                    }`}
-                  />
-                ))}
-              </div>
-
-              {/* Terminal simulé */}
-              <div className="bg-black/50 rounded-lg p-4 font-mono text-sm">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  <span className="text-gray-400 ml-2">sebastien@portfolio:~$</span>
-                </div>
-                <div className="text-green-400">
-                  <div className="mb-1">$ whoami</div>
-                  <div className="text-white mb-2">Futur expert en cybersécurité</div>
-                  <div className="mb-1">$ cat objectifs.txt</div>
-                  <div className="text-white">
-                    <div>✓ Maîtriser l'infrastructure IT</div>
-                    <div>✓ Devenir expert en sécurité</div>
-                    <div className="text-orange-400">→ Certification pentesting</div>
+              {/* Active Node Info Panel */}
+              <div className="bg-gray-900/50 rounded-xl p-6 border border-gray-700">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${currentNode.color} p-0.5`}>
+                    <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center">
+                      {(() => {
+                        const CurrentIcon = currentNode.icon;
+                        return <CurrentIcon className="w-6 h-6 text-white" />;
+                      })()}
+                    </div>
                   </div>
-                  <div className="mt-2 text-green-400">
-                    <span className="animate-pulse">█</span>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">{currentNode.label}</h3>
+                    <p className="text-sm text-gray-400">Niveau de maîtrise</p>
+                  </div>
+                </div>
+                
+                {/* Progress Bar */}
+                <div className="mb-4">
+                  <div className="flex justify-between text-sm text-gray-400 mb-2">
+                    <span>Progression</span>
+                    <span>{currentNode.level}%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className={`h-2 rounded-full bg-gradient-to-r ${currentNode.color} transition-all duration-1000`}
+                      style={{ width: `${currentNode.level}%` }}
+                    />
+                  </div>
+                </div>
+
+                {/* Network Status */}
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <div className="text-lg font-bold text-green-400">{currentNode.connections.length}</div>
+                    <div className="text-xs text-gray-400">Connexions</div>
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold text-blue-400">Active</div>
+                    <div className="text-xs text-gray-400">Statut</div>
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold text-orange-400">
+                      <Zap className="w-5 h-5 mx-auto" />
+                    </div>
+                    <div className="text-xs text-gray-400">En ligne</div>
                   </div>
                 </div>
               </div>
