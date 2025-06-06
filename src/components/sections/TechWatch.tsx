@@ -307,9 +307,8 @@ const TechWatch: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              ))
-            )}
-          </div>
+              ))}
+            </div>
           )}
 
           {/* Call to Action */}
