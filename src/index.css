@@ -61,14 +61,15 @@ section#projects {
 section#techwatch {
   --tw-gradient-from: theme('colors.rose.900' / 5%);
   --tw-gradient-to: theme('colors.pink.900' / 5%);
-  /* Configuration spéciale pour la veille */
+  /* Configuration spéciale pour la veille - SUPPRESSION DES OVERRIDES */
   min-height: 100vh;
-  align-items: flex-start;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-  /* Assure que le fond couvre tout le contenu */
-  background-attachment: local;
-  background-repeat: repeat-y;
+  /* Retour aux valeurs par défaut pour permettre l'expansion */
+  align-items: center;
+  justify-content: center;
+  /* Fond qui s'adapte au contenu */
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 section#contact {
@@ -204,7 +205,20 @@ img {
   overflow: hidden;
 }
 
-/* Fond dynamique pour la section veille */
+/* Solution alternative pour le fond de la section veille */
+section#techwatch {
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgba(244, 63, 94, 0.05) 0%, 
+    rgba(236, 72, 153, 0.05) 50%, 
+    rgba(219, 39, 119, 0.05) 100%
+  );
+  background-attachment: fixed;
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
+
+/* Overlay pour assurer la couverture complète */
 section#techwatch::before {
   content: '';
   position: absolute;
@@ -212,13 +226,7 @@ section#techwatch::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: radial-gradient(
-    circle at center,
-    theme('colors.rose.900' / 5%) 0%,
-    theme('colors.pink.900' / 5%) 100%
-  );
-  background-size: 200% 200%;
-  animation: gradientMove 15s ease infinite;
+  background: inherit;
   z-index: -1;
   min-height: 100%;
 }
