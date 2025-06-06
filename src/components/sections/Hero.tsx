@@ -1,10 +1,31 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Users } from 'lucide-react';
+import { Server, ArrowRight, Terminal, Shield, Network, Code, Database, Users, Zap, Target, Rocket, Star } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [currentText, setCurrentText] = useState(0);
+
+  const dynamicTexts = [
+    "Administrateur Systèmes & Réseaux",
+    "Futur Expert en Cybersécurité", 
+    "Spécialiste Infrastructure IT",
+    "Passionné de Pentesting"
+  ];
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentText((prev) => (prev + 1) % dynamicTexts.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -15,29 +36,7 @@ const Hero: React.FC = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (heroRef.current) {
-      observer.observe(heroRef.current);
-    }
-
-    return () => {
-      if (heroRef.current) {
-        observer.unobserve(heroRef.current);
-      }
-    };
-  }, []);
-
-  // Matrix Rain Effect
+  // Matrix Rain Effect amélioré
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -51,7 +50,7 @@ const Hero: React.FC = () => {
     const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
     const matrixArray = matrix.split("");
 
-    const fontSize = 10;
+    const fontSize = 12;
     const columns = canvas.width / fontSize;
 
     const drops: number[] = [];
@@ -62,15 +61,18 @@ const Hero: React.FC = () => {
     function draw() {
       if (!ctx || !canvas) return;
       
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = '#0F4C75';
       ctx.font = fontSize + 'px monospace';
 
       for (let i = 0; i < drops.length; i++) {
         const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
-        ctx.fillStyle = i % 3 === 0 ? '#f97316' : i % 5 === 0 ? '#a855f7' : '#0F4C75';
+        
+        // Couleurs variées pour plus de dynamisme
+        const colors = ['#f97316', '#a855f7', '#3b82f6', '#10b981', '#ef4444'];
+        ctx.fillStyle = colors[i % colors.length];
+        
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
@@ -80,7 +82,7 @@ const Hero: React.FC = () => {
       }
     }
 
-    const interval = setInterval(draw, 35);
+    const interval = setInterval(draw, 50);
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
@@ -112,302 +114,234 @@ const Hero: React.FC = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
     >
       {/* Matrix Canvas Background */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 opacity-15"
+        className="absolute inset-0 opacity-20"
         style={{ zIndex: 1 }}
       />
 
-      {/* Interactive Gradient Overlay */}
+      {/* Gradient interactif qui suit la souris */}
       <div 
-        className="absolute inset-0 transition-all duration-1000 ease-out"
+        className="absolute inset-0 transition-all duration-700 ease-out pointer-events-none"
         style={{ 
           zIndex: 2,
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, 
-            rgba(249, 115, 22, 0.1), 
-            rgba(168, 85, 247, 0.05), 
-            rgba(17, 24, 39, 0.9))`
+          background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, 
+            rgba(249, 115, 22, 0.15), 
+            rgba(168, 85, 247, 0.1), 
+            rgba(59, 130, 246, 0.05),
+            transparent 70%)`
         }} 
       />
 
-      {/* Floating Elements */}
+      {/* Particules flottantes */}
       <div className="absolute inset-0" style={{ zIndex: 2 }}>
-        <div className="absolute top-20 left-10 w-2 h-2 bg-orange-500 rounded-full animate-pulse opacity-60"></div>
-        <div className="absolute top-40 right-20 w-1 h-1 bg-purple-500 rounded-full animate-ping opacity-40"></div>
-        <div className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse opacity-50"></div>
-        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-green-500 rounded-full animate-ping opacity-30"></div>
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className={`absolute w-1 h-1 rounded-full animate-pulse opacity-40`}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              backgroundColor: ['#f97316', '#a855f7', '#3b82f6', '#10b981'][i % 4],
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
+            }}
+          />
+        ))}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative" style={{ zIndex: 3 }}>
-        <div 
-          ref={heroRef}
-          className="flex flex-col lg:flex-row items-center gap-16 transition-all duration-1000 opacity-0 translate-y-10"
-        >
-          {/* Left Column */}
-          <div className="lg:w-1/2 space-y-10">
-            <div className="space-y-8 text-center lg:text-left">
-              {/* Badge animé */}
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-orange-900/40 to-purple-900/40 backdrop-blur-md border border-orange-500/30 text-orange-400 text-sm font-medium shadow-lg hover:shadow-orange-500/25 transition-all duration-300 hover:scale-105">
-                <Server className="w-5 h-5 animate-pulse" />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-purple-400">
-                  BTS SIO SISR • Futur Expert en Cybersécurité
-                </span>
-              </div>
-              
-              {/* Titre avec effet de typing */}
-              <div className="relative">
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                  <span className="block bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600 animate-pulse">
-                    Sébastien
-                  </span>
-                  <span className="block text-white relative">
-                    Fernandes
-                    <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full transform scale-x-0 animate-[scaleX_2s_ease-in-out_1s_forwards]"></div>
-                  </span>
-                </h1>
-                
-                {/* Descriptions avec animations décalées */}
-                <div className="space-y-4">
-                  <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-medium opacity-0 animate-[fadeInUp_1s_ease-out_1.5s_forwards]">
-                    Administrateur Systèmes & Réseaux passionné par la cybersécurité
-                  </p>
-                  <p className="text-lg text-gray-400 leading-relaxed max-w-2xl opacity-0 animate-[fadeInUp_1s_ease-out_2s_forwards]">
-                    Spécialisé en infrastructure IT, sécurisation des systèmes et administration réseau. 
-                    En formation pour devenir expert en pentesting et audit de sécurité.
-                  </p>
-                </div>
-              </div>
+        <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          
+          {/* Header central avec animation spectaculaire */}
+          <div className="text-center mb-16">
+            {/* Badge d'introduction animé */}
+            <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-orange-500/20 to-purple-500/20 backdrop-blur-xl border border-orange-500/30 text-orange-400 text-lg font-medium shadow-2xl hover:shadow-orange-500/25 transition-all duration-500 hover:scale-105 mb-8">
+              <Zap className="w-6 h-6 animate-pulse text-yellow-400" />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-400 to-purple-400">
+                Bienvenue dans mon univers tech
+              </span>
+              <Star className="w-6 h-6 animate-spin text-purple-400" />
+            </div>
 
-              {/* Boutons avec animations */}
-              <div className="flex flex-wrap gap-6 justify-center lg:justify-start opacity-0 animate-[fadeInUp_1s_ease-out_2.5s_forwards]">
-                <button 
-                  onClick={scrollToProjects}
-                  className="group px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl
-                            hover:from-orange-600 hover:to-purple-600 transform hover:scale-105 hover:-translate-y-1
-                            transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-orange-500/25
-                            flex items-center gap-3 font-medium relative overflow-hidden"
-                >
-                  <span className="relative z-10">Découvrir mes réalisations</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </button>
-                
-                <button 
-                  onClick={scrollToContact}
-                  className="group px-8 py-4 border-2 border-orange-500 text-orange-400 bg-gray-900/50
-                            hover:bg-orange-500 hover:text-white rounded-xl backdrop-blur-md
-                            transform hover:scale-105 hover:-translate-y-1 transition-all duration-300
-                            flex items-center gap-3 font-medium shadow-lg hover:shadow-orange-500/25"
-                >
-                  <span>Opportunités pro</span>
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                </button>
+            {/* Titre principal avec effet wow */}
+            <div className="relative mb-8">
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
+                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-yellow-400 to-orange-600 animate-pulse">
+                  Sébastien
+                </span>
+                <span className="block text-white relative">
+                  Fernandes
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-orange-500 via-yellow-400 to-purple-500 rounded-full animate-pulse"></div>
+                </span>
+              </h1>
+              
+              {/* Texte dynamique qui change */}
+              <div className="h-16 flex items-center justify-center">
+                <p className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-500">
+                  {dynamicTexts[currentText]}
+                </p>
               </div>
             </div>
 
-            {/* Stats Grid améliorées */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-0 animate-[fadeInUp_1s_ease-out_3s_forwards]">
-              {[
-                { value: "2+", label: "Années BTS SIO", color: "orange" },
-                { value: "20+", label: "Projets techniques", color: "purple" },
-                { value: "5+", label: "Technologies maîtrisées", color: "blue" },
-                { value: "2", label: "Expériences pro", color: "green" }
-              ].map((stat, index) => (
-                <div 
-                  key={index}
-                  className="group p-6 rounded-2xl bg-gray-800/60 backdrop-blur-md shadow-lg border border-gray-700/50 
-                           hover:border-orange-500/50 hover:bg-gray-800/80 transition-all duration-300 
-                           hover:scale-105 hover:-translate-y-1 cursor-pointer"
-                >
-                  <div className={`font-bold text-3xl mb-2 bg-clip-text text-transparent bg-gradient-to-r 
-                    ${stat.color === 'orange' ? 'from-orange-400 to-orange-600' : 
-                      stat.color === 'purple' ? 'from-purple-400 to-purple-600' :
-                      stat.color === 'blue' ? 'from-blue-400 to-blue-600' :
-                      'from-green-400 to-green-600'}`}>
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
+            {/* Description captivante */}
+            <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-4xl mx-auto mb-12 font-medium">
+              🚀 Étudiant BTS SIO SISR passionné par l'infrastructure IT et la cybersécurité. 
+              <br />
+              <span className="text-orange-400">En quête d'excellence technique</span> et 
+              <span className="text-purple-400"> d'innovation constante</span>.
+            </p>
+
+            {/* Boutons d'action spectaculaires */}
+            <div className="flex flex-wrap gap-6 justify-center mb-16">
+              <button 
+                onClick={scrollToProjects}
+                className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-2xl
+                          hover:from-orange-600 hover:to-purple-600 transform hover:scale-110 hover:-translate-y-2
+                          transition-all duration-300 shadow-2xl hover:shadow-orange-500/50
+                          flex items-center gap-4 font-bold text-lg overflow-hidden"
+              >
+                <Rocket className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+                <span>Explorer mes projets</span>
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-pink-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+              </button>
+              
+              <button 
+                onClick={scrollToContact}
+                className="group relative px-10 py-5 border-3 border-orange-500 text-orange-400 bg-gray-900/50
+                          hover:bg-orange-500 hover:text-white rounded-2xl backdrop-blur-xl
+                          transform hover:scale-110 hover:-translate-y-2 transition-all duration-300
+                          flex items-center gap-4 font-bold text-lg shadow-2xl hover:shadow-orange-500/50"
+              >
+                <Target className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />
+                <span>Collaborons ensemble</span>
+                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              </button>
             </div>
           </div>
 
-          {/* Right Column - Expertise Showcase améliorée */}
-          <div className="lg:w-1/2 relative opacity-0 animate-[fadeInRight_1s_ease-out_1s_forwards]">
-            {/* Effet de glow autour de la carte */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-60 animate-pulse"></div>
-            
-            <div className="relative bg-gray-800/40 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-gray-700/50 hover:border-gray-600/50 transition-all duration-500">
-              <div className="space-y-8">
-                {/* Header avec animation */}
-                <div className="text-center">
-                  <h3 className="text-2xl font-bold text-white mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
-                    Domaines d'expertise
+          {/* Grille de compétences interactive */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            {/* Expertise technique */}
+            <div className="lg:col-span-2">
+              <div className="relative group">
+                <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur-lg opacity-30 group-hover:opacity-60 transition duration-500"></div>
+                <div className="relative bg-gray-800/60 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-500">
+                  <h3 className="text-3xl font-bold text-white mb-6 flex items-center gap-4">
+                    <Code className="w-8 h-8 text-orange-500" />
+                    <span>Expertise Technique</span>
+                    <div className="flex-1 h-px bg-gradient-to-r from-orange-500 to-transparent"></div>
                   </h3>
-                  <p className="text-gray-400">Technologies et compétences techniques</p>
-                  <div className="w-16 h-0.5 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
+                  
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[
+                      { icon: Server, label: 'Infrastructure', color: 'orange', skills: ['Windows Server', 'Linux', 'Virtualisation'] },
+                      { icon: Shield, label: 'Cybersécurité', color: 'blue', skills: ['Pentesting', 'Audit', 'Sécurisation'] },
+                      { icon: Network, label: 'Réseaux', color: 'green', skills: ['Cisco', 'TCP/IP', 'VLAN'] },
+                      { icon: Terminal, label: 'DevOps', color: 'purple', skills: ['Scripts', 'Automation', 'Monitoring'] }
+                    ].map((item, index) => (
+                      <div
+                        key={index}
+                        className="group/card relative p-6 rounded-2xl bg-gray-900/50 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 hover:scale-105 hover:-translate-y-2 cursor-pointer"
+                      >
+                        <item.icon className={`w-12 h-12 mb-4 mx-auto transition-all duration-300 group-hover/card:scale-125 group-hover/card:rotate-6 ${
+                          item.color === 'orange' ? 'text-orange-500' :
+                          item.color === 'blue' ? 'text-blue-500' :
+                          item.color === 'green' ? 'text-green-500' : 'text-purple-500'
+                        }`} />
+                        <h4 className="font-bold text-white text-center mb-3 group-hover/card:text-orange-300 transition-colors">
+                          {item.label}
+                        </h4>
+                        <div className="space-y-1">
+                          {item.skills.map((skill, skillIndex) => (
+                            <div key={skillIndex} className="text-xs text-gray-400 text-center bg-gray-800/50 px-2 py-1 rounded-lg group-hover/card:bg-gray-700/50 group-hover/card:text-gray-300 transition-all duration-300">
+                              {skill}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              </div>
+            </div>
 
-                {/* Expertise Grid avec animations staggerées */}
-                <div className="grid grid-cols-2 gap-6">
-                  {[
-                    { 
-                      icon: Server, 
-                      label: 'Infrastructure', 
-                      gradient: 'from-orange-500 to-red-500',
-                      description: 'Windows Server, Linux, Virtualisation',
-                      skills: ['Active Directory', 'Proxmox', 'VMware'],
-                      delay: '0.2s'
-                    },
-                    { 
-                      icon: Shield, 
-                      label: 'Cybersécurité', 
-                      gradient: 'from-blue-500 to-cyan-500',
-                      description: 'Audit, Pentesting, Sécurisation',
-                      skills: ['Kali Linux', 'Wireshark', 'VPN'],
-                      delay: '0.4s'
-                    },
-                    { 
-                      icon: Network, 
-                      label: 'Réseaux', 
-                      gradient: 'from-green-500 to-emerald-500',
-                      description: 'Cisco, TCP/IP, Supervision',
-                      skills: ['Routage', 'VLAN', 'Zabbix'],
-                      delay: '0.6s'
-                    },
-                    { 
-                      icon: Terminal, 
-                      label: 'Automatisation', 
-                      gradient: 'from-purple-500 to-pink-500',
-                      description: 'Scripts, DevOps, Monitoring',
-                      skills: ['Bash', 'PowerShell', 'Python'],
-                      delay: '0.8s'
-                    }
-                  ].map((item, index) => (
-                    <div
-                      key={index}
-                      className="relative group transition-all duration-500 hover:scale-110 hover:-translate-y-2 opacity-0"
-                      style={{ animation: `fadeInUp 0.8s ease-out ${item.delay} forwards` }}
-                    >
-                      <div className={`
-                        w-full rounded-2xl
-                        bg-gradient-to-br ${item.gradient}
-                        p-0.5 transition-all duration-300
-                        cursor-pointer shadow-lg group-hover:shadow-2xl
-                      `}>
-                        <div className="w-full h-full rounded-2xl bg-gray-900/90 backdrop-blur-sm p-6
-                                      flex flex-col items-center justify-center gap-4
-                                      border border-gray-700/50 group-hover:border-gray-600/50 transition-all duration-300">
-                          <item.icon className="w-10 h-10 text-white transition-all duration-300
-                                              group-hover:scale-125 group-hover:rotate-6" />
-                          <div className="text-center">
-                            <div className="font-bold text-white mb-2 text-lg group-hover:text-orange-300 transition-colors">
-                              {item.label}
-                            </div>
-                            <p className="text-xs text-gray-400 mb-3 leading-tight group-hover:text-gray-300 transition-colors">
-                              {item.description}
-                            </p>
-                            <div className="space-y-1">
-                              {item.skills.map((skill, skillIndex) => (
-                                <div key={skillIndex} className="text-xs text-gray-500 bg-gray-800/50 px-2 py-1 rounded-lg
-                                                                 group-hover:bg-gray-700/50 group-hover:text-gray-400 transition-all duration-300">
-                                  {skill}
-                                </div>
-                              ))}
-                            </div>
+            {/* Stats impressionnantes */}
+            <div className="space-y-6">
+              <div className="relative group">
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 to-green-500 rounded-3xl blur-lg opacity-30 group-hover:opacity-60 transition duration-500"></div>
+                <div className="relative bg-gray-800/60 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-500">
+                  <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <Database className="w-7 h-7 text-blue-500" />
+                    <span>En chiffres</span>
+                  </h3>
+                  
+                  <div className="space-y-6">
+                    {[
+                      { value: "2+", label: "Années BTS SIO", color: "orange", icon: "🎓" },
+                      { value: "20+", label: "Projets réalisés", color: "purple", icon: "🚀" },
+                      { value: "10+", label: "Technologies", color: "blue", icon: "⚡" },
+                      { value: "2", label: "Expériences pro", color: "green", icon: "💼" }
+                    ].map((stat, index) => (
+                      <div 
+                        key={index}
+                        className="group/stat flex items-center gap-4 p-4 rounded-xl bg-gray-900/50 hover:bg-gray-900/70 transition-all duration-300 hover:scale-105 cursor-pointer"
+                      >
+                        <div className="text-2xl">{stat.icon}</div>
+                        <div className="flex-1">
+                          <div className={`font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r ${
+                            stat.color === 'orange' ? 'from-orange-400 to-orange-600' :
+                            stat.color === 'purple' ? 'from-purple-400 to-purple-600' :
+                            stat.color === 'blue' ? 'from-blue-400 to-blue-600' :
+                            'from-green-400 to-green-600'
+                          }`}>
+                            {stat.value}
+                          </div>
+                          <div className="text-sm text-gray-400 group-hover/stat:text-gray-300 transition-colors">
+                            {stat.label}
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Objectifs professionnels avec design amélioré */}
-                <div className="bg-gradient-to-br from-orange-500/10 to-purple-500/10 rounded-2xl p-6 border border-gray-700/50 backdrop-blur-sm hover:border-gray-600/50 transition-all duration-300">
-                  <h4 className="text-lg font-semibold mb-4 text-white flex items-center gap-3">
-                    <Users className="w-5 h-5 text-orange-500" />
-                    <span>Objectifs de carrière</span>
-                    <div className="flex-1 h-px bg-gradient-to-r from-orange-500/50 to-transparent"></div>
-                  </h4>
-                  <ul className="space-y-4">
-                    {[
-                      { term: "Court terme", goal: "Administrateur systèmes & réseaux", color: "orange" },
-                      { term: "Moyen terme", goal: "Expert en cybersécurité", color: "blue" },
-                      { term: "Long terme", goal: "Pentester / Consultant sécurité", color: "purple" }
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-center gap-4 text-sm text-gray-300 group hover:text-white transition-colors">
-                        <div className={`w-3 h-3 rounded-full flex-shrink-0 ${
-                          item.color === 'orange' ? 'bg-orange-500' :
-                          item.color === 'blue' ? 'bg-blue-500' : 'bg-purple-500'
-                        } group-hover:scale-125 transition-transform duration-300`}></div>
-                        <span className="font-medium text-gray-400">{item.term} :</span>
-                        <span className="flex-1">{item.goal}</span>
-                      </li>
                     ))}
-                  </ul>
+                  </div>
                 </div>
+              </div>
 
-                {/* Call to action avec badges animés */}
-                <div className="text-center space-y-4">
-                  <p className="text-sm text-gray-400 mb-4">
-                    Recherche d'opportunités en alternance ou stage
+              {/* Call to action */}
+              <div className="relative group">
+                <div className="absolute -inset-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-3xl blur-lg opacity-30 group-hover:opacity-60 transition duration-500"></div>
+                <div className="relative bg-gray-800/60 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-500 text-center">
+                  <h3 className="text-xl font-bold text-white mb-4">🎯 Objectif 2025</h3>
+                  <p className="text-gray-300 mb-6">
+                    Décrocher une alternance en cybersécurité pour devenir expert en pentesting
                   </p>
-                  <div className="flex justify-center gap-4 flex-wrap">
-                    <span className="px-4 py-2 bg-green-900/30 text-green-400 rounded-full text-xs border border-green-500/30 
-                                   hover:bg-green-900/50 hover:scale-105 transition-all duration-300 cursor-default flex items-center gap-2">
+                  <div className="flex justify-center gap-3">
+                    <span className="px-4 py-2 bg-green-900/30 text-green-400 rounded-full text-sm border border-green-500/30 flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                      Disponible immédiatement
+                      Disponible
                     </span>
-                    <span className="px-4 py-2 bg-blue-900/30 text-blue-400 rounded-full text-xs border border-blue-500/30
-                                   hover:bg-blue-900/50 hover:scale-105 transition-all duration-300 cursor-default">
-                      Mobilité Île-de-France
+                    <span className="px-4 py-2 bg-blue-900/30 text-blue-400 rounded-full text-sm border border-blue-500/30">
+                      Île-de-France
                     </span>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Scroll indicator animé */}
+          <div className="text-center">
+            <div className="inline-flex flex-col items-center gap-2 text-gray-400 hover:text-orange-400 transition-colors cursor-pointer animate-bounce">
+              <span className="text-sm font-medium">Découvrir la suite</span>
+              <ArrowRight className="w-5 h-5 rotate-90" />
             </div>
           </div>
         </div>
       </div>
-
-      {/* Styles pour les animations personnalisées */}
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fadeInRight {
-          from {
-            opacity: 0;
-            transform: translateX(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        @keyframes scaleX {
-          from {
-            transform: scaleX(0);
-          }
-          to {
-            transform: scaleX(1);
-          }
-        }
-      `}</style>
     </section>
   );
 };
