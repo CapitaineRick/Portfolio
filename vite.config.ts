@@ -15,9 +15,12 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        // nécessaire pour les workers dans certaines configs
         manualChunks: undefined,
       },
     },
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+    minify: 'terser',
   },
 });
