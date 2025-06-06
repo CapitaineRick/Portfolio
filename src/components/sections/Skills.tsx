@@ -58,25 +58,6 @@ const Skills: React.FC = () => {
           </p>
         </div>
 
-        {/* Skills Overview Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {[
-            { label: 'Catégories', value: skillsData.length, icon: '🎯' },
-            { label: 'Compétences', value: skillsData.reduce((acc, cat) => acc + cat.skills.length, 0), icon: '⚡' },
-            { label: 'Technologies', value: skillsData.reduce((acc, cat) => acc + cat.skills.filter(s => s.name.includes('Linux') || s.name.includes('Windows')).length, 0), icon: '💻' },
-            { label: 'Outils', value: skillsData.reduce((acc, cat) => acc + cat.skills.filter(s => !s.name.includes('Linux') && !s.name.includes('Windows')).length, 0), icon: '🛠️' }
-          ].map((stat, index) => (
-            <div key={index} className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-xl blur opacity-30 group-hover:opacity-75 transition duration-300"></div>
-              <div className="relative bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 text-center">
-                <div className="text-2xl mb-2">{stat.icon}</div>
-                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-gray-400">{stat.label}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
         <div 
           ref={skillsRef}
           className="transition-all duration-300 opacity-0 translate-y-10 space-y-12"
@@ -100,7 +81,7 @@ const Skills: React.FC = () => {
                         {category.name}
                       </h3>
                       <p className="text-gray-400 text-lg">
-                        {category.skills.length} compétences techniques
+                        {category.skills.length} compétences maîtrisées
                       </p>
                     </div>
                   </div>
