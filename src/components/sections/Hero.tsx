@@ -57,11 +57,7 @@ const Hero: React.FC = () => {
       observer.observe(heroRef.current);
     }
 
-    // Auto-rotate skills
-    const interval = setInterval(() => {
-      setActiveSkill((prev) => (prev + 1) % skills.length);
-    }, 3000);
-
+  
     return () => {
       if (heroRef.current) {
         observer.unobserve(heroRef.current);
