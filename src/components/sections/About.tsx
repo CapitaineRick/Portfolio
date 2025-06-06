@@ -322,22 +322,17 @@ const About: React.FC = () => {
                             {education.description}
                           </p>
                           {education.id === "bts-sio" && (
-                            <div className="mt-6">
-                              <div className="relative group/button">
-                                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl blur opacity-75 group-hover/button:opacity-100 transition duration-300"></div>
-                                <a
-                                  href=""
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="relative flex items-center justify-center gap-2 w-full px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-xl transition-all duration-300 group-hover/button:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                                >
-                                  <div className="flex items-center gap-2">
-                                    <FileText className="w-5 h-5 text-purple-400" />
-                                    <span className="font-medium">Tableau de Synthèse</span>
-                                    <ExternalLink className="w-4 h-4 text-purple-400 group-hover/button:translate-x-1 transition-transform" />
-                                  </div>
-                                </a>
-                              </div>
+                            <div className="mt-4 pt-4 border-t border-gray-700">
+                              <a
+                                href=""
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors group/link"
+                              >
+                                <FileText className="w-4 h-4" />
+                                <span>Tableau de Synthèse</span>
+                                <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" />
+                              </a>
                             </div>
                           )}
 
