@@ -133,7 +133,7 @@ const Hero: React.FC = () => {
         }
 
         // Dessiner la particule avec effet de pulsation
-        const lifeRatio = 1 - (p.life / p.maxLife);
+        const lifeRatio = Math.max(0, 1 - (p.life / p.maxLife));
         const alpha = (Math.sin(p.pulse) * 0.3 + 0.7) * lifeRatio;
         const size = p.size * (Math.sin(p.pulse * 0.5) * 0.2 + 1) * lifeRatio;
         
