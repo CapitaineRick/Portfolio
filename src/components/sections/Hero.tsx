@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
     setTimeout(() => setIsVisible(true), 500);
   }, []);
 
-  // Système de particules avec traînées colorées
+  // Système de particules avec évitement de la souris
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -149,11 +149,10 @@ const Hero: React.FC = () => {
         // Dessiner la traînée avec effet de fondu
         for (let j = 0; j < p.trail.length; j++) {
           const trailPoint = p.trail[j];
-          const lifeRatio = Math.max(0, 1 - (p.life / p.maxLife));
-          const trailAlpha = (1 - (trailPoint.age / 15)) * lifeRatio * 0.6;
-          const trailSize = Math.max(0.1, p.size * (1 - (trailPoint.age / 15)) * 0.7);
+          const trailAlpha = (1 - (trailPoint.age / 15)) * (1 - (p.life / p.maxLife)) * 0.6;
+          const trailSize = p.size * (1 - (trailPoint.age / 15)) * 0.7;
           
-          if (trailAlpha > 0.01 && trailSize > 0) {
+          if (trailAlpha > 0.01) {
             ctx.globalAlpha = trailAlpha;
             ctx.fillStyle = p.color;
             ctx.beginPath();
@@ -163,23 +162,20 @@ const Hero: React.FC = () => {
         }
 
         // Dessiner la particule principale
-        const lifeRatio = Math.max(0, 1 - (p.life / p.maxLife));
-        const alpha = Math.sin(p.pulse) * 0.3 + 0.7 * lifeRatio;
-        const size = Math.max(0.1, p.size * (Math.sin(p.pulse * 0.5) * 0.3 + 1) * lifeRatio);
+        const alpha = Math.sin(p.pulse) * 0.3 + 0.7 * (1 - (p.life / p.maxLife));
+        const size = p.size * (Math.sin(p.pulse * 0.5) * 0.3 + 1);
         
-        if (size > 0) {
-          ctx.globalAlpha = alpha;
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-          ctx.fill();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+        ctx.fill();
 
-          // Effet de lueur autour de la particule
-          ctx.globalAlpha = alpha * 0.3;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, size * 2, 0, Math.PI * 2);
-          ctx.fill();
-        }
+        // Effet de lueur autour de la particule
+        ctx.globalAlpha = alpha * 0.3;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size * 2, 0, Math.PI * 2);
+        ctx.fill();
 
         // Supprimer les particules mortes
         if (p.life >= p.maxLife) {

@@ -61,15 +61,10 @@ section > div {
   max-width: 100%;
 }
 
-/* HERO - Fond spécial avec dégradé et particules */
+/* HERO - Fond spécial avec style inline (pas de CSS ici) */
 section#home {
-  background: linear-gradient(
-    135deg,
-    #0f172a 0%,
-    #1e293b 30%,
-    #0f172a 70%,
-    #1e293b 100%
-  );
+  /* Le fond est défini directement dans le composant Hero avec style inline */
+  background: none !important;
 }
 
 /* TOUTES LES AUTRES SECTIONS - Fond uniforme simple */
@@ -87,44 +82,20 @@ section:not(#home)::before {
   display: none !important;
 }
 
-/* Overlay décoratif uniquement pour Hero */
-section#home::before {
-  content: '';
-  position: absolute;
+/* Navbar fixe sans affecter les sections */
+nav {
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.3;
-  background: 
-    radial-gradient(
-      circle at 20% 80%,
-      rgba(249, 115, 22, 0.4) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(168, 85, 247, 0.4) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      circle at 40% 40%,
-      rgba(59, 130, 246, 0.3) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      circle at 60% 80%,
-      rgba(16, 185, 129, 0.3) 0%,
-      transparent 60%
-    );
+  z-index: 50;
 }
 
-/* Contenu au-dessus de l'overlay pour Hero uniquement */
-section#home > * {
-  position: relative;
-  z-index: 1;
+/* Footer sans marge */
+footer {
+  margin: 0;
+  padding: 2rem 0;
+  background: #0f172a;
 }
 
 /* Animations pour les éléments flottants */
@@ -143,22 +114,6 @@ section#home > * {
 
 .animation-delay-4000 {
   animation-delay: 4s;
-}
-
-/* Navbar fixe sans affecter les sections */
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-}
-
-/* Footer sans marge */
-footer {
-  margin: 0;
-  padding: 2rem 0;
-  background: #0f172a;
 }
 
 /* Element transitions */
