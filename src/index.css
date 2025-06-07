@@ -47,15 +47,8 @@ section {
   justify-content: center;
   position: relative;
   
-  /* Fond uniforme pour toutes les sections */
-  background: linear-gradient(
-    135deg,
-    #0f172a 0%,
-    #1e293b 25%,
-    #0f172a 50%,
-    #1e293b 75%,
-    #0f172a 100%
-  );
+  /* Fond uniforme pour toutes les sections SAUF Hero */
+  background: #0f172a;
   
   /* Transitions douces */
   transition: all 0.5s ease-in-out;
@@ -68,8 +61,34 @@ section > div {
   max-width: 100%;
 }
 
-/* Overlays décoratifs subtils par section */
-section::before {
+/* HERO - Fond spécial avec dégradé et particules */
+section#home {
+  background: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #1e293b 30%,
+    #0f172a 70%,
+    #1e293b 100%
+  );
+}
+
+/* TOUTES LES AUTRES SECTIONS - Fond uniforme simple */
+section#about,
+section#education,
+section#skills,
+section#projects,
+section#techwatch,
+section#contact {
+  background: #0f172a !important;
+}
+
+/* Suppression de tous les overlays pour les sections non-Hero */
+section:not(#home)::before {
+  display: none !important;
+}
+
+/* Overlay décoratif uniquement pour Hero */
+section#home::before {
   content: '';
   position: absolute;
   top: 0;
@@ -78,116 +97,34 @@ section::before {
   bottom: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.6;
-  transition: opacity 0.5s ease;
+  opacity: 0.3;
+  background: 
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(249, 115, 22, 0.4) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(168, 85, 247, 0.4) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(59, 130, 246, 0.3) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 60% 80%,
+      rgba(16, 185, 129, 0.3) 0%,
+      transparent 60%
+    );
 }
 
-/* Contenu au-dessus de l'overlay */
-section > * {
+/* Contenu au-dessus de l'overlay pour Hero uniquement */
+section#home > * {
   position: relative;
   z-index: 1;
-}
-
-/* Variations subtiles par section */
-section#home::before {
-  background: radial-gradient(
-    circle at 20% 80%,
-    rgba(249, 115, 22, 0.08) 0%,
-    transparent 60%
-  ),
-  radial-gradient(
-    circle at 80% 20%,
-    rgba(168, 85, 247, 0.08) 0%,
-    transparent 60%
-  );
-}
-
-section#about::before {
-  background: radial-gradient(
-    circle at 30% 70%,
-    rgba(59, 130, 246, 0.08) 0%,
-    transparent 60%
-  ),
-  radial-gradient(
-    circle at 70% 30%,
-    rgba(168, 85, 247, 0.06) 0%,
-    transparent 60%
-  );
-}
-
-section#education::before {
-  background: radial-gradient(
-    circle at 40% 60%,
-    rgba(139, 92, 246, 0.08) 0%,
-    transparent 60%
-  ),
-  radial-gradient(
-    circle at 60% 40%,
-    rgba(59, 130, 246, 0.06) 0%,
-    transparent 60%
-  );
-}
-
-section#skills::before {
-  background: radial-gradient(
-    circle at 25% 75%,
-    rgba(16, 185, 129, 0.08) 0%,
-    transparent 60%
-  ),
-  radial-gradient(
-    circle at 75% 25%,
-    rgba(5, 150, 105, 0.06) 0%,
-    transparent 60%
-  );
-}
-
-section#projects::before {
-  background: radial-gradient(
-    circle at 35% 65%,
-    rgba(249, 115, 22, 0.08) 0%,
-    transparent 60%
-  ),
-  radial-gradient(
-    circle at 65% 35%,
-    rgba(234, 88, 12, 0.06) 0%,
-    transparent 60%
-  );
-}
-
-section#techwatch::before {
-  background: radial-gradient(
-    circle at 45% 55%,
-    rgba(99, 102, 241, 0.06) 0%,
-    transparent 60%
-  ),
-  radial-gradient(
-    circle at 55% 45%,
-    rgba(139, 92, 246, 0.04) 0%,
-    transparent 60%
-  );
-}
-
-section#contact::before {
-  background: radial-gradient(
-    circle at 50% 30%,
-    rgba(16, 185, 129, 0.08) 0%,
-    transparent 60%
-  ),
-  radial-gradient(
-    circle at 50% 70%,
-    rgba(5, 150, 105, 0.06) 0%,
-    transparent 60%
-  );
-}
-
-/* Animation des overlays */
-section::before {
-  animation: subtlePulse 12s ease-in-out infinite;
-}
-
-@keyframes subtlePulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
 }
 
 /* Animations pour les éléments flottants */
