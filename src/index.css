@@ -11,210 +11,83 @@ html {
   @apply transition-all duration-300 ease-in-out;
 }
 
-/* Section styling uniforme */
+/* Section styling */
 section {
-  @apply relative overflow-hidden transition-all duration-700 ease-in-out;
+  @apply relative overflow-hidden transition-all duration-300 ease-in-out py-16;
+  background-image: radial-gradient(
+    circle at center,
+    var(--tw-gradient-from) 0%,
+    var(--tw-gradient-to) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientMove 15s ease infinite;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
-/* Background uniforme pour toutes les sections - Plus visible */
-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(15, 23, 42, 0.85) 0%,
-    rgba(30, 41, 59, 0.90) 25%,
-    rgba(15, 23, 42, 0.85) 50%,
-    rgba(30, 41, 59, 0.90) 75%,
-    rgba(15, 23, 42, 0.85) 100%
-  );
-  background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
-  z-index: -2;
+/* Section colors */
+section {
+  --tw-gradient-from: theme('colors.gray.900' / 5%);
+  --tw-gradient-to: theme('colors.gray.900' / 5%);
 }
 
-/* Overlay coloré spécifique à chaque section - Plus intense */
-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(
-      ellipse at center,
-      var(--section-color-primary) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse at 20% 80%,
-      var(--section-color-secondary) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse at 80% 20%,
-      var(--section-color-accent) 0%,
-      transparent 60%
-    ),
-    linear-gradient(
-      45deg,
-      var(--section-color-primary) 0%,
-      transparent 30%,
-      var(--section-color-secondary) 70%,
-      transparent 100%
-    );
-  opacity: 0.25;
-  background-size: 300% 300%, 200% 200%, 200% 200%, 400% 400%;
-  animation: colorFlow 30s ease infinite;
-  z-index: -1;
-}
-
-/* Couleurs spécifiques par section - Plus saturées */
 section#home {
-  --section-color-primary: rgba(249, 115, 22, 0.6);
-  --section-color-secondary: rgba(168, 85, 247, 0.5);
-  --section-color-accent: rgba(59, 130, 246, 0.4);
+  --tw-gradient-from: theme('colors.orange.900' / 5%);
+  --tw-gradient-to: theme('colors.purple.900' / 5%);
 }
 
 section#about {
-  --section-color-primary: rgba(59, 130, 246, 0.6);
-  --section-color-secondary: rgba(168, 85, 247, 0.5);
-  --section-color-accent: rgba(16, 185, 129, 0.4);
+  --tw-gradient-from: theme('colors.blue.900' / 5%);
+  --tw-gradient-to: theme('colors.purple.900' / 5%);
 }
 
 section#education {
-  --section-color-primary: rgba(168, 85, 247, 0.6);
-  --section-color-secondary: rgba(59, 130, 246, 0.5);
-  --section-color-accent: rgba(249, 115, 22, 0.4);
+  --tw-gradient-from: theme('colors.purple.900' / 5%);
+  --tw-gradient-to: theme('colors.blue.900' / 5%);
 }
 
 section#skills {
-  --section-color-primary: rgba(16, 185, 129, 0.6);
-  --section-color-secondary: rgba(5, 150, 105, 0.5);
-  --section-color-accent: rgba(59, 130, 246, 0.4);
+  --tw-gradient-from: theme('colors.green.900' / 5%);
+  --tw-gradient-to: theme('colors.emerald.900' / 5%);
 }
 
 section#projects {
-  --section-color-primary: rgba(249, 115, 22, 0.6);
-  --section-color-secondary: rgba(239, 68, 68, 0.5);
-  --section-color-accent: rgba(168, 85, 247, 0.4);
+  --tw-gradient-from: theme('colors.orange.900' / 5%);
+  --tw-gradient-to: theme('colors.red.900' / 5%);
 }
 
 section#techwatch {
-  --section-color-primary: rgba(139, 92, 246, 0.6);
-  --section-color-secondary: rgba(168, 85, 247, 0.5);
-  --section-color-accent: rgba(59, 130, 246, 0.4);
+  /* SUPPRESSION COMPLÈTE DU FOND */
+  background: none !important;
+  background-image: none !important;
+  animation: none !important;
+  --tw-gradient-from: transparent;
+  --tw-gradient-to: transparent;
 }
 
 section#contact {
-  --section-color-primary: rgba(5, 150, 105, 0.6);
-  --section-color-secondary: rgba(16, 185, 129, 0.5);
-  --section-color-accent: rgba(249, 115, 22, 0.4);
+  --tw-gradient-from: theme('colors.emerald.900' / 5%);
+  --tw-gradient-to: theme('colors.green.900' / 5%);
 }
 
-/* Transitions fluides entre sections */
-section#home::after {
-  background: 
-    radial-gradient(
-      ellipse at center,
-      var(--section-color-primary) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse at 20% 80%,
-      var(--section-color-secondary) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse at 80% 20%,
-      var(--section-color-accent) 0%,
-      transparent 60%
-    ),
-    linear-gradient(
-      to bottom,
-      var(--section-color-primary) 0%,
-      transparent 50%,
-      rgba(59, 130, 246, 0.3) 100%
-    );
-}
-
-section#about::before {
-  background: linear-gradient(
-    to bottom,
-    rgba(249, 115, 22, 0.1) 0%,
-    rgba(15, 23, 42, 0.85) 20%,
-    rgba(30, 41, 59, 0.90) 50%,
-    rgba(15, 23, 42, 0.85) 80%,
-    rgba(168, 85, 247, 0.1) 100%
-  );
-}
-
-/* Animations améliorées */
-@keyframes gradientShift {
-  0% { 
-    background-position: 0% 50%; 
-    transform: scale(1);
-  }
-  25% { 
-    background-position: 100% 50%; 
-    transform: scale(1.02);
-  }
-  50% { 
-    background-position: 100% 100%; 
-    transform: scale(1);
-  }
-  75% { 
-    background-position: 0% 100%; 
-    transform: scale(1.02);
-  }
-  100% { 
-    background-position: 0% 50%; 
-    transform: scale(1);
-  }
-}
-
-@keyframes colorFlow {
-  0% { 
-    background-position: 0% 50%, 0% 0%, 100% 100%, 0% 0%;
-    opacity: 0.2;
-  }
-  25% { 
-    background-position: 50% 50%, 50% 50%, 50% 50%, 25% 25%;
-    opacity: 0.3;
-  }
-  50% { 
-    background-position: 100% 50%, 100% 0%, 0% 100%, 50% 50%;
-    opacity: 0.25;
-  }
-  75% { 
-    background-position: 50% 100%, 50% 100%, 50% 0%, 75% 75%;
-    opacity: 0.3;
-  }
-  100% { 
-    background-position: 0% 50%, 0% 0%, 100% 100%, 100% 100%;
-    opacity: 0.2;
-  }
+/* Animations */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @keyframes blob {
-  0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
-  33% { transform: translate(30px, -50px) scale(1.1) rotate(120deg); }
-  66% { transform: translate(-20px, 20px) scale(0.9) rotate(240deg); }
-  100% { transform: translate(0px, 0px) scale(1) rotate(360deg); }
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
 }
 
 .animate-blob {
-  animation: blob 12s infinite;
+  animation: blob 7s infinite;
 }
 
 .animation-delay-2000 {
@@ -223,85 +96,6 @@ section#about::before {
 
 .animation-delay-4000 {
   animation-delay: 4s;
-}
-
-/* Éléments flottants décoratifs - Plus visibles */
-section .floating-elements {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-section .floating-elements::before,
-section .floating-elements::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  background: linear-gradient(
-    45deg, 
-    var(--section-color-primary), 
-    var(--section-color-secondary),
-    var(--section-color-accent)
-  );
-  opacity: 0.15;
-  animation: float 20s ease-in-out infinite;
-  filter: blur(2px);
-}
-
-section .floating-elements::before {
-  width: 400px;
-  height: 400px;
-  top: 5%;
-  left: -15%;
-  animation-delay: 0s;
-}
-
-section .floating-elements::after {
-  width: 300px;
-  height: 300px;
-  bottom: 5%;
-  right: -10%;
-  animation-delay: 10s;
-}
-
-@keyframes float {
-  0%, 100% { 
-    transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); 
-    opacity: 0.1;
-  }
-  25% { 
-    transform: translateY(-30px) translateX(20px) rotate(90deg) scale(1.1); 
-    opacity: 0.15;
-  }
-  50% { 
-    transform: translateY(-20px) translateX(-10px) rotate(180deg) scale(0.9); 
-    opacity: 0.2;
-  }
-  75% { 
-    transform: translateY(10px) translateX(30px) rotate(270deg) scale(1.05); 
-    opacity: 0.15;
-  }
-}
-
-/* Particules supplémentaires pour certaines sections */
-section#home .floating-elements,
-section#about .floating-elements {
-  background: radial-gradient(
-    circle at 30% 70%,
-    var(--section-color-primary) 0%,
-    transparent 50%
-  );
-  opacity: 0.1;
-  animation: pulse 8s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.05; transform: scale(1); }
-  50% { opacity: 0.15; transform: scale(1.1); }
 }
 
 /* Element transitions */
@@ -335,21 +129,6 @@ img {
 
 .opacity-transition {
   @apply transition-opacity duration-300;
-}
-
-/* Contenu des sections */
-section > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Amélioration de la lisibilité du contenu */
-section .max-w-7xl {
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(1px);
-  border-radius: 2rem;
-  padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* PDF Viewer Styles */
