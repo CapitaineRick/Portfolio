@@ -165,7 +165,7 @@ const handleSubmit = (e: React.FormEvent) => {
                         'Erreur, veuillez réessayer'
                       ) : (
                         <>
-                          <Send className="mr-2\" size={18} />
+                          <Send className="mr-2" size={18} />
                           Envoyer
                         </>
                       )}
