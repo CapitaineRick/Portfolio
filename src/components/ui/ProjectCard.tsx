@@ -31,7 +31,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [showFullscreen, setShowFullscreen] = useState(false);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [scale, setScale] = useState(1.0);
+  const [scale, setScale] = useState(1.2); // Augmenté de 1.0 à 1.2
   const [pdfError, setPdfError] = useState<string | null>(null);
   const [selectedDocument, setSelectedDocument] = useState<DocumentItem | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -304,10 +304,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
       {/* PDF Viewer Modal */}
       {showFullscreen && (selectedDocument?.url || project.pdfUrl) && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
-          <div className="bg-gray-800 rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-auto p-6">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-bold text-white">
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-2">
+          <div className="bg-gray-800 rounded-2xl w-full max-w-7xl max-h-[95vh] overflow-auto p-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold text-white">
                 {selectedDocument?.title || project.title}
               </h3>
               <div className="flex items-center gap-2">
@@ -364,7 +364,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   {Math.round(scale * 100)}%
                 </span>
                 <button 
-                  onClick={() => setScale(Math.min(2.0, scale + 0.1))}
+                  onClick={() => setScale(Math.min(3.0, scale + 0.1))}
                   className="px-3 py-1 bg-gray-700 text-gray-300 rounded-lg"
                 >
                   +
