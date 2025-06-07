@@ -11,131 +11,182 @@ html {
   @apply transition-all duration-300 ease-in-out;
 }
 
-/* Section styling */
+/* Section styling uniforme et détendu */
 section {
-  @apply relative overflow-hidden transition-all duration-300 ease-in-out py-16;
-  background-image: radial-gradient(
-    circle at center,
-    var(--tw-gradient-from) 0%,
-    var(--tw-gradient-to) 100%
-  );
-  background-size: 200% 200%;
-  animation: gradientMove 15s ease infinite;
+  @apply relative overflow-hidden transition-all duration-500 ease-in-out py-16;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* Section colors avec transitions fluides */
-section {
-  --tw-gradient-from: theme('colors.gray.900' / 5%);
-  --tw-gradient-to: theme('colors.gray.900' / 5%);
-}
-
-section#home {
-  --tw-gradient-from: theme('colors.orange.900' / 8%);
-  --tw-gradient-to: theme('colors.purple.900' / 8%);
-  /* Dégradé vers le bas pour transition avec about */
+  
+  /* Fond uniforme avec dégradé subtil */
   background: linear-gradient(
-    180deg,
-    radial-gradient(circle at 20% 80%, rgba(249, 115, 22, 0.4) 0%, transparent 60%),
-    radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.4) 0%, transparent 60%),
-    radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.3) 0%, transparent 60%),
-    radial-gradient(circle at 60% 80%, rgba(16, 185, 129, 0.3) 0%, transparent 60%),
-    linear-gradient(135deg, #0f172a 0%, #1e293b 30%, #0f172a 70%, #1e293b 100%)
+    135deg,
+    rgba(15, 23, 42, 0.95) 0%,
+    rgba(30, 41, 59, 0.98) 25%,
+    rgba(15, 23, 42, 0.95) 50%,
+    rgba(30, 41, 59, 0.98) 75%,
+    rgba(15, 23, 42, 0.95) 100%
+  );
+  
+  /* Overlay subtil pour la profondeur */
+  position: relative;
+}
+
+/* Overlay décoratif uniforme pour toutes les sections */
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 20% 20%,
+    rgba(249, 115, 22, 0.03) 0%,
+    transparent 50%
   ),
-  linear-gradient(
-    180deg,
-    rgba(249, 115, 22, 0.1) 0%,
-    rgba(168, 85, 247, 0.08) 30%,
-    rgba(59, 130, 246, 0.06) 70%,
-    rgba(59, 130, 246, 0.08) 100%
+  radial-gradient(
+    circle at 80% 80%,
+    rgba(168, 85, 247, 0.03) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 50% 50%,
+    rgba(59, 130, 246, 0.02) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Contenu au-dessus de l'overlay */
+section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Variations subtiles par section pour maintenir l'identité */
+section#home::before {
+  background: radial-gradient(
+    circle at 20% 80%,
+    rgba(249, 115, 22, 0.04) 0%,
+    transparent 60%
+  ),
+  radial-gradient(
+    circle at 80% 20%,
+    rgba(168, 85, 247, 0.04) 0%,
+    transparent 60%
   );
 }
 
-section#about {
-  --tw-gradient-from: theme('colors.blue.900' / 8%);
-  --tw-gradient-to: theme('colors.purple.900' / 8%);
-  /* Dégradé depuis le haut pour transition avec hero */
-  background: linear-gradient(
-    180deg,
-    rgba(168, 85, 247, 0.06) 0%,
-    rgba(59, 130, 246, 0.08) 30%,
-    rgba(59, 130, 246, 0.1) 70%,
-    rgba(168, 85, 247, 0.08) 100%
+section#about::before {
+  background: radial-gradient(
+    circle at 30% 70%,
+    rgba(59, 130, 246, 0.04) 0%,
+    transparent 60%
+  ),
+  radial-gradient(
+    circle at 70% 30%,
+    rgba(168, 85, 247, 0.03) 0%,
+    transparent 60%
   );
 }
 
-section#education {
-  --tw-gradient-from: theme('colors.purple.900' / 5%);
-  --tw-gradient-to: theme('colors.blue.900' / 5%);
-  background: linear-gradient(
-    180deg,
-    rgba(168, 85, 247, 0.06) 0%,
-    rgba(139, 92, 246, 0.08) 50%,
-    rgba(16, 185, 129, 0.06) 100%
+section#education::before {
+  background: radial-gradient(
+    circle at 40% 60%,
+    rgba(139, 92, 246, 0.04) 0%,
+    transparent 60%
+  ),
+  radial-gradient(
+    circle at 60% 40%,
+    rgba(59, 130, 246, 0.03) 0%,
+    transparent 60%
   );
 }
 
-section#skills {
-  --tw-gradient-from: theme('colors.green.900' / 5%);
-  --tw-gradient-to: theme('colors.emerald.900' / 5%);
-  background: linear-gradient(
-    180deg,
-    rgba(16, 185, 129, 0.06) 0%,
-    rgba(5, 150, 105, 0.08) 50%,
-    rgba(249, 115, 22, 0.06) 100%
+section#skills::before {
+  background: radial-gradient(
+    circle at 25% 75%,
+    rgba(16, 185, 129, 0.04) 0%,
+    transparent 60%
+  ),
+  radial-gradient(
+    circle at 75% 25%,
+    rgba(5, 150, 105, 0.03) 0%,
+    transparent 60%
   );
 }
 
-section#projects {
-  --tw-gradient-from: theme('colors.orange.900' / 5%);
-  --tw-gradient-to: theme('colors.red.900' / 5%);
-  background: linear-gradient(
-    180deg,
-    rgba(249, 115, 22, 0.06) 0%,
-    rgba(234, 88, 12, 0.08) 50%,
-    rgba(239, 68, 68, 0.06) 100%
+section#projects::before {
+  background: radial-gradient(
+    circle at 35% 65%,
+    rgba(249, 115, 22, 0.04) 0%,
+    transparent 60%
+  ),
+  radial-gradient(
+    circle at 65% 35%,
+    rgba(234, 88, 12, 0.03) 0%,
+    transparent 60%
   );
 }
 
 section#techwatch {
-  /* SUPPRESSION COMPLÈTE DU FOND */
-  background: none !important;
-  background-image: none !important;
-  animation: none !important;
-  --tw-gradient-from: transparent;
-  --tw-gradient-to: transparent;
-}
-
-section#contact {
-  --tw-gradient-from: theme('colors.emerald.900' / 5%);
-  --tw-gradient-to: theme('colors.green.900' / 5%);
+  /* Section spéciale avec fond plus neutre */
   background: linear-gradient(
-    180deg,
-    rgba(239, 68, 68, 0.06) 0%,
-    rgba(16, 185, 129, 0.08) 50%,
-    rgba(5, 150, 105, 0.06) 100%
+    135deg,
+    rgba(17, 24, 39, 0.98) 0%,
+    rgba(31, 41, 55, 0.99) 50%,
+    rgba(17, 24, 39, 0.98) 100%
   );
 }
 
-/* Animations */
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+section#techwatch::before {
+  background: radial-gradient(
+    circle at 45% 55%,
+    rgba(99, 102, 241, 0.03) 0%,
+    transparent 60%
+  ),
+  radial-gradient(
+    circle at 55% 45%,
+    rgba(139, 92, 246, 0.02) 0%,
+    transparent 60%
+  );
 }
 
-@keyframes blob {
-  0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-  100% { transform: translate(0px, 0px) scale(1); }
+section#contact::before {
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(16, 185, 129, 0.04) 0%,
+    transparent 60%
+  ),
+  radial-gradient(
+    circle at 50% 70%,
+    rgba(5, 150, 105, 0.03) 0%,
+    transparent 60%
+  );
 }
 
+/* Animations douces */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-10px) scale(1.02); }
+}
+
+@keyframes subtlePulse {
+  0%, 100% { opacity: 0.02; }
+  50% { opacity: 0.05; }
+}
+
+/* Animation des overlays */
+section::before {
+  animation: subtlePulse 8s ease-in-out infinite;
+}
+
+/* Animations pour les éléments flottants */
 .animate-blob {
-  animation: blob 7s infinite;
+  animation: gentleFloat 6s ease-in-out infinite;
 }
 
 .animation-delay-2000 {
