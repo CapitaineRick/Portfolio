@@ -11,72 +11,135 @@ html {
   @apply transition-all duration-300 ease-in-out;
 }
 
-/* Section styling */
+/* Section styling uniforme */
 section {
-  @apply relative overflow-hidden transition-all duration-300 ease-in-out py-16;
-  background-image: radial-gradient(
-    circle at center,
-    var(--tw-gradient-from) 0%,
-    var(--tw-gradient-to) 100%
-  );
-  background-size: 200% 200%;
-  animation: gradientMove 15s ease infinite;
+  @apply relative overflow-hidden transition-all duration-500 ease-in-out;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-/* Section colors */
-section {
-  --tw-gradient-from: theme('colors.gray.900' / 5%);
-  --tw-gradient-to: theme('colors.gray.900' / 5%);
+/* Background uniforme pour toutes les sections */
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.95) 0%,
+    rgba(30, 41, 59, 0.98) 25%,
+    rgba(15, 23, 42, 0.95) 50%,
+    rgba(30, 41, 59, 0.98) 75%,
+    rgba(15, 23, 42, 0.95) 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  z-index: -2;
 }
 
+/* Overlay coloré spécifique à chaque section */
+section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    var(--section-color-primary) 0%,
+    transparent 70%
+  ),
+  radial-gradient(
+    circle at 20% 80%,
+    var(--section-color-secondary) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 80% 20%,
+    var(--section-color-accent) 0%,
+    transparent 50%
+  );
+  opacity: 0.15;
+  background-size: 200% 200%, 150% 150%, 150% 150%;
+  animation: colorFlow 25s ease infinite;
+  z-index: -1;
+}
+
+/* Couleurs spécifiques par section */
 section#home {
-  --tw-gradient-from: theme('colors.orange.900' / 5%);
-  --tw-gradient-to: theme('colors.purple.900' / 5%);
+  --section-color-primary: rgba(249, 115, 22, 0.4);
+  --section-color-secondary: rgba(168, 85, 247, 0.3);
+  --section-color-accent: rgba(59, 130, 246, 0.2);
 }
 
 section#about {
-  --tw-gradient-from: theme('colors.blue.900' / 5%);
-  --tw-gradient-to: theme('colors.purple.900' / 5%);
+  --section-color-primary: rgba(59, 130, 246, 0.4);
+  --section-color-secondary: rgba(168, 85, 247, 0.3);
+  --section-color-accent: rgba(16, 185, 129, 0.2);
 }
 
 section#education {
-  --tw-gradient-from: theme('colors.purple.900' / 5%);
-  --tw-gradient-to: theme('colors.blue.900' / 5%);
+  --section-color-primary: rgba(168, 85, 247, 0.4);
+  --section-color-secondary: rgba(59, 130, 246, 0.3);
+  --section-color-accent: rgba(249, 115, 22, 0.2);
 }
 
 section#skills {
-  --tw-gradient-from: theme('colors.green.900' / 5%);
-  --tw-gradient-to: theme('colors.emerald.900' / 5%);
+  --section-color-primary: rgba(16, 185, 129, 0.4);
+  --section-color-secondary: rgba(5, 150, 105, 0.3);
+  --section-color-accent: rgba(59, 130, 246, 0.2);
 }
 
 section#projects {
-  --tw-gradient-from: theme('colors.orange.900' / 5%);
-  --tw-gradient-to: theme('colors.red.900' / 5%);
+  --section-color-primary: rgba(249, 115, 22, 0.4);
+  --section-color-secondary: rgba(239, 68, 68, 0.3);
+  --section-color-accent: rgba(168, 85, 247, 0.2);
 }
 
 section#techwatch {
-  /* SUPPRESSION COMPLÈTE DU FOND */
-  background: none !important;
-  background-image: none !important;
-  animation: none !important;
-  --tw-gradient-from: transparent;
-  --tw-gradient-to: transparent;
+  --section-color-primary: rgba(139, 92, 246, 0.4);
+  --section-color-secondary: rgba(168, 85, 247, 0.3);
+  --section-color-accent: rgba(59, 130, 246, 0.2);
 }
 
 section#contact {
-  --tw-gradient-from: theme('colors.emerald.900' / 5%);
-  --tw-gradient-to: theme('colors.green.900' / 5%);
+  --section-color-primary: rgba(5, 150, 105, 0.4);
+  --section-color-secondary: rgba(16, 185, 129, 0.3);
+  --section-color-accent: rgba(249, 115, 22, 0.2);
 }
 
 /* Animations */
-@keyframes gradientMove {
+@keyframes gradientShift {
   0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
   100% { background-position: 0% 50%; }
+}
+
+@keyframes colorFlow {
+  0% { 
+    background-position: 0% 50%, 0% 0%, 100% 100%;
+    opacity: 0.1;
+  }
+  33% { 
+    background-position: 100% 50%, 100% 0%, 0% 100%;
+    opacity: 0.15;
+  }
+  66% { 
+    background-position: 100% 100%, 50% 100%, 50% 0%;
+    opacity: 0.12;
+  }
+  100% { 
+    background-position: 0% 50%, 0% 0%, 100% 100%;
+    opacity: 0.1;
+  }
 }
 
 @keyframes blob {
@@ -96,6 +159,48 @@ section#contact {
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+/* Éléments flottants décoratifs */
+section .floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+section .floating-elements::before,
+section .floating-elements::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--section-color-primary), var(--section-color-secondary));
+  opacity: 0.1;
+  animation: float 15s ease-in-out infinite;
+}
+
+section .floating-elements::before {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: -10%;
+  animation-delay: 0s;
+}
+
+section .floating-elements::after {
+  width: 200px;
+  height: 200px;
+  bottom: 10%;
+  right: -5%;
+  animation-delay: 7s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
 }
 
 /* Element transitions */
@@ -129,6 +234,12 @@ img {
 
 .opacity-transition {
   @apply transition-opacity duration-300;
+}
+
+/* Contenu des sections */
+section > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* PDF Viewer Styles */

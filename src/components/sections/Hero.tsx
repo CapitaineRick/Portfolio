@@ -217,21 +217,15 @@ const Hero: React.FC = () => {
     <section 
       id="home" 
       className="h-screen flex items-center justify-center relative overflow-hidden"
-      style={{
-        background: `
-          radial-gradient(circle at 20% 80%, rgba(249, 115, 22, 0.4) 0%, transparent 60%),
-          radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.4) 0%, transparent 60%),
-          radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.3) 0%, transparent 60%),
-          radial-gradient(circle at 60% 80%, rgba(16, 185, 129, 0.3) 0%, transparent 60%),
-          linear-gradient(135deg, #0f172a 0%, #1e293b 30%, #0f172a 70%, #1e293b 100%)
-        `
-      }}
     >
+      {/* Éléments flottants décoratifs */}
+      <div className="floating-elements"></div>
+
       {/* Canvas de particules */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 opacity-70"
-        style={{ zIndex: 1 }}
+        style={{ zIndex: 2 }}
       />
 
       {/* Contenu principal centré */}

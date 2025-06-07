@@ -10,6 +10,14 @@ const Education: React.FC = () => {
         if (entry.isIntersecting) {
           entry.target.classList.add('opacity-100', 'translate-y-0');
           entry.target.classList.remove('opacity-0', 'translate-y-10');
+          
+          const skills = entry.target.querySelectorAll('.skill-category');
+          skills.forEach((skill, index) => {
+            setTimeout(() => {
+              skill.classList.add('opacity-100', 'translate-y-0');
+              skill.classList.remove('opacity-0', 'translate-y-10');
+            }, 150 * index);
+          });
         }
       },
       { threshold: 0.1 }
@@ -27,13 +35,9 @@ const Education: React.FC = () => {
   }, []);
 
   return (
-    <section id="education" className="py-16 bg-gray-900 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 -left-4 w-72 h-72 bg-orange-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
-        <div className="absolute -bottom-8 -right-4 w-72 h-72 bg-blue-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
-        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-purple-500/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000" />
-      </div>
+    <section id="education" className="py-16 md:py-24 relative overflow-hidden">
+      {/* Éléments flottants décoratifs */}
+      <div className="floating-elements"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">

@@ -40,7 +40,10 @@ const TechWatch: React.FC = () => {
   }, []);
 
   return (
-    <section id="techwatch" className="py-16 md:py-24 bg-gray-900">
+    <section id="techwatch" className="py-16 md:py-24 relative overflow-hidden">
+      {/* Éléments flottants décoratifs */}
+      <div className="floating-elements"></div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
