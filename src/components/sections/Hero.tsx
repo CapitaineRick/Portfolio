@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
     setTimeout(() => setIsVisible(true), 500);
   }, []);
 
-  // Système de particules avec évitement de la souris
+  // Système de particules propre sans traînées
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -32,7 +32,6 @@ const Hero: React.FC = () => {
       life: number;
       maxLife: number;
       pulse: number;
-      trail: Array<{ x: number; y: number; age: number }>;
       baseVx: number;
       baseVy: number;
     }> = [];
@@ -51,8 +50,8 @@ const Hero: React.FC = () => {
     canvas.addEventListener('mousemove', handleMouseMove);
 
     function createParticle(x: number, y: number) {
-      const baseVx = (Math.random() - 0.5) * 2;
-      const baseVy = (Math.random() - 0.5) * 2;
+      const baseVx = (Math.random() - 0.5) * 1.5;
+      const baseVy = (Math.random() - 0.5) * 1.5;
       
       particles.push({
         x,
@@ -61,24 +60,22 @@ const Hero: React.FC = () => {
         vy: baseVy,
         baseVx,
         baseVy,
-        size: Math.random() * 4 + 2,
+        size: Math.random() * 3 + 1.5,
         color: colors[Math.floor(Math.random() * colors.length)],
         life: 0,
-        maxLife: Math.random() * 120 + 80,
-        pulse: Math.random() * Math.PI * 2,
-        trail: []
+        maxLife: Math.random() * 150 + 100,
+        pulse: Math.random() * Math.PI * 2
       });
     }
 
     function animate() {
       if (!ctx || !canvas) return;
       
-      // Effacement progressif du canvas pour créer l'effet de traînée qui s'estompe
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Effacement complet du canvas pour un effet propre
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Créer des particules aléatoirement
-      if (Math.random() < 0.3) {
+      if (Math.random() < 0.2) {
         createParticle(Math.random() * canvas.width, Math.random() * canvas.height);
       }
 
@@ -90,9 +87,9 @@ const Hero: React.FC = () => {
         const dx = mousePos.current.x - p.x;
         const dy = mousePos.current.y - p.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        const avoidanceRadius = 100; // Rayon d'évitement
+        const avoidanceRadius = 120;
         
-        // Force d'évitement
+        // Force d'évitement douce
         let avoidanceForceX = 0;
         let avoidanceForceY = 0;
         
@@ -101,80 +98,56 @@ const Hero: React.FC = () => {
           const angle = Math.atan2(dy, dx);
           
           // Force qui repousse la particule de la souris
-          avoidanceForceX = -Math.cos(angle) * force * 3;
-          avoidanceForceY = -Math.sin(angle) * force * 3;
+          avoidanceForceX = -Math.cos(angle) * force * 2;
+          avoidanceForceY = -Math.sin(angle) * force * 2;
         }
         
-        // Application des forces
+        // Application des forces avec retour progressif
         p.vx = p.baseVx + avoidanceForceX;
         p.vy = p.baseVy + avoidanceForceY;
         
         // Limitation de la vitesse
-        const maxSpeed = 5;
+        const maxSpeed = 3;
         const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
         if (speed > maxSpeed) {
           p.vx = (p.vx / speed) * maxSpeed;
           p.vy = (p.vy / speed) * maxSpeed;
         }
         
-        // Ajouter la position actuelle à la traînée
-        p.trail.push({ x: p.x, y: p.y, age: 0 });
-        
-        // Limiter la longueur de la traînée et vieillir les points
-        if (p.trail.length > 15) {
-          p.trail.shift();
-        }
-        
-        // Vieillir tous les points de la traînée
-        p.trail.forEach(point => point.age++);
-        
         // Mettre à jour la position
         p.x += p.vx;
         p.y += p.vy;
         p.life++;
-        p.pulse += 0.1;
+        p.pulse += 0.08;
 
         // Rebond sur les bords
         if (p.x < 0 || p.x > canvas.width) {
-          p.vx *= -1;
-          p.baseVx *= -1;
+          p.vx *= -0.8;
+          p.baseVx *= -0.8;
           p.x = Math.max(0, Math.min(canvas.width, p.x));
         }
         if (p.y < 0 || p.y > canvas.height) {
-          p.vy *= -1;
-          p.baseVy *= -1;
+          p.vy *= -0.8;
+          p.baseVy *= -0.8;
           p.y = Math.max(0, Math.min(canvas.height, p.y));
         }
 
-        // Dessiner la traînée avec effet de fondu
-        for (let j = 0; j < p.trail.length; j++) {
-          const trailPoint = p.trail[j];
-          const trailAlpha = (1 - (trailPoint.age / 15)) * (1 - (p.life / p.maxLife)) * 0.6;
-          const trailSize = p.size * (1 - (trailPoint.age / 15)) * 0.7;
-          
-          if (trailAlpha > 0.01) {
-            ctx.globalAlpha = trailAlpha;
-            ctx.fillStyle = p.color;
-            ctx.beginPath();
-            ctx.arc(trailPoint.x, trailPoint.y, trailSize, 0, Math.PI * 2);
-            ctx.fill();
-          }
-        }
-
-        // Dessiner la particule principale
-        const alpha = Math.sin(p.pulse) * 0.3 + 0.7 * (1 - (p.life / p.maxLife));
-        const size = p.size * (Math.sin(p.pulse * 0.5) * 0.3 + 1);
+        // Dessiner la particule avec effet de pulsation
+        const lifeRatio = 1 - (p.life / p.maxLife);
+        const alpha = (Math.sin(p.pulse) * 0.3 + 0.7) * lifeRatio;
+        const size = p.size * (Math.sin(p.pulse * 0.5) * 0.2 + 1) * lifeRatio;
         
+        // Particule principale
         ctx.globalAlpha = alpha;
         ctx.fillStyle = p.color;
         ctx.beginPath();
         ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Effet de lueur autour de la particule
-        ctx.globalAlpha = alpha * 0.3;
+        // Effet de lueur subtil
+        ctx.globalAlpha = alpha * 0.2;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, size * 2, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, size * 1.8, 0, Math.PI * 2);
         ctx.fill();
 
         // Supprimer les particules mortes
@@ -226,7 +199,7 @@ const Hero: React.FC = () => {
       {/* Canvas de particules */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 opacity-70"
+        className="absolute inset-0 opacity-60"
         style={{ zIndex: 1 }}
       />
 
