@@ -41,6 +41,30 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const buttonRef = useRef<HTMLButtonElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
+  // Gestion du scroll et de la touche Échap
+  useEffect(() => {
+    if (showFullscreen) {
+      // Bloquer le scroll de la page principale
+      document.body.style.overflow = 'hidden';
+      
+      // Gestionnaire pour la touche Échap
+      const handleEscape = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          setShowFullscreen(false);
+          setSelectedDocument(null);
+        }
+      };
+
+      document.addEventListener('keydown', handleEscape);
+
+      return () => {
+        // Restaurer le scroll et supprimer l'écouteur
+        document.body.style.overflow = 'unset';
+        document.removeEventListener('keydown', handleEscape);
+      };
+    }
+  }, [showFullscreen]);
+
   useEffect(() => {
     const updateDropdownPosition = () => {
       if (buttonRef.current && showDropdown) {
@@ -134,6 +158,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       link.click();
       document.body.removeChild(link);
     }
+  };
+
+  const handleCloseModal = () => {
+    setShowFullscreen(false);
+    setSelectedDocument(null);
   };
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
@@ -319,11 +348,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   <Download size={20} />
                 </button>
                 <button
-                  onClick={() => {
-                    setShowFullscreen(false);
-                    setSelectedDocument(null);
-                  }}
+                  onClick={handleCloseModal}
                   className="p-2 rounded-xl bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors"
+                  title="Fermer (Échap)"
                 >
                   <X size={20} />
                 </button>
