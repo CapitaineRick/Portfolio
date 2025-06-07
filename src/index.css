@@ -2,54 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base styles */
-html {
-  scroll-behavior: smooth;
-}
-
+/* Reset complet pour éliminer toutes les fractures */
 * {
-  @apply transition-all duration-300 ease-in-out;
-}
-
-/* Section styling uniforme et détendu - SANS FRACTURES */
-section {
-  @apply relative overflow-hidden transition-all duration-500 ease-in-out;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  /* SUPPRESSION COMPLÈTE DES MARGES ET PADDING */
-  margin: 0;
-  padding: 4rem 0; /* Padding interne seulement */
-  
-  /* Fond uniforme avec dégradé subtil */
-  background: linear-gradient(
-    135deg,
-    rgba(15, 23, 42, 0.95) 0%,
-    rgba(30, 41, 59, 0.98) 25%,
-    rgba(15, 23, 42, 0.95) 50%,
-    rgba(30, 41, 59, 0.98) 75%,
-    rgba(15, 23, 42, 0.95) 100%
-  );
-  
-  /* Overlay subtil pour la profondeur */
-  position: relative;
-}
-
-/* SUPPRESSION DES GAPS ENTRE SECTIONS */
-body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Layout principal sans gaps */
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
   margin: 0;
   padding: 0;
   display: block;
+  flex: 1;
 }
 
-/* Overlay décoratif uniforme pour toutes les sections */
+/* Sections parfaitement continues */
+section {
+  /* SUPPRESSION TOTALE DES MARGES ET BORDURES */
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  
+  /* Dimensions et positionnement */
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  
+  /* Fond uniforme pour toutes les sections */
+  background: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #1e293b 25%,
+    #0f172a 50%,
+    #1e293b 75%,
+    #0f172a 100%
+  );
+  
+  /* Transitions douces */
+  transition: all 0.5s ease-in-out;
+}
+
+/* Contenu des sections avec padding interne */
+section > div {
+  width: 100%;
+  padding: 4rem 1rem;
+  max-width: 100%;
+}
+
+/* Overlays décoratifs subtils par section */
 section::before {
   content: '';
   position: absolute;
@@ -57,23 +76,10 @@ section::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(
-    circle at 20% 20%,
-    rgba(249, 115, 22, 0.03) 0%,
-    transparent 50%
-  ),
-  radial-gradient(
-    circle at 80% 80%,
-    rgba(168, 85, 247, 0.03) 0%,
-    transparent 50%
-  ),
-  radial-gradient(
-    circle at 50% 50%,
-    rgba(59, 130, 246, 0.02) 0%,
-    transparent 60%
-  );
   pointer-events: none;
   z-index: 0;
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
 }
 
 /* Contenu au-dessus de l'overlay */
@@ -82,16 +88,16 @@ section > * {
   z-index: 1;
 }
 
-/* Variations subtiles par section pour maintenir l'identité */
+/* Variations subtiles par section */
 section#home::before {
   background: radial-gradient(
     circle at 20% 80%,
-    rgba(249, 115, 22, 0.04) 0%,
+    rgba(249, 115, 22, 0.08) 0%,
     transparent 60%
   ),
   radial-gradient(
     circle at 80% 20%,
-    rgba(168, 85, 247, 0.04) 0%,
+    rgba(168, 85, 247, 0.08) 0%,
     transparent 60%
   );
 }
@@ -99,12 +105,12 @@ section#home::before {
 section#about::before {
   background: radial-gradient(
     circle at 30% 70%,
-    rgba(59, 130, 246, 0.04) 0%,
+    rgba(59, 130, 246, 0.08) 0%,
     transparent 60%
   ),
   radial-gradient(
     circle at 70% 30%,
-    rgba(168, 85, 247, 0.03) 0%,
+    rgba(168, 85, 247, 0.06) 0%,
     transparent 60%
   );
 }
@@ -112,12 +118,12 @@ section#about::before {
 section#education::before {
   background: radial-gradient(
     circle at 40% 60%,
-    rgba(139, 92, 246, 0.04) 0%,
+    rgba(139, 92, 246, 0.08) 0%,
     transparent 60%
   ),
   radial-gradient(
     circle at 60% 40%,
-    rgba(59, 130, 246, 0.03) 0%,
+    rgba(59, 130, 246, 0.06) 0%,
     transparent 60%
   );
 }
@@ -125,12 +131,12 @@ section#education::before {
 section#skills::before {
   background: radial-gradient(
     circle at 25% 75%,
-    rgba(16, 185, 129, 0.04) 0%,
+    rgba(16, 185, 129, 0.08) 0%,
     transparent 60%
   ),
   radial-gradient(
     circle at 75% 25%,
-    rgba(5, 150, 105, 0.03) 0%,
+    rgba(5, 150, 105, 0.06) 0%,
     transparent 60%
   );
 }
@@ -138,35 +144,25 @@ section#skills::before {
 section#projects::before {
   background: radial-gradient(
     circle at 35% 65%,
-    rgba(249, 115, 22, 0.04) 0%,
+    rgba(249, 115, 22, 0.08) 0%,
     transparent 60%
   ),
   radial-gradient(
     circle at 65% 35%,
-    rgba(234, 88, 12, 0.03) 0%,
+    rgba(234, 88, 12, 0.06) 0%,
     transparent 60%
-  );
-}
-
-section#techwatch {
-  /* Section spéciale avec fond plus neutre */
-  background: linear-gradient(
-    135deg,
-    rgba(17, 24, 39, 0.98) 0%,
-    rgba(31, 41, 55, 0.99) 50%,
-    rgba(17, 24, 39, 0.98) 100%
   );
 }
 
 section#techwatch::before {
   background: radial-gradient(
     circle at 45% 55%,
-    rgba(99, 102, 241, 0.03) 0%,
+    rgba(99, 102, 241, 0.06) 0%,
     transparent 60%
   ),
   radial-gradient(
     circle at 55% 45%,
-    rgba(139, 92, 246, 0.02) 0%,
+    rgba(139, 92, 246, 0.04) 0%,
     transparent 60%
   );
 }
@@ -174,35 +170,34 @@ section#techwatch::before {
 section#contact::before {
   background: radial-gradient(
     circle at 50% 30%,
-    rgba(16, 185, 129, 0.04) 0%,
+    rgba(16, 185, 129, 0.08) 0%,
     transparent 60%
   ),
   radial-gradient(
     circle at 50% 70%,
-    rgba(5, 150, 105, 0.03) 0%,
+    rgba(5, 150, 105, 0.06) 0%,
     transparent 60%
   );
 }
 
-/* Animations douces */
-@keyframes gentleFloat {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-10px) scale(1.02); }
+/* Animation des overlays */
+section::before {
+  animation: subtlePulse 12s ease-in-out infinite;
 }
 
 @keyframes subtlePulse {
-  0%, 100% { opacity: 0.02; }
-  50% { opacity: 0.05; }
-}
-
-/* Animation des overlays */
-section::before {
-  animation: subtlePulse 8s ease-in-out infinite;
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
 }
 
 /* Animations pour les éléments flottants */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-8px) scale(1.01); }
+}
+
 .animate-blob {
-  animation: gentleFloat 6s ease-in-out infinite;
+  animation: gentleFloat 8s ease-in-out infinite;
 }
 
 .animation-delay-2000 {
@@ -211,6 +206,22 @@ section::before {
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+/* Navbar fixe sans affecter les sections */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+}
+
+/* Footer sans marge */
+footer {
+  margin: 0;
+  padding: 2rem 0;
+  background: #0f172a;
 }
 
 /* Element transitions */
