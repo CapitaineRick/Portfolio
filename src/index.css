@@ -27,35 +27,77 @@ section {
   justify-content: center;
 }
 
-/* Section colors */
+/* Section colors avec transitions fluides */
 section {
   --tw-gradient-from: theme('colors.gray.900' / 5%);
   --tw-gradient-to: theme('colors.gray.900' / 5%);
 }
 
 section#home {
-  --tw-gradient-from: theme('colors.orange.900' / 5%);
-  --tw-gradient-to: theme('colors.purple.900' / 5%);
+  --tw-gradient-from: theme('colors.orange.900' / 8%);
+  --tw-gradient-to: theme('colors.purple.900' / 8%);
+  /* Dégradé vers le bas pour transition avec about */
+  background: linear-gradient(
+    180deg,
+    radial-gradient(circle at 20% 80%, rgba(249, 115, 22, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.3) 0%, transparent 60%),
+    radial-gradient(circle at 60% 80%, rgba(16, 185, 129, 0.3) 0%, transparent 60%),
+    linear-gradient(135deg, #0f172a 0%, #1e293b 30%, #0f172a 70%, #1e293b 100%)
+  ),
+  linear-gradient(
+    180deg,
+    rgba(249, 115, 22, 0.1) 0%,
+    rgba(168, 85, 247, 0.08) 30%,
+    rgba(59, 130, 246, 0.06) 70%,
+    rgba(59, 130, 246, 0.08) 100%
+  );
 }
 
 section#about {
-  --tw-gradient-from: theme('colors.blue.900' / 5%);
-  --tw-gradient-to: theme('colors.purple.900' / 5%);
+  --tw-gradient-from: theme('colors.blue.900' / 8%);
+  --tw-gradient-to: theme('colors.purple.900' / 8%);
+  /* Dégradé depuis le haut pour transition avec hero */
+  background: linear-gradient(
+    180deg,
+    rgba(168, 85, 247, 0.06) 0%,
+    rgba(59, 130, 246, 0.08) 30%,
+    rgba(59, 130, 246, 0.1) 70%,
+    rgba(168, 85, 247, 0.08) 100%
+  );
 }
 
 section#education {
   --tw-gradient-from: theme('colors.purple.900' / 5%);
   --tw-gradient-to: theme('colors.blue.900' / 5%);
+  background: linear-gradient(
+    180deg,
+    rgba(168, 85, 247, 0.06) 0%,
+    rgba(139, 92, 246, 0.08) 50%,
+    rgba(16, 185, 129, 0.06) 100%
+  );
 }
 
 section#skills {
   --tw-gradient-from: theme('colors.green.900' / 5%);
   --tw-gradient-to: theme('colors.emerald.900' / 5%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 185, 129, 0.06) 0%,
+    rgba(5, 150, 105, 0.08) 50%,
+    rgba(249, 115, 22, 0.06) 100%
+  );
 }
 
 section#projects {
   --tw-gradient-from: theme('colors.orange.900' / 5%);
   --tw-gradient-to: theme('colors.red.900' / 5%);
+  background: linear-gradient(
+    180deg,
+    rgba(249, 115, 22, 0.06) 0%,
+    rgba(234, 88, 12, 0.08) 50%,
+    rgba(239, 68, 68, 0.06) 100%
+  );
 }
 
 section#techwatch {
@@ -70,6 +112,12 @@ section#techwatch {
 section#contact {
   --tw-gradient-from: theme('colors.emerald.900' / 5%);
   --tw-gradient-to: theme('colors.green.900' / 5%);
+  background: linear-gradient(
+    180deg,
+    rgba(239, 68, 68, 0.06) 0%,
+    rgba(16, 185, 129, 0.08) 50%,
+    rgba(5, 150, 105, 0.06) 100%
+  );
 }
 
 /* Animations */
