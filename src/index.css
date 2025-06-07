@@ -11,13 +11,17 @@ html {
   @apply transition-all duration-300 ease-in-out;
 }
 
-/* Section styling uniforme et détendu */
+/* Section styling uniforme et détendu - SANS FRACTURES */
 section {
-  @apply relative overflow-hidden transition-all duration-500 ease-in-out py-16;
+  @apply relative overflow-hidden transition-all duration-500 ease-in-out;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  /* SUPPRESSION COMPLÈTE DES MARGES ET PADDING */
+  margin: 0;
+  padding: 4rem 0; /* Padding interne seulement */
   
   /* Fond uniforme avec dégradé subtil */
   background: linear-gradient(
@@ -31,6 +35,18 @@ section {
   
   /* Overlay subtil pour la profondeur */
   position: relative;
+}
+
+/* SUPPRESSION DES GAPS ENTRE SECTIONS */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin: 0;
+  padding: 0;
+  display: block;
 }
 
 /* Overlay décoratif uniforme pour toutes les sections */
