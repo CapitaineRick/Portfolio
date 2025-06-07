@@ -1,49 +1,52 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Send, Mail, Linkedin, File } from 'lucide-react';
-import emailjs from '@emailjs/browser';
+import React, { useEffect, useRef, useState } from "react";
+import { Send, Mail, Linkedin, File } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const Contact: React.FC = () => {
   const contactRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
-  const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
+    "idle"
+  );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-
-const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  
-  emailjs.send(
-    'service_krdwbss',
-    'template_uvldull',
-    formData,
-    'CFXC5Rk1dCMIux3BE'
-  ).then(() => {
-    setFormStatus('success');
-    setFormData({ name: '', email: '', message: '' });
-    setTimeout(() => setFormStatus('idle'), 3000);
-  }).catch(() => {
-    setFormStatus('error');
-    setTimeout(() => setFormStatus('idle'), 3000);
-  });
-};
-
-
+    emailjs
+      .send(
+        "service_krdwbss",
+        "template_uvldull",
+        formData,
+        "CFXC5Rk1dCMIux3BE"
+      )
+      .then(() => {
+        setFormStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setFormStatus("idle"), 3000);
+      })
+      .catch(() => {
+        setFormStatus("error");
+        setTimeout(() => setFormStatus("idle"), 3000);
+      });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
+          entry.target.classList.add("opacity-100", "translate-y-0");
+          entry.target.classList.remove("opacity-0", "translate-y-10");
         }
       },
       { threshold: 0.1 }
@@ -69,11 +72,12 @@ const handleSubmit = (e: React.FormEvent) => {
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
           <p className="text-lg text-gray-300 max-w-3xl mx-auto font-medium">
-            N'hésitez pas à me contacter pour toute opportunité professionnelle ou collaboration technique
+            N'hésitez pas à me contacter pour toute opportunité professionnelle
+            ou collaboration technique
           </p>
         </div>
-        
-        <div 
+
+        <div
           ref={contactRef}
           className="transition-all duration-300 opacity-0 translate-y-10"
         >
@@ -82,14 +86,20 @@ const handleSubmit = (e: React.FormEvent) => {
               <div className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-gray-800 rounded-2xl p-8">
-                  <h3 className="text-2xl font-semibold mb-4 text-white">Envoyez-moi un message</h3>
+                  <h3 className="text-2xl font-semibold mb-4 text-white">
+                    Envoyez-moi un message
+                  </h3>
                   <p className="mb-6 text-gray-300">
-                    Je suis à l'écoute de vos propositions de stage, d'alternance ou de collaboration technique.
+                    Je suis à l'écoute de vos propositions de stage,
+                    d'alternance ou de collaboration technique.
                   </p>
-                  
+
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium text-gray-300 mb-1"
+                      >
                         Nom
                       </label>
                       <input
@@ -106,9 +116,12 @@ const handleSubmit = (e: React.FormEvent) => {
                                 transition-all duration-300"
                       />
                     </div>
-                    
+
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-300 mb-1"
+                      >
                         Email
                       </label>
                       <input
@@ -125,9 +138,12 @@ const handleSubmit = (e: React.FormEvent) => {
                                 transition-all duration-300"
                       />
                     </div>
-                    
+
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
+                      <label
+                        htmlFor="message"
+                        className="block text-sm font-medium text-gray-300 mb-1"
+                      >
                         Message
                       </label>
                       <textarea
@@ -144,22 +160,23 @@ const handleSubmit = (e: React.FormEvent) => {
                                 transition-all duration-300"
                       />
                     </div>
-                    
+
                     <button
                       type="submit"
                       className={`w-full py-3 px-6 flex items-center justify-center rounded-xl
                               text-white font-medium transition-all duration-300
-                              ${formStatus === 'success' 
-                                ? 'bg-green-500 hover:bg-green-600' 
-                                : formStatus === 'error'
-                                  ? 'bg-red-500 hover:bg-red-600'
-                                  : 'bg-gradient-to-r from-orange-500 to-purple-500 hover:opacity-90'
+                              ${
+                                formStatus === "success"
+                                  ? "bg-green-500 hover:bg-green-600"
+                                  : formStatus === "error"
+                                  ? "bg-red-500 hover:bg-red-600"
+                                  : "bg-gradient-to-r from-orange-500 to-purple-500 hover:opacity-90"
                               }`}
                     >
-                      {formStatus === 'success' ? (
-                        'Message envoyé !'
-                      ) : formStatus === 'error' ? (
-                        'Erreur, veuillez réessayer'
+                      {formStatus === "success" ? (
+                        "Message envoyé !"
+                      ) : formStatus === "error" ? (
+                        "Erreur, veuillez réessayer"
                       ) : (
                         <>
                           <Send className="mr-2" size={18} />
@@ -171,24 +188,29 @@ const handleSubmit = (e: React.FormEvent) => {
                 </div>
               </div>
             </div>
-            
+
             <div className="md:w-1/2">
               <div className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-gray-800 rounded-2xl p-8">
-                  <h3 className="text-2xl font-semibold mb-4 text-white">Informations de contact</h3>
+                  <h3 className="text-2xl font-semibold mb-4 text-white">
+                    Informations de contact
+                  </h3>
                   <p className="mb-6 text-gray-300">
-                    Vous pouvez également me contacter directement via les coordonnées ci-dessous.
+                    Vous pouvez également me contacter directement via les
+                    coordonnées ci-dessous.
                   </p>
-                  
+
                   <div className="space-y-6">
                     <div className="flex items-start">
                       <div className="bg-orange-900/30 p-3 rounded-xl mr-4">
                         <Mail className="text-orange-500" size={24} />
                       </div>
                       <div>
-                        <h4 className="text-lg font-medium text-white">Email</h4>
-                        <a 
+                        <h4 className="text-lg font-medium text-white">
+                          Email
+                        </h4>
+                        <a
                           href="mailto:sebastien.78.fernandes@outlook.fr"
                           className="text-orange-400 hover:underline"
                         >
@@ -196,14 +218,16 @@ const handleSubmit = (e: React.FormEvent) => {
                         </a>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-start">
                       <div className="bg-orange-900/30 p-3 rounded-xl mr-4">
                         <Linkedin className="text-orange-500" size={24} />
                       </div>
                       <div>
-                        <h4 className="text-lg font-medium text-white">LinkedIn</h4>
-                        <a 
+                        <h4 className="text-lg font-medium text-white">
+                          LinkedIn
+                        </h4>
+                        <a
                           href="https://www.linkedin.com/in/s%C3%A9bastien-fernandes-566008232/"
                           target="_blank"
                           rel="noopener noreferrer"
@@ -213,21 +237,22 @@ const handleSubmit = (e: React.FormEvent) => {
                         </a>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-start">
                       <div className="bg-orange-900/30 p-3 rounded-xl mr-4">
                         <File className="text-orange-500" size={24} />
                       </div>
                       <div>
-                        <h4 className="text-lg font-medium text-white">Mon CV</h4>
-                  <a
-                    href="/public/docs/fernandes-sebastien-cv.pdf"
-                    download
-                    className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
-                  >
-                    
-                    Télécharger mon CV
-                  </a>
+                        <h4 className="text-lg font-medium text-white">
+                          Mon CV
+                        </h4>
+                        <a
+                          href="/public/docs/fernandes-sebastien-cv.pdf"
+                          download
+                          className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                        >
+                          Télécharger mon CV
+                        </a>
                       </div>
                     </div>
                   </div>

@@ -121,7 +121,7 @@ const Hero: React.FC = () => {
         p.trail.push({ x: p.x, y: p.y, age: 0 });
         
         // Limiter la longueur de la traînée et vieillir les points
-        if (p.trail.length > 15) {
+        if (p.trail.length > 30) {
           p.trail.shift();
         }
         
@@ -144,21 +144,6 @@ const Hero: React.FC = () => {
           p.vy *= -1;
           p.baseVy *= -1;
           p.y = Math.max(0, Math.min(canvas.height, p.y));
-        }
-
-        // Dessiner la traînée avec effet de fondu
-        for (let j = 0; j < p.trail.length; j++) {
-          const trailPoint = p.trail[j];
-          const trailAlpha = (1 - (trailPoint.age / 15)) * (1 - (p.life / p.maxLife)) * 0.6;
-          const trailSize = p.size * (1 - (trailPoint.age / 15)) * 0.7;
-          
-          if (trailAlpha > 0.01) {
-            ctx.globalAlpha = trailAlpha;
-            ctx.fillStyle = p.color;
-            ctx.beginPath();
-            ctx.arc(trailPoint.x, trailPoint.y, trailSize, 0, Math.PI * 2);
-            ctx.fill();
-          }
         }
 
         // Dessiner la particule principale
