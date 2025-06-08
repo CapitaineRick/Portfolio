@@ -1,52 +1,45 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Send, Mail, Linkedin, File } from "lucide-react";
-import emailjs from "@emailjs/browser";
+import React, { useEffect, useRef, useState } from 'react';
+import { Send, Mail, Linkedin, File } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const contactRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+    name: '',
+    email: '',
+    message: ''
   });
-  const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
-    "idle"
-  );
+  const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    emailjs
-      .send(
-        "service_krdwbss",
-        "template_uvldull",
-        formData,
-        "CFXC5Rk1dCMIux3BE"
-      )
-      .then(() => {
-        setFormStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setFormStatus("idle"), 3000);
-      })
-      .catch(() => {
-        setFormStatus("error");
-        setTimeout(() => setFormStatus("idle"), 3000);
-      });
+    
+    emailjs.send(
+      'service_krdwbss',
+      'template_uvldull',
+      formData,
+      'CFXC5Rk1dCMIux3BE'
+    ).then(() => {
+      setFormStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setFormStatus('idle'), 3000);
+    }).catch(() => {
+      setFormStatus('error');
+      setTimeout(() => setFormStatus('idle'), 3000);
+    });
   };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("opacity-100", "translate-y-0");
-          entry.target.classList.remove("opacity-0", "translate-y-10");
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          entry.target.classList.remove('opacity-0', 'translate-y-10');
         }
       },
       { threshold: 0.1 }
@@ -64,42 +57,35 @@ const Contact: React.FC = () => {
   }, []);
 
   return (
-    <section id="contact" className="py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-purple-600">
+    <section id="contact" className="py-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-purple-500">
             Contact
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto font-medium">
-            N'hésitez pas à me contacter pour toute opportunité professionnelle
-            ou collaboration technique
+          <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-8 rounded-full"></div>
+          <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            N'hésitez pas à me contacter pour toute opportunité professionnelle ou collaboration technique
           </p>
         </div>
-
-        <div
+        
+        <div 
           ref={contactRef}
           className="transition-all duration-300 opacity-0 translate-y-10"
         >
-          <div className="flex flex-col md:flex-row gap-8">
+          <div className="flex flex-col md:flex-row gap-12">
             <div className="md:w-1/2">
               <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative bg-gray-800 rounded-2xl p-8">
-                  <h3 className="text-2xl font-semibold mb-4 text-white">
-                    Envoyez-moi un message
-                  </h3>
-                  <p className="mb-6 text-gray-300">
-                    Je suis à l'écoute de vos propositions de stage,
-                    d'alternance ou de collaboration technique.
+                <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <div className="relative bg-gray-800 rounded-3xl p-10 border border-gray-700">
+                  <h3 className="text-3xl font-bold mb-6 text-white">Envoyez-moi un message</h3>
+                  <p className="mb-8 text-gray-300 text-lg leading-relaxed">
+                    Je suis à l'écoute de vos propositions de stage, d'alternance ou de collaboration technique.
                   </p>
-
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  
+                  <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                      <label
-                        htmlFor="name"
-                        className="block text-sm font-medium text-gray-300 mb-1"
-                      >
+                      <label htmlFor="name" className="block text-base font-semibold text-gray-300 mb-2">
                         Nom
                       </label>
                       <input
@@ -109,19 +95,17 @@ const Contact: React.FC = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full p-3 border border-gray-600 rounded-xl
-                                bg-gray-700 text-white
+                        className="w-full p-4 border border-gray-600 rounded-2xl
+                                bg-gray-700 text-white text-base
                                 focus:ring-2 focus:ring-orange-500 focus:border-transparent
                                 placeholder-gray-400
                                 transition-all duration-300"
+                        placeholder="Votre nom complet"
                       />
                     </div>
-
+                    
                     <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-300 mb-1"
-                      >
+                      <label htmlFor="email" className="block text-base font-semibold text-gray-300 mb-2">
                         Email
                       </label>
                       <input
@@ -131,19 +115,17 @@ const Contact: React.FC = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full p-3 border border-gray-600 rounded-xl
-                                bg-gray-700 text-white
+                        className="w-full p-4 border border-gray-600 rounded-2xl
+                                bg-gray-700 text-white text-base
                                 focus:ring-2 focus:ring-orange-500 focus:border-transparent
                                 placeholder-gray-400
                                 transition-all duration-300"
+                        placeholder="votre.email@exemple.com"
                       />
                     </div>
-
+                    
                     <div>
-                      <label
-                        htmlFor="message"
-                        className="block text-sm font-medium text-gray-300 mb-1"
-                      >
+                      <label htmlFor="message" className="block text-base font-semibold text-gray-300 mb-2">
                         Message
                       </label>
                       <textarea
@@ -152,35 +134,35 @@ const Contact: React.FC = () => {
                         value={formData.message}
                         onChange={handleChange}
                         required
-                        rows={5}
-                        className="w-full p-3 border border-gray-600 rounded-xl
-                                bg-gray-700 text-white
+                        rows={6}
+                        className="w-full p-4 border border-gray-600 rounded-2xl
+                                bg-gray-700 text-white text-base
                                 focus:ring-2 focus:ring-orange-500 focus:border-transparent
                                 placeholder-gray-400
-                                transition-all duration-300"
+                                transition-all duration-300 resize-none"
+                        placeholder="Décrivez votre projet ou votre demande..."
                       />
                     </div>
-
+                    
                     <button
                       type="submit"
-                      className={`w-full py-3 px-6 flex items-center justify-center rounded-xl
-                              text-white font-medium transition-all duration-300
-                              ${
-                                formStatus === "success"
-                                  ? "bg-green-500 hover:bg-green-600"
-                                  : formStatus === "error"
-                                  ? "bg-red-500 hover:bg-red-600"
-                                  : "bg-gradient-to-r from-orange-500 to-purple-500 hover:opacity-90"
+                      className={`w-full py-4 px-8 flex items-center justify-center rounded-2xl
+                              text-white font-bold text-lg transition-all duration-300 shadow-lg
+                              ${formStatus === 'success' 
+                                ? 'bg-green-500 hover:bg-green-600' 
+                                : formStatus === 'error'
+                                  ? 'bg-red-500 hover:bg-red-600'
+                                  : 'bg-gradient-to-r from-orange-500 to-purple-500 hover:opacity-90 hover:scale-105'
                               }`}
                     >
-                      {formStatus === "success" ? (
-                        "Message envoyé !"
-                      ) : formStatus === "error" ? (
-                        "Erreur, veuillez réessayer"
+                      {formStatus === 'success' ? (
+                        'Message envoyé avec succès !'
+                      ) : formStatus === 'error' ? (
+                        'Erreur, veuillez réessayer'
                       ) : (
                         <>
-                          <Send className="mr-2" size={18} />
-                          Envoyer
+                          <Send className="mr-3" size={20} />
+                          Envoyer le message
                         </>
                       )}
                     </button>
@@ -188,69 +170,61 @@ const Contact: React.FC = () => {
                 </div>
               </div>
             </div>
-
+            
             <div className="md:w-1/2">
               <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative bg-gray-800 rounded-2xl p-8">
-                  <h3 className="text-2xl font-semibold mb-4 text-white">
-                    Informations de contact
-                  </h3>
-                  <p className="mb-6 text-gray-300">
-                    Vous pouvez également me contacter directement via les
-                    coordonnées ci-dessous.
+                <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <div className="relative bg-gray-800 rounded-3xl p-10 border border-gray-700">
+                  <h3 className="text-3xl font-bold mb-6 text-white">Informations de contact</h3>
+                  <p className="mb-8 text-gray-300 text-lg leading-relaxed">
+                    Vous pouvez également me contacter directement via les coordonnées ci-dessous.
                   </p>
-
-                  <div className="space-y-6">
-                    <div className="flex items-start">
-                      <div className="bg-orange-900/30 p-3 rounded-xl mr-4">
-                        <Mail className="text-orange-500" size={24} />
+                  
+                  <div className="space-y-8">
+                    <div className="flex items-start gap-6">
+                      <div className="bg-orange-900/30 p-4 rounded-2xl border border-orange-500/30">
+                        <Mail className="text-orange-500" size={28} />
                       </div>
                       <div>
-                        <h4 className="text-lg font-medium text-white">
-                          Email
-                        </h4>
-                        <a
+                        <h4 className="text-xl font-bold text-white mb-2">Email</h4>
+                        <a 
                           href="mailto:sebastien.78.fernandes@outlook.fr"
-                          className="text-orange-400 hover:underline"
+                          className="text-orange-400 hover:text-orange-300 transition-colors text-lg"
                         >
                           sebastien.78.fernandes@outlook.fr
                         </a>
                       </div>
                     </div>
-
-                    <div className="flex items-start">
-                      <div className="bg-orange-900/30 p-3 rounded-xl mr-4">
-                        <Linkedin className="text-orange-500" size={24} />
+                    
+                    <div className="flex items-start gap-6">
+                      <div className="bg-orange-900/30 p-4 rounded-2xl border border-orange-500/30">
+                        <Linkedin className="text-orange-500" size={28} />
                       </div>
                       <div>
-                        <h4 className="text-lg font-medium text-white">
-                          LinkedIn
-                        </h4>
-                        <a
+                        <h4 className="text-xl font-bold text-white mb-2">LinkedIn</h4>
+                        <a 
                           href="https://www.linkedin.com/in/s%C3%A9bastien-fernandes-566008232/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-orange-400 hover:underline"
+                          className="text-orange-400 hover:text-orange-300 transition-colors text-lg"
                         >
                           linkedin.com/in/sébastien-fernandes
                         </a>
                       </div>
                     </div>
-
-                    <div className="flex items-start">
-                      <div className="bg-orange-900/30 p-3 rounded-xl mr-4">
-                        <File className="text-orange-500" size={24} />
+                    
+                    <div className="flex items-start gap-6">
+                      <div className="bg-orange-900/30 p-4 rounded-2xl border border-orange-500/30">
+                        <File className="text-orange-500" size={28} />
                       </div>
-                      <div>
-                        <h4 className="text-lg font-medium text-white">
-                          Mon CV
-                        </h4>
+                      <div className="flex-1">
+                        <h4 className="text-xl font-bold text-white mb-4">Mon CV</h4>
                         <a
                           href="/public/docs/fernandes-sebastien-cv.pdf"
                           download
-                          className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                          className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-2xl hover:opacity-90 transition-opacity font-semibold shadow-lg"
                         >
+                          <File className="w-5 h-5" />
                           Télécharger mon CV
                         </a>
                       </div>

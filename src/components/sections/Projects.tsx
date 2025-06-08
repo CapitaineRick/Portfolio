@@ -67,28 +67,28 @@ const Projects: React.FC = () => {
   }, [currentProjects]);
 
   return (
-    <section id="projects" className="py-16 flex items-center justify-center relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-purple-600">
+    <section id="projects" className="py-20 flex items-center justify-center relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-purple-500">
             Mes Projets
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto font-medium">
+          <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-8 rounded-full"></div>
+          <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
             Découvrez mes réalisations techniques en administration système, réseau et sécurité
           </p>
         </div>
 
         {/* Filtres par tags */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           {tags.map(tag => (
             <button
               key={tag}
               onClick={() => toggleTag(tag)}
-              className={`px-4 py-2 rounded-full border transition duration-200 ${
+              className={`px-6 py-3 rounded-2xl border transition duration-300 font-semibold text-base ${
                 selectedTags.includes(tag)
-                  ? 'bg-orange-500 text-white border-orange-500'
-                  : 'bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700'
+                  ? 'bg-orange-500 text-white border-orange-500 shadow-lg'
+                  : 'bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700 hover:border-gray-500'
               }`}
             >
               {tag}
@@ -99,7 +99,7 @@ const Projects: React.FC = () => {
         {/* Projets affichés */}
         <div
           ref={projectsRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
         >
           {currentProjects.map((project) => (
             <ProjectCard
@@ -113,21 +113,21 @@ const Projects: React.FC = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-10 flex justify-center items-center gap-4">
+          <div className="mt-12 flex justify-center items-center gap-6">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className="px-4 py-2 rounded bg-gray-700 text-white disabled:opacity-40"
+              className="px-6 py-3 rounded-xl bg-gray-800 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-700 transition-colors font-semibold border border-gray-700"
             >
               Précédent
             </button>
-            <span className="text-gray-300">
+            <span className="text-gray-300 text-lg font-semibold">
               Page {currentPage} / {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 rounded bg-gray-700 text-white disabled:opacity-40"
+              className="px-6 py-3 rounded-xl bg-gray-800 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-700 transition-colors font-semibold border border-gray-700"
             >
               Suivant
             </button>
