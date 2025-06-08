@@ -36,45 +36,6 @@ const Skills: React.FC = () => {
     };
   }, []);
 
-  const getLevelColor = (level: number) => {
-    switch (level) {
-      case 0:
-        return 'from-gray-500 to-gray-600';
-      case 1:
-        return 'from-yellow-500 to-orange-500';
-      case 2:
-        return 'from-orange-500 to-red-500';
-      default:
-        return 'from-gray-500 to-gray-600';
-    }
-  };
-
-  const getLevelText = (level: number) => {
-    switch (level) {
-      case 0:
-        return 'Débutant';
-      case 1:
-        return 'Intermédiaire';
-      case 2:
-        return 'Avancé';
-      default:
-        return 'Débutant';
-    }
-  };
-
-  const getLevelBadgeColor = (level: number) => {
-    switch (level) {
-      case 0:
-        return 'bg-gray-600/30 text-gray-300 border-gray-500/30';
-      case 1:
-        return 'bg-yellow-600/30 text-yellow-300 border-yellow-500/30';
-      case 2:
-        return 'bg-orange-600/30 text-orange-300 border-orange-500/30';
-      default:
-        return 'bg-gray-600/30 text-gray-300 border-gray-500/30';
-    }
-  };
-
   return (
     <section id="skills" className="py-20 flex items-center justify-center relative overflow-hidden">
       {/* Background Elements */}
@@ -108,37 +69,37 @@ const Skills: React.FC = () => {
             >
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-                <div className="relative bg-gray-800 backdrop-blur-sm rounded-3xl p-8 border border-gray-700">
+                <div className="relative bg-gray-800 backdrop-blur-sm rounded-3xl p-10 border border-gray-700">
                   
                   {/* Category Header */}
-                  <div className="flex items-center gap-6 mb-10">
-                    <div className="p-4 bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-2xl border border-orange-500/30">
-                      <category.icon className="w-8 h-8 text-orange-500" />
+                  <div className="flex items-center gap-8 mb-12">
+                    <div className="p-5 bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-3xl border border-orange-500/30">
+                      <category.icon className="w-10 h-10 text-orange-500" />
                     </div>
                     <div>
-                      <h3 className="text-3xl font-bold text-white mb-2">
+                      <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
                         {category.name}
                       </h3>
-                      <p className="text-gray-400 text-lg">
+                      <p className="text-gray-400 text-xl">
                         {category.skills.length} compétences maîtrisées
                       </p>
                     </div>
                   </div>
 
                   {/* Skills Grid */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                     {category.skills.map((skill, skillIndex) => (
                       <div 
                         key={skillIndex}
                         className="relative group/skill transition-all duration-300 hover:scale-[1.02]"
                       >
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-xl blur opacity-0 group-hover/skill:opacity-30 transition duration-300"></div>
+                        <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-0 group-hover/skill:opacity-50 transition duration-300"></div>
                         
-                        <div className="relative bg-gray-900/80 backdrop-blur-sm rounded-xl p-6 h-full flex flex-col border border-gray-700 group-hover/skill:border-gray-600 transition-all duration-300">
+                        <div className="relative bg-gray-900/80 backdrop-blur-sm rounded-2xl p-8 h-full flex flex-col border border-gray-700 group-hover/skill:border-gray-600 transition-all duration-300">
                           
                           {/* Skill Header */}
-                          <div className="flex items-start gap-4 mb-4">
-                            <div className="h-12 w-12 rounded-xl bg-gray-800 p-2 flex items-center justify-center border border-gray-700 group-hover/skill:border-gray-600 transition-colors flex-shrink-0">
+                          <div className="flex items-start gap-6 mb-6">
+                            <div className="h-16 w-16 rounded-2xl bg-gray-800 p-4 flex items-center justify-center border border-gray-700 group-hover/skill:border-gray-600 transition-colors">
                               <img 
                                 src={skill.logo} 
                                 alt={skill.name}
@@ -147,57 +108,21 @@ const Skills: React.FC = () => {
                             </div>
                             
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between mb-2">
-                                <h4 className="font-bold text-white text-lg group-hover/skill:text-orange-400 transition-colors">
-                                  {skill.name}
-                                </h4>
-                                <span className={`px-2 py-1 text-xs font-medium rounded-lg border ${getLevelBadgeColor(skill.level)}`}>
-                                  {getLevelText(skill.level)}
-                                </span>
-                              </div>
-                              
-                              {/* Progress Bar */}
-                              <div className="w-full bg-gray-700 rounded-full h-2 mb-3">
-                                <div 
-                                  className={`h-2 rounded-full bg-gradient-to-r ${getLevelColor(skill.level)} transition-all duration-1000 ease-out`}
-                                  style={{ 
-                                    width: `${((skill.level + 1) / 3) * 100}%`,
-                                    animationDelay: `${categoryIndex * 150 + skillIndex * 100}ms`
-                                  }}
-                                ></div>
-                              </div>
+                              <h4 className="font-bold text-white text-xl mb-3 group-hover/skill:text-orange-400 transition-colors">
+                                {skill.name}
+                              </h4>
                             </div>
                           </div>
 
                           {/* Description */}
                           <div className="flex-1">
-                            <p className="text-sm text-gray-300 leading-relaxed">
+                            <p className="text-base text-gray-300 leading-relaxed">
                               {skill.description}
                             </p>
                           </div>
 
-                          {/* Level Indicator */}
-                          <div className="flex items-center gap-1 mt-4 pt-3 border-t border-gray-700">
-                            {[...Array(3)].map((_, i) => (
-                              <div 
-                                key={i}
-                                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                                  i <= skill.level 
-                                    ? `bg-gradient-to-r ${getLevelColor(skill.level)} shadow-lg` 
-                                    : 'bg-gray-600'
-                                }`}
-                                style={{ 
-                                  animationDelay: `${categoryIndex * 150 + skillIndex * 100 + i * 50}ms`
-                                }}
-                              />
-                            ))}
-                            <span className="ml-2 text-xs text-gray-400 font-medium">
-                              Niveau {skill.level + 1}/3
-                            </span>
-                          </div>
-
                           {/* Hover Effect */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-purple-500/5 rounded-xl opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300 pointer-events-none" />
                         </div>
                       </div>
                     ))}
@@ -206,42 +131,6 @@ const Skills: React.FC = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Skills Summary */}
-        <div className="mt-16 text-center">
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-            <div className="relative bg-gray-800 rounded-2xl p-8 border border-gray-700">
-              <h3 className="text-2xl font-bold text-white mb-6">Résumé des compétences</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-500 mb-2">
-                    {skillsData.reduce((total, category) => 
-                      total + category.skills.filter(skill => skill.level === 2).length, 0
-                    )}
-                  </div>
-                  <div className="text-gray-400">Compétences avancées</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-yellow-500 mb-2">
-                    {skillsData.reduce((total, category) => 
-                      total + category.skills.filter(skill => skill.level === 1).length, 0
-                    )}
-                  </div>
-                  <div className="text-gray-400">Compétences intermédiaires</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-gray-500 mb-2">
-                    {skillsData.reduce((total, category) => 
-                      total + category.skills.filter(skill => skill.level === 0).length, 0
-                    )}
-                  </div>
-                  <div className="text-gray-400">Compétences débutantes</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
