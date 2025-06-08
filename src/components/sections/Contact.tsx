@@ -161,7 +161,7 @@ const Contact: React.FC = () => {
                         'Erreur, veuillez réessayer'
                       ) : (
                         <>
-                          <Send className="mr-3" size={20} />
+                          <Send className="mr-3\" size={20} />
                           Envoyer le message
                         </>
                       )}
