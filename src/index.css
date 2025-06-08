@@ -219,115 +219,71 @@ li {
   border-color: #4b5563 !important;
 }
 
-/* Animations pour les éléments flottants */
-@keyframes gentleFloat {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-8px) scale(1.01); }
-}
-
-@keyframes pulse-slow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
-}
-
-@keyframes glow {
-  0%, 100% { 
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+/* Animations optimisées pour les performances */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  50% { 
-    box-shadow: 0 0 40px rgba(249, 115, 22, 0.6), 0 0 60px rgba(168, 85, 247, 0.3);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes scan {
-  0% { transform: translateX(-100%) skewX(-12deg); }
-  100% { transform: translateX(200%) skewX(-12deg); }
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
-@keyframes neon-pulse {
-  0%, 100% { 
-    text-shadow: 0 0 10px rgba(249, 115, 22, 0.8),
-                 0 0 20px rgba(249, 115, 22, 0.6),
-                 0 0 30px rgba(249, 115, 22, 0.4);
-  }
-  50% { 
-    text-shadow: 0 0 20px rgba(249, 115, 22, 1),
-                 0 0 30px rgba(249, 115, 22, 0.8),
-                 0 0 40px rgba(249, 115, 22, 0.6);
-  }
-}
-
+/* Suppression des animations coûteuses */
 .animate-blob {
-  animation: gentleFloat 8s ease-in-out infinite;
+  /* Animation supprimée pour les performances */
 }
 
 .animate-pulse-slow {
-  animation: pulse-slow 3s ease-in-out infinite;
+  /* Animation supprimée pour les performances */
 }
 
 .animate-glow {
-  animation: glow 2s ease-in-out infinite;
+  /* Animation supprimée pour les performances */
 }
 
-.animate-scan {
-  animation: scan 1s ease-in-out;
+/* Optimisation des transitions */
+.transition-optimized {
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 
-.animate-neon-pulse {
-  animation: neon-pulse 2s ease-in-out infinite;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-/* Element transitions */
+/* Element transitions simplifiées */
 .backdrop-blur {
-  @apply transition-[backdrop-filter] duration-300;
+  @apply transition-[backdrop-filter] duration-200;
 }
 
 button {
-  @apply transition-all duration-200 ease-in-out;
+  @apply transition-all duration-150 ease-in-out;
 }
 
 img {
-  @apply transition-transform duration-300 ease-out;
+  @apply transition-transform duration-200 ease-out;
 }
 
 .text-transition {
-  @apply transition-colors duration-300;
+  @apply transition-colors duration-200;
 }
 
 .border-transition {
-  @apply transition-[border-color] duration-300;
+  @apply transition-[border-color] duration-200;
 }
 
 .shadow-transition {
-  @apply transition-shadow duration-300;
+  @apply transition-shadow duration-200;
 }
 
 .bg-transition {
-  @apply transition-[background-color] duration-300;
+  @apply transition-[background-color] duration-200;
 }
 
 .opacity-transition {
-  @apply transition-opacity duration-300;
-}
-
-/* Effets futuristes pour la navbar */
-.navbar-glow {
-  box-shadow: 
-    0 0 20px rgba(249, 115, 22, 0.1),
-    0 0 40px rgba(168, 85, 247, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.navbar-border {
-  border-image: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.5), transparent) 1;
+  @apply transition-opacity duration-200;
 }
 
 /* PDF Viewer Styles */
@@ -462,4 +418,26 @@ th {
   font-weight: 600;
   color: #ffffff;
   background-color: #1e293b;
+}
+
+/* Optimisations pour les performances */
+* {
+  will-change: auto;
+}
+
+/* Désactivation du will-change par défaut pour éviter les couches inutiles */
+.performance-optimized {
+  contain: layout style paint;
+}
+
+/* Optimisation des images */
+img {
+  image-rendering: optimizeQuality;
+}
+
+/* Optimisation du rendu des polices */
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
