@@ -9,21 +9,13 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
-body {
+html, body {
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
   overflow-x: hidden;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
-  /* Optimisations de performance */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
 /* Layout principal sans gaps */
@@ -42,7 +34,7 @@ main {
   flex: 1;
 }
 
-/* Sections parfaitement continues avec optimisations de performance */
+/* Sections parfaitement continues */
 section {
   /* SUPPRESSION TOTALE DES MARGES ET BORDURES */
   margin: 0 !important;
@@ -60,13 +52,8 @@ section {
   /* Fond uniforme pour toutes les sections SAUF Hero */
   background: #0f172a;
   
-  /* Optimisations de performance */
-  will-change: auto;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  
-  /* Transitions optimisées */
-  transition: opacity 0.3s ease-out;
+  /* Transitions douces */
+  transition: all 0.5s ease-in-out;
 }
 
 /* Contenu des sections avec padding interne */
@@ -76,8 +63,9 @@ section > div {
   max-width: 100%;
 }
 
-/* HERO - Fond spécial avec style inline */
+/* HERO - Fond spécial avec style inline (pas de CSS ici) */
 section#home {
+  /* Le fond est défini directement dans le composant Hero avec style inline */
   background: none !important;
 }
 
@@ -91,15 +79,18 @@ section#contact {
   background: #0f172a !important;
 }
 
-/* Navbar fixe optimisée */
+/* Suppression de tous les overlays pour les sections non-Hero */
+section:not(#home)::before {
+  display: none !important;
+}
+
+/* Navbar fixe sans affecter les sections */
 nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 50;
-  will-change: transform;
-  transform: translateZ(0);
 }
 
 /* Footer sans marge */
@@ -109,13 +100,12 @@ footer {
   background: #0f172a;
 }
 
-/* Amélioration de la typographie avec optimisations */
+/* Amélioration de la typographie */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.025em;
   color: #ffffff;
-  text-rendering: optimizeLegibility;
 }
 
 h1 {
@@ -173,16 +163,11 @@ p {
   background-color: #0f172a !important;
 }
 
-/* Amélioration des boutons avec optimisations */
+/* Amélioration des boutons */
 button {
   font-weight: 600;
   letter-spacing: 0.025em;
   transition: all 0.2s ease-in-out;
-  will-change: transform;
-}
-
-button:hover {
-  transform: translateY(-1px);
 }
 
 /* Amélioration des liens */
@@ -234,10 +219,10 @@ li {
   border-color: #4b5563 !important;
 }
 
-/* Animations optimisées pour les performances */
+/* Animations pour les éléments flottants */
 @keyframes gentleFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-4px); }
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-8px) scale(1.01); }
 }
 
 @keyframes pulse-slow {
@@ -245,60 +230,107 @@ li {
   50% { opacity: 0.8; }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+@keyframes glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  50% { 
+    box-shadow: 0 0 40px rgba(249, 115, 22, 0.6), 0 0 60px rgba(168, 85, 247, 0.3);
   }
 }
 
-/* Classes d'animation optimisées */
+@keyframes scan {
+  0% { transform: translateX(-100%) skewX(-12deg); }
+  100% { transform: translateX(200%) skewX(-12deg); }
+}
+
+@keyframes neon-pulse {
+  0%, 100% { 
+    text-shadow: 0 0 10px rgba(249, 115, 22, 0.8),
+                 0 0 20px rgba(249, 115, 22, 0.6),
+                 0 0 30px rgba(249, 115, 22, 0.4);
+  }
+  50% { 
+    text-shadow: 0 0 20px rgba(249, 115, 22, 1),
+                 0 0 30px rgba(249, 115, 22, 0.8),
+                 0 0 40px rgba(249, 115, 22, 0.6);
+  }
+}
+
 .animate-blob {
-  animation: gentleFloat 6s ease-in-out infinite;
-  will-change: transform;
+  animation: gentleFloat 8s ease-in-out infinite;
 }
 
 .animate-pulse-slow {
   animation: pulse-slow 3s ease-in-out infinite;
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
 }
 
-.animation-delay-200 {
-  animation-delay: 0.2s;
+.animate-scan {
+  animation: scan 1s ease-in-out;
 }
 
-.animation-delay-400 {
-  animation-delay: 0.4s;
+.animate-neon-pulse {
+  animation: neon-pulse 2s ease-in-out infinite;
 }
 
-.animation-delay-600 {
-  animation-delay: 0.6s;
+.animation-delay-2000 {
+  animation-delay: 2s;
 }
 
-/* Optimisations de performance pour les transitions */
-.transition-optimized {
-  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-  will-change: transform, opacity;
+.animation-delay-4000 {
+  animation-delay: 4s;
 }
 
-.hover-lift:hover {
-  transform: translateY(-2px);
+/* Element transitions */
+.backdrop-blur {
+  @apply transition-[backdrop-filter] duration-300;
 }
 
-/* Optimisations pour les éléments avec backdrop-blur */
-.backdrop-blur-optimized {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+button {
+  @apply transition-all duration-200 ease-in-out;
 }
 
-/* PDF Viewer Styles optimisées */
+img {
+  @apply transition-transform duration-300 ease-out;
+}
+
+.text-transition {
+  @apply transition-colors duration-300;
+}
+
+.border-transition {
+  @apply transition-[border-color] duration-300;
+}
+
+.shadow-transition {
+  @apply transition-shadow duration-300;
+}
+
+.bg-transition {
+  @apply transition-[background-color] duration-300;
+}
+
+.opacity-transition {
+  @apply transition-opacity duration-300;
+}
+
+/* Effets futuristes pour la navbar */
+.navbar-glow {
+  box-shadow: 
+    0 0 20px rgba(249, 115, 22, 0.1),
+    0 0 40px rgba(168, 85, 247, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.navbar-border {
+  border-image: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.5), transparent) 1;
+}
+
+/* PDF Viewer Styles */
 .react-pdf__Document {
   display: flex;
   flex-direction: column;
@@ -328,6 +360,35 @@ li {
 
 .react-pdf__Page__annotations {
   max-width: 100%;
+}
+
+/* Fix for PDF overflow */
+.react-pdf__Page__annotations.annotationLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.react-pdf__Page__textContent.textLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  opacity: 0.25;
+  line-height: 1.0;
+  max-width: 100%;
+}
+
+/* PDF container */
+.pdf-container {
+  max-width: 100%;
+  overflow: hidden;
 }
 
 /* Utility pour line-clamp */
@@ -384,30 +445,21 @@ input:focus, textarea:focus {
   box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
 }
 
-/* Optimisations pour les grilles */
-.grid-optimized {
-  display: grid;
-  will-change: auto;
+/* Amélioration des tableaux si nécessaire */
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-/* Optimisations pour les images */
-img {
-  will-change: auto;
-  transform: translateZ(0);
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #374151;
+  color: #e2e8f0;
 }
 
-/* Désactivation des animations sur les appareils avec préférence de mouvement réduit */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  
-  .animate-bounce {
-    animation: none;
-  }
+th {
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #1e293b;
 }

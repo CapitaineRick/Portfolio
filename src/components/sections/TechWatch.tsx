@@ -21,10 +21,11 @@ const TechWatch: React.FC = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in-up');
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          entry.target.classList.remove('opacity-0', 'translate-y-10');
         }
       },
-      { threshold: 0.1, rootMargin: '50px' }
+      { threshold: 0.1 }
     );
 
     if (watchRef.current) {
@@ -61,10 +62,10 @@ const TechWatch: React.FC = () => {
               <div className="flex flex-wrap justify-center gap-3">
                 <button
                   onClick={() => setSelectedCategory(null)}
-                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift ${
+                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                     !selectedCategory
-                      ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg'
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg transform scale-105'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:scale-105'
                   }`}
                 >
                   Tous les articles
@@ -73,10 +74,10 @@ const TechWatch: React.FC = () => {
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(selectedCategory === category ? null : category)}
-                    className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift ${
+                    className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                       selectedCategory === category
-                        ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg'
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                        ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg transform scale-105'
+                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:scale-105'
                     }`}
                   >
                     {category}
@@ -90,13 +91,13 @@ const TechWatch: React.FC = () => {
         {/* Articles Grid avec Masonry Layout */}
         <div 
           ref={watchRef}
-          className="opacity-0"
+          className="transition-all duration-300 opacity-0 translate-y-10"
         >
           <div className="columns-1 lg:columns-2 gap-8 space-y-8">
             {filteredArticles.map((item, index) => (
               <article 
                 key={item.title}
-                className={`relative group break-inside-avoid mb-8 transition-all duration-500 ease-in-out hover-lift ${
+                className={`relative group break-inside-avoid mb-8 transition-all duration-500 ease-in-out ${
                   expandedCard === item.title ? 'transform scale-[1.02]' : ''
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
@@ -113,7 +114,6 @@ const TechWatch: React.FC = () => {
                       src={item.image} 
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      loading="lazy"
                     />
                     
                     {/* Image Overlay */}
@@ -190,7 +190,7 @@ const TechWatch: React.FC = () => {
                         onClick={() => toggleCard(item.title)}
                         className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 
                                  text-orange-400 font-medium transition-all duration-300
-                                 hover:bg-orange-900/50 hover-lift"
+                                 hover:bg-orange-900/50 hover:scale-105"
                       >
                         {expandedCard === item.title ? (
                           <>
@@ -211,7 +211,7 @@ const TechWatch: React.FC = () => {
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-900/30 
                                  text-purple-400 font-medium transition-all duration-300
-                                 hover:bg-purple-900/50 hover-lift"
+                                 hover:bg-purple-900/50 hover:scale-105"
                       >
                         Source
                         <ExternalLink className="w-4 h-4" />

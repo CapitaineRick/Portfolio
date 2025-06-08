@@ -10,17 +10,19 @@ const Skills: React.FC = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in-up');
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          entry.target.classList.remove('opacity-0', 'translate-y-10');
           
           const skills = entry.target.querySelectorAll('.skill-category');
           skills.forEach((skill, index) => {
             setTimeout(() => {
-              skill.classList.add('animate-fade-in-up');
-            }, 100 * index);
+              skill.classList.add('opacity-100', 'translate-y-0');
+              skill.classList.remove('opacity-0', 'translate-y-10');
+            }, 150 * index);
           });
         }
       },
-      { threshold: 0.1, rootMargin: '50px' }
+      { threshold: 0.1 }
     );
 
     if (skillsRef.current) {
@@ -35,7 +37,14 @@ const Skills: React.FC = () => {
   }, []);
 
   return (
-    <section id="skills" className="py-20 flex items-center justify-center relative">
+    <section id="skills" className="py-20 flex items-center justify-center relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-orange-500/5 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
+        <div className="absolute -bottom-8 -right-4 w-72 h-72 bg-purple-500/5 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-blue-500/5 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000" />
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
         {/* Header */}
         <div className="text-center mb-20">
@@ -51,12 +60,12 @@ const Skills: React.FC = () => {
 
         <div 
           ref={skillsRef}
-          className="opacity-0 space-y-16"
+          className="transition-all duration-300 opacity-0 translate-y-10 space-y-16"
         >
           {skillsData.map((category, categoryIndex) => (
             <div 
               key={categoryIndex}
-              className="skill-category opacity-0"
+              className="skill-category transition-all duration-300 opacity-0 translate-y-10"
             >
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
@@ -82,7 +91,7 @@ const Skills: React.FC = () => {
                     {category.skills.map((skill, skillIndex) => (
                       <div 
                         key={skillIndex}
-                        className="relative group/skill transition-all duration-300 hover-lift"
+                        className="relative group/skill transition-all duration-300 hover:scale-[1.02]"
                       >
                         <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-0 group-hover/skill:opacity-50 transition duration-300"></div>
                         
@@ -90,12 +99,11 @@ const Skills: React.FC = () => {
                           
                           {/* Skill Header */}
                           <div className="flex items-start gap-6 mb-6">
-                            <div className="h-16 w-16 rounded-2xl bg-gray-800 p-4 flex items-center justify-center border border-gray-700 group-hover/skill:border-gray-600 transition-colors flex-shrink-0">
+                            <div className="h-16 w-16 rounded-2xl bg-gray-800 p-4 flex items-center justify-center border border-gray-700 group-hover/skill:border-gray-600 transition-colors">
                               <img 
                                 src={skill.logo} 
                                 alt={skill.name}
                                 className="w-full h-full object-contain"
-                                loading="lazy"
                               />
                             </div>
                             
