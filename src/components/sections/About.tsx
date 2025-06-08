@@ -22,10 +22,8 @@ import {
 } from "lucide-react";
 import { educationData } from "../../data/educationData";
 
-
 const About: React.FC = () => {
   const [showPastEducation, setShowPastEducation] = React.useState(false);
-  const [showCertifications, setShowCertifications] = React.useState(false);
   const aboutRef = useRef<HTMLDivElement>(null);
 
   const completedEducation = educationData.filter(
@@ -42,11 +40,10 @@ const About: React.FC = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("opacity-100", "translate-y-0");
-          entry.target.classList.remove("opacity-0", "translate-y-10");
+          entry.target.classList.add('animate-fade-in-up');
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '50px' }
     );
 
     if (aboutRef.current) {
@@ -63,7 +60,7 @@ const About: React.FC = () => {
   return (
     <section
       id="about"
-      className="py-20 flex items-center justify-center relative overflow-hidden"
+      className="py-20 flex items-center justify-center relative"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
         <div className="text-center mb-16">
@@ -76,10 +73,7 @@ const About: React.FC = () => {
           </p>
         </div>
 
-        <div
-          ref={aboutRef}
-          className="transition-all duration-300 opacity-0 translate-y-10"
-        >
+        <div ref={aboutRef} className="opacity-0">
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-12">
             {/* Profile Card */}
             <div className="xl:col-span-4">
@@ -88,12 +82,13 @@ const About: React.FC = () => {
                 <div className="relative bg-gray-800 rounded-3xl p-8 border border-gray-700">
                   {/* Profile Image */}
                   <div className="relative w-40 h-40 mx-auto mb-8">
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-purple-500 rounded-full animate-spin-slow"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-purple-500 rounded-full"></div>
                     <div className="absolute inset-2 bg-gray-800 rounded-full overflow-hidden">
                       <img
                         src="/images/profile.webp"
                         alt="Profile"
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -307,6 +302,7 @@ const About: React.FC = () => {
                                 src={education.logo}
                                 alt={education.school}
                                 className="w-20 h-auto"
+                                loading="lazy"
                               />
                               <div>
                                 <h4 className="text-2xl font-bold text-white mb-2">
@@ -324,18 +320,6 @@ const About: React.FC = () => {
                           <p className="text-gray-400 mb-6 leading-relaxed">
                             {education.description}
                           </p>
-                          {education.id === "bts-sio" && (
-                            <a
-                              href=""
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-3 px-6 py-3 mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
-                            >
-                              <FileText className="w-5 h-5" />
-                              <span>Tableau de Synthèse</span>
-                              <ExternalLink className="w-5 h-5" />
-                            </a>
-                          )}
 
                           {education.skills && (
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6">
@@ -387,6 +371,7 @@ const About: React.FC = () => {
                                       src={education.logo}
                                       alt={education.school}
                                       className="w-20 h-auto"
+                                      loading="lazy"
                                     />
                                     <div>
                                       <h4 className="text-2xl font-bold text-white mb-2">
@@ -427,6 +412,7 @@ const About: React.FC = () => {
                                 src={education.logo}
                                 alt={education.school}
                                 className="w-20 h-auto"
+                                loading="lazy"
                               />
                               <div>
                                 <h4 className="text-2xl font-bold text-white mb-2">
@@ -448,7 +434,6 @@ const About: React.FC = () => {
                             <div className="mt-6 inline-flex px-4 py-2 bg-green-900/30 text-green-400 rounded-full font-semibold">
                               Mention {education.mention}
                             </div>
-                            
                           )}
                           {education.skills && (
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6">

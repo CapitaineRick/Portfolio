@@ -38,11 +38,10 @@ const Contact: React.FC = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
+          entry.target.classList.add('animate-fade-in-up');
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '50px' }
     );
 
     if (contactRef.current) {
@@ -71,7 +70,7 @@ const Contact: React.FC = () => {
         
         <div 
           ref={contactRef}
-          className="transition-all duration-300 opacity-0 translate-y-10"
+          className="opacity-0"
         >
           <div className="flex flex-col md:flex-row gap-12">
             <div className="md:w-1/2">
@@ -147,12 +146,12 @@ const Contact: React.FC = () => {
                     <button
                       type="submit"
                       className={`w-full py-4 px-8 flex items-center justify-center rounded-2xl
-                              text-white font-bold text-lg transition-all duration-300 shadow-lg
+                              text-white font-bold text-lg transition-all duration-300 shadow-lg hover-lift
                               ${formStatus === 'success' 
                                 ? 'bg-green-500 hover:bg-green-600' 
                                 : formStatus === 'error'
                                   ? 'bg-red-500 hover:bg-red-600'
-                                  : 'bg-gradient-to-r from-orange-500 to-purple-500 hover:opacity-90 hover:scale-105'
+                                  : 'bg-gradient-to-r from-orange-500 to-purple-500 hover:opacity-90'
                               }`}
                     >
                       {formStatus === 'success' ? (
@@ -161,7 +160,7 @@ const Contact: React.FC = () => {
                         'Erreur, veuillez réessayer'
                       ) : (
                         <>
-                          <Send className="mr-3\" size={20} />
+                          <Send className="mr-3" size={20} />
                           Envoyer le message
                         </>
                       )}
@@ -222,7 +221,7 @@ const Contact: React.FC = () => {
                         <a
                           href="/public/docs/fernandes-sebastien-cv.pdf"
                           download
-                          className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-2xl hover:opacity-90 transition-opacity font-semibold shadow-lg"
+                          className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-2xl hover:opacity-90 transition-opacity font-semibold shadow-lg hover-lift"
                         >
                           <File className="w-5 h-5" />
                           Télécharger mon CV
