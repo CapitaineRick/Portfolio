@@ -273,12 +273,12 @@ const About: React.FC = () => {
           </div>
 
           {/* Experience & Education in Parallel */}
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8 items-start">
             
             {/* Professional Experience Section */}
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-blue-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-              <div className="relative bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 h-full">
+              <div className="relative bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700">
                 <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
                   <div className="p-2 md:p-3 bg-green-900/30 rounded-lg md:rounded-xl flex-shrink-0">
                     <Briefcase className="w-5 h-5 md:w-6 md:h-6 text-green-500" />
@@ -383,7 +383,7 @@ const About: React.FC = () => {
             {/* Education Timeline */}
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-              <div className="relative bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 h-full">
+              <div className="relative bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700">
                 <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
                   <div className="p-2 md:p-3 bg-blue-900/30 rounded-lg md:rounded-xl flex-shrink-0">
                     <GraduationCap className="w-5 h-5 md:w-6 md:h-6 text-blue-500" />
