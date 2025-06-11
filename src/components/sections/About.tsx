@@ -334,24 +334,19 @@ const About: React.FC = () => {
                         {experience.description}
                       </p>
 
-                      {/* Missions */}
+                      {/* Missions - AFFICHAGE COMPLET */}
                       <div className="bg-gray-700/50 rounded-lg p-3 mb-3 md:mb-4">
                         <h5 className="font-bold mb-2 text-green-400 text-xs md:text-sm flex items-center gap-2">
                           <Target className="w-3 h-3" />
                           Missions principales
                         </h5>
                         <ul className="space-y-1">
-                          {experience.missions.slice(0, 3).map((mission, index) => (
+                          {experience.missions.map((mission, index) => (
                             <li key={index} className="flex items-start gap-2">
                               <ChevronRight className="w-3 h-3 text-green-500 flex-shrink-0 mt-0.5" />
                               <span className="text-gray-300 text-xs">{mission}</span>
                             </li>
                           ))}
-                          {experience.missions.length > 3 && (
-                            <li className="text-gray-400 text-xs italic">
-                              +{experience.missions.length - 3} autres missions...
-                            </li>
-                          )}
                         </ul>
                       </div>
 
@@ -439,9 +434,10 @@ const About: React.FC = () => {
                           </a>
                         )}
 
+                        {/* AFFICHAGE COMPLET DES COMPÉTENCES */}
                         {education.skills && (
                           <div className="grid grid-cols-1 gap-1 md:gap-2 mt-3 md:mt-4">
-                            {education.skills.slice(0, 4).map((skill, index) => (
+                            {education.skills.map((skill, index) => (
                               <div
                                 key={index}
                                 className="flex items-center gap-2"
@@ -452,11 +448,6 @@ const About: React.FC = () => {
                                 </span>
                               </div>
                             ))}
-                            {education.skills.length > 4 && (
-                              <div className="text-gray-400 text-xs italic">
-                                +{education.skills.length - 4} autres compétences...
-                              </div>
-                            )}
                           </div>
                         )}
                       </div>
@@ -561,9 +552,10 @@ const About: React.FC = () => {
                           </div>
                         )}
                         
+                        {/* AFFICHAGE COMPLET DES COMPÉTENCES */}
                         {education.skills && (
                           <div className="grid grid-cols-1 gap-1 md:gap-2 mt-3 md:mt-4">
-                            {education.skills.slice(0, 4).map((skill, index) => (
+                            {education.skills.map((skill, index) => (
                               <div
                                 key={index}
                                 className="flex items-center gap-2"
@@ -574,11 +566,6 @@ const About: React.FC = () => {
                                 </span>
                               </div>
                             ))}
-                            {education.skills && education.skills.length > 4 && (
-                              <div className="text-gray-400 text-xs italic">
-                                +{education.skills.length - 4} autres compétences...
-                              </div>
-                            )}
                           </div>
                         )}
                       </div>
