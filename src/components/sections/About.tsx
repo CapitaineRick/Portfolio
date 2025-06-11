@@ -23,6 +23,7 @@ import {
   Clock,
   Target,
   CheckCircle2,
+  BookOpen,
 } from "lucide-react";
 import { educationData } from "../../data/educationData";
 import { experienceData } from "../../data/experienceData";
@@ -63,6 +64,13 @@ const About: React.FC = () => {
       }
     };
   }, []);
+
+  const scrollToProjects = () => {
+    const projectsSection = document.querySelector('#projects');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section
@@ -173,15 +181,25 @@ const About: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Download CV Button */}
-                  <a
-                    href="/public/docs/fernandes-sebastien-cv.pdf"
-                    download
-                    className="w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity font-semibold shadow-lg"
-                  >
-                    <FileText className="w-4 h-4" />
-                    Télécharger mon CV
-                  </a>
+                  {/* Action Buttons */}
+                  <div className="space-y-3">
+                    <a
+                      href="/public/docs/fernandes-sebastien-cv.pdf"
+                      download
+                      className="w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity font-semibold shadow-lg"
+                    >
+                      <FileText className="w-4 h-4" />
+                      Télécharger mon CV
+                    </a>
+                    
+                    <button
+                      onClick={scrollToProjects}
+                      className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity font-semibold shadow-lg"
+                    >
+                      <BookOpen className="w-4 h-4" />
+                      Voir la documentation
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -272,93 +290,101 @@ const About: React.FC = () => {
             </div>
           </div>
 
-          {/* Professional Experience Section */}
-          <div className="relative group mb-16">
-            <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-blue-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-            <div className="relative bg-gray-800 rounded-3xl p-8 border border-gray-700">
-              <div className="flex items-center gap-6 mb-8">
-                <div className="p-4 bg-green-900/30 rounded-2xl flex-shrink-0">
-                  <Briefcase className="w-7 h-7 text-green-500" />
+          {/* Experience & Education in Parallel */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            {/* Professional Experience Section */}
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-blue-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+              <div className="relative bg-gray-800 rounded-3xl p-8 border border-gray-700 h-full">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 bg-green-900/30 rounded-xl flex-shrink-0">
+                    <Briefcase className="w-6 h-6 text-green-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">
+                    Expériences Professionnelles
+                  </h3>
                 </div>
-                <h3 className="text-3xl font-bold text-white">
-                  Expériences Professionnelles
-                </h3>
-              </div>
 
-              <div className="space-y-8">
-                {experienceData.map((experience) => (
-                  <div key={experience.id} className="bg-green-900/20 rounded-2xl p-6 border border-green-800/30">
-                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6 gap-6">
-                      <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                        <img
-                          src={experience.logo}
-                          alt={experience.company}
-                          className="w-16 h-auto"
-                        />
-                        <div>
-                          <h4 className="text-xl font-bold text-white mb-2">
-                            {experience.title}
-                          </h4>
-                          <p className="text-green-400 font-semibold mb-1">
-                            {experience.company}
-                          </p>
-                          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-gray-400 text-sm">
-                            <div className="flex items-center gap-2">
-                              <Calendar className="w-4 h-4" />
-                              <span>{experience.period}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <MapPin className="w-4 h-4" />
-                              <span>{experience.location}</span>
-                            </div>
+                <div className="space-y-6">
+                  {experienceData.map((experience) => (
+                    <div key={experience.id} className="bg-green-900/20 rounded-xl p-6 border border-green-800/30">
+                      <div className="flex flex-col gap-4 mb-4">
+                        <div className="flex items-center gap-4">
+                          <img
+                            src={experience.logo}
+                            alt={experience.company}
+                            className="w-12 h-auto"
+                          />
+                          <div className="flex-1">
+                            <h4 className="text-lg font-bold text-white mb-1">
+                              {experience.title}
+                            </h4>
+                            <p className="text-green-400 font-semibold text-sm">
+                              {experience.company}
+                            </p>
+                          </div>
+                          <span className={`px-2 py-1 rounded-full font-semibold text-xs ${
+                            experience.type === 'stage' 
+                              ? 'bg-blue-900/30 text-blue-400'
+                              : experience.type === 'alternance'
+                                ? 'bg-purple-900/30 text-purple-400'
+                                : 'bg-green-900/30 text-green-400'
+                          }`}>
+                            {experience.type === 'stage' ? 'Stage' : 
+                             experience.type === 'alternance' ? 'Alternance' : 'Emploi'}
+                          </span>
+                        </div>
+                        
+                        <div className="flex flex-col gap-2 text-gray-400 text-sm">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-3 h-3" />
+                            <span>{experience.period}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-3 h-3" />
+                            <span>{experience.location}</span>
                           </div>
                         </div>
                       </div>
-                      <span className={`px-3 py-1 rounded-full font-semibold text-sm ${
-                        experience.type === 'stage' 
-                          ? 'bg-blue-900/30 text-blue-400'
-                          : experience.type === 'alternance'
-                            ? 'bg-purple-900/30 text-purple-400'
-                            : 'bg-green-900/30 text-green-400'
-                      }`}>
-                        {experience.type === 'stage' ? 'Stage' : 
-                         experience.type === 'alternance' ? 'Alternance' : 'Emploi'}
-                      </span>
-                    </div>
 
-                    <p className="text-gray-400 mb-6 leading-relaxed">
-                      {experience.description}
-                    </p>
+                      <p className="text-gray-400 mb-4 leading-relaxed text-sm">
+                        {experience.description}
+                      </p>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       {/* Missions */}
-                      <div className="bg-gray-700/50 rounded-xl p-4">
-                        <h5 className="font-bold mb-4 text-green-400 flex items-center gap-2">
-                          <Target className="w-4 h-4" />
+                      <div className="bg-gray-700/50 rounded-lg p-3 mb-4">
+                        <h5 className="font-bold mb-2 text-green-400 text-sm flex items-center gap-2">
+                          <Target className="w-3 h-3" />
                           Missions principales
                         </h5>
-                        <ul className="space-y-2">
-                          {experience.missions.map((mission, index) => (
+                        <ul className="space-y-1">
+                          {experience.missions.slice(0, 3).map((mission, index) => (
                             <li key={index} className="flex items-start gap-2">
-                              <ChevronRight className="w-3 h-3 text-green-500 flex-shrink-0 mt-1" />
-                              <span className="text-gray-300 text-sm">{mission}</span>
+                              <ChevronRight className="w-3 h-3 text-green-500 flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-300 text-xs">{mission}</span>
                             </li>
                           ))}
+                          {experience.missions.length > 3 && (
+                            <li className="text-gray-400 text-xs italic">
+                              +{experience.missions.length - 3} autres missions...
+                            </li>
+                          )}
                         </ul>
                       </div>
 
                       {/* Technologies */}
                       {experience.technologies && (
-                        <div className="bg-gray-700/50 rounded-xl p-4">
-                          <h5 className="font-bold mb-4 text-blue-400 flex items-center gap-2">
-                            <Monitor className="w-4 h-4" />
-                            Technologies utilisées
+                        <div className="bg-gray-700/50 rounded-lg p-3">
+                          <h5 className="font-bold mb-2 text-blue-400 text-sm flex items-center gap-2">
+                            <Monitor className="w-3 h-3" />
+                            Technologies
                           </h5>
-                          <div className="flex flex-wrap gap-2">
+                          <div className="flex flex-wrap gap-1">
                             {experience.technologies.map((tech, index) => (
                               <span
                                 key={index}
-                                className="px-2 py-1 bg-blue-900/30 text-blue-300 rounded-lg text-xs font-medium"
+                                className="px-2 py-1 bg-blue-900/30 text-blue-300 rounded text-xs font-medium"
                               >
                                 {tech}
                               </span>
@@ -367,217 +393,216 @@ const About: React.FC = () => {
                         </div>
                       )}
                     </div>
-
-                    {/* Achievements */}
-                    {experience.achievements && (
-                      <div className="mt-6 bg-gray-700/50 rounded-xl p-4">
-                        <h5 className="font-bold mb-4 text-orange-400 flex items-center gap-2">
-                          <Award className="w-4 h-4" />
-                          Réalisations et apprentissages
-                        </h5>
-                        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-2">
-                          {experience.achievements.map((achievement, index) => (
-                            <li key={index} className="flex items-start gap-2">
-                              <CheckCircle2 className="w-3 h-3 text-orange-500 flex-shrink-0 mt-1" />
-                              <span className="text-gray-300 text-sm">{achievement}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Education Timeline */}
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-            <div className="relative bg-gray-800 rounded-3xl p-8 border border-gray-700">
-              <div className="flex items-center gap-6 mb-8">
-                <div className="p-4 bg-blue-900/30 rounded-2xl flex-shrink-0">
-                  <GraduationCap className="w-7 h-7 text-blue-500" />
+            {/* Education Timeline */}
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+              <div className="relative bg-gray-800 rounded-3xl p-8 border border-gray-700 h-full">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 bg-blue-900/30 rounded-xl flex-shrink-0">
+                    <GraduationCap className="w-6 h-6 text-blue-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">
+                    Parcours Académique
+                  </h3>
                 </div>
-                <h3 className="text-3xl font-bold text-white">
-                  Parcours Académique
-                </h3>
-              </div>
 
-              <div className="relative">
-                <div className="absolute left-8 top-0 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
+                <div className="relative">
+                  <div className="absolute left-6 top-0 h-full w-0.5 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
 
-                {/* Current Education */}
-                {ongoingEducation.map((education) => (
-                  <div key={education.id} className="relative pl-20 pb-12">
-                    <div className="absolute left-6 top-4 w-5 h-5 rounded-full bg-blue-500 border-4 border-gray-800"></div>
-                    <div className="bg-blue-900/20 rounded-2xl p-6 border border-blue-800/30">
-                      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 gap-6">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                          <img
-                            src={education.logo}
-                            alt={education.school}
-                            className="w-16 h-auto"
-                          />
-                          <div>
-                            <h4 className="text-xl font-bold text-white mb-2">
-                              {education.title}
-                            </h4>
-                            <p className="text-gray-400">
-                              {education.school}
-                            </p>
+                  {/* Current Education */}
+                  {ongoingEducation.map((education) => (
+                    <div key={education.id} className="relative pl-16 pb-8">
+                      <div className="absolute left-5 top-3 w-3 h-3 rounded-full bg-blue-500 border-2 border-gray-800"></div>
+                      <div className="bg-blue-900/20 rounded-xl p-4 border border-blue-800/30">
+                        <div className="flex flex-col gap-3 mb-4">
+                          <div className="flex items-center gap-3">
+                            <img
+                              src={education.logo}
+                              alt={education.school}
+                              className="w-10 h-auto"
+                            />
+                            <div className="flex-1">
+                              <h4 className="text-lg font-bold text-white mb-1">
+                                {education.title}
+                              </h4>
+                              <p className="text-gray-400 text-sm">
+                                {education.school}
+                              </p>
+                            </div>
+                            <span className="px-2 py-1 bg-blue-900/30 text-blue-400 rounded-full font-semibold text-xs">
+                              {education.period}
+                            </span>
                           </div>
                         </div>
-                        <span className="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full font-semibold text-sm">
-                          {education.period}
-                        </span>
-                      </div>
-                      <p className="text-gray-400 mb-6 leading-relaxed">
-                        {education.description}
-                      </p>
-                      {education.id === "bts-sio" && (
-                        <a
-                          href=""
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
-                        >
-                          <FileText className="w-4 h-4" />
-                          <span>Tableau de Synthèse</span>
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      )}
+                        
+                        <p className="text-gray-400 mb-4 leading-relaxed text-sm">
+                          {education.description}
+                        </p>
+                        
+                        {education.id === "bts-sio" && (
+                          <a
+                            href=""
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-3 py-2 mt-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg text-sm"
+                          >
+                            <FileText className="w-3 h-3" />
+                            <span>Tableau de Synthèse</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        )}
 
-                      {education.skills && (
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-6">
-                          {education.skills.map((skill, index) => (
-                            <div
-                              key={index}
-                              className="flex items-center gap-2"
-                            >
-                              <ChevronRight className="w-4 h-4 text-blue-500 flex-shrink-0" />
-                              <span className="text-gray-300 text-sm">
-                                {skill}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-
-                {/* Past Education Toggle */}
-                <div className="relative pl-20">
-                  <button
-                    onClick={() => setShowPastEducation(!showPastEducation)}
-                    className="flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-colors font-semibold"
-                  >
-                    {showPastEducation ? (
-                      <>
-                        <ChevronUp size={16} />
-                        <span>Masquer les formations non terminées</span>
-                      </>
-                    ) : (
-                      <>
-                        <ChevronDown size={16} />
-                        <span>Afficher les formations non terminées</span>
-                      </>
-                    )}
-                  </button>
-
-                  {showPastEducation && (
-                    <div className="mt-8 space-y-8">
-                      {incompleteEducation.map((education) => (
-                        <div key={education.id}>
-                          <div className="absolute left-6 top-4 w-5 h-5 rounded-full bg-red-500 border-4 border-gray-800"></div>
-                          <div className="bg-red-900/20 rounded-2xl p-6 border border-red-800/30">
-                            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 gap-6">
-                              <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                                <img
-                                  src={education.logo}
-                                  alt={education.school}
-                                  className="w-16 h-auto"
-                                />
-                                <div>
-                                  <h4 className="text-xl font-bold text-white mb-2">
-                                    {education.title}
-                                  </h4>
-                                  <p className="text-gray-400">
-                                    {education.school}
-                                  </p>
-                                </div>
+                        {education.skills && (
+                          <div className="grid grid-cols-1 gap-2 mt-4">
+                            {education.skills.slice(0, 4).map((skill, index) => (
+                              <div
+                                key={index}
+                                className="flex items-center gap-2"
+                              >
+                                <ChevronRight className="w-3 h-3 text-blue-500 flex-shrink-0" />
+                                <span className="text-gray-300 text-xs">
+                                  {skill}
+                                </span>
                               </div>
-                              <span className="px-3 py-1 bg-red-900/30 text-red-400 rounded-full font-semibold text-sm">
-                                {education.period}
-                              </span>
-                            </div>
-                            <p className="text-gray-400 mb-6 leading-relaxed">
-                              {education.description}
-                            </p>
-                            {education.reason && (
-                              <div className="mt-4 inline-flex px-3 py-1 bg-red-900/30 text-red-400 rounded-full font-semibold text-sm">
-                                Non validé - {education.reason}
+                            ))}
+                            {education.skills.length > 4 && (
+                              <div className="text-gray-400 text-xs italic">
+                                +{education.skills.length - 4} autres compétences...
                               </div>
                             )}
                           </div>
-                        </div>
-                      ))}
+                        )}
+                      </div>
                     </div>
-                  )}
-                </div>
+                  ))}
 
-                {/* Completed Education */}
-                {completedEducation.map((education) => (
-                  <div key={education.id} className="relative pl-20 pb-12">
-                    <div className="absolute left-6 top-4 w-5 h-5 rounded-full bg-green-500 border-4 border-gray-800"></div>
-                    <div className="bg-green-900/20 rounded-2xl p-6 border border-green-800/30">
-                      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 gap-6">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                          <img
-                            src={education.logo}
-                            alt={education.school}
-                            className="w-16 h-auto"
-                          />
-                          <div>
-                            <h4 className="text-xl font-bold text-white mb-2">
-                              {education.title}
-                            </h4>
-                            <p className="text-gray-400">
-                              {education.school}
-                            </p>
+                  {/* Past Education Toggle */}
+                  <div className="relative pl-16 mb-6">
+                    <button
+                      onClick={() => setShowPastEducation(!showPastEducation)}
+                      className="flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-colors font-semibold text-sm"
+                    >
+                      {showPastEducation ? (
+                        <>
+                          <ChevronUp size={14} />
+                          <span>Masquer formations non terminées</span>
+                        </>
+                      ) : (
+                        <>
+                          <ChevronDown size={14} />
+                          <span>Afficher formations non terminées</span>
+                        </>
+                      )}
+                    </button>
+
+                    {showPastEducation && (
+                      <div className="mt-6 space-y-6">
+                        {incompleteEducation.map((education) => (
+                          <div key={education.id} className="relative -ml-16 pl-16">
+                            <div className="absolute left-5 top-3 w-3 h-3 rounded-full bg-red-500 border-2 border-gray-800"></div>
+                            <div className="bg-red-900/20 rounded-xl p-4 border border-red-800/30">
+                              <div className="flex flex-col gap-3 mb-4">
+                                <div className="flex items-center gap-3">
+                                  <img
+                                    src={education.logo}
+                                    alt={education.school}
+                                    className="w-10 h-auto"
+                                  />
+                                  <div className="flex-1">
+                                    <h4 className="text-lg font-bold text-white mb-1">
+                                      {education.title}
+                                    </h4>
+                                    <p className="text-gray-400 text-sm">
+                                      {education.school}
+                                    </p>
+                                  </div>
+                                  <span className="px-2 py-1 bg-red-900/30 text-red-400 rounded-full font-semibold text-xs">
+                                    {education.period}
+                                  </span>
+                                </div>
+                              </div>
+                              
+                              <p className="text-gray-400 mb-4 leading-relaxed text-sm">
+                                {education.description}
+                              </p>
+                              
+                              {education.reason && (
+                                <div className="mt-3 inline-flex px-2 py-1 bg-red-900/30 text-red-400 rounded-full font-semibold text-xs">
+                                  Non validé - {education.reason}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Completed Education */}
+                  {completedEducation.map((education) => (
+                    <div key={education.id} className="relative pl-16 pb-8">
+                      <div className="absolute left-5 top-3 w-3 h-3 rounded-full bg-green-500 border-2 border-gray-800"></div>
+                      <div className="bg-green-900/20 rounded-xl p-4 border border-green-800/30">
+                        <div className="flex flex-col gap-3 mb-4">
+                          <div className="flex items-center gap-3">
+                            <img
+                              src={education.logo}
+                              alt={education.school}
+                              className="w-10 h-auto"
+                            />
+                            <div className="flex-1">
+                              <h4 className="text-lg font-bold text-white mb-1">
+                                {education.title}
+                              </h4>
+                              <p className="text-gray-400 text-sm">
+                                {education.school}
+                              </p>
+                            </div>
+                            <span className="px-2 py-1 bg-green-900/30 text-green-400 rounded-full font-semibold text-xs">
+                              {education.period}
+                            </span>
                           </div>
                         </div>
-                        <span className="px-3 py-1 bg-green-900/30 text-green-400 rounded-full font-semibold text-sm">
-                          {education.period}
-                        </span>
+                        
+                        <p className="text-gray-400 mb-4 leading-relaxed text-sm">
+                          {education.description}
+                        </p>
+                        
+                        {education.mention && (
+                          <div className="mt-3 inline-flex px-2 py-1 bg-green-900/30 text-green-400 rounded-full font-semibold text-xs">
+                            Mention {education.mention}
+                          </div>
+                        )}
+                        
+                        {education.skills && (
+                          <div className="grid grid-cols-1 gap-2 mt-4">
+                            {education.skills.slice(0, 4).map((skill, index) => (
+                              <div
+                                key={index}
+                                className="flex items-center gap-2"
+                              >
+                                <ChevronRight className="w-3 h-3 text-blue-500 flex-shrink-0" />
+                                <span className="text-gray-300 text-xs">
+                                  {skill}
+                                </span>
+                              </div>
+                            ))}
+                            {education.skills && education.skills.length > 4 && (
+                              <div className="text-gray-400 text-xs italic">
+                                +{education.skills.length - 4} autres compétences...
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
-                      <p className="text-gray-400 mb-6 leading-relaxed">
-                        {education.description}
-                      </p>
-                      {education.mention && (
-                        <div className="mt-4 inline-flex px-3 py-1 bg-green-900/30 text-green-400 rounded-full font-semibold text-sm">
-                          Mention {education.mention}
-                        </div>
-                      )}
-                      {education.skills && (
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-6">
-                          {education.skills.map((skill, index) => (
-                            <div
-                              key={index}
-                              className="flex items-center gap-2"
-                            >
-                              <ChevronRight className="w-4 h-4 text-blue-500 flex-shrink-0" />
-                              <span className="text-gray-300 text-sm">
-                                {skill}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
