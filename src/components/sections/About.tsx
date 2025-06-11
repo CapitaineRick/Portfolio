@@ -19,8 +19,13 @@ import {
   FileText,
   ChevronRight,
   ExternalLink,
+  Building,
+  Clock,
+  Target,
+  CheckCircle2,
 } from "lucide-react";
 import { educationData } from "../../data/educationData";
+import { experienceData } from "../../data/experienceData";
 
 
 const About: React.FC = () => {
@@ -160,17 +165,17 @@ const About: React.FC = () => {
                     </div>
                     <div className="bg-gray-700/50 rounded-2xl p-4 text-center border border-gray-600">
                       <div className="text-2xl font-bold text-orange-500 mb-1">
-                        -
+                        {experienceData.length}
                       </div>
                       <div className="text-sm text-gray-400">
-                        Certifications
+                        Expériences pro
                       </div>
                     </div>
                     <div className="bg-gray-700/50 rounded-2xl p-4 text-center border border-gray-600">
                       <div className="text-2xl font-bold text-orange-500 mb-1">
-                        2
+                        3
                       </div>
-                      <div className="text-sm text-gray-400">Expérience pro</div>
+                      <div className="text-sm text-gray-400">Mois de stage</div>
                     </div>
                   </div>
 
@@ -276,6 +281,125 @@ const About: React.FC = () => {
                         </ul>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Professional Experience Section */}
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-blue-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <div className="relative bg-gray-800 rounded-3xl p-8 border border-gray-700">
+                  <div className="flex items-center gap-6 mb-8">
+                    <div className="p-4 bg-green-900/30 rounded-2xl flex-shrink-0">
+                      <Briefcase className="w-7 h-7 text-green-500" />
+                    </div>
+                    <h3 className="text-3xl font-bold text-white">
+                      Expériences Professionnelles
+                    </h3>
+                  </div>
+
+                  <div className="space-y-8">
+                    {experienceData.map((experience) => (
+                      <div key={experience.id} className="bg-green-900/20 rounded-2xl p-6 border border-green-800/30">
+                        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6 gap-6">
+                          <div className="flex flex-col lg:flex-row lg:items-center gap-6">
+                            <img
+                              src={experience.logo}
+                              alt={experience.company}
+                              className="w-20 h-auto"
+                            />
+                            <div>
+                              <h4 className="text-2xl font-bold text-white mb-2">
+                                {experience.title}
+                              </h4>
+                              <p className="text-green-400 text-lg font-semibold mb-1">
+                                {experience.company}
+                              </p>
+                              <div className="flex items-center gap-4 text-gray-400">
+                                <div className="flex items-center gap-2">
+                                  <Calendar className="w-4 h-4" />
+                                  <span>{experience.period}</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <MapPin className="w-4 h-4" />
+                                  <span>{experience.location}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <span className={`px-4 py-2 rounded-full font-semibold ${
+                            experience.type === 'stage' 
+                              ? 'bg-blue-900/30 text-blue-400'
+                              : experience.type === 'alternance'
+                                ? 'bg-purple-900/30 text-purple-400'
+                                : 'bg-green-900/30 text-green-400'
+                          }`}>
+                            {experience.type === 'stage' ? 'Stage' : 
+                             experience.type === 'alternance' ? 'Alternance' : 'Emploi'}
+                          </span>
+                        </div>
+
+                        <p className="text-gray-400 mb-6 leading-relaxed">
+                          {experience.description}
+                        </p>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                          {/* Missions */}
+                          <div className="bg-gray-700/50 rounded-xl p-4">
+                            <h5 className="font-bold text-lg mb-4 text-green-400 flex items-center gap-2">
+                              <Target className="w-5 h-5" />
+                              Missions principales
+                            </h5>
+                            <ul className="space-y-2">
+                              {experience.missions.map((mission, index) => (
+                                <li key={index} className="flex items-start gap-3">
+                                  <ChevronRight className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                                  <span className="text-gray-300 text-sm">{mission}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          {/* Technologies */}
+                          {experience.technologies && (
+                            <div className="bg-gray-700/50 rounded-xl p-4">
+                              <h5 className="font-bold text-lg mb-4 text-blue-400 flex items-center gap-2">
+                                <Monitor className="w-5 h-5" />
+                                Technologies utilisées
+                              </h5>
+                              <div className="flex flex-wrap gap-2">
+                                {experience.technologies.map((tech, index) => (
+                                  <span
+                                    key={index}
+                                    className="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-lg text-sm font-medium"
+                                  >
+                                    {tech}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Achievements */}
+                        {experience.achievements && (
+                          <div className="mt-6 bg-gray-700/50 rounded-xl p-4">
+                            <h5 className="font-bold text-lg mb-4 text-orange-400 flex items-center gap-2">
+                              <Award className="w-5 h-5" />
+                              Réalisations et apprentissages
+                            </h5>
+                            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+                              {experience.achievements.map((achievement, index) => (
+                                <li key={index} className="flex items-start gap-3">
+                                  <CheckCircle2 className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5" />
+                                  <span className="text-gray-300 text-sm">{achievement}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
