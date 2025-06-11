@@ -84,15 +84,15 @@ const About: React.FC = () => {
           ref={aboutRef}
           className="transition-all duration-300 opacity-0 translate-y-10"
         >
-          {/* Profile Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 lg:mb-16">
-            {/* Profile Card */}
-            <div className="lg:col-span-1">
-              <div className="relative group">
+          {/* Profile Section - Optimized Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mb-12 lg:mb-16">
+            {/* Profile Card - Reduced width */}
+            <div className="lg:col-span-4">
+              <div className="relative group h-full">
                 <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 h-full">
+                <div className="relative bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 h-full flex flex-col">
                   {/* Profile Image */}
-                  <div className="relative w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 md:mb-6">
+                  <div className="relative w-28 h-28 md:w-36 md:h-36 mx-auto mb-6">
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-purple-500 rounded-full animate-spin-slow"></div>
                     <div className="absolute inset-2 bg-gray-800 rounded-full overflow-hidden">
                       <img
@@ -104,23 +104,27 @@ const About: React.FC = () => {
                   </div>
 
                   {/* Personal Info */}
-                  <div className="text-center mb-4 md:mb-6">
-                    <h3 className="text-lg md:text-xl font-bold mb-2 text-white">
+                  <div className="text-center mb-6">
+                    <h3 className="text-xl md:text-2xl font-bold mb-2 text-white">
                       Fernandes Sébastien
                     </h3>
-                    <p className="text-orange-400 font-semibold text-sm md:text-base">
+                    <p className="text-orange-400 font-semibold text-base md:text-lg">
                       Étudiant en BTS SIO SISR
                     </p>
                   </div>
 
                   {/* Contact Details */}
-                  <div className="space-y-2 md:space-y-3 mb-4 md:mb-6">
-                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm">
-                      <MapPin className="w-3 h-3 md:w-4 md:h-4 text-orange-500 flex-shrink-0" />
+                  <div className="space-y-3 mb-6 flex-grow">
+                    <div className="flex items-center gap-3 text-gray-300 text-sm">
+                      <div className="p-2 bg-orange-900/30 rounded-lg flex-shrink-0">
+                        <MapPin className="w-4 h-4 text-orange-500" />
+                      </div>
                       <span>Versailles, France</span>
                     </div>
-                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm">
-                      <Mail className="w-3 h-3 md:w-4 md:h-4 text-orange-500 flex-shrink-0" />
+                    <div className="flex items-center gap-3 text-gray-300 text-sm">
+                      <div className="p-2 bg-orange-900/30 rounded-lg flex-shrink-0">
+                        <Mail className="w-4 h-4 text-orange-500" />
+                      </div>
                       <a
                         href="mailto:sebastien.78.fernandes@outlook.fr"
                         className="hover:text-orange-500 transition-colors break-all"
@@ -128,8 +132,10 @@ const About: React.FC = () => {
                         sebastien.78.fernandes@outlook.fr
                       </a>
                     </div>
-                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm">
-                      <Globe className="w-3 h-3 md:w-4 md:h-4 text-orange-500 flex-shrink-0" />
+                    <div className="flex items-center gap-3 text-gray-300 text-sm">
+                      <div className="p-2 bg-orange-900/30 rounded-lg flex-shrink-0">
+                        <Globe className="w-4 h-4 text-orange-500" />
+                      </div>
                       <a
                         href="https://github.com/CapitaineRick"
                         target="_blank"
@@ -142,31 +148,31 @@ const About: React.FC = () => {
                   </div>
 
                   {/* Quick Stats */}
-                  <div className="grid grid-cols-2 gap-2 md:gap-3 mb-4 md:mb-6">
-                    <div className="bg-gray-700/50 rounded-lg md:rounded-xl p-2 md:p-3 text-center border border-gray-600">
-                      <div className="text-base md:text-lg font-bold text-orange-500 mb-1">
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    <div className="bg-gray-700/50 rounded-xl p-3 text-center border border-gray-600">
+                      <div className="text-xl font-bold text-orange-500 mb-1">
                         {ongoingEducation.length + completedEducation.length}
                       </div>
                       <div className="text-xs text-gray-400">
                         Années d'études
                       </div>
                     </div>
-                    <div className="bg-gray-700/50 rounded-lg md:rounded-xl p-2 md:p-3 text-center border border-gray-600">
-                      <div className="text-base md:text-lg font-bold text-orange-500 mb-1">
+                    <div className="bg-gray-700/50 rounded-xl p-3 text-center border border-gray-600">
+                      <div className="text-xl font-bold text-orange-500 mb-1">
                         15+
                       </div>
                       <div className="text-xs text-gray-400">Projets</div>
                     </div>
-                    <div className="bg-gray-700/50 rounded-lg md:rounded-xl p-2 md:p-3 text-center border border-gray-600">
-                      <div className="text-base md:text-lg font-bold text-orange-500 mb-1">
+                    <div className="bg-gray-700/50 rounded-xl p-3 text-center border border-gray-600">
+                      <div className="text-xl font-bold text-orange-500 mb-1">
                         {experienceData.length}
                       </div>
                       <div className="text-xs text-gray-400">
                         Expériences pro
                       </div>
                     </div>
-                    <div className="bg-gray-700/50 rounded-lg md:rounded-xl p-2 md:p-3 text-center border border-gray-600">
-                      <div className="text-base md:text-lg font-bold text-orange-500 mb-1">
+                    <div className="bg-gray-700/50 rounded-xl p-3 text-center border border-gray-600">
+                      <div className="text-xl font-bold text-orange-500 mb-1">
                         3
                       </div>
                       <div className="text-xs text-gray-400">Mois de stage</div>
@@ -177,32 +183,32 @@ const About: React.FC = () => {
                   <a
                     href="/public/docs/fernandes-sebastien-cv.pdf"
                     download
-                    className="w-full px-3 md:px-4 py-2 md:py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-lg md:rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity font-semibold shadow-lg text-sm md:text-base"
+                    className="w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity font-semibold shadow-lg"
                   >
-                    <FileText className="w-3 h-3 md:w-4 md:h-4" />
+                    <FileText className="w-4 h-4" />
                     Télécharger mon CV
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* About Me & Strengths */}
-            <div className="lg:col-span-2 space-y-6 md:space-y-8">
+            {/* About Me & Strengths - Increased width */}
+            <div className="lg:col-span-8 space-y-6">
               {/* About Me Section */}
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700">
-                  <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                    <div className="p-2 md:p-3 bg-orange-900/30 rounded-lg md:rounded-xl flex-shrink-0">
-                      <User className="w-5 h-5 md:w-6 md:h-6 text-orange-500" />
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 bg-orange-900/30 rounded-xl flex-shrink-0">
+                      <User className="w-6 h-6 text-orange-500" />
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-white">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white">
                       Qui suis-je ?
                     </h3>
                   </div>
 
-                  <div className="space-y-3 md:space-y-4">
-                    <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                  <div className="space-y-4">
+                    <p className="text-gray-300 leading-relaxed text-base md:text-lg">
                       Je suis un étudiant passionné en BTS SIO avec une
                       spécialisation en SISR à l'IPSSI de Saint Quentin en
                       Yvelines. Ma formation me permet d'acquérir des
@@ -210,7 +216,7 @@ const About: React.FC = () => {
                       déploiement et la maintenance d'infrastructures
                       informatiques.
                     </p>
-                    <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                    <p className="text-gray-300 leading-relaxed text-base md:text-lg">
                       Mon objectif est de devenir administrateur systèmes &
                       réseaux ou dans plusieurs années pentester, en mettant à
                       profit ma rigueur, ma logique et mon autonomie.
@@ -220,51 +226,51 @@ const About: React.FC = () => {
               </div>
 
               {/* Strengths & Interests */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                <div className="bg-gray-800 rounded-xl md:rounded-2xl p-4 md:p-6 border border-gray-700">
-                  <h4 className="font-bold text-base md:text-lg mb-3 md:mb-4 text-orange-400">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                  <h4 className="font-bold text-lg mb-4 text-orange-400">
                     Points forts
                   </h4>
-                  <ul className="space-y-2 md:space-y-3">
-                    <li className="flex items-center gap-2 md:gap-3">
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0"></div>
-                      <span className="text-gray-300 text-sm md:text-base">Autonomie</span>
+                      <span className="text-gray-300 text-base">Autonomie</span>
                     </li>
-                    <li className="flex items-center gap-2 md:gap-3">
+                    <li className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0"></div>
-                      <span className="text-gray-300 text-sm md:text-base">Rigueur</span>
+                      <span className="text-gray-300 text-base">Rigueur</span>
                     </li>
-                    <li className="flex items-center gap-2 md:gap-3">
+                    <li className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0"></div>
-                      <span className="text-gray-300 text-sm md:text-base">Esprit d'équipe</span>
+                      <span className="text-gray-300 text-base">Esprit d'équipe</span>
                     </li>
-                    <li className="flex items-center gap-2 md:gap-3">
+                    <li className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0"></div>
-                      <span className="text-gray-300 text-sm md:text-base">Capacité d'adaptation</span>
+                      <span className="text-gray-300 text-base">Capacité d'adaptation</span>
                     </li>
                   </ul>
                 </div>
 
-                <div className="bg-gray-800 rounded-xl md:rounded-2xl p-4 md:p-6 border border-gray-700">
-                  <h4 className="font-bold text-base md:text-lg mb-3 md:mb-4 text-purple-400">
+                <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                  <h4 className="font-bold text-lg mb-4 text-purple-400">
                     Centres d'intérêt
                   </h4>
-                  <ul className="space-y-2 md:space-y-3">
-                    <li className="flex items-center gap-2 md:gap-3">
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
-                      <span className="text-gray-300 text-sm md:text-base">Cybersécurité</span>
+                      <span className="text-gray-300 text-base">Cybersécurité</span>
                     </li>
-                    <li className="flex items-center gap-2 md:gap-3">
+                    <li className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
-                      <span className="text-gray-300 text-sm md:text-base">Nouvelles technologies</span>
+                      <span className="text-gray-300 text-base">Nouvelles technologies</span>
                     </li>
-                    <li className="flex items-center gap-2 md:gap-3">
+                    <li className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
-                      <span className="text-gray-300 text-sm md:text-base">Impressions 3D</span>
+                      <span className="text-gray-300 text-base">Impressions 3D</span>
                     </li>
-                    <li className="flex items-center gap-2 md:gap-3">
+                    <li className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
-                      <span className="text-gray-300 text-sm md:text-base">Volley-ball</span>
+                      <span className="text-gray-300 text-base">Volley-ball</span>
                     </li>
                   </ul>
                 </div>
@@ -272,41 +278,41 @@ const About: React.FC = () => {
             </div>
           </div>
 
-          {/* Experience & Education in Parallel */}
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
+          {/* Experience & Education in Parallel - Equal Heights */}
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
             
             {/* Professional Experience Section */}
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-blue-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-              <div className="relative bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 h-full">
-                <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-                  <div className="p-2 md:p-3 bg-green-900/30 rounded-lg md:rounded-xl flex-shrink-0">
-                    <Briefcase className="w-5 h-5 md:w-6 md:h-6 text-green-500" />
+              <div className="relative bg-gray-800 rounded-3xl p-8 border border-gray-700 h-full">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 bg-green-900/30 rounded-xl flex-shrink-0">
+                    <Briefcase className="w-6 h-6 text-green-500" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white">
                     Expériences Professionnelles
                   </h3>
                 </div>
 
-                <div className="space-y-4 md:space-y-6">
+                <div className="space-y-6">
                   {experienceData.map((experience) => (
-                    <div key={experience.id} className="bg-green-900/20 rounded-lg md:rounded-xl p-4 md:p-6 border border-green-800/30">
-                      <div className="flex flex-col gap-3 md:gap-4 mb-3 md:mb-4">
-                        <div className="flex items-start gap-3 md:gap-4">
+                    <div key={experience.id} className="bg-green-900/20 rounded-xl p-6 border border-green-800/30">
+                      <div className="flex flex-col gap-4 mb-4">
+                        <div className="flex items-start gap-4">
                           <img
                             src={experience.logo}
                             alt={experience.company}
-                            className="w-8 h-8 md:w-12 md:h-auto object-contain flex-shrink-0"
+                            className="w-12 h-auto object-contain flex-shrink-0"
                           />
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-base md:text-lg font-bold text-white mb-1">
+                            <h4 className="text-lg font-bold text-white mb-1">
                               {experience.title}
                             </h4>
-                            <p className="text-green-400 font-semibold text-xs md:text-sm">
+                            <p className="text-green-400 font-semibold text-sm">
                               {experience.company}
                             </p>
                           </div>
-                          <span className={`px-2 py-1 rounded-full font-semibold text-xs flex-shrink-0 ${
+                          <span className={`px-3 py-1 rounded-full font-semibold text-xs flex-shrink-0 ${
                             experience.type === 'stage' 
                               ? 'bg-blue-900/30 text-blue-400'
                               : experience.type === 'alternance'
@@ -318,38 +324,38 @@ const About: React.FC = () => {
                           </span>
                         </div>
                         
-                        <div className="flex flex-col sm:flex-row gap-2 text-gray-400 text-xs md:text-sm">
-                          <div className="flex items-center gap-1 md:gap-2">
-                            <Calendar className="w-3 h-3 flex-shrink-0" />
+                        <div className="flex flex-col sm:flex-row gap-2 text-gray-400 text-sm">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4 flex-shrink-0" />
                             <span>{experience.period}</span>
                           </div>
-                          <div className="flex items-center gap-1 md:gap-2">
-                            <MapPin className="w-3 h-3 flex-shrink-0" />
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-4 h-4 flex-shrink-0" />
                             <span>{experience.location}</span>
                           </div>
                         </div>
                       </div>
 
-                      <p className="text-gray-400 mb-3 md:mb-4 leading-relaxed text-xs md:text-sm">
+                      <p className="text-gray-400 mb-4 leading-relaxed text-sm">
                         {experience.description}
                       </p>
 
                       {/* Missions */}
-                      <div className="bg-gray-700/50 rounded-lg p-3 mb-3 md:mb-4">
-                        <h5 className="font-bold mb-2 text-green-400 text-xs md:text-sm flex items-center gap-2">
-                          <Target className="w-3 h-3" />
+                      <div className="bg-gray-700/50 rounded-lg p-4 mb-4">
+                        <h5 className="font-bold mb-3 text-green-400 text-sm flex items-center gap-2">
+                          <Target className="w-4 h-4" />
                           Missions principales
                         </h5>
-                        <ul className="space-y-1">
-                          {experience.missions.slice(0, 3).map((mission, index) => (
+                        <ul className="space-y-2">
+                          {experience.missions.slice(0, 4).map((mission, index) => (
                             <li key={index} className="flex items-start gap-2">
-                              <ChevronRight className="w-3 h-3 text-green-500 flex-shrink-0 mt-0.5" />
-                              <span className="text-gray-300 text-xs">{mission}</span>
+                              <ChevronRight className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-300 text-sm">{mission}</span>
                             </li>
                           ))}
-                          {experience.missions.length > 3 && (
-                            <li className="text-gray-400 text-xs italic">
-                              +{experience.missions.length - 3} autres missions...
+                          {experience.missions.length > 4 && (
+                            <li className="text-gray-400 text-sm italic">
+                              +{experience.missions.length - 4} autres missions...
                             </li>
                           )}
                         </ul>
@@ -357,16 +363,16 @@ const About: React.FC = () => {
 
                       {/* Technologies */}
                       {experience.technologies && (
-                        <div className="bg-gray-700/50 rounded-lg p-3">
-                          <h5 className="font-bold mb-2 text-blue-400 text-xs md:text-sm flex items-center gap-2">
-                            <Monitor className="w-3 h-3" />
+                        <div className="bg-gray-700/50 rounded-lg p-4">
+                          <h5 className="font-bold mb-3 text-blue-400 text-sm flex items-center gap-2">
+                            <Monitor className="w-4 h-4" />
                             Technologies
                           </h5>
-                          <div className="flex flex-wrap gap-1">
+                          <div className="flex flex-wrap gap-2">
                             {experience.technologies.map((tech, index) => (
                               <span
                                 key={index}
-                                className="px-2 py-1 bg-blue-900/30 text-blue-300 rounded text-xs font-medium"
+                                className="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-lg text-sm font-medium"
                               >
                                 {tech}
                               </span>
@@ -383,46 +389,46 @@ const About: React.FC = () => {
             {/* Education Timeline */}
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-              <div className="relative bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 h-full">
-                <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-                  <div className="p-2 md:p-3 bg-blue-900/30 rounded-lg md:rounded-xl flex-shrink-0">
-                    <GraduationCap className="w-5 h-5 md:w-6 md:h-6 text-blue-500" />
+              <div className="relative bg-gray-800 rounded-3xl p-8 border border-gray-700 h-full">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 bg-blue-900/30 rounded-xl flex-shrink-0">
+                    <GraduationCap className="w-6 h-6 text-blue-500" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white">
                     Parcours Académique
                   </h3>
                 </div>
 
                 <div className="relative">
-                  <div className="absolute left-4 md:left-6 top-0 h-full w-0.5 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
+                  <div className="absolute left-6 top-0 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
 
                   {/* Current Education */}
                   {ongoingEducation.map((education) => (
-                    <div key={education.id} className="relative pl-12 md:pl-16 pb-6 md:pb-8">
-                      <div className="absolute left-3 md:left-5 top-3 w-2 h-2 md:w-3 md:h-3 rounded-full bg-blue-500 border-2 border-gray-800"></div>
-                      <div className="bg-blue-900/20 rounded-lg md:rounded-xl p-3 md:p-4 border border-blue-800/30">
-                        <div className="flex flex-col gap-2 md:gap-3 mb-3 md:mb-4">
-                          <div className="flex items-start gap-2 md:gap-3">
+                    <div key={education.id} className="relative pl-16 pb-8">
+                      <div className="absolute left-5 top-4 w-3 h-3 rounded-full bg-blue-500 border-4 border-gray-800"></div>
+                      <div className="bg-blue-900/20 rounded-xl p-6 border border-blue-800/30">
+                        <div className="flex flex-col gap-3 mb-4">
+                          <div className="flex items-start gap-3">
                             <img
                               src={education.logo}
                               alt={education.school}
-                              className="w-8 h-8 md:w-10 md:h-auto object-contain flex-shrink-0"
+                              className="w-12 h-auto object-contain flex-shrink-0"
                             />
                             <div className="flex-1 min-w-0">
-                              <h4 className="text-base md:text-lg font-bold text-white mb-1">
+                              <h4 className="text-lg font-bold text-white mb-1">
                                 {education.title}
                               </h4>
-                              <p className="text-gray-400 text-xs md:text-sm">
+                              <p className="text-gray-400 text-sm">
                                 {education.school}
                               </p>
                             </div>
-                            <span className="px-2 py-1 bg-blue-900/30 text-blue-400 rounded-full font-semibold text-xs flex-shrink-0">
+                            <span className="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full font-semibold text-xs flex-shrink-0">
                               {education.period}
                             </span>
                           </div>
                         </div>
                         
-                        <p className="text-gray-400 mb-3 md:mb-4 leading-relaxed text-xs md:text-sm">
+                        <p className="text-gray-400 mb-4 leading-relaxed text-sm">
                           {education.description}
                         </p>
                         
@@ -431,29 +437,29 @@ const About: React.FC = () => {
                             href=""
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-3 py-2 mt-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg text-xs md:text-sm"
+                            className="inline-flex items-center gap-2 px-4 py-2 mt-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg text-sm"
                           >
-                            <FileText className="w-3 h-3" />
+                            <FileText className="w-4 h-4" />
                             <span>Tableau de Synthèse</span>
-                            <ExternalLink className="w-3 h-3" />
+                            <ExternalLink className="w-4 h-4" />
                           </a>
                         )}
 
                         {education.skills && (
-                          <div className="grid grid-cols-1 gap-1 md:gap-2 mt-3 md:mt-4">
+                          <div className="grid grid-cols-1 gap-2 mt-4">
                             {education.skills.slice(0, 4).map((skill, index) => (
                               <div
                                 key={index}
                                 className="flex items-center gap-2"
                               >
-                                <ChevronRight className="w-3 h-3 text-blue-500 flex-shrink-0" />
-                                <span className="text-gray-300 text-xs">
+                                <ChevronRight className="w-4 h-4 text-blue-500 flex-shrink-0" />
+                                <span className="text-gray-300 text-sm">
                                   {skill}
                                 </span>
                               </div>
                             ))}
                             {education.skills.length > 4 && (
-                              <div className="text-gray-400 text-xs italic">
+                              <div className="text-gray-400 text-sm italic">
                                 +{education.skills.length - 4} autres compétences...
                               </div>
                             )}
@@ -464,57 +470,57 @@ const About: React.FC = () => {
                   ))}
 
                   {/* Past Education Toggle */}
-                  <div className="relative pl-12 md:pl-16 mb-4 md:mb-6">
+                  <div className="relative pl-16 mb-6">
                     <button
                       onClick={() => setShowPastEducation(!showPastEducation)}
-                      className="flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-colors font-semibold text-xs md:text-sm"
+                      className="flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-colors font-semibold text-sm"
                     >
                       {showPastEducation ? (
                         <>
-                          <ChevronUp size={14} />
+                          <ChevronUp size={16} />
                           <span>Masquer formations non terminées</span>
                         </>
                       ) : (
                         <>
-                          <ChevronDown size={14} />
+                          <ChevronDown size={16} />
                           <span>Afficher formations non terminées</span>
                         </>
                       )}
                     </button>
 
                     {showPastEducation && (
-                      <div className="mt-4 md:mt-6 space-y-4 md:space-y-6">
+                      <div className="mt-6 space-y-6">
                         {incompleteEducation.map((education) => (
-                          <div key={education.id} className="relative -ml-12 md:-ml-16 pl-12 md:pl-16">
-                            <div className="absolute left-3 md:left-5 top-3 w-2 h-2 md:w-3 md:h-3 rounded-full bg-red-500 border-2 border-gray-800"></div>
-                            <div className="bg-red-900/20 rounded-lg md:rounded-xl p-3 md:p-4 border border-red-800/30">
-                              <div className="flex flex-col gap-2 md:gap-3 mb-3 md:mb-4">
-                                <div className="flex items-start gap-2 md:gap-3">
+                          <div key={education.id} className="relative -ml-16 pl-16">
+                            <div className="absolute left-5 top-4 w-3 h-3 rounded-full bg-red-500 border-4 border-gray-800"></div>
+                            <div className="bg-red-900/20 rounded-xl p-6 border border-red-800/30">
+                              <div className="flex flex-col gap-3 mb-4">
+                                <div className="flex items-start gap-3">
                                   <img
                                     src={education.logo}
                                     alt={education.school}
-                                    className="w-8 h-8 md:w-10 md:h-auto object-contain flex-shrink-0"
+                                    className="w-12 h-auto object-contain flex-shrink-0"
                                   />
                                   <div className="flex-1 min-w-0">
-                                    <h4 className="text-base md:text-lg font-bold text-white mb-1">
+                                    <h4 className="text-lg font-bold text-white mb-1">
                                       {education.title}
                                     </h4>
-                                    <p className="text-gray-400 text-xs md:text-sm">
+                                    <p className="text-gray-400 text-sm">
                                       {education.school}
                                     </p>
                                   </div>
-                                  <span className="px-2 py-1 bg-red-900/30 text-red-400 rounded-full font-semibold text-xs flex-shrink-0">
+                                  <span className="px-3 py-1 bg-red-900/30 text-red-400 rounded-full font-semibold text-xs flex-shrink-0">
                                     {education.period}
                                   </span>
                                 </div>
                               </div>
                               
-                              <p className="text-gray-400 mb-3 md:mb-4 leading-relaxed text-xs md:text-sm">
+                              <p className="text-gray-400 mb-4 leading-relaxed text-sm">
                                 {education.description}
                               </p>
                               
                               {education.reason && (
-                                <div className="mt-3 inline-flex px-2 py-1 bg-red-900/30 text-red-400 rounded-full font-semibold text-xs">
+                                <div className="mt-3 inline-flex px-3 py-1 bg-red-900/30 text-red-400 rounded-full font-semibold text-sm">
                                   Non validé - {education.reason}
                                 </div>
                               )}
@@ -527,55 +533,55 @@ const About: React.FC = () => {
 
                   {/* Completed Education */}
                   {completedEducation.map((education) => (
-                    <div key={education.id} className="relative pl-12 md:pl-16 pb-6 md:pb-8">
-                      <div className="absolute left-3 md:left-5 top-3 w-2 h-2 md:w-3 md:h-3 rounded-full bg-green-500 border-2 border-gray-800"></div>
-                      <div className="bg-green-900/20 rounded-lg md:rounded-xl p-3 md:p-4 border border-green-800/30">
-                        <div className="flex flex-col gap-2 md:gap-3 mb-3 md:mb-4">
-                          <div className="flex items-start gap-2 md:gap-3">
+                    <div key={education.id} className="relative pl-16 pb-8">
+                      <div className="absolute left-5 top-4 w-3 h-3 rounded-full bg-green-500 border-4 border-gray-800"></div>
+                      <div className="bg-green-900/20 rounded-xl p-6 border border-green-800/30">
+                        <div className="flex flex-col gap-3 mb-4">
+                          <div className="flex items-start gap-3">
                             <img
                               src={education.logo}
                               alt={education.school}
-                              className="w-8 h-8 md:w-10 md:h-auto object-contain flex-shrink-0"
+                              className="w-12 h-auto object-contain flex-shrink-0"
                             />
                             <div className="flex-1 min-w-0">
-                              <h4 className="text-base md:text-lg font-bold text-white mb-1">
+                              <h4 className="text-lg font-bold text-white mb-1">
                                 {education.title}
                               </h4>
-                              <p className="text-gray-400 text-xs md:text-sm">
+                              <p className="text-gray-400 text-sm">
                                 {education.school}
                               </p>
                             </div>
-                            <span className="px-2 py-1 bg-green-900/30 text-green-400 rounded-full font-semibold text-xs flex-shrink-0">
+                            <span className="px-3 py-1 bg-green-900/30 text-green-400 rounded-full font-semibold text-xs flex-shrink-0">
                               {education.period}
                             </span>
                           </div>
                         </div>
                         
-                        <p className="text-gray-400 mb-3 md:mb-4 leading-relaxed text-xs md:text-sm">
+                        <p className="text-gray-400 mb-4 leading-relaxed text-sm">
                           {education.description}
                         </p>
                         
                         {education.mention && (
-                          <div className="mt-3 inline-flex px-2 py-1 bg-green-900/30 text-green-400 rounded-full font-semibold text-xs">
+                          <div className="mt-3 inline-flex px-3 py-1 bg-green-900/30 text-green-400 rounded-full font-semibold text-sm">
                             Mention {education.mention}
                           </div>
                         )}
                         
                         {education.skills && (
-                          <div className="grid grid-cols-1 gap-1 md:gap-2 mt-3 md:mt-4">
+                          <div className="grid grid-cols-1 gap-2 mt-4">
                             {education.skills.slice(0, 4).map((skill, index) => (
                               <div
                                 key={index}
                                 className="flex items-center gap-2"
                               >
-                                <ChevronRight className="w-3 h-3 text-blue-500 flex-shrink-0" />
-                                <span className="text-gray-300 text-xs">
+                                <ChevronRight className="w-4 h-4 text-blue-500 flex-shrink-0" />
+                                <span className="text-gray-300 text-sm">
                                   {skill}
                                 </span>
                               </div>
                             ))}
                             {education.skills && education.skills.length > 4 && (
-                              <div className="text-gray-400 text-xs italic">
+                              <div className="text-gray-400 text-sm italic">
                                 +{education.skills.length - 4} autres compétences...
                               </div>
                             )}
