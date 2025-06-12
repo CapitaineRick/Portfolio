@@ -11,60 +11,6 @@ export const projectsData = {
   ],
   school: [
     {
-      id: 'ap1',
-      title: 'AP-1',
-      description: "Création de l'entreprise revive",
-      image: '/docs/AP1/logo_revive_nobg.png',
-      documents: [
-        {
-          title: 'Présentation Revive',
-          url: '/docs/AP1/présentation_revive.pdf',
-          description: 'Présentation détaillée de l\'entreprise'
-        },
-        {
-          title: 'Bon de commande',
-          url: '/docs/AP1/bon_commande.pdf',
-          description: 'Bon de commande type'
-        },
-        {
-          title: 'Contrat de travail - Hajar',
-          url: '/docs/AP1/contrat_travail_hajar.pdf',
-          description: 'Contrat de travail'
-        },
-        {
-          title: 'Contrat de travail - Tony',
-          url: '/docs/AP1/contrat_travail_tony.pdf',
-          description: 'Contrat de travail'
-        },
-        {
-          title: 'Estimation des prix',
-          url: '/docs/AP1/estimation_prix.pdf',
-          description: 'Estimation détaillée des prix'
-        },
-        {
-          title: 'Facture exemple',
-          url: '/docs/AP1/facture_f33000001.pdf',
-          description: 'Exemple de facture'
-        },
-        {
-          title: 'Fiche de poste Marketing',
-          url: '/docs/AP1/fiche_de_poste_marketing.pdf',
-          description: 'Description du poste Marketing'
-        },
-        {
-          title: 'KBIS Revive',
-          url: '/docs/AP1/kbis_revive.pdf',
-          description: 'Extrait KBIS de l\'entreprise'
-        },
-        {
-          title: 'Template Devis',
-          url: '/docs/AP1/template_devis.pdf',
-          description: 'Modèle de devis'
-        }
-      ],
-      tags: ['Gestion de projet', 'Entrepreneuriat', 'Documentation']
-    },
-    {
       id: 'ap2',
       title: 'AP-2',
       description: 'Problématique de la M2L',
