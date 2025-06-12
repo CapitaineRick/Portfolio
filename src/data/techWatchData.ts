@@ -1,1 +1,1 @@
-https://cdn.jsdelivr.net/gh/CapitaineRick/Portfolio@76d2d0d06a7a7dede21d4e07fbf29563759ae090/src/data/techWatchData.ts
+export const techWatchData: any[] = [];
