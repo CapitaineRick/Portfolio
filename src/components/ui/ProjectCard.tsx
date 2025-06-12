@@ -177,6 +177,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     setShowDropdown(!showDropdown);
   };
 
+  const handleDemoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (project.demoUrl) {
+      window.location.href = project.demoUrl;
+    }
+  };
+
   // Dropdown component to be rendered in portal
   const DropdownMenu = () => {
     if (!showDropdown || !project.documents) return null;
@@ -314,14 +322,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
               </div>
 
               {project.demoUrl && (
-                <a
-                  href={project.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={handleDemoClick}
                   className="p-2 rounded-xl bg-gray-700 text-gray-400 hover:text-orange-500 transition-colors"
+                  title="Aller vers le site"
                 >
                   <ExternalLink size={16} />
-                </a>
+                </button>
               )}
             </div>
           </div>
