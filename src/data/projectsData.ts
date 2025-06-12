@@ -15,7 +15,6 @@ export const projectsData = {
       title: 'AP-1',
       description: "Création de l'entreprise revive",
       image: '/docs/AP1/logo_revive_nobg.png',
-      demoUrl: '/AP1/index.html',
       documents: [
         {
           title: 'Présentation Revive',
@@ -63,7 +62,7 @@ export const projectsData = {
           description: 'Modèle de devis'
         }
       ],
-      tags: ['Gestion de projet', 'Entrepreneuriat', 'Documentation', 'Site Web']
+      tags: ['Gestion de projet', 'Entrepreneuriat', 'Documentation']
     },
     {
       id: 'ap2',
