@@ -1,0 +1,3 @@
+[submodule "public/docs/Revive"]
+	path = public/docs/Revive
+	url = https://github.com/CapitaineRick/Revive.git
