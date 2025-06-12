@@ -91,14 +91,20 @@ const About: React.FC = () => {
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 h-full">
-                  {/* Profile Image - Agrandie */}
+                  {/* Profile Image - Optimisée pour éviter la pixellisation */}
                   <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 md:mb-6">
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-purple-500 rounded-full animate-spin-slow"></div>
                     <div className="absolute inset-1 bg-gray-800 rounded-full overflow-hidden">
                       <img
                         src="/images/profile.webp"
                         alt="Profile"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-center"
+                        style={{
+                          imageRendering: 'auto',
+                          filter: 'none'
+                        }}
+                        loading="eager"
+                        decoding="sync"
                       />
                     </div>
                   </div>
