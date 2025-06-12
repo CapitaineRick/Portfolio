@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, Download, ChevronLeft, ChevronRight, FileText, ChevronDown } from 'lucide-react';
+import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, ChevronLeft, ChevronRight, FileText, ChevronDown } from 'lucide-react';
 import { Document, Page } from 'react-pdf';
 
 interface DocumentItem {
@@ -31,7 +31,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [showFullscreen, setShowFullscreen] = useState(false);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [scale, setScale] = useState(1.2); // Augmenté de 1.0 à 1.2
+  const [scale, setScale] = useState(1.2);
   const [pdfError, setPdfError] = useState<string | null>(null);
   const [selectedDocument, setSelectedDocument] = useState<DocumentItem | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -145,19 +145,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     setShowDropdown(false);
     setPageNumber(1);
     setPdfError(null);
-  };
-
-  const handleDownload = () => {
-    const fileUrl = selectedDocument?.url || project.pdfUrl;
-    if (fileUrl) {
-      const link = document.createElement('a');
-      link.href = fileUrl;
-      const fileName = fileUrl.split('/').pop() || 'document.pdf';
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
   };
 
   const handleCloseModal = () => {
@@ -347,13 +334,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                 {selectedDocument?.title || project.title}
               </h3>
               <div className="flex items-center gap-2">
-                <button
-                  onClick={handleDownload}
-                  className="p-2 rounded-xl bg-orange-900/30 text-orange-400 hover:bg-orange-900/50 transition-colors"
-                  title="Télécharger le PDF"
-                >
-                  <Download size={20} />
-                </button>
                 <button
                   onClick={handleCloseModal}
                   className="p-2 rounded-xl bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors"
