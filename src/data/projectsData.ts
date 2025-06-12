@@ -70,7 +70,8 @@ export const projectsData = {
       description: 'Problématique de la M2L',
       image: '/images/m2l-logo.webp',
       pdfUrl: '/docs/AP2.pdf',
-      tags: ['Windows', 'Active Directory', 'Déploiement logiciel']
+      demoUrl: '/AP2/index.html',
+      tags: ['Windows', 'Active Directory', 'Déploiement logiciel', 'Site Web']
     },
     {
       id: 'Proxmox',
