@@ -44,8 +44,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   // Gestion du scroll et de la touche Échap
   useEffect(() => {
     if (showFullscreen) {
-      // Bloquer le scroll de la page principale
+      // Sauvegarder la position de scroll actuelle
+      const scrollY = window.scrollY;
+      
+      // Bloquer le scroll de manière plus agressive
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
       
       // Gestionnaire pour la touche Échap
       const handleEscape = (event: KeyboardEvent) => {
@@ -55,12 +62,55 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
         }
       };
 
+      // Bloquer le scroll avec les touches
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) {
+          // Permettre le scroll seulement à l'intérieur du modal PDF
+          const target = event.target as HTMLElement;
+          const isInsideModal = target.closest('.pdf-modal-content');
+          if (!isInsideModal) {
+            event.preventDefault();
+          }
+        }
+      };
+
+      // Bloquer le scroll avec la molette
+      const handleWheel = (event: WheelEvent) => {
+        const target = event.target as HTMLElement;
+        const isInsideModal = target.closest('.pdf-modal-content');
+        if (!isInsideModal) {
+          event.preventDefault();
+        }
+      };
+
+      // Bloquer le scroll tactile
+      const handleTouchMove = (event: TouchEvent) => {
+        const target = event.target as HTMLElement;
+        const isInsideModal = target.closest('.pdf-modal-content');
+        if (!isInsideModal) {
+          event.preventDefault();
+        }
+      };
+
       document.addEventListener('keydown', handleEscape);
+      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('wheel', handleWheel, { passive: false });
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
       return () => {
-        // Restaurer le scroll et supprimer l'écouteur
-        document.body.style.overflow = 'unset';
+        // Restaurer le scroll et la position
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        window.scrollTo(0, scrollY);
+        
+        // Supprimer les écouteurs
         document.removeEventListener('keydown', handleEscape);
+        document.removeEventListener('keydown', handleKeyDown);
+        document.removeEventListener('wheel', handleWheel);
+        document.removeEventListener('touchmove', handleTouchMove);
       };
     }
   }, [showFullscreen]);
@@ -327,8 +377,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
       {/* PDF Viewer Modal */}
       {showFullscreen && (selectedDocument?.url || project.pdfUrl) && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-2">
-          <div className="bg-gray-800 rounded-2xl w-full max-w-7xl max-h-[95vh] overflow-auto p-4">
+        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
+          <div className="pdf-modal-content bg-gray-800 rounded-2xl w-full max-w-7xl max-h-[95vh] overflow-auto p-4 m-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold text-white">
                 {selectedDocument?.title || project.title}
