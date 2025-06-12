@@ -91,8 +91,8 @@ const About: React.FC = () => {
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <div className="relative bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-700 h-full">
-                  {/* Profile Image - Version haute qualité */}
-                  <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 md:mb-6">
+                  {/* Profile Image - Taille augmentée */}
+                  <div className="relative w-40 h-40 md:w-48 md:h-48 lg:w-52 lg:h-52 mx-auto mb-6 md:mb-8">
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-purple-500 rounded-full animate-spin-slow"></div>
                     <div className="absolute inset-1 bg-gray-800 rounded-full overflow-hidden p-1">
                       <div className="w-full h-full rounded-full overflow-hidden bg-gray-700">
@@ -111,8 +111,8 @@ const About: React.FC = () => {
                           }}
                           loading="eager"
                           decoding="sync"
-                          width="160"
-                          height="160"
+                          width="208"
+                          height="208"
                         />
                       </div>
                     </div>
