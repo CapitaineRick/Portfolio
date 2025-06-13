@@ -454,7 +454,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   pageNumber={pageNumber}
                   scale={scale}
                   renderTextLayer={true}
-                  renderAnnotationLayer={true}
+                  renderAnnotationLayer={false}
                   className="mx-auto"
                 />
               </Document>
