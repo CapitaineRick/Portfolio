@@ -26,8 +26,8 @@ export const educationData: Education[] = [
     skills: [
       'Administration systèmes (Windows / Linux)',
       'Gestion de réseaux (Cisco)',
-      'Sécurité des infrastructures (Proxy)',
-      'Virtualisation (VMware, Proxmox)',
+      'Sécurité des infrastructures (Proxy,Reverse Proxy, Iptables)',
+      'Virtualisation (Proxmox, Virtual Box, Vmware Workstation)',
       'Support utilisateur (GLPI)',
       'Supervision réseau (Zabbix)',
       'Scripts d’automatisation (Bash, PowerShell)'

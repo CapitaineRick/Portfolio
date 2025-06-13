@@ -9,7 +9,6 @@ export interface Experience {
   type: 'stage' | 'emploi' | 'alternance';
   missions: string[];
   technologies?: string[];
-  achievements?: string[];
 }
 
 export const experienceData: Experience[] = [
@@ -18,31 +17,23 @@ export const experienceData: Experience[] = [
     title: 'Stagiaire Support Informatique',
     company: 'KNDS France',
     logo: '/images/knds-logo.webp',
-    period: 'Mai 2024 - Juillet 2024',
+    period: 'Mai 2025 - Juin 2025',
     location: 'Versailles, France',
     description: 'Stage de première année en BTS SIO SISR au sein du service informatique de KNDS France, spécialisé dans la défense et l\'armement.',
     type: 'stage',
     missions: [
       'Support utilisateur niveau 1 et 2',
-      'Gestion et maintenance du parc informatique',
       'Administration des systèmes VoIP/ToIP AVAYA',
       'Création d\'infographies du parc informatique',
       'Résolution d\'incidents techniques',
-      'Documentation des procédures support'
+      'Documentation de procédure'
     ],
     technologies: [
       'AVAYA (VoIP/ToIP)',
       'Windows 10/11',
-      'Active Directory',
       'Outils de ticketing',
-      'Inventaire de parc'
-    ],
-    achievements: [
-      'Résolution de 95% des tickets niveau 1 en autonomie',
-      'Création d\'une cartographie complète du parc',
-      'Amélioration des procédures de support utilisateur',
-      'Formation aux technologies VoIP/ToIP'
+      'Inventaire de parc',
+      'Netbox'
     ]
   }
-  // Vous pouvez ajouter d'autres expériences ici
 ];

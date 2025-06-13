@@ -9,7 +9,7 @@ export const skillsData = [
         name: 'Windows Server',
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/2048px-Windows_logo_-_2012.svg.png',
         level: 2,
-        description: 'Compétence acquise en BTS SIO SISR via des TP et projets. Installation et configuration de services AD DS, DNS et DHCP sur des VM simulées.'
+        description: 'Compétence acquise en BTS SIO SISR via des TP et projets. Installation et configuration de services AD et DHCP sur des VM.'
       },
       {
         name: 'Windows 11',
@@ -21,7 +21,7 @@ export const skillsData = [
         name: 'Windows 10',
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/2048px-Windows_logo_-_2012.svg.png',
         level: 2,
-        description: 'Support technique acquis en BTS et en stage. Résolution d’incidents, paramétrages réseau, gestion des services et configuration système.'
+        description: 'Expérience personnelle et en environnement de test. Installation, configuration système, gestion des comptes utilisateurs et dépannage.'
       },
       {
         name: 'Linux',
@@ -33,13 +33,13 @@ export const skillsData = [
         name: 'GLPI',
         logo: 'https://www.sparks-formation.com/wp-content/uploads/2020/07/logo-glpi.png',
         level: 1,
-        description: 'Utilisé dans le cadre de projets scolaires. Installation, configuration de base, gestion des tickets et inventaire de parc informatique simulé.'
+        description: 'Utilisé dans le cadre du BTS. Installation, configuration de base, gestion des tickets et inventaire de parc informatique simulé.'
       },
       {
         name: 'Active Directory',
         logo: 'https://cdn-icons-png.flaticon.com/512/2784/2784487.png',
         level: 1,
-        description: 'Manipulation dans des environnements de TP. Création d’OU, comptes, groupes, stratégies de sécurité et GPO.'
+        description: 'Manipulation dans des environnements de TP. Création de comptes, groupes, stratégies de sécurité et GPO.'
       }
     ]
   },
@@ -67,9 +67,9 @@ export const skillsData = [
       },
       {
         name: 'VirtualBox',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/0/00/Virtualbox_logo.png',
+        logo: '/public/images/virtualbox-logo.webp',
         level: 2,
-        description: 'Virtualisation d’OS pour tests, TP et simulations. Création de réseaux internes et machines de test.'
+        description: 'Utilisé pour la virtualisation d’environnements Windows/Linux lors de projets personnels et en laboratoire scolaire.'
       },
       {
         name: 'MySQL',
@@ -111,7 +111,7 @@ export const skillsData = [
         name: 'VPN',
         logo: 'https://cdn-icons-png.flaticon.com/512/6313/6313041.png',
         level: 1,
-        description: 'Mise en place d’un VPN simple pour un projet scolaire. Concepts abordés : chiffrement, tunnels, sécurité réseau.'
+        description: 'Mise en place d’un VPN simple pour un projet personnel. Concepts abordés : chiffrement, tunnels, sécurité réseau.'
       },
       {
         name: 'Pare-feu',
@@ -129,7 +129,7 @@ export const skillsData = [
         name: 'HAProxy',
         logo: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Haproxy-logo.png',
         level: 2,
-        description: 'Utilisé en projet BTS pour répartir la charge entre plusieurs serveurs web. Explication du reverse proxy.'
+        description: 'Utilisé en projet BTS pour répartir la charge entre plusieurs serveurs web (load balancing). Rupture protocolaire via un reverse proxy.'
       },
       {
         name: 'Zabbix',
@@ -139,7 +139,7 @@ export const skillsData = [
       },
       {
         name: 'Rsync',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/e/ee/Veeam_logo.png',
+        logo: '/images/rsync-logo.webpà',
         level: 1,
         description: 'Mise en place de sauvegardes automatisées sur Linux. Scripté dans le cadre d’un projet de continuité de service.'
       }
@@ -195,7 +195,7 @@ export const skillsData = [
         name: 'PHP 7',
         logo: 'https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg',
         level: 2,
-        description: 'Développement back-end avec MySQL pour des projets de gestion. Appris au BTS via un projet CRUD.'
+        description: 'Développement back-end avec MySQL pour des projets de gestion de base de donnée.'
       },
       {
         name: 'SQL',
@@ -219,7 +219,7 @@ export const skillsData = [
         name: 'Diagrame de Gant',
         logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Merise_model.png',
         level: 2,
-        description: 'Planification de projets BTS avec diagrammes de Gantt sur GanttProject ou Excel.'
+        description: 'Planification de projets avec diagrammes de Gantt sur GanttProject ou Excel.'
       }
     ]
   },
@@ -229,16 +229,17 @@ export const skillsData = [
     skills: [
       {
         name: 'Arch Linux',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Archlinux-icon-crystal-64.svg',
+        logo: '/images/arch-logo.webp',
         level: 2,
         description: 'Autoformation poussée. Installation manuelle, configuration fine, scripts de maintenance. Utilisé en dual boot.'
       },
       {
         name: 'Debian',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/Debian-logo.svg',
+        logo: '/images/debian12-logo.webp',
         level: 2,
         description: 'Utilisée en environnement de TP. Serveurs LAMP, SSH, DNS. Appris dans le cadre du BTS.'
       }
+
     ]
   }
 ];

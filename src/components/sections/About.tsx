@@ -160,7 +160,7 @@ const About: React.FC = () => {
                   <div className="grid grid-cols-2 gap-2 md:gap-3 mb-4 md:mb-6">
                     <div className="bg-gray-700/50 rounded-lg md:rounded-xl p-2 md:p-3 text-center border border-gray-600">
                       <div className="text-base md:text-lg font-bold text-orange-500 mb-1">
-                        {ongoingEducation.length + completedEducation.length}
+                        {ongoingEducation.length + completedEducation.length-1}
                       </div>
                       <div className="text-xs text-gray-400">
                         Années d'études
@@ -170,7 +170,7 @@ const About: React.FC = () => {
                       <div className="text-base md:text-lg font-bold text-orange-500 mb-1">
                         15+
                       </div>
-                      <div className="text-xs text-gray-400">Projets</div>
+                      <div className="text-xs text-gray-400">Documentations</div>
                     </div>
                     <div className="bg-gray-700/50 rounded-lg md:rounded-xl p-2 md:p-3 text-center border border-gray-600">
                       <div className="text-base md:text-lg font-bold text-orange-500 mb-1">
@@ -182,7 +182,7 @@ const About: React.FC = () => {
                     </div>
                     <div className="bg-gray-700/50 rounded-lg md:rounded-xl p-2 md:p-3 text-center border border-gray-600">
                       <div className="text-base md:text-lg font-bold text-orange-500 mb-1">
-                        3
+                        2
                       </div>
                       <div className="text-xs text-gray-400">Mois de stage</div>
                     </div>
@@ -438,7 +438,7 @@ const About: React.FC = () => {
                         
                         {education.id === "bts-sio" && (
                           <a
-                            href=""
+                            href="/docs/tableau_synt_Fernandes.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-3 py-2 mt-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg text-xs md:text-sm"
