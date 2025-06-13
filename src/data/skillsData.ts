@@ -67,7 +67,7 @@ export const skillsData = [
       },
       {
         name: 'VirtualBox',
-        logo: '/public/images/virtualbox-logo.webp',
+        logo: '/public/images/logo-virtualbox-logo.webp',
         level: 2,
         description: 'Utilisé pour la virtualisation d’environnements Windows/Linux lors de projets personnels et en laboratoire scolaire.'
       },
@@ -229,13 +229,13 @@ export const skillsData = [
     skills: [
       {
         name: 'Arch Linux',
-        logo: '/images/arch-logo.webp',
+        logo: '/images/logo-arch-logo.webp',
         level: 2,
         description: 'Autoformation poussée. Installation manuelle, configuration fine, scripts de maintenance. Utilisé en dual boot.'
       },
       {
         name: 'Debian',
-        logo: '/images/debian12-logo.webp',
+        logo: '/images/logo-debian12-logo.webp',
         level: 2,
         description: 'Utilisée en environnement de TP. Serveurs LAMP, SSH, DNS. Appris dans le cadre du BTS.'
       }

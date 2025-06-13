@@ -16,7 +16,7 @@ export const experienceData: Experience[] = [
     id: 'stage-knds',
     title: 'Stagiaire Support Informatique',
     company: 'KNDS France',
-    logo: '/images/knds-logo.webp',
+    logo: '/images/logo-knds-logo.webp',
     period: 'Mai 2025 - Juin 2025',
     location: 'Versailles, France',
     description: 'Stage de première année en BTS SIO SISR au sein du service informatique de KNDS France, spécialisé dans la défense et l\'armement.',

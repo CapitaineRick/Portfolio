@@ -97,7 +97,7 @@ const About: React.FC = () => {
                     <div className="absolute inset-1 bg-gray-800 rounded-full overflow-hidden p-1">
                       <div className="w-full h-full rounded-full overflow-hidden bg-gray-700">
                         <img
-                          src="/images/profile.webp"
+                          src="/images/logo-profile.webp"
                           alt="Fernandes Sébastien - Profil"
                           className="w-full h-full object-cover object-center rounded-full"
                           style={{

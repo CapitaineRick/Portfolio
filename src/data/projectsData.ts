@@ -4,7 +4,7 @@ export const projectsData = {
       id: 'active-directory',
       title: 'Stage KNDS',
       description: 'Stage de première année, support utilisateur, infographie du parc et administration système',
-      image: '/images/knds-logo.webp',
+      image: '/images/logo-knds-logo.webp',
       pdfUrl: '',
       tags: ['Gestion de parc', 'VoIP/ToIP', 'AVAYA', 'Support']
     },
@@ -14,7 +14,7 @@ export const projectsData = {
       id: 'ap2',
       title: 'AP-2',
       description: 'Problématique de la M2L',
-      image: '/images/m2l-logo.webp',
+      image: '/images/logo-m2l-logo.webp',
       pdfUrl: '/docs/AP2.pdf',
       tags: ['Windows', 'Active Directory', 'Déploiement logiciel']
     },
@@ -22,7 +22,7 @@ export const projectsData = {
       id: 'Proxmox',
       title: 'Proxmox',
       description: 'Installation et configuration de Proxmox VE',
-      image: '/images/proxmox-logo.webp',
+      image: '/images/logo-proxmox-logo.webp',
       pdfUrl: '/docs/Install_Proxmox.pdf',
       tags: ['Hyperviseur', 'Virtualisation', 'Clustering']
     },
@@ -30,7 +30,7 @@ export const projectsData = {
       id: 'Docker',
       title: 'Docker',
       description: 'Installation et configuration de Docker',
-      image: '/images/Docker-Logo.webp',
+      image: '/images/logo-docker-logo.webp',
       pdfUrl: '/docs/Install_Docker.pdf',
       tags: ['Docker', 'Linux', 'Conteneurisation']
     },
@@ -38,7 +38,7 @@ export const projectsData = {
       id: 'Windows  server 2025',
       title: 'Windows Server 2025',
       description: 'Installation et configuration Windows server 2025',
-      image: '/images/winS25-logo.webp',
+      image: '/images/logo-wins25-logo.webp',
       pdfUrl: '/docs/Install_Win_S2025.pdf',
       tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
     },
@@ -46,7 +46,7 @@ export const projectsData = {
       id: 'Windows 10',
       title: 'Windows 10',
       description: 'Installation et configuration Windows 10',
-      image: '/images/win10-logo.webp',
+      image: '/images/logo-win10-logo.webp',
       pdfUrl: '/docs/Install_Win10.pdf',
       tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
     }, 
@@ -54,7 +54,7 @@ export const projectsData = {
       id: 'Windows 11',
       title: 'Windows 11',
       description: 'Installation et configuration Windows 11',
-      image: '/images/win11-logo.webp',
+      image: '/images/logo-win11-logo.webp',
       pdfUrl: '/docs/Install_Win11.pdf',
       tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
     },
@@ -62,7 +62,7 @@ export const projectsData = {
       id: 'Ubuntu',
       title: 'Ubuntu Linux',
       description: 'Installation et configuration de Ubuntu Linux',
-      image: '/images/Ubuntu-Logo.webp',
+      image: '/images/logo-ubuntu-logo.webp',
       pdfUrl: '/docs/Install_Ubuntu.pdf',
       tags: ['OS', 'Linux', 'Serveur', 'Administration système']
     },
@@ -70,7 +70,7 @@ export const projectsData = {
       id: 'HAproxy',
       title: 'HAproxy',
       description: 'Installation et configuration de HAproxy',
-      image: '/images/haproxy-logo.webp',
+      image: '/images/logo-haproxy-logo.webp',
       pdfUrl: '/docs/installation-haproxy.pdf',
       tags: ['Haute Disponibilité', 'Load Balancing']
     },
@@ -78,7 +78,7 @@ export const projectsData = {
       id: 'Kali',
       title: 'Kali Linux',
       description: 'Installation et configuration de Kali Linux',
-      image: '/images/kali-logo.webp',
+      image: '/images/logo-kali-logo.webp',
       pdfUrl: '/docs/Install_Kali.pdf',
       tags: ['Linux', 'Cybersécurité', 'Hacking', 'Pentesting', 'OS']
     },
@@ -86,7 +86,7 @@ export const projectsData = {
       id: 'Arch',
       title: 'Arch Linux',
       description: 'Installation et configuration de Arch Linux',
-      image: '/images/arch-logo.webp',
+      image: '/images/logo-arch-logo.webp',
       pdfUrl: '',
       tags: ['Linux', 'OS', 'Serveur', 'Administration système']
     },
@@ -94,7 +94,7 @@ export const projectsData = {
       id: 'Debian 12',
       title: 'Debian 12 Linux',
       description: 'Installation et configuration de Debian 12',
-      image: '/images/debian12-logo.webp',
+      image: '/images/logo-debian12-logo.webp',
       pdfUrl: '/docs/Install-debian12.pdf',
       tags: ['Linux', 'OS', 'Serveur', 'Administration système']
     },
@@ -102,7 +102,7 @@ export const projectsData = {
       id: 'Ticketing',
       title: 'GLPI',
       description: 'Installation et configuration GLPI',
-      image: '/images/logo-glpi.webp',
+      image: '/images/logo-logo-glpi.webp',
       pdfUrl: '',
       tags: ['Support', 'Inventaire']
     },
@@ -110,7 +110,7 @@ export const projectsData = {
       id: 'monitoring',
       title: 'Zabbix',
       description: 'Installation et configuration Zabbix',
-      image: '/images/Zabbix_logo.webp',
+      image: '/images/logo-zabbix-logo.webp',
       pdfUrl: '',
       tags: ['Monitoring', 'Administration système']
     },
@@ -118,7 +118,7 @@ export const projectsData = {
       id: 'Apache2',
       title: 'Apache2',
       description: 'Installation et configuration de Apache2 et module',
-      image: '/images/apache-logo.webp',
+      image: '/images/logo-apache-logo.webp',
       pdfUrl: '/docs/Install_Apache2.pdf',
       tags: ['Haute Disponibilité', 'Load Balancing', 'Web','WAF']
     },
