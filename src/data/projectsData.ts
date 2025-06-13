@@ -5,122 +5,116 @@ export const projectsData = {
       title: 'Stage KNDS',
       description: 'Stage de première année, support utilisateur, infographie du parc et administration système',
       image: '/images/logo-knds-logo.webp',
-      pdfUrl: '',
       tags: ['Gestion de parc', 'VoIP/ToIP', 'AVAYA', 'Support']
     },
   ],
   school: [
     {
+      id: 'ap1',
+      title: 'AP-1',
+      description: 'Activité Professionnelle 1 - Problématique entreprise Revive',
+      image: '/images/logo-revive-logo.webp',
+      documents: [
+        {
+          title: 'Bon de commande Revive',
+          url: '/docs/AP1/bon_commande.pdf',
+          description: 'Document de commande pour l\'entreprise Revive'
+        },
+        {
+          title: 'KBIS Revive',
+          url: '/docs/AP1/kbis_revive.pdf',
+          description: 'Extrait KBIS de l\'entreprise Revive'
+        }
+      ],
+      tags: ['Entreprise', 'Analyse', 'Documentation', 'Gestion']
+    },
+    {
       id: 'ap2',
       title: 'AP-2',
-      description: 'Problématique de la M2L',
+      description: 'Activité Professionnelle 2 - Problématique de la M2L',
       image: '/images/logo-m2l-logo.webp',
       pdfUrl: '/docs/AP2.pdf',
       tags: ['Windows', 'Active Directory', 'Déploiement logiciel']
     },
     {
-      id: 'Proxmox',
-      title: 'Proxmox',
-      description: 'Installation et configuration de Proxmox VE',
+      id: 'proxmox',
+      title: 'Installation Proxmox VE',
+      description: 'Installation et configuration de l\'hyperviseur Proxmox VE',
       image: '/images/logo-proxmox-logo.webp',
       pdfUrl: '/docs/Install_Proxmox.pdf',
       tags: ['Hyperviseur', 'Virtualisation', 'Clustering']
     },
     {
-      id: 'Docker',
-      title: 'Docker',
-      description: 'Installation et configuration de Docker',
+      id: 'docker',
+      title: 'Installation Docker',
+      description: 'Installation et configuration de Docker sur Linux',
       image: '/images/logo-docker-logo.webp',
       pdfUrl: '/docs/Install_Docker.pdf',
       tags: ['Docker', 'Linux', 'Conteneurisation']
     },
     {
-      id: 'Windows  server 2025',
-      title: 'Windows Server 2025',
-      description: 'Installation et configuration Windows server 2025',
+      id: 'windows-server-2025',
+      title: 'Installation Windows Server 2025',
+      description: 'Installation et configuration de Windows Server 2025',
       image: '/images/logo-wins25-logo.webp',
       pdfUrl: '/docs/Install_Win_S2025.pdf',
       tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
     },
     {
-      id: 'Windows 10',
-      title: 'Windows 10',
-      description: 'Installation et configuration Windows 10',
+      id: 'windows-10',
+      title: 'Installation Windows 10',
+      description: 'Installation et configuration de Windows 10',
       image: '/images/logo-win10-logo.webp',
       pdfUrl: '/docs/Install_Win10.pdf',
-      tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
+      tags: ['OS', 'Windows', 'Administration système']
     }, 
     {
-      id: 'Windows 11',
-      title: 'Windows 11',
-      description: 'Installation et configuration Windows 11',
+      id: 'windows-11',
+      title: 'Installation Windows 11',
+      description: 'Installation et configuration de Windows 11',
       image: '/images/logo-win11-logo.webp',
       pdfUrl: '/docs/Install_Win11.pdf',
-      tags: ['OS', 'Windows', 'Active Directory', 'Administration système']
+      tags: ['OS', 'Windows', 'Administration système']
     },
     {
-      id: 'Ubuntu',
-      title: 'Ubuntu Linux',
-      description: 'Installation et configuration de Ubuntu Linux',
+      id: 'ubuntu',
+      title: 'Installation Ubuntu Linux',
+      description: 'Installation et configuration d\'Ubuntu Linux',
       image: '/images/logo-ubuntu-logo.webp',
       pdfUrl: '/docs/Install_Ubuntu.pdf',
       tags: ['OS', 'Linux', 'Serveur', 'Administration système']
     },
     {
-      id: 'HAproxy',
-      title: 'HAproxy',
-      description: 'Installation et configuration de HAproxy',
+      id: 'haproxy',
+      title: 'Installation HAProxy',
+      description: 'Installation et configuration du load balancer HAProxy',
       image: '/images/logo-haproxy-logo.webp',
-      pdfUrl: '/docs/installation-haproxy.pdf',
+      pdfUrl: '/docs/Install_Haproxy.pdf',
       tags: ['Haute Disponibilité', 'Load Balancing']
     },
     {
-      id: 'Kali',
-      title: 'Kali Linux',
+      id: 'kali',
+      title: 'Installation Kali Linux',
       description: 'Installation et configuration de Kali Linux',
       image: '/images/logo-kali-logo.webp',
       pdfUrl: '/docs/Install_Kali.pdf',
       tags: ['Linux', 'Cybersécurité', 'Hacking', 'Pentesting', 'OS']
     },
     {
-      id: 'Arch',
-      title: 'Arch Linux',
-      description: 'Installation et configuration de Arch Linux',
-      image: '/images/logo-arch-logo.webp',
-      pdfUrl: '',
-      tags: ['Linux', 'OS', 'Serveur', 'Administration système']
-    },
-    {
-      id: 'Debian 12',
-      title: 'Debian 12 Linux',
+      id: 'debian-12',
+      title: 'Installation Debian 12',
       description: 'Installation et configuration de Debian 12',
       image: '/images/logo-debian12-logo.webp',
       pdfUrl: '/docs/Install-debian12.pdf',
       tags: ['Linux', 'OS', 'Serveur', 'Administration système']
     },
     {
-      id: 'Ticketing',
-      title: 'GLPI',
-      description: 'Installation et configuration GLPI',
-      image: '/images/logo-logo-glpi.webp',
-      pdfUrl: '',
-      tags: ['Support', 'Inventaire']
-    },
-    {
-      id: 'monitoring',
-      title: 'Zabbix',
-      description: 'Installation et configuration Zabbix',
-      image: '/images/logo-zabbix-logo.webp',
-      pdfUrl: '',
-      tags: ['Monitoring', 'Administration système']
-    },
-    {
-      id: 'Apache2',
-      title: 'Apache2',
-      description: 'Installation et configuration de Apache2 et module',
+      id: 'apache2',
+      title: 'Installation Apache2',
+      description: 'Installation et configuration du serveur web Apache2 avec modules',
       image: '/images/logo-apache-logo.webp',
-      pdfUrl: '/docs/Install_Apache2.pdf',
-      tags: ['Haute Disponibilité', 'Load Balancing', 'Web','WAF']
-    },
+      pdfUrl: '/docs/install-apache2.pdf',
+      tags: ['Web', 'Serveur', 'Apache', 'WAF']
+    }
   ]
 };
