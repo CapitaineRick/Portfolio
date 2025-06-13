@@ -54,21 +54,21 @@ const Navbar: React.FC = () => {
         : 'backdrop-blur-md bg-gray-900/70'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
+        <div className="flex justify-between h-14 sm:h-16 items-center">
           
           {/* Logo simple */}
           <div 
             className="flex items-center cursor-pointer group" 
             onClick={() => handleNavClick('#home')}
           >
-            <Monitor className="h-8 w-8 text-orange-500 group-hover:text-orange-400 transition-colors" />
-            <span className="ml-2 text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
+            <Monitor className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500 group-hover:text-orange-400 transition-colors" />
+            <span className="ml-2 text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
               Portfolio
             </span>
           </div>
           
           {/* Navigation desktop */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
             {navLinks.map(link => (
               <a
                 key={link.name}
@@ -92,15 +92,15 @@ const Navbar: React.FC = () => {
           </div>
           
           {/* Bouton menu mobile */}
-          <div className="flex md:hidden">
+          <div className="flex lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
             >
               {isOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-5 w-5 sm:h-6 sm:w-6" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
               )}
             </button>
           </div>
@@ -109,8 +109,8 @@ const Navbar: React.FC = () => {
 
       {/* Menu mobile */}
       {isOpen && (
-        <div className="md:hidden bg-gray-900/95 backdrop-blur-lg border-t border-gray-800">
-          <div className="px-4 pt-2 pb-3 space-y-1">
+        <div className="lg:hidden bg-gray-900/95 backdrop-blur-lg border-t border-gray-800">
+          <div className="px-4 pt-2 pb-3 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
             {navLinks.map(link => (
               <a
                 key={link.name}
@@ -119,7 +119,7 @@ const Navbar: React.FC = () => {
                   e.preventDefault();
                   handleNavClick(link.href);
                 }}
-                className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors
+                className={`block px-3 py-3 rounded-lg text-base font-medium transition-colors
                   ${activeSection === link.href.substring(1)
                     ? 'text-orange-500 bg-orange-500/10'
                     : 'text-gray-300 hover:text-white hover:bg-gray-800'

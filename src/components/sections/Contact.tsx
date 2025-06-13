@@ -57,14 +57,14 @@ const Contact: React.FC = () => {
   }, []);
 
   return (
-    <section id="contact" className="py-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-purple-500">
+    <section id="contact" className="py-12 sm:py-16 md:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-purple-500">
             Contact
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-8 rounded-full"></div>
-          <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+          <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6 sm:mb-8 rounded-full"></div>
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-4">
             N'hésitez pas à me contacter pour toute opportunité professionnelle ou collaboration technique
           </p>
         </div>
@@ -73,19 +73,19 @@ const Contact: React.FC = () => {
           ref={contactRef}
           className="transition-all duration-300 opacity-0 translate-y-10"
         >
-          <div className="flex flex-col md:flex-row gap-12">
-            <div className="md:w-1/2">
+          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-12">
+            <div className="lg:w-1/2">
               <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative bg-gray-800 rounded-3xl p-10 border border-gray-700">
-                  <h3 className="text-3xl font-bold mb-6 text-white">Envoyez-moi un message</h3>
-                  <p className="mb-8 text-gray-300 text-lg leading-relaxed">
+                <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl sm:rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <div className="relative bg-gray-800 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border border-gray-700">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-white">Envoyez-moi un message</h3>
+                  <p className="mb-6 sm:mb-8 text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
                     Je suis à l'écoute de vos propositions de stage, d'alternance ou de collaboration technique.
                   </p>
                   
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                     <div>
-                      <label htmlFor="name" className="block text-base font-semibold text-gray-300 mb-2">
+                      <label htmlFor="name" className="block text-sm sm:text-base font-semibold text-gray-300 mb-2">
                         Nom
                       </label>
                       <input
@@ -95,8 +95,8 @@ const Contact: React.FC = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full p-4 border border-gray-600 rounded-2xl
-                                bg-gray-700 text-white text-base
+                        className="w-full p-3 sm:p-4 border border-gray-600 rounded-xl sm:rounded-2xl
+                                bg-gray-700 text-white text-sm sm:text-base
                                 focus:ring-2 focus:ring-orange-500 focus:border-transparent
                                 placeholder-gray-400
                                 transition-all duration-300"
@@ -105,7 +105,7 @@ const Contact: React.FC = () => {
                     </div>
                     
                     <div>
-                      <label htmlFor="email" className="block text-base font-semibold text-gray-300 mb-2">
+                      <label htmlFor="email" className="block text-sm sm:text-base font-semibold text-gray-300 mb-2">
                         Email
                       </label>
                       <input
@@ -115,8 +115,8 @@ const Contact: React.FC = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full p-4 border border-gray-600 rounded-2xl
-                                bg-gray-700 text-white text-base
+                        className="w-full p-3 sm:p-4 border border-gray-600 rounded-xl sm:rounded-2xl
+                                bg-gray-700 text-white text-sm sm:text-base
                                 focus:ring-2 focus:ring-orange-500 focus:border-transparent
                                 placeholder-gray-400
                                 transition-all duration-300"
@@ -125,7 +125,7 @@ const Contact: React.FC = () => {
                     </div>
                     
                     <div>
-                      <label htmlFor="message" className="block text-base font-semibold text-gray-300 mb-2">
+                      <label htmlFor="message" className="block text-sm sm:text-base font-semibold text-gray-300 mb-2">
                         Message
                       </label>
                       <textarea
@@ -134,9 +134,9 @@ const Contact: React.FC = () => {
                         value={formData.message}
                         onChange={handleChange}
                         required
-                        rows={6}
-                        className="w-full p-4 border border-gray-600 rounded-2xl
-                                bg-gray-700 text-white text-base
+                        rows={5}
+                        className="w-full p-3 sm:p-4 border border-gray-600 rounded-xl sm:rounded-2xl
+                                bg-gray-700 text-white text-sm sm:text-base
                                 focus:ring-2 focus:ring-orange-500 focus:border-transparent
                                 placeholder-gray-400
                                 transition-all duration-300 resize-none"
@@ -146,8 +146,8 @@ const Contact: React.FC = () => {
                     
                     <button
                       type="submit"
-                      className={`w-full py-4 px-8 flex items-center justify-center rounded-2xl
-                              text-white font-bold text-lg transition-all duration-300 shadow-lg
+                      className={`w-full py-3 sm:py-4 px-6 sm:px-8 flex items-center justify-center rounded-xl sm:rounded-2xl
+                              text-white font-bold text-sm sm:text-base md:text-lg transition-all duration-300 shadow-lg
                               ${formStatus === 'success' 
                                 ? 'bg-green-500 hover:bg-green-600' 
                                 : formStatus === 'error'
@@ -161,7 +161,7 @@ const Contact: React.FC = () => {
                         'Erreur, veuillez réessayer'
                       ) : (
                         <>
-                          <Send className="mr-3\" size={20} />
+                          <Send className="mr-2 sm:mr-3" size={16} />
                           Envoyer le message
                         </>
                       )}
@@ -171,60 +171,60 @@ const Contact: React.FC = () => {
               </div>
             </div>
             
-            <div className="md:w-1/2">
+            <div className="lg:w-1/2">
               <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative bg-gray-800 rounded-3xl p-10 border border-gray-700">
-                  <h3 className="text-3xl font-bold mb-6 text-white">Informations de contact</h3>
-                  <p className="mb-8 text-gray-300 text-lg leading-relaxed">
+                <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl sm:rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <div className="relative bg-gray-800 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border border-gray-700">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-white">Informations de contact</h3>
+                  <p className="mb-6 sm:mb-8 text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
                     Vous pouvez également me contacter directement via les coordonnées ci-dessous.
                   </p>
                   
-                  <div className="space-y-8">
-                    <div className="flex items-start gap-6">
-                      <div className="bg-orange-900/30 p-4 rounded-2xl border border-orange-500/30">
-                        <Mail className="text-orange-500" size={28} />
+                  <div className="space-y-6 sm:space-y-8">
+                    <div className="flex items-start gap-4 sm:gap-6">
+                      <div className="bg-orange-900/30 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-orange-500/30">
+                        <Mail className="text-orange-500" size={20} />
                       </div>
                       <div>
-                        <h4 className="text-xl font-bold text-white mb-2">Email</h4>
+                        <h4 className="text-lg sm:text-xl font-bold text-white mb-2">Email</h4>
                         <a 
                           href="mailto:sebastien.78.fernandes@outlook.fr"
-                          className="text-orange-400 hover:text-orange-300 transition-colors text-lg"
+                          className="text-orange-400 hover:text-orange-300 transition-colors text-sm sm:text-base md:text-lg break-all"
                         >
                           sebastien.78.fernandes@outlook.fr
                         </a>
                       </div>
                     </div>
                     
-                    <div className="flex items-start gap-6">
-                      <div className="bg-orange-900/30 p-4 rounded-2xl border border-orange-500/30">
-                        <Linkedin className="text-orange-500" size={28} />
+                    <div className="flex items-start gap-4 sm:gap-6">
+                      <div className="bg-orange-900/30 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-orange-500/30">
+                        <Linkedin className="text-orange-500" size={20} />
                       </div>
                       <div>
-                        <h4 className="text-xl font-bold text-white mb-2">LinkedIn</h4>
+                        <h4 className="text-lg sm:text-xl font-bold text-white mb-2">LinkedIn</h4>
                         <a 
                           href="https://www.linkedin.com/in/s%C3%A9bastien-fernandes-566008232/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-orange-400 hover:text-orange-300 transition-colors text-lg"
+                          className="text-orange-400 hover:text-orange-300 transition-colors text-sm sm:text-base md:text-lg break-all"
                         >
                           linkedin.com/in/sébastien-fernandes
                         </a>
                       </div>
                     </div>
                     
-                    <div className="flex items-start gap-6">
-                      <div className="bg-orange-900/30 p-4 rounded-2xl border border-orange-500/30">
-                        <File className="text-orange-500" size={28} />
+                    <div className="flex items-start gap-4 sm:gap-6">
+                      <div className="bg-orange-900/30 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-orange-500/30">
+                        <File className="text-orange-500" size={20} />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-xl font-bold text-white mb-4">Mon CV</h4>
+                        <h4 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Mon CV</h4>
                         <a
                           href="/public/docs/fernandes-sebastien-cv.pdf"
                           download
-                          className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-2xl hover:opacity-90 transition-opacity font-semibold shadow-lg"
+                          className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl sm:rounded-2xl hover:opacity-90 transition-opacity font-semibold shadow-lg text-sm sm:text-base"
                         >
-                          <File className="w-5 h-5" />
+                          <File className="w-4 h-4 sm:w-5 sm:h-5" />
                           Télécharger mon CV
                         </a>
                       </div>

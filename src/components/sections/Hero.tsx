@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, ArrowRight, Terminal, Shield, Network, ChevronDown } from 'lucide-react';
+import { Server, ChevronDown } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -226,16 +226,16 @@ const Hero: React.FC = () => {
         }`}>
           
           {/* Badge professionnel */}
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-orange-500/20 to-purple-500/20 backdrop-blur-xl border border-orange-500/30 text-orange-300 text-sm font-medium mb-8 shadow-2xl">
-            <Server className="w-5 h-5" />
+          <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-6 py-2 sm:py-3 rounded-full bg-gradient-to-r from-orange-500/20 to-purple-500/20 backdrop-blur-xl border border-orange-500/30 text-orange-300 text-xs sm:text-sm font-medium mb-6 sm:mb-8 shadow-2xl">
+            <Server className="w-4 h-4 sm:w-5 sm:h-5" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-purple-400">
-              BTS SIO SISR • Administrateur Systèmes & Réseaux
+              <span className="hidden sm:inline">BTS SIO SISR • </span>Administrateur Systèmes & Réseaux
             </span>
           </div>
           
           {/* Titre principal spectaculaire */}
-          <div className="mb-8">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-none">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 sm:mb-6 leading-none">
               <span className="block bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 drop-shadow-2xl">
                 Fernandes
               </span>
@@ -245,15 +245,15 @@ const Hero: React.FC = () => {
             </h1>
             
             {/* Sous-titre élégant */}
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-300 font-light leading-relaxed max-w-4xl mx-auto">
+            <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-300 font-light leading-relaxed max-w-4xl mx-auto px-2">
               Passionné par l'<span className="text-orange-400 font-medium">infrastructure IT</span> & 
               la <span className="text-purple-400 font-medium">cybersécurité</span>
             </p>
           </div>
 
           {/* Contenu simple */}
-          <div className="space-y-8">
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <div className="space-y-6 sm:space-y-8">
+            <p className="text-gray-400 text-sm sm:text-lg max-w-2xl mx-auto px-4">
               Étudiant en BTS SIO SISR, je développe mes compétences en administration système, 
               sécurité réseau et infrastructure informatique.
             </p>
@@ -262,15 +262,15 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Indicateur de scroll animé - repositionné */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center space-y-3">
-        <div className="text-gray-400 text-sm font-medium tracking-wider uppercase">
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center space-y-2 sm:space-y-3">
+        <div className="text-gray-400 text-xs sm:text-sm font-medium tracking-wider uppercase">
           Découvrir
         </div>
         <button 
           onClick={scrollToAbout}
-          className="group relative p-4 rounded-full bg-gradient-to-r from-orange-500/20 to-purple-500/20 backdrop-blur-xl border border-orange-500/30 text-orange-400 hover:text-orange-300 transition-all duration-500 shadow-2xl hover:shadow-orange-500/25 hover:scale-110"
+          className="group relative p-3 sm:p-4 rounded-full bg-gradient-to-r from-orange-500/20 to-purple-500/20 backdrop-blur-xl border border-orange-500/30 text-orange-400 hover:text-orange-300 transition-all duration-500 shadow-2xl hover:shadow-orange-500/25 hover:scale-110"
         >
-          <ChevronDown className="w-6 h-6 animate-bounce" />
+          <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 animate-bounce" />
           
           {/* Effet de halo */}
           <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-purple-500/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>

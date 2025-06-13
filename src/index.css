@@ -56,11 +56,23 @@ section {
   transition: all 0.5s ease-in-out;
 }
 
-/* Contenu des sections avec padding interne */
+/* Contenu des sections avec padding interne responsive */
 section > div {
   width: 100%;
-  padding: 5rem 1.5rem;
+  padding: 3rem 1rem;
   max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  section > div {
+    padding: 4rem 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  section > div {
+    padding: 5rem 1.5rem;
+  }
 }
 
 /* HERO - Fond spécial avec style inline (pas de CSS ici) */
@@ -100,7 +112,7 @@ footer {
   background: #0f172a;
 }
 
-/* Amélioration de la typographie */
+/* Amélioration de la typographie responsive */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.2;
@@ -109,31 +121,74 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  margin-bottom: 1.5rem;
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1.5rem;
+  }
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: 1.25rem;
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1.25rem;
+  }
 }
 
 h3 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  margin-bottom: 1rem;
-}
-
-h4 {
-  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.25rem, 3vw, 2rem);
   margin-bottom: 0.75rem;
 }
 
-/* Amélioration du texte de base */
+@media (min-width: 640px) {
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 1rem;
+  }
+}
+
+h4 {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  h4 {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* Amélioration du texte de base responsive */
 p {
-  font-size: clamp(1rem, 2vw, 1.125rem);
-  line-height: 1.7;
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  line-height: 1.6;
   color: #e2e8f0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  p {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
 }
 
 /* Texte secondaire plus lisible */
@@ -163,11 +218,12 @@ p {
   background-color: #0f172a !important;
 }
 
-/* Amélioration des boutons */
+/* Amélioration des boutons responsive */
 button {
   font-weight: 600;
   letter-spacing: 0.025em;
   transition: all 0.2s ease-in-out;
+  font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
 /* Amélioration des liens */
@@ -183,22 +239,36 @@ a:hover {
 
 /* Amélioration des listes */
 ul, ol {
-  padding-left: 1.5rem;
+  padding-left: 1rem;
+}
+
+@media (min-width: 640px) {
+  ul, ol {
+    padding-left: 1.5rem;
+  }
 }
 
 li {
   margin-bottom: 0.5rem;
   color: #e2e8f0;
   line-height: 1.6;
+  font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
-/* Amélioration des badges/tags */
+/* Amélioration des badges/tags responsive */
 .tag, .badge {
-  font-size: 0.875rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
   font-weight: 500;
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
   letter-spacing: 0.025em;
+}
+
+@media (min-width: 640px) {
+  .tag, .badge {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.5rem;
+  }
 }
 
 /* Amélioration des ombres pour plus de profondeur */
@@ -286,7 +356,7 @@ img {
   @apply transition-opacity duration-200;
 }
 
-/* PDF Viewer Styles */
+/* PDF Viewer Styles responsive */
 .react-pdf__Document {
   display: flex;
   flex-direction: column;
@@ -295,11 +365,18 @@ img {
 }
 
 .react-pdf__Page {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
+  border-radius: 0.375rem;
   overflow: hidden;
   max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .react-pdf__Page {
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+  }
 }
 
 .react-pdf__Page__canvas {
@@ -356,22 +433,43 @@ img {
 }
 
 /* Amélioration de la lisibilité sur mobile */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
+  /* Réduction des espacements sur très petits écrans */
   section > div {
-    padding: 3rem 1rem;
+    padding: 2rem 0.75rem;
   }
   
+  /* Ajustement des tailles de police pour mobile */
   h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    line-height: 1.1;
   }
   
   h2 {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
   }
   
   p {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  
+  /* Boutons plus accessibles sur mobile */
+  button {
+    min-height: 44px; /* Taille recommandée pour le touch */
+    font-size: 0.875rem;
+  }
+  
+  /* Liens plus accessibles */
+  a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
@@ -384,9 +482,9 @@ textarea:focus {
   outline-offset: 2px;
 }
 
-/* Amélioration des formulaires */
+/* Amélioration des formulaires responsive */
 input, textarea {
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2vw, 1rem);
   line-height: 1.5;
   color: #ffffff;
   background-color: #374151;
@@ -394,6 +492,14 @@ input, textarea {
   border-radius: 0.5rem;
   padding: 0.75rem;
   transition: all 0.2s ease-in-out;
+  min-height: 44px; /* Accessibilité mobile */
+}
+
+@media (min-width: 640px) {
+  input, textarea {
+    border-radius: 0.75rem;
+    padding: 1rem;
+  }
 }
 
 input:focus, textarea:focus {
@@ -405,13 +511,20 @@ input:focus, textarea:focus {
 table {
   border-collapse: collapse;
   width: 100%;
+  font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
 th, td {
-  padding: 0.75rem;
+  padding: 0.5rem;
   text-align: left;
   border-bottom: 1px solid #374151;
   color: #e2e8f0;
+}
+
+@media (min-width: 640px) {
+  th, td {
+    padding: 0.75rem;
+  }
 }
 
 th {
@@ -433,6 +546,8 @@ th {
 /* Optimisation des images */
 img {
   image-rendering: optimizeQuality;
+  max-width: 100%;
+  height: auto;
 }
 
 /* Optimisation du rendu des polices */
@@ -440,4 +555,91 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Amélioration du scroll sur mobile */
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 4rem; /* Compense la navbar fixe */
+  }
+}
+
+/* Amélioration des grilles responsive */
+.grid-responsive {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .grid-responsive {
+    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-responsive {
+    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Amélioration des espacements responsive */
+.space-responsive > * + * {
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .space-responsive > * + * {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .space-responsive > * + * {
+    margin-top: 2rem;
+  }
+}
+
+/* Amélioration des conteneurs responsive */
+.container-responsive {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-responsive {
+    max-width: 640px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-responsive {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-responsive {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-responsive {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container-responsive {
+    max-width: 1536px;
+  }
 }
