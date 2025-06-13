@@ -34,7 +34,7 @@ main {
   flex: 1;
 }
 
-/* Sections parfaitement continues */
+/* Sections avec espacement augmenté */
 section {
   /* SUPPRESSION TOTALE DES MARGES ET BORDURES */
   margin: 0 !important;
@@ -56,22 +56,28 @@ section {
   transition: all 0.5s ease-in-out;
 }
 
-/* Contenu des sections avec padding interne responsive */
+/* Contenu des sections avec padding interne responsive AUGMENTÉ */
 section > div {
   width: 100%;
-  padding: 3rem 1rem;
+  padding: 4rem 1rem; /* Augmenté de 3rem à 4rem */
   max-width: 100%;
 }
 
 @media (min-width: 640px) {
   section > div {
-    padding: 4rem 1.5rem;
+    padding: 6rem 1.5rem; /* Augmenté de 4rem à 6rem */
   }
 }
 
 @media (min-width: 768px) {
   section > div {
-    padding: 5rem 1.5rem;
+    padding: 8rem 1.5rem; /* Augmenté de 5rem à 8rem */
+  }
+}
+
+@media (min-width: 1024px) {
+  section > div {
+    padding: 10rem 1.5rem; /* Nouveau breakpoint pour desktop */
   }
 }
 
@@ -81,7 +87,7 @@ section#home {
   background: none !important;
 }
 
-/* TOUTES LES AUTRES SECTIONS - Fond uniforme simple */
+/* TOUTES LES AUTRES SECTIONS - Fond uniforme simple avec espacement vertical */
 section#about,
 section#education,
 section#skills,
@@ -89,6 +95,45 @@ section#projects,
 section#techwatch,
 section#contact {
   background: #0f172a !important;
+  /* Ajout d'un espacement vertical entre les sections */
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+@media (min-width: 640px) {
+  section#about,
+  section#education,
+  section#skills,
+  section#projects,
+  section#techwatch,
+  section#contact {
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+  }
+}
+
+@media (min-width: 768px) {
+  section#about,
+  section#education,
+  section#skills,
+  section#projects,
+  section#techwatch,
+  section#contact {
+    margin-top: 4rem !important;
+    margin-bottom: 4rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  section#about,
+  section#education,
+  section#skills,
+  section#projects,
+  section#techwatch,
+  section#contact {
+    margin-top: 6rem !important;
+    margin-bottom: 6rem !important;
+  }
 }
 
 /* Suppression de tous les overlays pour les sections non-Hero */
@@ -105,11 +150,12 @@ nav {
   z-index: 50;
 }
 
-/* Footer sans marge */
+/* Footer sans marge avec espacement augmenté */
 footer {
   margin: 0;
-  padding: 2rem 0;
+  padding: 3rem 0; /* Augmenté de 2rem à 3rem */
   background: #0f172a;
+  margin-top: 4rem; /* Espacement avant le footer */
 }
 
 /* Amélioration de la typographie responsive */
@@ -122,56 +168,56 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: clamp(2rem, 5vw, 4rem);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* Augmenté */
 }
 
 @media (min-width: 640px) {
   h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 1.25rem;
+    margin-bottom: 2rem; /* Augmenté */
   }
 }
 
 @media (min-width: 768px) {
   h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem; /* Augmenté */
   }
 }
 
 h2 {
   font-size: clamp(1.75rem, 4vw, 3rem);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* Augmenté */
 }
 
 @media (min-width: 640px) {
   h2 {
     font-size: clamp(2rem, 4vw, 3rem);
-    margin-bottom: 1.25rem;
+    margin-bottom: 2rem; /* Augmenté */
   }
 }
 
 h3 {
   font-size: clamp(1.25rem, 3vw, 2rem);
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem; /* Augmenté */
 }
 
 @media (min-width: 640px) {
   h3 {
     font-size: clamp(1.5rem, 3vw, 2rem);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; /* Augmenté */
   }
 }
 
 h4 {
   font-size: clamp(1.125rem, 2.5vw, 1.5rem);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem; /* Augmenté */
 }
 
 @media (min-width: 640px) {
   h4 {
     font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem; /* Augmenté */
   }
 }
 
@@ -180,14 +226,14 @@ p {
   font-size: clamp(0.875rem, 2vw, 1.125rem);
   line-height: 1.6;
   color: #e2e8f0;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem; /* Augmenté */
 }
 
 @media (min-width: 640px) {
   p {
     font-size: clamp(1rem, 2vw, 1.125rem);
     line-height: 1.7;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; /* Augmenté */
   }
 }
 
@@ -249,7 +295,7 @@ ul, ol {
 }
 
 li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem; /* Augmenté */
   color: #e2e8f0;
   line-height: 1.6;
   font-size: clamp(0.875rem, 2vw, 1rem);
@@ -436,7 +482,7 @@ img {
 @media (max-width: 640px) {
   /* Réduction des espacements sur très petits écrans */
   section > div {
-    padding: 2rem 0.75rem;
+    padding: 3rem 0.75rem; /* Ajusté pour mobile */
   }
   
   /* Ajustement des tailles de police pour mobile */
@@ -567,38 +613,38 @@ body {
 /* Amélioration des grilles responsive */
 .grid-responsive {
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem; /* Augmenté */
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 640px) {
   .grid-responsive {
-    gap: 1.5rem;
+    gap: 2rem; /* Augmenté */
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
   .grid-responsive {
-    gap: 2rem;
+    gap: 2.5rem; /* Augmenté */
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 /* Amélioration des espacements responsive */
 .space-responsive > * + * {
-  margin-top: 1rem;
+  margin-top: 1.5rem; /* Augmenté */
 }
 
 @media (min-width: 640px) {
   .space-responsive > * + * {
-    margin-top: 1.5rem;
+    margin-top: 2rem; /* Augmenté */
   }
 }
 
 @media (min-width: 768px) {
   .space-responsive > * + * {
-    margin-top: 2rem;
+    margin-top: 2.5rem; /* Augmenté */
   }
 }
 
