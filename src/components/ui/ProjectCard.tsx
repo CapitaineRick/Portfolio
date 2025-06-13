@@ -44,13 +44,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   // Gestion du scroll et de la touche Échap
   useEffect(() => {
     if (showFullscreen) {
-      // Sauvegarder la position de scroll actuelle
-      const scrollY = window.scrollY;
+      // Bloquer le scroll de manière plus agressive SANS changer la position
+      const originalOverflow = document.body.style.overflow;
+      const originalPosition = document.body.style.position;
+      const originalTop = document.body.style.top;
+      const originalWidth = document.body.style.width;
+      const originalDocumentOverflow = document.documentElement.style.overflow;
       
-      // Bloquer le scroll de manière plus agressive
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
+      // Bloquer le scroll sans affecter la position
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
       
@@ -98,13 +99,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
       return () => {
-        // Restaurer le scroll et la position
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflow = '';
-        document.documentElement.style.overflow = '';
-        window.scrollTo(0, scrollY);
+        // Restaurer les styles originaux SANS affecter la position de scroll
+        document.body.style.overflow = originalOverflow;
+        document.body.style.position = originalPosition;
+        document.body.style.top = originalTop;
+        document.body.style.width = originalWidth;
+        document.documentElement.style.overflow = originalDocumentOverflow;
         
         // Supprimer les écouteurs
         document.removeEventListener('keydown', handleEscape);
