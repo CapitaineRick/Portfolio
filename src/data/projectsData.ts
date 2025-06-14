@@ -19,7 +19,7 @@ export const projectsData = {
       documents: [
         {
           title: "Site Web Revive",
-          url: "https://portfolio-bts-sio-sisr.netlify.app/docs/AP1/Revive/index.html",
+          url: "/docs/AP1/Revive/index.html",
           description: "Site web de l'entreprise Revive - Interface utilisateur complète avec e-commerce",
         },
         {
