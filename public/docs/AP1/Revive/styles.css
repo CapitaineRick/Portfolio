@@ -56,6 +56,41 @@ nav {
     color: lightgreen;
 }
 
+/* Styles pour le bouton de retour */
+.return-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(249, 115, 22, 0.9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.return-button:hover {
+    background: rgba(249, 115, 22, 1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.return-button:active {
+    transform: translateY(0);
+}
+
+.return-button svg {
+    transition: transform 0.3s ease;
+}
+
+.return-button:hover svg {
+    transform: translateX(-2px);
+}
+
 .menu-button {
     display: none;
     background: none;
@@ -842,5 +877,15 @@ canvas{
     .menu {
         flex-wrap: wrap;
         justify-content: center;
+    }
+    
+    /* Adaptation du bouton de retour sur mobile */
+    .return-button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .return-button span {
+        display: none; /* Masquer le texte sur mobile */
     }
 }
