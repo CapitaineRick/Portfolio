@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, ChevronLeft, ChevronRight, FileText, ChevronDown } from 'lucide-react';
+import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, ChevronLeft, ChevronRight, FileText, ChevronDown, Globe } from 'lucide-react';
 import { Document, Page } from 'react-pdf';
 
 interface DocumentItem {
@@ -40,6 +40,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+
+  // Fonction pour détecter si c'est un site web
+  const isWebDocument = (url: string): boolean => {
+    const webExtensions = ['.html', '.htm', '.php', '.asp', '.aspx', '.jsp'];
+    const urlLower = url.toLowerCase();
+    
+    // Vérifier si l'URL commence par http/https
+    if (urlLower.startsWith('http://') || urlLower.startsWith('https://')) {
+      return true;
+    }
+    
+    // Vérifier les extensions web
+    return webExtensions.some(ext => urlLower.endsWith(ext));
+  };
 
   // Gestion du scroll et de la touche Échap
   useEffect(() => {
@@ -190,6 +204,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   }, [showDropdown]);
 
   const handleDocumentSelect = (doc: DocumentItem) => {
+    // Vérifier si c'est un site web
+    if (isWebDocument(doc.url)) {
+      // Ouvrir dans un nouvel onglet
+      window.open(doc.url, '_blank', 'noopener,noreferrer');
+      setShowDropdown(false);
+      return;
+    }
+
+    // Sinon, ouvrir dans le visualiseur PDF
     setSelectedDocument(doc);
     setShowFullscreen(true);
     setShowDropdown(false);
@@ -222,6 +245,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     }
   };
 
+  const handleSingleDocumentClick = () => {
+    if (project.pdfUrl) {
+      if (isWebDocument(project.pdfUrl)) {
+        window.open(project.pdfUrl, '_blank', 'noopener,noreferrer');
+      } else {
+        setShowFullscreen(true);
+      }
+    }
+  };
+
   // Dropdown component to be rendered in portal
   const DropdownMenu = () => {
     if (!showDropdown || !project.documents) return null;
@@ -241,31 +274,44 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       >
         <div className="max-h-96 overflow-y-auto overscroll-contain">
           <div className="p-2">
-            {project.documents.map((doc, index) => (
-              <button
-                key={index}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  handleDocumentSelect(doc);
-                }}
-                className="w-full p-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-start gap-3 rounded-lg mb-1 last:mb-0 focus:outline-none focus:bg-gray-700 focus:ring-2 focus:ring-orange-500"
-              >
-                <div className="flex-shrink-0 mt-0.5">
-                  <FileText className="w-4 h-4 text-orange-500" />
-                </div>
-                <div className="flex-1 min-w-0 space-y-1">
-                  <div className="font-medium text-sm leading-tight break-words">
-                    {doc.title}
+            {project.documents.map((doc, index) => {
+              const isWeb = isWebDocument(doc.url);
+              return (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleDocumentSelect(doc);
+                  }}
+                  className="w-full p-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-start gap-3 rounded-lg mb-1 last:mb-0 focus:outline-none focus:bg-gray-700 focus:ring-2 focus:ring-orange-500"
+                >
+                  <div className="flex-shrink-0 mt-0.5">
+                    {isWeb ? (
+                      <Globe className="w-4 h-4 text-blue-500" />
+                    ) : (
+                      <FileText className="w-4 h-4 text-orange-500" />
+                    )}
                   </div>
-                  {doc.description && (
-                    <div className="text-xs text-gray-400 leading-tight break-words">
-                      {doc.description}
+                  <div className="flex-1 min-w-0 space-y-1">
+                    <div className="font-medium text-sm leading-tight break-words flex items-center gap-2">
+                      {doc.title}
+                      {isWeb && <ExternalLink className="w-3 h-3 text-blue-400" />}
                     </div>
-                  )}
-                </div>
-              </button>
-            ))}
+                    {doc.description && (
+                      <div className="text-xs text-gray-400 leading-tight break-words">
+                        {doc.description}
+                      </div>
+                    )}
+                    {isWeb && (
+                      <div className="text-xs text-blue-400 font-medium">
+                        Ouvre dans un nouvel onglet
+                      </div>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>,
@@ -347,12 +393,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                 ) : (
                   project.pdfUrl && (
                     <button
-                      onClick={() => setShowFullscreen(true)}
+                      onClick={handleSingleDocumentClick}
                       className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-orange-900/30 text-orange-400 hover:bg-orange-900/50 font-medium transition-all duration-300"
                     >
-                      <Maximize2 className="w-3 h-3 sm:w-4 sm:h-4" />
-                      <span className="text-xs sm:text-sm">Voir le document</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
+                      {isWebDocument(project.pdfUrl) ? (
+                        <>
+                          <Globe className="w-3 h-3 sm:w-4 sm:h-4" />
+                          <span className="text-xs sm:text-sm">Voir le site</span>
+                          <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+                        </>
+                      ) : (
+                        <>
+                          <Maximize2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                          <span className="text-xs sm:text-sm">Voir le document</span>
+                          <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
+                        </>
+                      )}
                     </button>
                   )
                 )}
@@ -376,7 +432,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       <DropdownMenu />
 
       {/* PDF Viewer Modal */}
-      {showFullscreen && (selectedDocument?.url || project.pdfUrl) && (
+      {showFullscreen && (selectedDocument?.url || project.pdfUrl) && !isWebDocument(selectedDocument?.url || project.pdfUrl || '') && (
         <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-2 sm:p-4">
           <div className="pdf-modal-content bg-gray-800 rounded-xl sm:rounded-2xl w-full max-w-7xl max-h-[95vh] overflow-auto p-3 sm:p-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 sm:mb-4 gap-2 sm:gap-0">
