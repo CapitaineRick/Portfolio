@@ -55,7 +55,7 @@ export const projectsData = {
         },
         {
           title: "Présentation de l'entreprise Revive",
-          url: "/docs/AP1/presentation_revive.pdf",
+          url: "/docs/AP1/présentation_revive.pdf",
           description: "Présentation de l'entreprise Revive",
         },
         {
@@ -65,8 +65,8 @@ export const projectsData = {
         },
         {
           title: "Site Web Revive",
-          url: "/docs/AP1/index.php",
-          description: "Site Web de l'entreprise Revive",
+          url: "https://raw.githubusercontent.com/CapitaineRick/Portfolio/main/public/docs/AP1/index.php",
+          description: "Site Web de l'entreprise Revive (code source)",
         },
       ],
       tags: ["Analyse", "Documentation", "Gestion"],
