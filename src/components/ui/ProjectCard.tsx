@@ -247,9 +247,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
     // Vérifier si c'est un site web
     if (isWebDocument(doc.url)) {
-      // Construire l'URL complète et ouvrir dans un nouvel onglet
+      // Construire l'URL complète et naviguer dans le même onglet
       const fullUrl = getFullUrl(doc.url);
-      window.open(fullUrl, '_blank', 'noopener,noreferrer');
+      window.location.href = fullUrl;
       setShowDropdown(false);
       return;
     }
@@ -294,7 +294,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
         downloadFile(project.pdfUrl, filename);
       } else if (isWebDocument(project.pdfUrl)) {
         const fullUrl = getFullUrl(project.pdfUrl);
-        window.open(fullUrl, '_blank', 'noopener,noreferrer');
+        window.location.href = fullUrl;
       } else {
         setShowFullscreen(true);
       }
@@ -345,7 +345,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   <div className="flex-1 min-w-0 space-y-1">
                     <div className="font-medium text-sm leading-tight break-words flex items-center gap-2">
                       {doc.title}
-                      {isWeb && <ExternalLink className="w-3 h-3 text-blue-400" />}
                       {isDownloadable && <Download className="w-3 h-3 text-green-400" />}
                     </div>
                     {doc.description && (
@@ -360,7 +359,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     )}
                     {isWeb && (
                       <div className="text-xs text-blue-400 font-medium">
-                        Ouvre dans un nouvel onglet
+                        Ouvre dans le même onglet
                       </div>
                     )}
                   </div>
@@ -460,7 +459,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                         <>
                           <Globe className="w-3 h-3 sm:w-4 sm:h-4" />
                           <span className="text-xs sm:text-sm">Voir le site</span>
-                          <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                         </>
                       ) : (
                         <>
