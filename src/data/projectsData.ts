@@ -18,6 +18,11 @@ export const projectsData = {
       image: "/images/logo_revive_blanc.png",
       documents: [
         {
+          title: "Site Web Revive",
+          url: "https://portfolio-bts-sio-sisr.netlify.app/docs/AP1/Revive/index.html",
+          description: "Site web de l'entreprise Revive - Interface utilisateur complète avec e-commerce",
+        },
+        {
           title: "Bon de commande Revive",
           url: "/docs/AP1/bon_commande.pdf",
           description: "Document de commande pour l'entreprise Revive",
@@ -63,13 +68,8 @@ export const projectsData = {
           url: "/docs/AP1/template_devis.pdf",
           description: "Template de devis pour l'entreprise Revive",
         },
-        {
-          title: "Site Web Revive (Code Source)",
-          url: "/docs/AP1/index.php",
-          description: "Code source PHP du site Web de l'entreprise Revive - Téléchargeable",
-        },
       ],
-      tags: ["Analyse", "Documentation", "Gestion"],
+      tags: ["Analyse", "Documentation", "Gestion", "E-commerce", "HTML/CSS/JS"],
     },
     {
       id: "ap2",
