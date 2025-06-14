@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, ChevronLeft, ChevronRight, FileText, ChevronDown, Globe } from 'lucide-react';
+import { ArrowRight, Briefcase, GraduationCap, ExternalLink, Maximize2, X, ChevronLeft, ChevronRight, FileText, ChevronDown, Globe, Download } from 'lucide-react';
 import { Document, Page } from 'react-pdf';
 
 interface DocumentItem {
@@ -53,6 +53,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     
     // Vérifier les extensions web
     return webExtensions.some(ext => urlLower.endsWith(ext));
+  };
+
+  // Fonction pour détecter si c'est un fichier téléchargeable
+  const isDownloadableFile = (url: string): boolean => {
+    const downloadableExtensions = ['.php', '.js', '.css', '.txt', '.json', '.xml', '.sql'];
+    const urlLower = url.toLowerCase();
+    return downloadableExtensions.some(ext => urlLower.endsWith(ext));
+  };
+
+  // Fonction pour télécharger un fichier
+  const downloadFile = (url: string, filename: string) => {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   // Fonction pour construire l'URL complète
@@ -220,6 +237,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   }, [showDropdown]);
 
   const handleDocumentSelect = (doc: DocumentItem) => {
+    // Vérifier si c'est un fichier téléchargeable
+    if (isDownloadableFile(doc.url)) {
+      const filename = doc.url.split('/').pop() || 'document';
+      downloadFile(doc.url, filename);
+      setShowDropdown(false);
+      return;
+    }
+
     // Vérifier si c'est un site web
     if (isWebDocument(doc.url)) {
       // Construire l'URL complète et ouvrir dans un nouvel onglet
@@ -264,7 +289,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
 
   const handleSingleDocumentClick = () => {
     if (project.pdfUrl) {
-      if (isWebDocument(project.pdfUrl)) {
+      if (isDownloadableFile(project.pdfUrl)) {
+        const filename = project.pdfUrl.split('/').pop() || 'document';
+        downloadFile(project.pdfUrl, filename);
+      } else if (isWebDocument(project.pdfUrl)) {
         const fullUrl = getFullUrl(project.pdfUrl);
         window.open(fullUrl, '_blank', 'noopener,noreferrer');
       } else {
@@ -294,6 +322,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
           <div className="p-2">
             {project.documents.map((doc, index) => {
               const isWeb = isWebDocument(doc.url);
+              const isDownloadable = isDownloadableFile(doc.url);
               return (
                 <button
                   key={index}
@@ -305,7 +334,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                   className="w-full p-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-start gap-3 rounded-lg mb-1 last:mb-0 focus:outline-none focus:bg-gray-700 focus:ring-2 focus:ring-orange-500"
                 >
                   <div className="flex-shrink-0 mt-0.5">
-                    {isWeb ? (
+                    {isDownloadable ? (
+                      <Download className="w-4 h-4 text-green-500" />
+                    ) : isWeb ? (
                       <Globe className="w-4 h-4 text-blue-500" />
                     ) : (
                       <FileText className="w-4 h-4 text-orange-500" />
@@ -315,10 +346,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                     <div className="font-medium text-sm leading-tight break-words flex items-center gap-2">
                       {doc.title}
                       {isWeb && <ExternalLink className="w-3 h-3 text-blue-400" />}
+                      {isDownloadable && <Download className="w-3 h-3 text-green-400" />}
                     </div>
                     {doc.description && (
                       <div className="text-xs text-gray-400 leading-tight break-words">
                         {doc.description}
+                      </div>
+                    )}
+                    {isDownloadable && (
+                      <div className="text-xs text-green-400 font-medium">
+                        Télécharger le fichier
                       </div>
                     )}
                     {isWeb && (
@@ -414,7 +451,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
                       onClick={handleSingleDocumentClick}
                       className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-orange-900/30 text-orange-400 hover:bg-orange-900/50 font-medium transition-all duration-300"
                     >
-                      {isWebDocument(project.pdfUrl) ? (
+                      {isDownloadableFile(project.pdfUrl) ? (
+                        <>
+                          <Download className="w-3 h-3 sm:w-4 sm:h-4" />
+                          <span className="text-xs sm:text-sm">Télécharger</span>
+                        </>
+                      ) : isWebDocument(project.pdfUrl) ? (
                         <>
                           <Globe className="w-3 h-3 sm:w-4 sm:h-4" />
                           <span className="text-xs sm:text-sm">Voir le site</span>
@@ -450,7 +492,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       <DropdownMenu />
 
       {/* PDF Viewer Modal */}
-      {showFullscreen && (selectedDocument?.url || project.pdfUrl) && !isWebDocument(selectedDocument?.url || project.pdfUrl || '') && (
+      {showFullscreen && (selectedDocument?.url || project.pdfUrl) && !isWebDocument(selectedDocument?.url || project.pdfUrl || '') && !isDownloadableFile(selectedDocument?.url || project.pdfUrl || '') && (
         <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-2 sm:p-4">
           <div className="pdf-modal-content bg-gray-800 rounded-xl sm:rounded-2xl w-full max-w-7xl max-h-[95vh] overflow-auto p-3 sm:p-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 sm:mb-4 gap-2 sm:gap-0">

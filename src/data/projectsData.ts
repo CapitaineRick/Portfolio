@@ -64,9 +64,9 @@ export const projectsData = {
           description: "Template de devis pour l'entreprise Revive",
         },
         {
-          title: "Site Web Revive",
-          url: "https://raw.githubusercontent.com/CapitaineRick/Portfolio/main/public/docs/AP1/index.php",
-          description: "Site Web de l'entreprise Revive (code source)",
+          title: "Site Web Revive (Code Source)",
+          url: "/docs/AP1/index.php",
+          description: "Code source PHP du site Web de l'entreprise Revive - Téléchargeable",
         },
       ],
       tags: ["Analyse", "Documentation", "Gestion"],
