@@ -55,18 +55,13 @@ export const projectsData = {
         },
         {
           title: "Présentation de l'entreprise Revive",
-          url: "/docs/AP1/presentation_revive.pdf",
+          url: "/docs/AP1/présentation_revive.pdf",
           description: "Présentation de l'entreprise Revive",
         },
         {
           title: "Template de devis",
           url: "/docs/AP1/template_devis.pdf",
           description: "Template de devis pour l'entreprise Revive",
-        },
-        {
-          title: "Site Web Revive",
-          url: "/docs/AP1/index.php",
-          description: "Site Web de l'entreprise Revive",
         },
       ],
       tags: ["Analyse", "Documentation", "Gestion"],
