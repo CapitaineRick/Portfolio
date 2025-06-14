@@ -55,6 +55,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     return webExtensions.some(ext => urlLower.endsWith(ext));
   };
 
+  // Fonction pour construire l'URL complète
+  const getFullUrl = (url: string): string => {
+    // Si l'URL est déjà absolue (commence par http/https), la retourner telle quelle
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+    
+    // Si l'URL commence par /, c'est un chemin absolu depuis la racine
+    if (url.startsWith('/')) {
+      return `${window.location.origin}${url}`;
+    }
+    
+    // Sinon, c'est un chemin relatif
+    return `${window.location.origin}/${url}`;
+  };
+
   // Gestion du scroll et de la touche Échap
   useEffect(() => {
     if (showFullscreen) {
@@ -206,8 +222,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const handleDocumentSelect = (doc: DocumentItem) => {
     // Vérifier si c'est un site web
     if (isWebDocument(doc.url)) {
-      // Ouvrir dans un nouvel onglet
-      window.open(doc.url, '_blank', 'noopener,noreferrer');
+      // Construire l'URL complète et ouvrir dans un nouvel onglet
+      const fullUrl = getFullUrl(doc.url);
+      window.open(fullUrl, '_blank', 'noopener,noreferrer');
       setShowDropdown(false);
       return;
     }
@@ -248,7 +265,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const handleSingleDocumentClick = () => {
     if (project.pdfUrl) {
       if (isWebDocument(project.pdfUrl)) {
-        window.open(project.pdfUrl, '_blank', 'noopener,noreferrer');
+        const fullUrl = getFullUrl(project.pdfUrl);
+        window.open(fullUrl, '_blank', 'noopener,noreferrer');
       } else {
         setShowFullscreen(true);
       }
