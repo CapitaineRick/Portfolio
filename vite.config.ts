@@ -11,6 +11,12 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
+    // Configuration pour servir les fichiers statiques correctement
+    middlewareMode: false,
+    fs: {
+      // Permettre l'accès aux fichiers dans public
+      allow: ['..']
+    }
   },
   build: {
     rollupOptions: {
@@ -20,4 +26,7 @@ export default defineConfig({
       },
     },
   },
+  // Configuration pour éviter que React Router intercepte les fichiers PHP
+  appType: 'spa',
+  base: './'
 });

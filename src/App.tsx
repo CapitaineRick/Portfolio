@@ -10,6 +10,7 @@ import Projects from './components/sections/Projects';
 import TechWatch from './components/sections/TechWatch';
 import Contact from './components/sections/Contact';
 import Education from './components/sections/Education';
+import { Analytics } from "@vercel/analytics/next"
 
 function App() {
   return (

@@ -67,7 +67,7 @@ export const skillsData = [
       },
       {
         name: 'VirtualBox',
-        logo: '/public/images/logo-virtualbox-logo.webp',
+        logo: '/images/logo-virtualbox-logo.webp',
         level: 2,
         description: 'Utilisé pour la virtualisation d’environnements Windows/Linux lors de projets personnels et en laboratoire scolaire.'
       },
