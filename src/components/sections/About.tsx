@@ -438,7 +438,7 @@ const About: React.FC = () => {
                         
                         {education.id === "bts-sio" && (
                           <a
-                            href="/public/docs/tableau-synt-fernandes.pdf"
+                            href="/docs/tableau-synt-fernandes.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-3 py-2 mt-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg text-xs md:text-sm"
