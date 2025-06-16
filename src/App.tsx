@@ -28,7 +28,9 @@ function App() {
           </Layout>
         </ProjectProvider>
       </ThemeProvider>
+      <Analytics />
     </HelmetProvider>
+    
   );
 }
 
