@@ -10,7 +10,7 @@ import Projects from './components/sections/Projects';
 import TechWatch from './components/sections/TechWatch';
 import Contact from './components/sections/Contact';
 import Education from './components/sections/Education';
-import { Analytics } from "@vercel/analytics/react";
+// import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
           </Layout>
         </ProjectProvider>
       </ThemeProvider>
-      <Analytics />
+      {/* <Analytics /> */}
     </HelmetProvider>
     
   );

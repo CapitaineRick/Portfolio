@@ -4,7 +4,7 @@ export const techWatchData = [
   description: `Les certificats SSL/TLS subissent une transformation majeure avec une réduction progressive de leur durée de validité, rendant l’automatisation indispensable pour les professionnels du réseau et de la cybersécurité.
 
 Évolutions récentes :
-• Réduction de la durée maximale : 398 jours (2025) → 200 jours (2026) → 100 jours (2027) → 47 jours (2029)
+• Réduction de la durée maximale : 398 jours → 200 jours (2026) → 100 jours (2027) → 47 jours (2029) → 47 jours (2029) → 10 jours (2029)
 • Renouvellement automatique via le protocole ACME (ex : Let's Encrypt, Sectigo)
 • Intégration aux outils DevOps (CI/CD) et supervision centralisée
 • Vers la compatibilité post-quantique et certificats à très courte durée
