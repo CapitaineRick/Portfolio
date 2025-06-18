@@ -190,7 +190,7 @@ const About: React.FC = () => {
 
                   {/* CV Download Button */}
                   <a
-                    href="/public/docs/fernandes-sebastien-cv.pdf"
+                    href="/docs/fernandes-sebastien-cv.pdf"
                     download
                     className="w-full px-3 md:px-4 py-2 md:py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-lg md:rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity font-semibold shadow-lg text-xs sm:text-sm md:text-base"
                   >
@@ -437,13 +437,12 @@ const About: React.FC = () => {
                         </p>
                         
                         {education.id === "bts-sio" && (
-                          <a
-                            href="/docs/tableau-synt-fernandes.pdf"
-                            download
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-3 py-2 mt-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg text-xs md:text-sm"
-                          >
+                        <a
+                          href="/docs/tableau-synt-fernandes.pdf"
+                          download
+                          target="_blank"
+                          className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-xl sm:rounded-2xl hover:opacity-90 transition-opacity font-semibold shadow-lg text-sm sm:text-base"
+                        >
                             <FileText className="w-3 h-3" />
                             <span>Tableau de Synthèse</span>
                             <ExternalLink className="w-3 h-3" />
