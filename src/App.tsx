@@ -10,14 +10,18 @@ import Projects from './components/sections/Projects';
 import TechWatch from './components/sections/TechWatch';
 import Contact from './components/sections/Contact';
 import Education from './components/sections/Education';
-// import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 function App() {
   return (
+    
     <HelmetProvider>
       <ThemeProvider>
         <ProjectProvider>
-          <Layout>
+          <Layout>              
+            <Analytics />
+            <SpeedInsights/>
             <Hero />
             <About />
             <Education />
@@ -28,7 +32,7 @@ function App() {
           </Layout>
         </ProjectProvider>
       </ThemeProvider>
-      {/* <Analytics /> */}
+      
     </HelmetProvider>
     
   );

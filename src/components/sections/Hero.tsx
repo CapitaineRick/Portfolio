@@ -262,10 +262,8 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Indicateur de scroll animé - repositionné */}
-      <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center space-y-2 sm:space-y-3">
-        <div className="text-gray-400 text-xs sm:text-sm font-medium tracking-wider uppercase">
-          Découvrir
-        </div>
+      <div className="absolute size-height-10% bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center space-y-2 sm:space-y-3">
+
         <button 
           onClick={scrollToAbout}
           className="group relative p-3 sm:p-4 rounded-full bg-gradient-to-r from-orange-500/20 to-purple-500/20 backdrop-blur-xl border border-orange-500/30 text-orange-400 hover:text-orange-300 transition-all duration-500 shadow-2xl hover:shadow-orange-500/25 hover:scale-110"
