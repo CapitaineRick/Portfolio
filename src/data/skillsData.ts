@@ -139,7 +139,7 @@ export const skillsData = [
       },
       {
         name: 'Rsync',
-        logo: '/images/rsync-logo.webpà',
+        logo: '/images/logo-rsync-logo.webp',
         level: 1,
         description: 'Mise en place de sauvegardes automatisées sur Linux. Scripté dans le cadre d’un projet de continuité de service.'
       }
@@ -211,7 +211,7 @@ export const skillsData = [
     skills: [
       {
         name: 'Merise',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Merise_model.png',
+        logo: '/images/logo-merise.webp',
         level: 2,
         description: 'Modélisation des données (MLD, MCD) dans le cadre des cours de BTS. Utilisé dans les projets de gestion.'
       },

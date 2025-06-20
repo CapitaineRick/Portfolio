@@ -88,6 +88,14 @@ export const projectsData = {
       tags: ["Hyperviseur", "Virtualisation", "Clustering"],
     },
     {
+      id: "arch",
+      title: "Archlinux",
+      description: "Installation et configuration de Archlinux",
+      image: "/images/logo-arch-logo.webp",
+      pdfUrl: "/docs/AP2.pdf",
+      tags: ["Linux", "OS", "Serveur"],
+    },
+    {
       id: "docker",
       title: "Installation Docker",
       description: "Installation et configuration de Docker sur Linux",
