@@ -254,7 +254,7 @@ const Hero: React.FC = () => {
           {/* Contenu simple */}
           <div className="space-y-6 sm:space-y-8">
             <p className="text-gray-400 text-sm sm:text-lg max-w-2xl mx-auto px-4">
-              Étudiant en BTS SIO SISR, je développe mes compétences en administration système, 
+              Étudiant en BTS SIO SISR a l'IPSSI Saint Quentin, je développe mes compétences en administration système, 
               sécurité réseau et infrastructure informatique.
             </p>
           </div>
