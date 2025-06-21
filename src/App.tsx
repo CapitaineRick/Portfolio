@@ -20,8 +20,7 @@ function App() {
       <ThemeProvider>
         <ProjectProvider>
           <Layout>              
-            <Analytics />
-            <SpeedInsights/>
+
             <Hero />
             <About />
             <Education />
@@ -32,6 +31,9 @@ function App() {
           </Layout>
         </ProjectProvider>
       </ThemeProvider>
+                  <Analytics />
+            <SpeedInsights/>
+      
       
     </HelmetProvider>
     
