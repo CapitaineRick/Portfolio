@@ -8,7 +8,7 @@ const Hero: React.FC = () => {
   const mousePos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    setTimeout(() => setIsVisible(true), 500);
+    setTimeout(() => setIsVisible(true), 200);
   }, []);
 
   // Système de particules avec évitement de la souris
