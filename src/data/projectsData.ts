@@ -6,6 +6,7 @@ export const projectsData = {
       description:
         "Stage de première année, support utilisateur, infographie du parc et administration système",
       image: "/images/logo-knds-logo.webp",
+      pdfUrl:"docs/rapport_knds.pdf",
       tags: ["Gestion de parc", "VoIP/ToIP", "AVAYA", "Support"],
     },
   ],
@@ -76,8 +77,19 @@ export const projectsData = {
       title: "AP-2",
       description: "Activité Professionnelle 2 - Problématique de la M2L",
       image: "/images/logo-M2L.webp",
-      pdfUrl: "/docs/AP2.pdf",
       tags: ["Windows", "Active Directory", "Déploiement logiciel"],
+      documents: [
+          {
+          title: "Présentation AP2",
+          url: "/docs/AP2/ap2-pres.pdf",
+          description: "Présentation des problématiques et leurs solutions",
+        },
+        {
+          title: "Documentation d'installation",
+          url: "/docs/AP2/ap2-doc.pdf",
+          description: "Installation des solutions.",
+        }
+      ]
     },
     {
       id: "proxmox",
@@ -92,7 +104,7 @@ export const projectsData = {
       title: "Archlinux",
       description: "Installation et configuration de Archlinux",
       image: "/images/logo-arch-logo.webp",
-      pdfUrl: "/docs/AP2.pdf",
+      pdfUrl: "/docs/install-arch.pdf",
       tags: ["Linux", "OS", "Serveur"],
     },
     {
