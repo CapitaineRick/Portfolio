@@ -1,4 +1,3 @@
 User-agent: *
-Disallow:
-
-google-site-verification=T9kLsKdqkWMDqRh85iu03-w-qO-ad8BwvbIVmAzJKb4
+Allow: /
+Sitemap: https://portfolio-bts-sio-sisr.netlify.app/sitemap.xml
