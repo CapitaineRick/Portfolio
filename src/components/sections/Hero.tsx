@@ -64,7 +64,7 @@ const Hero: React.FC = () => {
         size: Math.random() * 4 + 2,
         color: colors[Math.floor(Math.random() * colors.length)],
         life: 0,
-        maxLife: Math.random() * 120 + ,
+        maxLife: Math.random() * 100,
         pulse: Math.random() * Math.PI * 2,
         trail: []
       });
@@ -78,7 +78,7 @@ const Hero: React.FC = () => {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Créer des particules aléatoirement
-      if (Math.random() < 0.4) {
+      if (Math.random() < 0.3) {
         createParticle(Math.random() * canvas.width, Math.random() * canvas.height);
       }
 
