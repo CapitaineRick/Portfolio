@@ -16,7 +16,7 @@ export const projectsData = {
       title: "AP-1",
       description:
         "Activité Professionnelle 1 - Problématique entreprise Revive",
-      image: "/images/logo_revive_blanc.png",
+      image: "/images/logo_revive_blanc.webp",
       documents: [
         {
           title: "Site Web Revive",
