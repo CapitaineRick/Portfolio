@@ -220,6 +220,12 @@ export const skillsData = [
         logo: '/images/logo-gantt.webp',
         level: 2,
         description: 'Planification de projets avec diagrammes de Gantt sur GanttProject ou Excel.'
+      },
+      {
+        name: 'Cycle de projet de vie',
+        logo: "images/cycle-projet.png",
+        level: 1,
+        description: 'Formation sur la logique de projet en entreprise '
       }
     ]
   },

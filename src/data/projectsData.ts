@@ -1,12 +1,21 @@
 export const projectsData = {
   enterprise: [
     {
-      id: "active-directory",
+      id: "",
       title: "Stage KNDS",
       description:
         "Stage de première année, support utilisateur, infographie du parc et administration système",
       image: "/images/logo-knds-logo.webp",
       pdfUrl:"docs/rapport_knds.pdf",
+      tags: ["Gestion de parc", "VoIP/ToIP", "AVAYA", "Support"],
+    },
+    {
+      id: "cycle",
+      title: "Cycle de vie des projets d'entreprise",
+      description:
+        "Formation sur le cycle de vie des engtreprises",
+      image: "images/cycle-projet.png",
+      pdfUrl:"images/formation.jpg",
       tags: ["Gestion de parc", "VoIP/ToIP", "AVAYA", "Support"],
     },
   ],
