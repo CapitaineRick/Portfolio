@@ -188,6 +188,23 @@ export const projectsData = {
       pdfUrl: "/docs/Install_GLPI.pdf",
       tags: ["Support","Web"],
     },
+        {
+      id: "bash",
+      title: "Script Bash",
+      description: "Backup via rsync",
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Bash_Logo_Colored.svg/1200px-Bash_Logo_Colored.svg.png",
+      pdfUrl: "/docs/script_bash.pdf",
+      tags: ["Bash","Backup", "Administration système"],
+    },
+
+        {
+      id: "powershell",
+      title: "Script powershell",
+      description: "Scripts d'administration en Powershell",
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/PowerShell_5.0_icon.png/600px-PowerShell_5.0_icon.png",
+      pdfUrl: "/docs/scripts_powershell.pdf",
+      tags: ["Powershell", "Administration système"],
+    },
   ],
   
 };
