@@ -216,8 +216,8 @@ export const skillsData = [
         description: 'Modélisation des données (MLD, MCD) dans le cadre des cours de BTS. Utilisé dans les projets de gestion.'
       },
       {
-        name: 'Diagrame de Gant',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Merise_model.png',
+        name: 'Diagrame de Gantt',
+        logo: '/images/logo-gantt.webp',
         level: 2,
         description: 'Planification de projets avec diagrammes de Gantt sur GanttProject ou Excel.'
       }
