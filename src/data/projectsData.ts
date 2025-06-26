@@ -180,5 +180,14 @@ export const projectsData = {
       pdfUrl: "/docs/install-apache2.pdf",
       tags: ["Web", "Serveur", "Apache", "WAF"],
     },
+        {
+      id: "GLPI",
+      title: "Installation de GLPI",
+      description: "Installation et configuration de GLPI",
+      image: "/images/logo-glpi.webp",
+      pdfUrl: "/docs/Install_GLPI.pdf",
+      tags: ["Support","Web"],
+    },
   ],
+  
 };
