@@ -125,18 +125,18 @@ const About: React.FC = () => {
                     <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 text-white" itemProp="name" itemScope itemType="https://schema.org/Person">
                       Fernandes Sébastien
                     </h3>
-                    <p className="text-orange-400 font-semibold text-xs sm:text-sm md:text-base" itemProp="jobTitle">
+                    <p className="text-orange-400 font-semibold text-xs sm:text-sm md:text-base">
                       Étudiant en BTS SIO SISR
                     </p>
                   </div>
 
                   {/* Contact Details */}
-                  <div className="space-y-2 md:space-y-3 mb-3 sm:mb-4 md:mb-6">
-                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm" itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+                  <div className="space-y-2 md:space-y-3 mb-3 sm:mb-4 md:mb-6" itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm">
                       <MapPin className="w-3 h-3 md:w-4 md:h-4 text-orange-500 flex-shrink-0" />
                       <span itemProp="addressLocality">Versailles, <span itemProp="addressCountry">France</span></span>
                     </div>
-                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm" itemProp="email">
+                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm">
                       <Mail className="w-3 h-3 md:w-4 md:h-4 text-orange-500 flex-shrink-0" />
                       <a
                         href="mailto:sebastien.78.fernandes@outlook.fr"
@@ -146,7 +146,7 @@ const About: React.FC = () => {
                         sebastien.78.fernandes@outlook.fr
                       </a>
                     </div>
-                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm" itemProp="sameAs">
+                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm">
                       <Globe className="w-3 h-3 md:w-4 md:h-4 text-orange-500 flex-shrink-0" />
                       <a
                         href="https://github.com/CapitaineRick"
