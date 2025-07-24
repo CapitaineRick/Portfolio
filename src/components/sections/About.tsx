@@ -67,11 +67,13 @@ const About: React.FC = () => {
   return (
     <section
       id="about"
+      itemScope
+      itemType="https://schema.org/AboutPage"
       className="py-8 sm:py-12 md:py-20 flex items-center justify-center relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-purple-500">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-purple-500" itemProp="name">
             À propos de moi
           </h2>
           <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-4 sm:mb-6 md:mb-8 rounded-full"></div>
@@ -120,36 +122,38 @@ const About: React.FC = () => {
 
                   {/* Personal Info */}
                   <div className="text-center mb-3 sm:mb-4 md:mb-6">
-                    <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 text-white">
+                    <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 text-white" itemProp="name" itemScope itemType="https://schema.org/Person">
                       Fernandes Sébastien
                     </h3>
-                    <p className="text-orange-400 font-semibold text-xs sm:text-sm md:text-base">
+                    <p className="text-orange-400 font-semibold text-xs sm:text-sm md:text-base" itemProp="jobTitle">
                       Étudiant en BTS SIO SISR
                     </p>
                   </div>
 
                   {/* Contact Details */}
                   <div className="space-y-2 md:space-y-3 mb-3 sm:mb-4 md:mb-6">
-                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm">
+                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm" itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
                       <MapPin className="w-3 h-3 md:w-4 md:h-4 text-orange-500 flex-shrink-0" />
-                      <span>Versailles, France</span>
+                      <span itemProp="addressLocality">Versailles, <span itemProp="addressCountry">France</span></span>
                     </div>
-                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm">
+                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm" itemProp="email">
                       <Mail className="w-3 h-3 md:w-4 md:h-4 text-orange-500 flex-shrink-0" />
                       <a
                         href="mailto:sebastien.78.fernandes@outlook.fr"
                         className="hover:text-orange-500 transition-colors break-all"
+                        itemProp="email"
                       >
                         sebastien.78.fernandes@outlook.fr
                       </a>
                     </div>
-                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm">
+                    <div className="flex items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm" itemProp="sameAs">
                       <Globe className="w-3 h-3 md:w-4 md:h-4 text-orange-500 flex-shrink-0" />
                       <a
                         href="https://github.com/CapitaineRick"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-orange-500 transition-colors break-all"
+                        itemProp="sameAs"
                       >
                         github.com/CapitaineRick
                       </a>

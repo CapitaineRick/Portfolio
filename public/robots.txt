@@ -1,3 +1,38 @@
 User-agent: *
 Allow: /
-Sitemap: https://portfolio-fernandes.vercel.app/sitemap.xml
+
+# Sitemap
+Sitemap: https://portfolio-bts-sio-sisr.netlify.app/sitemap.xml
+
+# Optimisations pour les moteurs de recherche
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Interdire l'accès aux fichiers sensibles
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /src/
+Disallow: /*.json$
+Disallow: /*.config.*
+
+# Permettre l'accès aux ressources importantes
+Allow: /docs/
+Allow: /images/
+Allow: *.pdf
+Allow: *.webp
+Allow: *.png
+Allow: *.jpg
+Allow: *.jpeg
+
+# Informations supplémentaires
+# Host: https://portfolio-bts-sio-sisr.netlify.app
+# Contact: sebastien.78.fernandes@outlook.fr

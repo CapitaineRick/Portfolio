@@ -64,10 +64,10 @@ const Contact: React.FC = () => {
   }, []);
 
   return (
-    <section id="contact" className="py-12 sm:py-16 md:py-20">
+    <section id="contact" className="py-12 sm:py-16 md:py-20" itemScope itemType="https://schema.org/ContactPage">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-purple-500">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-purple-500" itemProp="name">
             Contact
           </h2>
           <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-6 sm:mb-8 rounded-full"></div>
@@ -219,6 +219,7 @@ const Contact: React.FC = () => {
                         <a
                           href="mailto:sebastien.78.fernandes@outlook.fr"
                           className="text-orange-400 hover:text-orange-300 transition-colors text-sm sm:text-base md:text-lg break-all"
+                          itemProp="email"
                         >
                           sebastien.78.fernandes@outlook.fr
                         </a>
@@ -238,6 +239,7 @@ const Contact: React.FC = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-orange-400 hover:text-orange-300 transition-colors text-sm sm:text-base md:text-lg break-all"
+                          itemProp="sameAs"
                         >
                           linkedin.com/in/sébastien-fernandes
                         </a>

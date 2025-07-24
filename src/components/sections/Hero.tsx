@@ -140,6 +140,8 @@ const Hero: React.FC = () => {
   return (
     <section
       id="home"
+      itemScope
+      itemType="https://schema.org/Person"
       className="h-screen flex items-center justify-center relative overflow-hidden"
       style={{
         background: `
@@ -158,24 +160,24 @@ const Hero: React.FC = () => {
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto animate-fade-in-fast">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-300 text-sm font-medium mb-6 shadow-lg">
           <Server className="w-5 h-5" />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-purple-400">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-purple-400" itemProp="jobTitle">
             BTS SIO SISR • Administrateur Systèmes & Réseaux
           </span>
         </div>
 
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white drop-shadow-md mb-4">
-          <span className="block bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white drop-shadow-md mb-4" itemProp="name">
+          <span className="block bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600" itemProp="givenName">
             Fernandes
           </span>
-          <span className="block">Sébastien</span>
+          <span className="block" itemProp="familyName">Sébastien</span>
         </h1>
 
-        <p className="text-lg sm:text-xl text-gray-300 font-light max-w-3xl mx-auto">
+        <p className="text-lg sm:text-xl text-gray-300 font-light max-w-3xl mx-auto" itemProp="description">
           Passionné par l'<span className="text-orange-400 font-medium">infrastructure IT</span> & la <span className="text-purple-400 font-medium">cybersécurité</span>.
         </p>
 
-        <p className="mt-4 text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
-          Étudiant en BTS SIO SISR à l’IPSSI Saint-Quentin, je développe mes compétences en administration système, sécurité réseau et infrastructure informatique.
+        <p className="mt-4 text-gray-400 text-sm sm:text-base max-w-2xl mx-auto" itemProp="knowsAbout">
+          Étudiant en <strong>BTS SIO SISR</strong> à l'<span itemProp="alumniOf" itemScope itemType="https://schema.org/EducationalOrganization"><span itemProp="name">IPSSI Saint-Quentin</span></span>, je développe mes compétences en <strong>administration système</strong>, <strong>sécurité réseau</strong> et <strong>infrastructure informatique</strong>.
         </p>
       </div>
 
