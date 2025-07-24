@@ -177,7 +177,7 @@ const Hero: React.FC = () => {
         </p>
 
         <p className="mt-4 text-gray-400 text-sm sm:text-base max-w-2xl mx-auto" itemProp="knowsAbout">
-          Étudiant en <strong>BTS SIO SISR</strong> à l'<span itemProp="alumniOf" itemScope itemType="https://schema.org/EducationalOrganization"><span itemProp="name">IPSSI Saint-Quentin</span></span>, je développe mes compétences en <strong>administration système</strong>, <strong>sécurité réseau</strong> et <strong>infrastructure informatique</strong>.
+          Étudiant en <strong>BTS SIO SISR</strong> à l'<span itemProp="alumniOf" itemScope itemType="https://schema.org/EducationalOrganization"><span itemProp=\"name">IPSSI Saint-Quentin</span></span>, je développe mes compétences en <strong>administration système</strong>, <strong>sécurité réseau</strong> et <strong>infrastructure informatique</strong>.
         </p>
       </div>
 
