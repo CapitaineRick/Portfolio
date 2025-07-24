@@ -62,6 +62,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
     return downloadableExtensions.some(ext => urlLower.endsWith(ext));
   };
 
+  // Fonction pour détecter si c'est un fichier image
+  const isImageFile = (url: string): boolean => {
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
+    const urlLower = url.toLowerCase();
+    return imageExtensions.some(ext => urlLower.endsWith(ext));
+  };
+
   // Fonction pour télécharger un fichier
   const downloadFile = (url: string, filename: string) => {
     const link = document.createElement('a');
@@ -295,6 +302,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       } else if (isWebDocument(project.pdfUrl)) {
         const fullUrl = getFullUrl(project.pdfUrl);
         window.location.href = fullUrl;
+      } else if (isImageFile(project.pdfUrl)) {
+        // Ouvrir les images dans un nouvel onglet
+        const fullUrl = getFullUrl(project.pdfUrl);
+        window.open(fullUrl, '_blank');
       } else {
         setShowFullscreen(true);
       }
@@ -490,7 +501,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
       <DropdownMenu />
 
       {/* PDF Viewer Modal */}
-      {showFullscreen && (selectedDocument?.url || project.pdfUrl) && !isWebDocument(selectedDocument?.url || project.pdfUrl || '') && !isDownloadableFile(selectedDocument?.url || project.pdfUrl || '') && (
+      {showFullscreen && (selectedDocument?.url || project.pdfUrl) && !isWebDocument(selectedDocument?.url || project.pdfUrl || '') && !isDownloadableFile(selectedDocument?.url || project.pdfUrl || '') && !isImageFile(selectedDocument?.url || project.pdfUrl || '') && (
         <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-2 sm:p-4">
           <div className="pdf-modal-content bg-gray-800 rounded-xl sm:rounded-2xl w-full max-w-7xl max-h-[95vh] overflow-auto p-3 sm:p-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 sm:mb-4 gap-2 sm:gap-0">
