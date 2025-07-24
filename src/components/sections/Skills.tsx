@@ -74,8 +74,6 @@ const Skills: React.FC = () => {
                     <div 
                       key={skillIndex}
                       className="bg-gray-900/60 rounded-xl p-6 border border-gray-700 hover:border-gray-600 hover:bg-gray-900/80 transition-all duration-200"
-                      itemScope
-                      itemType="https://schema.org/Skill"
                     >
                       
                       {/* Skill Header */}
@@ -90,7 +88,7 @@ const Skills: React.FC = () => {
                         </div>
                         
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-bold text-white text-lg mb-1" itemProp="name">
+                          <h4 className="font-bold text-white text-lg mb-1">
                             {skill.name}
                           </h4>
                         </div>
@@ -98,7 +96,7 @@ const Skills: React.FC = () => {
 
                       {/* Description */}
                       <div>
-                        <p className="text-sm text-gray-300 leading-relaxed" itemProp="description">
+                        <p className="text-sm text-gray-300 leading-relaxed">
                           {skill.description}
                         </p>
                       </div>

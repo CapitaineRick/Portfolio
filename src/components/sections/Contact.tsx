@@ -219,7 +219,6 @@ const Contact: React.FC = () => {
                         <a
                           href="mailto:sebastien.78.fernandes@outlook.fr"
                           className="text-orange-400 hover:text-orange-300 transition-colors text-sm sm:text-base md:text-lg break-all"
-                          itemProp="email"
                         >
                           sebastien.78.fernandes@outlook.fr
                         </a>
@@ -239,7 +238,6 @@ const Contact: React.FC = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-orange-400 hover:text-orange-300 transition-colors text-sm sm:text-base md:text-lg break-all"
-                          itemProp="sameAs"
                         >
                           linkedin.com/in/sébastien-fernandes
                         </a>
