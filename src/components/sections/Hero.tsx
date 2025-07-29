@@ -180,16 +180,15 @@ const Hero: React.FC = () => {
           Étudiant en <strong>BTS SIO SISR</strong> à l'<span itemProp="alumniOf" itemScope itemType="https://schema.org/EducationalOrganization"><span itemProp="name">IPSSI Saint-Quentin</span></span>, je développe mes compétences en <strong>administration système</strong>, <strong>sécurité réseau</strong> et <strong>infrastructure informatique</strong>.
         </p>
       </div>
-
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
-        <button
-          onClick={scrollToAbout}
-          className="group relative p-4 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 hover:scale-110 transition-all duration-300"
-        >
-          <ChevronDown className="w-6 h-6 animate-bounce" />
-          <div className="absolute inset-0 rounded-full border border-orange-500/20 animate-ping" />
-        </button>
-      </div>
+<div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex items-center justify-center">
+  <button
+    onClick={scrollToAbout}
+    className="group relative p-4 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 hover:scale-110 transition-all duration-300"
+  >
+    <ChevronDown className="w-6 h-6 animate-bounce" />
+    <div className="absolute inset-0 rounded-full border border-orange-500/20 animate-ping" />
+  </button>
+</div>
     </section>
   );
 };
