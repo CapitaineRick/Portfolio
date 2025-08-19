@@ -9,15 +9,6 @@ export const projectsData = {
       pdfUrl:"docs/rapport_knds.pdf",
       tags: ["Gestion de parc", "VoIP/ToIP", "AVAYA", "Support"],
     },
-    {
-      id: "cycle",
-      title: "Cycle de vie des projets d'entreprise",
-      description:
-        "Formation sur le cycle de vie des engtreprises",
-      image: "images/cycle-projet.png",
-      pdfUrl:"images/formation.jpg",
-      tags: ["Gestion de parc", "VoIP/ToIP", "AVAYA", "Support"],
-    },
   ],
   school: [
     {
