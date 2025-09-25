@@ -1,5 +1,6 @@
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ProjectProvider } from './contexts/ProjectContext';
 import Layout from './components/Layout';
@@ -10,6 +11,7 @@ import Projects from './components/sections/Projects';
 import TechWatch from './components/sections/TechWatch';
 import Contact from './components/sections/Contact';
 import Education from './components/sections/Education';
+import RGPDPage from './components/pages/RGPDPage';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
@@ -19,6 +21,10 @@ function App() {
     <HelmetProvider>
       <ThemeProvider>
         <ProjectProvider>
+          <Router>
+            <Routes>
+              <Route path="/rgpd" element={<RGPDPage />} />
+              <Route path="/" element={
           <Layout>              
 
             <Hero />
@@ -29,6 +35,9 @@ function App() {
             <TechWatch />
             <Contact />
           </Layout>
+              } />
+            </Routes>
+          </Router>
         </ProjectProvider>
       </ThemeProvider>
                   <Analytics />

@@ -44,6 +44,18 @@ const Footer: React.FC = () => {
             </a>
           </div>
         </div>
+        
+        <div className="mt-4 pt-4 border-t border-gray-700">
+          <div className="flex justify-center">
+            <a 
+              href="/rgpd" 
+              className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors font-medium text-sm"
+            >
+              <File size={16} />
+              Politique RGPD
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );
