@@ -12,6 +12,21 @@ export interface Experience {
 }
 
 export const experienceData: Experience[] = [
+    {
+    id: 'alternance1-knds',
+    title: 'Alternance Administrateur Réseau',
+    company: 'KNDS France',
+    logo: '/images/logo-knds-logo.webp',
+    period: 'Septembre 2025 - Juillet 2026',
+    location: 'Versailles, France',
+    description: 'Alternance de deuxieme année en BTS SIO SISR au sein du service informatique de KNDS France, spécialisé dans la défense et l\'armement.',
+    type: 'alternance',
+    missions: [
+
+    ],
+    technologies: [
+    ]
+  },
   {
     id: 'stage-knds',
     title: 'Stagiaire Support Informatique',
@@ -36,4 +51,5 @@ export const experienceData: Experience[] = [
       'Netbox'
     ]
   }
+
 ];
