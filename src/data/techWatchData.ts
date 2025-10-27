@@ -28,7 +28,7 @@ Les certificats à courte durée deviennent la norme, renforçant la sécurité 
   date: "12 Juin 2025",
   tags: ["SSL", "TLS", "Cybersécurité", "Automatisation", "PKI"],
   url: "https://blog.nameshield.com/fr/2025/05/21/cest-officiel-la-duree-de-vie-des-certificats-ssl-tls-va-etre-reduite-a-47-jours/#:~:text=Cette%20mesure%20entre%20officiellement%20en,bonne%20gestion%20de%20ces%20certificats.",
-  category: "Sécurité"
+  category: "Cybersécurité"
 }
 
 ];
