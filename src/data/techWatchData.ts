@@ -54,7 +54,7 @@ Les certificats à courte durée deviennent la norme, renforçant la sécurité 
     {
       type: 'file',
       label: 'Documentation officielle',
-      url: 'https://letsencrypt.org/docs/'
+      url: '/docs/Veille.pdf'
     }
   ]
 }
