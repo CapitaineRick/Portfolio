@@ -52,9 +52,29 @@ Les certificats à courte durée deviennent la norme, renforçant la sécurité 
       url: 'https://blog.nameshield.com/fr/2025/05/21/cest-officiel-la-duree-de-vie-des-certificats-ssl-tls-va-etre-reduite-a-47-jours/#:~:text=Cette%20mesure%20entre%20officiellement%20en,bonne%20gestion%20de%20ces%20certificats.'
     },
     {
+      type: 'link',
+      label: 'Article Let’s Encrypt Blog',
+      url: 'https://letsencrypt.org/blog/'
+    },
+    {
+      type: 'link',
+      label: 'Article Le Monde Informatique',
+      url: 'https://www.lemondeinformatique.fr/actualites/lire-facebook-cloudflare-et-mozilla-allies-pour-mieux-securiser-les-certificats-tls-76965.html.'
+    },
+    {
       type: 'file',
-      label: 'Documentation officielle',
+      label: 'Documentation Veille',
       url: '/docs/Veille.pdf'
+    },
+    {
+      type: 'file',
+      label: 'Image ACME',
+      url: '/images/ACME_protocol_process.webp'
+    },
+    {
+      type: 'file',
+      label: 'Imaghe Certificat SSL',
+      url: '/images/ssl-desc.webp'
     }
   ]
 }
