@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ExternalLink, Calendar, ChevronDown, ChevronUp, BookOpen, Rss, Bell } from 'lucide-react';
+import { ExternalLink, Calendar, ChevronDown, ChevronUp, FileText, Video } from 'lucide-react';
 import { techWatchData } from '../../data/techWatchData';
 
 const TechWatch: React.FC = () => {
   const watchRef = useRef<HTMLDivElement>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const [openSourceMenu, setOpenSourceMenu] = useState<string | null>(null);
 
   const categories = Array.from(new Set(techWatchData.map(item => item.category)));
 
@@ -15,6 +16,21 @@ const TechWatch: React.FC = () => {
 
   const toggleCard = (title: string) => {
     setExpandedCard(expandedCard === title ? null : title);
+  };
+
+  const toggleSourceMenu = (title: string) => {
+    setOpenSourceMenu(openSourceMenu === title ? null : title);
+  };
+
+  const getSourceIcon = (type: string) => {
+    switch (type) {
+      case 'file':
+        return <FileText className="w-4 h-4" />;
+      case 'video':
+        return <Video className="w-4 h-4" />;
+      default:
+        return <ExternalLink className="w-4 h-4" />;
+    }
   };
 
   useEffect(() => {
@@ -37,6 +53,18 @@ const TechWatch: React.FC = () => {
         observer.unobserve(watchRef.current);
       }
     };
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.source-menu-container')) {
+        setOpenSourceMenu(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
@@ -189,7 +217,7 @@ const TechWatch: React.FC = () => {
                     <div className="flex justify-between items-center pt-4 border-t border-gray-700">
                       <button
                         onClick={() => toggleCard(item.title)}
-                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30
                                  text-orange-400 font-medium transition-all duration-300
                                  hover:bg-orange-900/50 hover:scale-105"
                       >
@@ -206,17 +234,41 @@ const TechWatch: React.FC = () => {
                         )}
                       </button>
 
-                      <a
-                        href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-900/30 
-                                 text-purple-400 font-medium transition-all duration-300
-                                 hover:bg-purple-900/50 hover:scale-105"
-                      >
-                        Source
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
+                      {/* Menu déroulant des sources */}
+                      <div className="relative source-menu-container">
+                        <button
+                          onClick={() => toggleSourceMenu(item.title)}
+                          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-900/30
+                                   text-blue-400 font-medium transition-all duration-300
+                                   hover:bg-blue-900/50 hover:scale-105"
+                        >
+                          Sources
+                          <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${
+                            openSourceMenu === item.title ? 'rotate-180' : ''
+                          }`} />
+                        </button>
+
+                        {/* Dropdown Menu */}
+                        {openSourceMenu === item.title && (
+                          <div className="absolute right-0 mt-2 w-64 bg-gray-800 rounded-xl shadow-2xl border border-gray-700 z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                            {item.sources.map((source, idx) => (
+                              <a
+                                key={idx}
+                                href={source.url || source.filePath}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300
+                                         hover:bg-gray-700 hover:text-blue-400 transition-all duration-200
+                                         border-b border-gray-700 last:border-b-0"
+                              >
+                                {getSourceIcon(source.type)}
+                                <span className="flex-1">{source.label}</span>
+                                <ExternalLink className="w-3 h-3 opacity-60" />
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
