@@ -133,12 +133,12 @@ const TechWatch: React.FC = () => {
               >
                 {/* Card Background Effect */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                
+
                 {/* Card Content */}
-                <div className="relative bg-gray-800 rounded-2xl overflow-hidden">
+                <div className="relative bg-gray-800 rounded-2xl">
                   
                   {/* Image Header */}
-                  <div className="relative h-48 overflow-hidden">
+                  <div className="relative h-48 overflow-hidden rounded-t-2xl">
                     <img 
                       src={item.image} 
                       alt={item.title}
@@ -184,29 +184,29 @@ const TechWatch: React.FC = () => {
                   </div>
                   
                   {/* Card Body */}
-                  <div className="p-6">
+                  <div className="p-6 rounded-b-2xl">
                     {/* Title */}
                     <h3 className="text-xl font-bold text-white group-hover:text-orange-500 transition-colors mb-4">
                       {item.title}
                     </h3>
 
                     {/* Description avec hauteur dynamique */}
-                    <div className="mb-6">
-                      <div 
+                    <div className="mb-6 relative">
+                      <div
                         className={`text-sm text-gray-300 leading-relaxed transition-all duration-500 ease-in-out overflow-hidden ${
-                          expandedCard === item.title 
-                            ? 'max-h-none opacity-100' 
+                          expandedCard === item.title
+                            ? 'max-h-none opacity-100'
                             : 'max-h-24 opacity-90'
                         }`}
                       >
                         <div className="whitespace-pre-wrap font-sans">
-                          {expandedCard === item.title 
-                            ? item.description 
+                          {expandedCard === item.title
+                            ? item.description
                             : item.description.substring(0, 150) + (item.description.length > 150 ? '...' : '')
                           }
                         </div>
                       </div>
-                      
+
                       {/* Fade effect pour le texte tronqué */}
                       {expandedCard !== item.title && item.description.length > 150 && (
                         <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-gray-800 to-transparent pointer-events-none"></div>
@@ -250,7 +250,7 @@ const TechWatch: React.FC = () => {
 
                         {/* Dropdown Menu */}
                         {openSourceMenu === item.title && (
-                          <div className="absolute right-0 mt-2 w-64 bg-gray-800 rounded-xl shadow-2xl border border-gray-700 z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                          <div className="absolute right-0 bottom-full mb-2 w-64 bg-gray-800 rounded-xl shadow-2xl border border-gray-700 z-50 overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-200">
                             {item.sources.map((source, idx) => (
                               <a
                                 key={idx}
