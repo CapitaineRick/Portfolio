@@ -44,7 +44,7 @@ Les certificats à courte durée deviennent la norme, renforçant la sécurité 
   image: "https://images.pexels.com/photos/669619/pexels-photo-669619.jpeg",
   date: "12 Juin 2025",
   tags: ["SSL", "TLS", "Cybersécurité", "Automatisation", "PKI"],
-  category: "Sécurité",
+  category: "Cybersécurité",
   sources: [
     {
       type: 'link',
