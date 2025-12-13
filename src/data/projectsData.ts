@@ -185,7 +185,7 @@ export const projectsData = {
       title: "Installation de GLPI",
       description: "Installation et configuration de GLPI",
       image: "/images/logo-glpi.webp",
-      pdfUrl: "/docs/Install_GLPI.pdf",
+      pdfUrl: "/docs/install-GLPI.pdf",
       tags: ["Support","Web"],
     },
         {
