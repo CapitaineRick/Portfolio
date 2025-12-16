@@ -168,7 +168,7 @@ export const projectsData = {
       title: "Installation Debian 12",
       description: "Installation et configuration de Debian 12",
       image: "/images/logo-debian12-logo.webp",
-      pdfUrl: "/docs/Install-debian12.pdf",
+      pdfUrl: "/docs/Install_Debian.pdf",
       tags: ["Linux", "OS", "Serveur", "Administration système"],
     },
     {
@@ -203,6 +203,14 @@ export const projectsData = {
       description: "Scripts d'administration en Powershell",
       image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/PowerShell_5.0_icon.png/600px-PowerShell_5.0_icon.png",
       pdfUrl: "/docs/scripts_powershell.pdf",
+      tags: ["Powershell", "Administration système"],
+    },
+            {
+      id: "pfsense",
+      title: "Installation et configuration de PFSENSE",
+      description: "Documentation d'installation et de configuration de PFSENSE",
+      image: "https://fr.wikipedia.org/wiki/Fichier:PfSense_logo.png",
+      pdfUrl: "/docs/install_pfsense.pdf",
       tags: ["Powershell", "Administration système"],
     },
   ],
