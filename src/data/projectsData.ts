@@ -212,7 +212,7 @@ export const projectsData = {
       image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/PfSense_logo.png/960px-PfSense_logo.png",
       pdfUrl: "/docs/install_pfsense.pdf",
       tags: ["pfsense", "Parefeu", "Réseau"],
-    },
+    },{
       id: "Zabbix",
       title: "Installation et configuration de Zabbix",
       description: "Documentation d'installation et de configuration de Zabbix",
