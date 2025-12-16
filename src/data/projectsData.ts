@@ -209,7 +209,7 @@ export const projectsData = {
       id: "pfsense",
       title: "Installation et configuration de PFSENSE",
       description: "Documentation d'installation et de configuration de PFSENSE",
-      image: "https://fr.wikipedia.org/wiki/Fichier:PfSense_logo.png",
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/PfSense_logo.png/960px-PfSense_logo.png",
       pdfUrl: "/docs/install_pfsense.pdf",
       tags: ["Powershell", "Administration système"],
     },
