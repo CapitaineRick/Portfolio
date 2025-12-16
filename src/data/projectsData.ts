@@ -217,8 +217,16 @@ export const projectsData = {
       title: "Installation et configuration de Zabbix",
       description: "Documentation d'installation et de configuration de Zabbix",
       image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Zabbix_logo.svg/960px-Zabbix_logo.svg.png?20200420123345",
-      pdfUrl: "/docs/install_zabbix.pdf",
+      pdfUrl: "/docs/Install_zabbix.pdf",
       tags: ["Zabbix", "Monitoring"],
+    },
+    ,{
+      id: "Veille",
+      title: "Documentation de veille technologique",
+      description: "Documentation de veille technologique",
+      image: "",
+      pdfUrl: "/docs/veille.pdf",
+      tags: ["Veille"],
     },
   ],
   
