@@ -316,6 +316,8 @@ const About: React.FC = () => {
                             src={experience.logo}
                             alt={experience.company}
                             className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-auto object-contain flex-shrink-0"
+                            loading="lazy"
+                            decoding="async"
                           />
                           <div className="flex-1 min-w-0">
                             <h4 className="text-sm sm:text-base md:text-lg font-bold text-white mb-1">

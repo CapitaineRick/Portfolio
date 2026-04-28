@@ -410,6 +410,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
               src={project.image} 
               alt={project.title} 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
               <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">
