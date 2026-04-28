@@ -30,7 +30,6 @@ function App() {
             <Hero />
             <About />
             <Education />
-            <Skills />
             <Projects />
             <TechWatch />
             <Contact />
