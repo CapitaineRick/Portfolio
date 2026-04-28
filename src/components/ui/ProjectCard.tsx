@@ -37,6 +37,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
   const [showDropdown, setShowDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
 
+  const fallbackImage = `${import.meta.env.BASE_URL}images/fond.webp`;
+  const resolveImageSrc = (image: string) => {
+    if (!image) return fallbackImage;
+    if (image.startsWith('http://') || image.startsWith('https://')) {
+      return image;
+    }
+
+    const normalized = image.startsWith('/') ? image.slice(1) : image;
+    return `${import.meta.env.BASE_URL}${normalized}`;
+  };
+
+  const [imgSrc, setImgSrc] = useState<string>(resolveImageSrc(project.image));
+
+  useEffect(() => {
+    setImgSrc(resolveImageSrc(project.image));
+  }, [project.image]);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -407,11 +424,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
           {/* Image avec hauteur fixe */}
           <div className="relative h-40 sm:h-48 overflow-hidden flex-shrink-0">
             <img 
-              src={project.image} 
+              src={imgSrc} 
               alt={project.title} 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               loading="lazy"
               decoding="async"
+              onError={() => setImgSrc(fallbackImage)}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
               <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">
