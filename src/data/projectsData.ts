@@ -92,6 +92,25 @@ export const projectsData = {
       ]
     },
     {
+      id: "e6",
+      title: "E6 / AP-2",
+      description: "Épreuve E6 et AP-2 - Problématique de la M2L",
+      image: "/images/logo-M2L.webp",
+      tags: ["E6", "Windows", "Active Directory", "Déploiement logiciel"],
+      documents: [
+          {
+          title: "Présentation E6",
+          url: "/docs/AP2/ap2-pres.pdf",
+          description: "Présentation des problématiques et leurs solutions",
+        },
+        {
+          title: "Documentation d'installation",
+          url: "/docs/AP2/ap2-doc.pdf",
+          description: "Installation des solutions.",
+        }
+      ]
+    },
+    {
       id: "proxmox",
       title: "Installation Proxmox VE",
       description: "Installation et configuration de l'hyperviseur Proxmox VE",
@@ -192,7 +211,7 @@ export const projectsData = {
       id: "bash",
       title: "Script Bash",
       description: "Backup via rsync",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Bash_Logo_Colored.svg/1200px-Bash_Logo_Colored.svg.png",
+      image: "/images/logo-rsync-logo.webp",
       pdfUrl: "/docs/script_bash.pdf",
       tags: ["Bash","Backup", "Administration système"],
     },
@@ -201,7 +220,7 @@ export const projectsData = {
       id: "powershell",
       title: "Script powershell",
       description: "Scripts d'administration en Powershell",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/PowerShell_5.0_icon.png/600px-PowerShell_5.0_icon.png",
+      image: "/images/logo-profile.webp",
       pdfUrl: "/docs/scripts_powershell.pdf",
       tags: ["Powershell", "Administration système"],
     },
@@ -209,14 +228,14 @@ export const projectsData = {
       id: "pfsense",
       title: "Installation et configuration de PFSENSE",
       description: "Documentation d'installation et de configuration de PFSENSE",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/PfSense_logo.png/960px-PfSense_logo.png",
+      image: "/images/logo-pfsense-logo.webp",
       pdfUrl: "/docs/install_pfsense.pdf",
       tags: ["pfsense", "Parefeu", "Réseau"],
     },{
       id: "Zabbix",
       title: "Installation et configuration de Zabbix",
       description: "Documentation d'installation et de configuration de Zabbix",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Zabbix_logo.svg/960px-Zabbix_logo.svg.png?20200420123345",
+      image: "/images/logo-zabbix-logo.webp",
       pdfUrl: "/docs/Install_zabbix.pdf",
       tags: ["Zabbix", "Monitoring"],
     }
@@ -224,7 +243,7 @@ export const projectsData = {
       id: "Veille",
       title: "Documentation de veille technologique",
       description: "Documentation de veille technologique",
-      image: "",
+      image: "/images/logo-gantt.webp",
       pdfUrl: "/docs/veille.pdf",
       tags: ["Veille"],
     },
