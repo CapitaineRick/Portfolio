@@ -11,7 +11,6 @@ import Projects from './components/sections/Projects';
 import TechWatch from './components/sections/TechWatch';
 import Contact from './components/sections/Contact';
 import Education from './components/sections/Education';
-import RGPDPage from './components/pages/RGPDPage';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
@@ -23,7 +22,6 @@ function App() {
         <ProjectProvider>
           <Router>
             <Routes>
-              <Route path="/rgpd" element={<RGPDPage />} />
               <Route path="/" element={
           <Layout>              
 
