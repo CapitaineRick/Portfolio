@@ -25,7 +25,7 @@ const Projects: React.FC = () => {
   const allProjects = [...internshipProjects, ...schoolProjects, ...technicalProjects];
 
   // Catégories principales
-  const categories = ['Tous', 'Stage / Alternance', 'AP', 'E5', 'Guide Technique'];
+  const categories = ['Tous', 'Stage / Alternance', 'AP', 'E6', 'Guide Technique'];
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);

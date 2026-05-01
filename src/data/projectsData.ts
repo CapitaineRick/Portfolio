@@ -216,7 +216,7 @@ export const projectsData = {
       description: "Installation et configuration de GLPI",
       image: "/images/logo-glpi.webp",
       pdfUrl: "/docs/install-GLPI.pdf",
-      tags: ["Support", "Web", "E5"],
+      tags: ["Support", "Web", "E6"],
     },
     {
       id: "bash",
@@ -240,7 +240,7 @@ export const projectsData = {
       description: "Documentation d'installation et de configuration de PFSENSE",
       image: "/images/logo-pfsense-logo.webp",
       pdfUrl: "/docs/install_pfsense.pdf",
-      tags: ["PFSENSE", "Parefeu", "Réseau", "E5"],
+      tags: ["PFSENSE", "Parefeu", "Réseau", "E6"],
     },
     {
       id: "Zabbix",
