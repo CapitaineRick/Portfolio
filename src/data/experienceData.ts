@@ -19,7 +19,7 @@ export const experienceData: Experience[] = [
     logo: '/images/logo-knds-logo.webp',
     period: 'Septembre 2025 - Juillet 2026',
     location: 'Versailles, France',
-    description: 'Alternance de deuxieme année en BTS SIO SISR au sein du service informatique de KNDS France, spécialisé dans la défense et l\'armement.',
+    description: 'Alternance de deuxième année en BTS SIO SISR au sein du service informatique de KNDS France, spécialisé dans la défense et l\'armement.',
     type: 'alternance',
     missions: [
 

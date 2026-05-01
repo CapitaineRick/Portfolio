@@ -22,12 +22,12 @@ interface Project {
 
 interface ProjectCardProps {
   project: Project;
-  isEnterprise: boolean;
+  category: 'internship' | 'school' | 'technical';
   className?: string;
   style?: React.CSSProperties;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, className = '', style }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className = '', style }) => {
   const [showFullscreen, setShowFullscreen] = useState(false);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -415,9 +415,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isEnterprise, classN
         <div className="relative bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden flex flex-col h-full">
           <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">
             <div className={`p-1.5 sm:p-2 rounded-lg sm:rounded-xl backdrop-blur-md ${
-              isEnterprise ? 'bg-orange-500/90 text-white' : 'bg-blue-500/90 text-white'
+              category === 'internship' ? 'bg-orange-500/90 text-white' : 
+              category === 'school' ? 'bg-blue-500/90 text-white' : 
+              'bg-purple-500/90 text-white'
             }`}>
-              {isEnterprise ? <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" /> : <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5" />}
+              {category === 'internship' ? <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" /> : 
+               category === 'school' ? <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5" /> :
+               <FileText className="w-4 h-4 sm:w-5 sm:h-5" />}
             </div>
           </div>
 

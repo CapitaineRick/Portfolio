@@ -4,47 +4,43 @@ import ProjectCard from '../ui/ProjectCard';
 
 const Projects: React.FC = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('Tous');
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  // Injecte les tags "Entreprise" et "Ecole" sans modifier la source
-  const enterpriseProjects = projectsData.enterprise.map(p => ({
+  // Injecte les tags de catégorie sans modifier la source
+  const internshipProjects = projectsData.internship.map(p => ({
     ...p,
-    tags: [...(p.tags || []), 'Entreprise'],
   }));
 
   const schoolProjects = projectsData.school.map(p => ({
     ...p,
-    tags: [...(p.tags || []), 'Ecole'],
+    tags: [...(p.tags || []), 'AP'],
   }));
 
-  const allProjects = [...enterpriseProjects, ...schoolProjects];
+  const technicalProjects = projectsData.technical.map(p => ({
+    ...p,
+    tags: [...(p.tags || []), 'Guide Technique'],
+  }));
 
-  // Priorité : Entreprise, Ecole, puis les autres en ordre alphabétique
-  const priorityTags = ['Entreprise', 'Ecole','Personnel'];
-  const otherTags = Array.from(
-    new Set(allProjects.flatMap(project => project.tags || []))
-  ).filter(tag => !priorityTags.includes(tag)).sort();
+  const allProjects = [...internshipProjects, ...schoolProjects, ...technicalProjects];
 
-  const tags = [...priorityTags, ...otherTags];
+  // Catégories principales
+  const categories = ['Tous', 'Stage / Alternance', 'AP', 'E5', 'Guide Technique'];
 
-  const toggleTag = (tag: string) => {
-    setSelectedTags(prev =>
-      prev.includes(tag)
-        ? prev.filter(t => t !== tag)
-        : [...prev, tag]
-    );
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
   };
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedTags]);
+  // Filtre les projets selon la catégorie
+  const getFilteredProjects = () => {
+    if (selectedCategory === 'Tous') {
+      return allProjects;
+    }
+    return allProjects.filter(project => project.tags?.includes(selectedCategory));
+  };
 
-  const filteredProjects = selectedTags.length === 0
-    ? allProjects
-    : allProjects.filter(project =>
-        project.tags?.some(tag => selectedTags.includes(tag))
-      );
+  const filteredProjects = getFilteredProjects();
 
   const projectsPerPage = 9;
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
@@ -79,21 +75,23 @@ const Projects: React.FC = () => {
           </p>
         </div>
 
-        {/* Filtres par tags */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-10 md:mb-12 px-4">
-          {tags.map(tag => (
-            <button
-              key={tag}
-              onClick={() => toggleTag(tag)}
-              className={`px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-xl sm:rounded-2xl border transition duration-300 font-semibold text-xs sm:text-sm md:text-base ${
-                selectedTags.includes(tag)
-                  ? 'bg-orange-500 text-white border-orange-500 shadow-lg'
-                  : 'bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700 hover:border-gray-500'
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
+        {/* Filtres par catégorie */}
+        <div className="mb-8 sm:mb-10 md:mb-12 px-4">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+            {categories.map(category => (
+              <button
+                key={category}
+                onClick={() => handleCategoryChange(category)}
+                className={`px-4 py-2 rounded-full border transition duration-300 font-semibold text-sm sm:text-base whitespace-nowrap ${
+                  selectedCategory === category
+                    ? 'bg-orange-500 text-white border-orange-500 shadow-lg'
+                    : 'bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700 hover:border-gray-500'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Projets affichés */}
@@ -101,14 +99,24 @@ const Projects: React.FC = () => {
           ref={projectsRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10"
         >
-          {currentProjects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              isEnterprise={project.tags?.includes('Entreprise')}
-              className="project-card opacity-0 scale-95 transition-all duration-300"
-            />
-          ))}
+          {currentProjects.map((project) => {
+            // Déterminer la catégorie en fonction des tags
+            let category: 'internship' | 'school' | 'technical' = 'technical';
+            if (project.tags?.includes('Stage')) {
+              category = 'internship';
+            } else if (project.tags?.includes('AP')) {
+              category = 'school';
+            }
+
+            return (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                category={category}
+                className="project-card opacity-0 scale-95 transition-all duration-300"
+              />
+            );
+          })}
         </div>
 
         {/* Pagination */}

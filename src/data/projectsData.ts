@@ -1,13 +1,22 @@
 export const projectsData = {
-  enterprise: [
+  internship: [
     {
-      id: "",
+      id: "stage-knds",
       title: "Stage KNDS",
       description:
         "Stage de première année, support utilisateur, infographie du parc et administration système",
       image: "/images/logo-knds-logo.webp",
-      pdfUrl:"docs/rapport_knds.pdf",
-      tags: ["Gestion de parc", "VoIP/ToIP", "AVAYA", "Support"],
+      pdfUrl: "docs/rapport_knds.pdf",
+      tags: ["Stage / Alternance", "Gestion de parc", "VoIP/ToIP", "AVAYA", "Support"],
+    },
+    {
+      id: "alternance-knds",
+      title: "Alternance KNDS",
+      description:
+        "Alternance de deuxième année, administration réseau et support interne au sein de KNDS France.",
+      image: "/images/logo-knds-logo.webp",
+      pdfUrl: "/docs/rapport_alternance_knds.pdf",
+      tags: ["Stage / Alternance", "Gestion de parc", "Support", "Réseau", "Documentation"],
     },
   ],
   school: [
@@ -110,6 +119,8 @@ export const projectsData = {
         }
       ]
     },
+  ],
+  technical: [
     {
       id: "proxmox",
       title: "Installation Proxmox VE",
@@ -199,24 +210,23 @@ export const projectsData = {
       pdfUrl: "/docs/install-apache2.pdf",
       tags: ["Web", "Serveur", "Apache", "WAF"],
     },
-        {
+    {
       id: "GLPI",
       title: "Installation de GLPI",
       description: "Installation et configuration de GLPI",
       image: "/images/logo-glpi.webp",
       pdfUrl: "/docs/install-GLPI.pdf",
-      tags: ["Support","Web"],
+      tags: ["Support", "Web", "E5"],
     },
-        {
+    {
       id: "bash",
       title: "Script Bash",
       description: "Backup via rsync",
       image: "/images/logo-rsync-logo.webp",
       pdfUrl: "/docs/script_bash.pdf",
-      tags: ["Bash","Backup", "Administration système"],
+      tags: ["Bash", "Backup", "Administration système"],
     },
-
-        {
+    {
       id: "powershell",
       title: "Script powershell",
       description: "Scripts d'administration en Powershell",
@@ -224,22 +234,23 @@ export const projectsData = {
       pdfUrl: "/docs/scripts_powershell.pdf",
       tags: ["Powershell", "Administration système"],
     },
-            {
+    {
       id: "pfsense",
       title: "Installation et configuration de PFSENSE",
       description: "Documentation d'installation et de configuration de PFSENSE",
       image: "/images/logo-pfsense-logo.webp",
       pdfUrl: "/docs/install_pfsense.pdf",
-      tags: ["pfsense", "Parefeu", "Réseau"],
-    },{
+      tags: ["PFSENSE", "Parefeu", "Réseau", "E5"],
+    },
+    {
       id: "Zabbix",
       title: "Installation et configuration de Zabbix",
       description: "Documentation d'installation et de configuration de Zabbix",
       image: "/images/logo-zabbix-logo.webp",
       pdfUrl: "/docs/Install_zabbix.pdf",
       tags: ["Zabbix", "Monitoring"],
-    }
-    ,{
+    },
+    {
       id: "Veille",
       title: "Documentation de veille technologique",
       description: "Documentation de veille technologique",
@@ -248,5 +259,4 @@ export const projectsData = {
       tags: ["Veille"],
     },
   ],
-  
 };
