@@ -15,7 +15,7 @@ export const projectsData = {
       description:
         "Alternance de deuxième année, administration réseau et support interne au sein de KNDS France.",
       image: "/images/logo-knds-logo.webp",
-      pdfUrl: "/docs/rapport_alternance_knds.pdf",
+      pdfUrl: "/docs/rapport_alternance.pdf",
       tags: ["Stage / Alternance", "Gestion de parc", "Support", "Réseau", "Documentation"],
     },
   ],

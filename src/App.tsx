@@ -15,33 +15,33 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   return (
-    
+
     <HelmetProvider>
       <ThemeProvider>
         <ProjectProvider>
           <Router>
             <Routes>
               <Route path="/" element={
-          <Layout>              
+                <Layout>
 
-            <Hero />
-            <About />
-            <Education />
-            <Projects />
-            <TechWatch />
-            <Contact />
-          </Layout>
+                  <Hero />
+                  <About />
+                  <Education />
+                  <Projects />
+                  <TechWatch />
+                  <Contact />
+                </Layout>
               } />
             </Routes>
           </Router>
         </ProjectProvider>
       </ThemeProvider>
-                  <Analytics />
-            <SpeedInsights/>
-      
-      
+      <Analytics />
+      <SpeedInsights />
+
+
     </HelmetProvider>
-    
+
   );
 }
 
