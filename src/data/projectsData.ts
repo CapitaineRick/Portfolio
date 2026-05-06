@@ -114,8 +114,8 @@ export const projectsData = {
         },
         {
           title: "Documentation d'installation",
-          url: "/docs/AP2/ap2-doc.pdf",
-          description: "Installation des solutions.",
+          url: "/docs/E6/Infra.png",
+          description: "Schema de la M2L",
         }
       ]
     },
