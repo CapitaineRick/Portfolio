@@ -62,7 +62,7 @@ SecNumCloud s'impose comme la norme de référence pour la protection des donné
   date: "12 Juin 2025",
   tags: ["SecNumCloud", "ANSSI", "Cloud", "Cybersécurité", "Souveraineté numérique", "Cloud de confiance"],
   category: "Cybersécurité",
-  sources: [
+sources: [
     {
       type: 'link',
       label: 'ANSSI — Page cloud officielle',
@@ -114,5 +114,6 @@ SecNumCloud s'impose comme la norme de référence pour la protection des donné
       url: 'https://newsroom.orange.com/orange-business-annonce-la-qualification-secnumcloud-de-son-offre-cloud-avenue-secnum-une-etape-cle-pour-la-confiance-numerique/?lang=fra'
     }
   ]
+}
 
 ];
