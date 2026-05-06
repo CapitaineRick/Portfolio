@@ -18,8 +18,8 @@ export interface TechWatchItem {
 export const techWatchData: TechWatchItem[] = [
   {
     title: "SecNumCloud : Le standard de confiance pour le cloud français",
-    description: `Sécurité des données dans le cloud (SecNumCloud) : Qualification ANSSI et souveraineté numérique`,
-    content: `SecNumCloud est un référentiel créé par l'ANSSI (Agence Nationale de la Sécurité des Systèmes d'Information) qui certifie qu'un hébergeur cloud est suffisamment sécurisé pour stocker des données sensibles. Il garantit qu'aucune législation étrangère ne peut permettre l'accès aux données hébergées, et que le prestataire respecte des exigences techniques strictes vérifiées par audit indépendant. Lorsqu'une administration stocke ses données chez un hébergeur américain, le CLOUD Act autorise les autorités américaines à y accéder, même si les serveurs sont en Europe. SecNumCloud impose qu'un opérateur européen garde le contrôle total et exclusif des données, rendant tout accès étranger légalement et techniquement impossible.
+    description: `Sécurité des données dans le cloud (SecNumCloud) : Qualification ANSSI et souveraineté numérique
+  SecNumCloud est un référentiel créé par l'ANSSI (Agence Nationale de la Sécurité des Systèmes d'Information) qui certifie qu'un hébergeur cloud est suffisamment sécurisé pour stocker des données sensibles. Il garantit qu'aucune législation étrangère ne peut permettre l'accès aux données hébergées, et que le prestataire respecte des exigences techniques strictes vérifiées par audit indépendant. Lorsqu'une administration stocke ses données chez un hébergeur américain, le CLOUD Act autorise les autorités américaines à y accéder, même si les serveurs sont en Europe. SecNumCloud impose qu'un opérateur européen garde le contrôle total et exclusif des données, rendant tout accès étranger légalement et techniquement impossible.
 
 Évolutions récentes :
 • Création en 2015 (Secure Cloud), renommé SecNumCloud en 2016, basé sur la norme ISO/CEI 27001
