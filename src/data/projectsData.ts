@@ -33,6 +33,11 @@ export const projectsData = {
           description: "Site web de l'entreprise Revive - Interface utilisateur complète avec e-commerce",
         },
         {
+          title: "Trello Revive",
+          url: "/https://trello.com/b/zPjQsarH/revive",
+          description: "Trello de gestion de projet pour l'entreprise Revive - Organisation des tâches et suivi de l'avancement",
+        },
+        {
           title: "Bon de commande Revive",
           url: "/docs/AP1/bon_commande.pdf",
           description: "Document de commande pour l'entreprise Revive",
