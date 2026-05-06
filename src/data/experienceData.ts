@@ -24,13 +24,17 @@ export const experienceData: Experience[] = [
     missions: [
       'Renouvellement du LAN',
       'Durcissement de VLAN',
-      'Mise en place de controle de conformité'
+      'Mise en place de controle de conformité',
+      "Brassage d'équipements réseau",
+      'Remplacement de PDU'
+
 
     ],
     technologies: [
       'Avaya (Switching)',
       'Aruba (Switching)',
       'Fortigate (Firewall)',
+      'Stormshield (Firewall)',
       'Netbox (Inventaire de parc)',
     ]
   },
