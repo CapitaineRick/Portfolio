@@ -110,12 +110,12 @@ export const projectsData = {
       title: "E6",
       description: "Épreuve E6 - Information Complémentaire",
       image: "/images/logo-M2L.webp",
-      
+    
       tags: ["E6"],
-            documents: [
+      documents: [
           {
           title: "Schema de l'infrastructure",
-          pdfUrl: "docs/E6/Infra.pdf",
+          url: "docs/E6/Infra.pdf",
           description: "Schéma de l'infrastructure mise en place pour l'épreuve E6",
         },
         {
