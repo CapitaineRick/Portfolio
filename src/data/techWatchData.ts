@@ -58,42 +58,61 @@ SecNumCloud n'est pas un label de souveraineté technologique. La qualification 
 
 SecNumCloud s'impose comme la norme de référence pour la protection des données sensibles en France, rendant sa maîtrise indispensable pour tout professionnel du réseau et de la cybersécurité.`,
 
-  image: "https://images.pexels.com/photos/669619/pexels-photo-669619.jpeg",
+  image: "/doc/images/secnumcloud.png",
   date: "12 Juin 2025",
-  tags: ["SSL", "TLS", "Cybersécurité", "Automatisation", "PKI"],
+  tags: ["SecNumCloud", "ANSSI", "Cloud", "Cybersécurité", "Souveraineté numérique", "Cloud de confiance"],
   category: "Cybersécurité",
   sources: [
     {
       type: 'link',
-      label: 'Article Nameshield',
-      url: 'https://blog.nameshield.com/fr/2025/05/21/cest-officiel-la-duree-de-vie-des-certificats-ssl-tls-va-etre-reduite-a-47-jours/#:~:text=Cette%20mesure%20entre%20officiellement%20en,bonne%20gestion%20de%20ces%20certificats.'
+      label: 'ANSSI — Page cloud officielle',
+      url: 'https://cyber.gouv.fr/enjeux-technologiques/cloud/'
     },
     {
       type: 'link',
-      label: 'Article Let’s Encrypt Blog',
-      url: 'https://letsencrypt.org/blog/'
+      label: 'ANSSI — Liste des prestataires qualifiés SecNumCloud',
+      url: 'https://cyber.gouv.fr/offre-de-service/solutions-certifiees-et-qualifiees/services-de-securite-evalue/solutions-en-cours-de-qualification/prestataires-secnumcloud/'
     },
     {
       type: 'link',
-      label: 'Article Le Monde Informatique',
-      url: 'https://www.lemondeinformatique.fr/actualites/lire-facebook-cloudflare-et-mozilla-allies-pour-mieux-securiser-les-certificats-tls-76965.html.'
+      label: 'Wikipedia — SecNumCloud',
+      url: 'https://fr.wikipedia.org/wiki/SecNumCloud'
     },
     {
-      type: 'file',
-      label: 'Documentation Veille',
-      url: '/docs/Veille.pdf'
+      type: 'link',
+      label: 'AFNOR Certification — Qualification SecNumCloud',
+      url: 'https://certification.afnor.org/numerique/qualification-secnumcloud'
     },
     {
-      type: 'file',
-      label: 'Image ACME',
-      url: '/images/ACME_protocol_process.webp'
+      type: 'link',
+      label: 'LNE — Processus de qualification SecNumCloud',
+      url: 'https://www.lne.fr/fr/service/certification/qualification-secnumcloud'
     },
     {
-      type: 'file',
-      label: 'Imaghe Certificat SSL',
-      url: '/images/ssl-desc.webp'
+      type: 'link',
+      label: 'SoftFluent — Comprendre SecNumCloud',
+      url: 'https://www.softfluent.fr/blog/comprendre-secnumcloud/'
+    },
+    {
+      type: 'link',
+      label: 'LeMagIT — Évolutions du référentiel version 3.2',
+      url: 'https://www.lemagit.fr/conseil/SecNumCloud-32-les-principales-evolutions-du-referentiel'
+    },
+    {
+      type: 'link',
+      label: 'Usine Digitale — S3NS et doctrine ANSSI (jan. 2026)',
+      url: 'https://www.usine-digitale.fr/informatique/cloud/souverainete-ce-que-lobtention-du-visa-secnumcloud-par-s3ns-change-durablement-dans-la-doctrine-francaise-du-cloud-de-confiance.IMMAGOMCTBFM3DXWKV2KBAZLSU.html'
+    },
+    {
+      type: 'link',
+      label: 'Next — Health Data Hub et migration SecNumCloud (fév. 2026)',
+      url: 'https://next.ink/223140/health-data-hub-le-gouvernement-promet-une-bascule-sur-secnumcloud-dici-fin-2026/'
+    },
+    {
+      type: 'link',
+      label: 'Orange Newsroom — Qualification Cloud Avenue SecNum (juil. 2025)',
+      url: 'https://newsroom.orange.com/orange-business-annonce-la-qualification-secnumcloud-de-son-offre-cloud-avenue-secnum-une-etape-cle-pour-la-confiance-numerique/?lang=fra'
     }
   ]
-}
 
 ];
