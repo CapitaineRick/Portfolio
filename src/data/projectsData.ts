@@ -108,10 +108,22 @@ export const projectsData = {
     {
       id: "e6",
       title: "E6",
-      description: "Épreuve E6 - Schéma Réseaux",
+      description: "Épreuve E6 - Information Complémentaire",
       image: "/images/logo-M2L.webp",
-      pdfUrl: "docs/E6/Infra.pdf",
+      
       tags: ["E6"],
+            documents: [
+          {
+          title: "Schema de l'infrastructure",
+          pdfUrl: "docs/E6/Infra.pdf",
+          description: "Schéma de l'infrastructure mise en place pour l'épreuve E6",
+        },
+        {
+          title: "Trello de gestion de projet",
+          url: "https://trello.com/b/M7M2Bnpz/infra",
+          description: "Trello de gestion de projet pour l'épreuve E6",
+        }
+      ]
       
 
     },
