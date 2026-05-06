@@ -70,7 +70,7 @@ SecNumCloud n'est pas un label de souveraineté technologique. La qualification 
 
 SecNumCloud s'impose comme la norme de référence pour la protection des données sensibles en France, rendant sa maîtrise indispensable pour tout professionnel du réseau et de la cybersécurité.`,
 
-  image: "\images\secnumcloud.webp",
+  image: "https://www.ypok.com/wp-content/uploads/2024/07/mlkio8668444pp66lolo4422Plan-de-travail-2-copie-4@2x.png",
   date: "01 mai 2026",
   tags: ["SecNumCloud", "ANSSI", "Cloud", "Cybersécurité", "Souveraineté numérique", "Cloud de confiance"],
   category: "Cybersécurité",
