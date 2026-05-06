@@ -22,9 +22,9 @@ export const experienceData: Experience[] = [
     description: 'Alternance de deuxième année en BTS SIO SISR au sein du service informatique de KNDS France, spécialisé dans la défense et l\'armement.',
     type: 'alternance',
     missions: [
-      'Renouvellement du LAN',
+      'Pilotage du renouvellement du LAN',
       'Durcissement de VLAN',
-      'Mise en place de controle de conformité',
+      'Mise en place de conformité',
       "Brassage d'équipements réseau",
       'Remplacement de PDU'
 
