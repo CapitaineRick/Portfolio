@@ -103,10 +103,10 @@ export const projectsData = {
     {
       id: "e6",
       title: "E6",
-      description: "Épreuve E6 et AP-2 - Problématique de la M2L",
+      description: "Épreuve E6 - Schéma Réseaux",
       image: "/images/logo-M2L.webp",
       pdfUrl: "/docs/E6.pdf",
-      tags: ["E6", "Windows", "Active Directory", "Déploiement logiciel"],
+      tags: ["E6"],
       
 
     },
@@ -162,15 +162,13 @@ export const projectsData = {
       tags: ["Veille"],
     },
 
-
-
-        {
+    {
       id: "arch",
       title: "Archlinux",
       description: "Installation et configuration de Archlinux",
       image: "/images/logo-arch-logo.webp",
       pdfUrl: "/docs/install-arch.pdf",
-      tags: ["Linux", "OS", "Serveur"],
+      tags: ["Linux", "OS"],
     },
     
     {
