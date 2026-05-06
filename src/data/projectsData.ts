@@ -113,9 +113,9 @@ export const projectsData = {
           description: "Présentation des problématiques et leurs solutions",
         },
         {
-          title: "Documentation d'installation",
-          url: "/docs/AP2/ap2-doc.pdf",
-          description: "Installation des solutions.",
+          title: "Schéma Réseau",
+          url: "/docs/E6/infra.png",
+          description: "Schéma Réseau",
         }
       ]
     },
