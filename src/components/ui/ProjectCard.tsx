@@ -62,12 +62,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
   const isWebDocument = (url: string): boolean => {
     const webExtensions = ['.html', '.htm', '.php', '.asp', '.aspx', '.jsp'];
     const urlLower = url.toLowerCase();
-    
+
     // Vérifier si l'URL commence par http/https
     if (urlLower.startsWith('http://') || urlLower.startsWith('https://')) {
       return true;
     }
-    
+
     // Vérifier les extensions web
     return webExtensions.some(ext => urlLower.endsWith(ext));
   };
@@ -102,12 +102,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return url;
     }
-    
+
     // Si l'URL commence par /, c'est un chemin absolu depuis la racine
     if (url.startsWith('/')) {
       return `${window.location.origin}${url}`;
     }
-    
+
     // Sinon, c'est un chemin relatif
     return `${window.location.origin}/${url}`;
   };
@@ -121,11 +121,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
       const originalTop = document.body.style.top;
       const originalWidth = document.body.style.width;
       const originalDocumentOverflow = document.documentElement.style.overflow;
-      
+
       // Bloquer le scroll sans affecter la position
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
-      
+
       // Gestionnaire pour la touche Échap
       const handleEscape = (event: KeyboardEvent) => {
         if (event.key === 'Escape') {
@@ -176,7 +176,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
         document.body.style.top = originalTop;
         document.body.style.width = originalWidth;
         document.documentElement.style.overflow = originalDocumentOverflow;
-        
+
         // Supprimer les écouteurs
         document.removeEventListener('keydown', handleEscape);
         document.removeEventListener('keydown', handleKeyDown);
@@ -193,23 +193,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
         const dropdownWidth = 320;
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
-        
+
         let left = buttonRect.left;
         let top = buttonRect.bottom + 8;
-        
+
         if (left + dropdownWidth > viewportWidth - 16) {
           left = Math.max(16, viewportWidth - dropdownWidth - 16);
         }
-        
+
         if (left < 16) {
           left = 16;
         }
-        
+
         const maxDropdownHeight = 400;
         if (top + maxDropdownHeight > viewportHeight - 16) {
           top = Math.max(16, buttonRect.top - maxDropdownHeight - 8);
         }
-        
+
         setDropdownPosition({
           top: Math.max(16, top),
           left: left
@@ -219,12 +219,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
 
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
-      
-      if (dropdownRef.current?.contains(target) || 
-          buttonRef.current?.contains(target)) {
+
+      if (dropdownRef.current?.contains(target) ||
+        buttonRef.current?.contains(target)) {
         return;
       }
-      
+
       setShowDropdown(false);
     };
 
@@ -232,7 +232,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
       if (dropdownRef.current?.contains(event.target as Node)) {
         return;
       }
-      
+
       if (showDropdown) {
         updateDropdownPosition();
       }
@@ -348,52 +348,64 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
       >
         <div className="max-h-96 overflow-y-auto overscroll-contain">
           <div className="p-2">
-            {project.documents.map((doc, index) => {
-              const isWeb = isWebDocument(doc.url);
-              const isDownloadable = isDownloadableFile(doc.url);
-              return (
-                <button
-                  key={index}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleDocumentSelect(doc);
-                  }}
-                  className="w-full p-3 text-left hover:bg-gray-700 text-gray-300 hover:text-orange-400 transition-colors flex items-start gap-3 rounded-lg mb-1 last:mb-0 focus:outline-none focus:bg-gray-700 focus:ring-2 focus:ring-orange-500"
-                >
-                  <div className="flex-shrink-0 mt-0.5">
-                    {isDownloadable ? (
-                      <Download className="w-4 h-4 text-green-500" />
-                    ) : isWeb ? (
-                      <Globe className="w-4 h-4 text-blue-500" />
-                    ) : (
-                      <FileText className="w-4 h-4 text-orange-500" />
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0 space-y-1">
-                    <div className="font-medium text-sm leading-tight break-words flex items-center gap-2">
-                      {doc.title}
-                      {isDownloadable && <Download className="w-3 h-3 text-green-400" />}
-                    </div>
-                    {doc.description && (
-                      <div className="text-xs text-gray-400 leading-tight break-words">
-                        {doc.description}
-                      </div>
-                    )}
-                    {isDownloadable && (
-                      <div className="text-xs text-green-400 font-medium">
-                        Télécharger le fichier
-                      </div>
-                    )}
-                    {isWeb && (
-                      <div className="text-xs text-blue-400 font-medium">
-                        Ouvre dans le même onglet
-                      </div>
-                    )}
-                  </div>
-                </button>
-              );
-            })}
+{project.documents.map((doc, index) => {
+  const isWeb = isWebDocument(doc.url);
+  const isDownloadable = isDownloadableFile(doc.url);
+
+  const filename = doc.url.split('/').pop() || doc.title || 'document';
+
+  return (
+    <div
+      key={index}
+      className="flex items-center gap-2 rounded-lg mb-1 last:mb-0 hover:bg-gray-700"
+    >
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          handleDocumentSelect(doc);
+        }}
+        className="flex-1 p-3 text-left text-gray-300 hover:text-orange-400 transition-colors flex items-start gap-3 rounded-lg focus:outline-none focus:bg-gray-700 focus:ring-2 focus:ring-orange-500"
+      >
+        <div className="flex-shrink-0 mt-0.5">
+          {isDownloadable ? (
+            <Download className="w-4 h-4 text-green-500" />
+          ) : isWeb ? (
+            <Globe className="w-4 h-4 text-blue-500" />
+          ) : (
+            <FileText className="w-4 h-4 text-orange-500" />
+          )}
+        </div>
+
+        <div className="flex-1 min-w-0 space-y-1">
+          <div className="font-medium text-sm leading-tight break-words">
+            {doc.title}
+          </div>
+
+          {doc.description && (
+            <div className="text-xs text-gray-400 leading-tight break-words">
+              {doc.description}
+            </div>
+          )}
+        </div>
+      </button>
+
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          downloadFile(doc.url, filename);
+          setShowDropdown(false);
+        }}
+        className="mr-2 p-2 rounded-lg bg-gray-700 text-gray-400 hover:text-green-500 transition-colors"
+        title="Télécharger"
+      >
+        <Download className="w-4 h-4" />
+      </button>
+    </div>
+  );
+})}
           </div>
         </div>
       </div>,
@@ -403,33 +415,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
 
   return (
     <>
-      <div 
+      <div
         ref={cardRef}
-        className={`group relative ${className}`} 
+        className={`group relative ${className}`}
         style={style}
       >
         {/* Fond coloré adaptatif */}
         <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-purple-500 rounded-xl sm:rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
-        
+
         {/* Contenu de la carte avec hauteur flexible */}
         <div className="relative bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden flex flex-col h-full">
           <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">
-            <div className={`p-1.5 sm:p-2 rounded-lg sm:rounded-xl backdrop-blur-md ${
-              category === 'internship' ? 'bg-orange-500/90 text-white' : 
-              category === 'school' ? 'bg-blue-500/90 text-white' : 
-              'bg-purple-500/90 text-white'
-            }`}>
-              {category === 'internship' ? <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" /> : 
-               category === 'school' ? <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5" /> :
-               <FileText className="w-4 h-4 sm:w-5 sm:h-5" />}
+            <div className={`p-1.5 sm:p-2 rounded-lg sm:rounded-xl backdrop-blur-md ${category === 'internship' ? 'bg-orange-500/90 text-white' :
+                category === 'school' ? 'bg-blue-500/90 text-white' :
+                  'bg-purple-500/90 text-white'
+              }`}>
+              {category === 'internship' ? <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" /> :
+                category === 'school' ? <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5" /> :
+                  <FileText className="w-4 h-4 sm:w-5 sm:h-5" />}
             </div>
           </div>
 
           {/* Image avec hauteur fixe */}
           <div className="relative h-40 sm:h-48 overflow-hidden flex-shrink-0">
-            <img 
-              src={imgSrc} 
-              alt={project.title} 
+            <img
+              src={imgSrc}
+              alt={project.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               loading="lazy"
               decoding="async"
@@ -458,7 +469,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
             <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white group-hover:text-orange-500 transition-colors">
               {project.title}
             </h3>
-            
+
             {/* Description avec hauteur flexible */}
             <div className="flex-grow mb-4 sm:mb-6">
               <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
@@ -507,34 +518,34 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
                 )}
               </div>
 
-{project.demoUrl && (
-  <button
-    onClick={handleDemoClick}
-    className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gray-700 text-gray-400 hover:text-orange-500 transition-colors"
-    title="Aller vers le site"
-  >
-    <ExternalLink size={14} className="sm:w-4 sm:h-4" />
-  </button>
-)}
+              {project.demoUrl && (
+                <button
+                  onClick={handleDemoClick}
+                  className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gray-700 text-gray-400 hover:text-orange-500 transition-colors"
+                  title="Aller vers le site"
+                >
+                  <ExternalLink size={14} className="sm:w-4 sm:h-4" />
+                </button>
+              )}
 
-{project.pdfUrl && (
-  <button
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
+              {project.pdfUrl && (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
 
-      const filename =
-        project.pdfUrl?.split('/').pop() || `${project.title}.pdf`;
+                    const filename =
+                      project.pdfUrl?.split('/').pop() || `${project.title}.pdf`;
 
-      downloadFile(project.pdfUrl, filename);
-    }}
-    className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gray-700 text-gray-400 hover:text-green-500 transition-colors"
-    title="Télécharger"
-  >
-    <Download size={14} className="sm:w-4 sm:h-4" />
-  </button>
-)}
-              
+                    downloadFile(project.pdfUrl, filename);
+                  }}
+                  className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gray-700 text-gray-400 hover:text-green-500 transition-colors"
+                  title="Télécharger"
+                >
+                  <Download size={14} className="sm:w-4 sm:h-4" />
+                </button>
+              )}
+
             </div>
           </div>
         </div>
@@ -586,7 +597,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
 
             <div className="flex justify-center mb-3 sm:mb-4">
               <div className="flex items-center gap-2 sm:gap-4">
-                <button 
+                <button
                   onClick={() => setScale(Math.max(0.5, scale - 0.1))}
                   className="px-2 sm:px-3 py-1 bg-gray-700 text-gray-300 rounded-md sm:rounded-lg text-sm"
                 >
@@ -595,7 +606,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
                 <span className="text-gray-300 min-w-[60px] text-center text-sm sm:text-base">
                   {Math.round(scale * 100)}%
                 </span>
-                <button 
+                <button
                   onClick={() => setScale(Math.min(3.0, scale + 0.1))}
                   className="px-2 sm:px-3 py-1 bg-gray-700 text-gray-300 rounded-md sm:rounded-lg text-sm"
                 >
