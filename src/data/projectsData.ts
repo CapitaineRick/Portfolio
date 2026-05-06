@@ -153,13 +153,21 @@ export const projectsData = {
       pdfUrl: "/docs/Install_zabbix.pdf",
       tags: ["Zabbix", "Monitoring"],
     },
-        {
+      {
       id: "Veille",
       title: "Documentation de veille technologique",
       description: "Documentation de veille technologique",
       image: "/images/logo-gantt.webp",
       pdfUrl: "/docs/Veille.pdf",
       tags: ["Veille"],
+    },
+      {
+      id: "Portfolio",
+      title: "Mise en ligne du portfolio",
+      description: "Documentation de la mise en ligne du portfolio",
+      image: "/images/logo-profile.webp",
+      pdfUrl: "/docs/portfolio.pdf",
+      tags: ["Portfolio"],
     },
 
     {
