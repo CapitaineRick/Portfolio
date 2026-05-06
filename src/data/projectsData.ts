@@ -167,7 +167,7 @@ export const projectsData = {
       title: "Documentation de veille technologique",
       description: "Documentation de veille technologique",
       image: "/images/logo-gantt.webp",
-      pdfUrl: "/docs/veille.pdf",
+      pdfUrl: "/docs/Veille.pdf",
       tags: ["Veille"],
     },
 
@@ -246,22 +246,7 @@ export const projectsData = {
       image: "/images/logo-apache-logo.webp",
       pdfUrl: "/docs/install-apache2.pdf",
       tags: ["Web", "Serveur", "Apache", "WAF"],
-    },
-    {
-      id: "bash",
-      title: "Script Bash",
-      description: "Backup via rsync",
-      image: "/images/logo-rsync-logo.webp",
-      pdfUrl: "/docs/script_bash.pdf",
-      tags: ["Bash", "Backup", "Administration système"],
-    },
-    {
-      id: "powershell",
-      title: "Script powershell",
-      description: "Scripts d'administration en Powershell",
-      image: "/images/logo-profile.webp",
-      pdfUrl: "/docs/scripts_powershell.pdf",
-      tags: ["Powershell", "Administration système"],
     }
+
   ],
 };
