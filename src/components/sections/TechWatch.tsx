@@ -77,7 +77,7 @@ const TechWatch: React.FC = () => {
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-purple-500 mx-auto mb-8"></div>
           <p className="text-lg text-gray-300 max-w-3xl mx-auto font-medium mb-12">
-            <br></br> Veille réalisé grace a google alert et Fresh RSS. <br></br>
+            <br></br> Veille technologique réalisée à l'aide de Google Alerts pour la surveillance de mots-clés et Fresh RSS pour l'agrégation de flux RSS. <br></br>
 
           </p>
         </div>
