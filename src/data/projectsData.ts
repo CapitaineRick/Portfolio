@@ -113,9 +113,9 @@ export const projectsData = {
           description: "Présentation des problématiques et leurs solutions",
         },
         {
-          title: "Documentation d'installation",
-          url: "/docs/E6/Infra.png",
-          description: "Schema de la M2L",
+          title: "Schéma de la M2L",
+          url: "/docs/E6/Infra.pdf",
+          description: "Schéma de la M2L",
         }
       ]
     },
