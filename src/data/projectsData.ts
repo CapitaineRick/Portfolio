@@ -102,22 +102,13 @@ export const projectsData = {
     },
     {
       id: "e6",
-      title: "E6 / AP-2",
+      title: "E6",
       description: "Épreuve E6 et AP-2 - Problématique de la M2L",
       image: "/images/logo-M2L.webp",
+      pdfUrl: "/docs/E6.pdf",
       tags: ["E6", "Windows", "Active Directory", "Déploiement logiciel"],
-      documents: [
-          {
-          title: "Présentation E6",
-          url: "/docs/AP2/ap2-pres.pdf",
-          description: "Présentation des problématiques et leurs solutions",
-        },
-        {
-          title: "Schéma de la M2L",
-          url: "/docs/E6/Infra.pdf",
-          description: "Schéma de la M2L",
-        }
-      ]
+      
+
     },
   ],
   technical: [
