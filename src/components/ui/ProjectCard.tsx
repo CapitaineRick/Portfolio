@@ -507,15 +507,34 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, category, className 
                 )}
               </div>
 
-              {project.demoUrl && (
-                <button
-                  onClick={handleDemoClick}
-                  className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gray-700 text-gray-400 hover:text-orange-500 transition-colors"
-                  title="Aller vers le site"
-                >
-                  <ExternalLink size={14} className="sm:w-4 sm:h-4" />
-                </button>
-              )}
+{project.demoUrl && (
+  <button
+    onClick={handleDemoClick}
+    className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gray-700 text-gray-400 hover:text-orange-500 transition-colors"
+    title="Aller vers le site"
+  >
+    <ExternalLink size={14} className="sm:w-4 sm:h-4" />
+  </button>
+)}
+
+{project.pdfUrl && (
+  <button
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const filename =
+        project.pdfUrl?.split('/').pop() || `${project.title}.pdf`;
+
+      downloadFile(project.pdfUrl, filename);
+    }}
+    className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gray-700 text-gray-400 hover:text-green-500 transition-colors"
+    title="Télécharger"
+  >
+    <Download size={14} className="sm:w-4 sm:h-4" />
+  </button>
+)}
+              
             </div>
           </div>
         </div>
