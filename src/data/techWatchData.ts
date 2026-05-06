@@ -28,6 +28,18 @@ export const techWatchData: TechWatchItem[] = [
 • Bleu (Orange + Capgemini + Microsoft Azure) : Jalon 1 validé novembre 2025, qualification visée en 2026
 • Migration du Health Data Hub (données de santé nationales) vers une solution SecNumCloud annoncée pour fin 2026
 
+Prérequis pour obtenir la qualification :
+• Être une personne morale de droit européen (entreprise enregistrée dans l'UE)
+• Détenir un capital majoritairement européen (minimum 61 % selon les exigences ANSSI)
+• Ne pas être soumis à des législations extraterritoriales non-européennes (CLOUD Act, FISA)
+• Disposer d'un Système de Management de la Sécurité de l'Information (SMSI) documenté et opérationnel
+• Appliquer le guide d'hygiène informatique de l'ANSSI au niveau renforcé
+• Mettre en œuvre des mécanismes de chiffrement conformes aux recommandations de l'ANSSI (algorithmes approuvés, gestion des clés)
+• Garantir que seul le personnel de l'opérateur qualifié peut intervenir sur les ressources hébergeant le service
+• Disposer d'une infrastructure hébergée exclusivement sur le sol européen
+• Être en capacité de répondre à un audit sur site réalisé par un laboratoire accrédité (AFNOR, LNE)
+• S'engager à maintenir la conformité avec un audit annuel de maintien et un renouvellement complet tous les 3 ans
+
 Processus de qualification par jalons (12 à 24 mois) :
 • J0 : recevabilité du dossier auprès de l'ANSSI
 • J1 : conformité documentaire validée (politiques, procédures, architecture)
