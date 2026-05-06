@@ -105,7 +105,7 @@ export const projectsData = {
       title: "E6",
       description: "Épreuve E6 - Schéma Réseaux",
       image: "/images/logo-M2L.webp",
-      pdfUrl: "/docs/E6.pdf",
+      pdfUrl: "docs/E6/Infra.pdf",
       tags: ["E6"],
       
 

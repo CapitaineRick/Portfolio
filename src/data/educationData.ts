@@ -21,7 +21,7 @@ export const educationData: Education[] = [
     school: 'IPSSI, Saint-Quentin-en-Yvelines',
     logo: '/images/logo-ipssi.webp',
     period: '2024–2026',
-    description: 'Brevet de Technicien Supérieur Services Informatiques aux Organisations, spécialité Solutions d’Infrastructure, Systèmes et Réseaux. Formation orientée administration réseau, cybersécurité et gestion de systèmes d’information.',
+    description: 'Brevet de Technicien Supérieur Services Informatiques aux Organisations, spécialité Solutions d’Infrastructure, Systèmes et Réseaux. Formation orientée administration réseaux, cybersécurité et gestion de systèmes d’information.',
     status: 'ongoing',
     skills: [
       'Administration systèmes (Windows / Linux)',
