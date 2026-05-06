@@ -22,9 +22,16 @@ export const experienceData: Experience[] = [
     description: 'Alternance de deuxième année en BTS SIO SISR au sein du service informatique de KNDS France, spécialisé dans la défense et l\'armement.',
     type: 'alternance',
     missions: [
+      'Renouvellement du LAN',
+      'Durcissement de VLAN',
+      'Mise en place de controle de conformité'
 
     ],
     technologies: [
+      'Avaya (Switching)',
+      'Aruba (Switching)',
+      'Fortigate (Firewall)',
+      'Netbox (Inventaire de parc)',
     ]
   },
   {
@@ -41,7 +48,7 @@ export const experienceData: Experience[] = [
       'Administration des systèmes VoIP/ToIP AVAYA',
       'Création d\'infographies du parc informatique',
       'Résolution d\'incidents techniques',
-      'Documentation de procédure'
+      'Documentation de procédures'
     ],
     technologies: [
       'AVAYA (VoIP/ToIP)',
