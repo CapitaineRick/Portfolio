@@ -129,22 +129,7 @@ export const projectsData = {
       pdfUrl: "/docs/Install_Proxmox.pdf",
       tags: ["Hyperviseur", "Virtualisation", "Clustering"],
     },
-    {
-      id: "arch",
-      title: "Archlinux",
-      description: "Installation et configuration de Archlinux",
-      image: "/images/logo-arch-logo.webp",
-      pdfUrl: "/docs/install-arch.pdf",
-      tags: ["Linux", "OS", "Serveur"],
-    },
-    {
-      id: "docker",
-      title: "Installation Docker",
-      description: "Installation et configuration de Docker sur Linux",
-      image: "/images/logo-docker-logo.webp",
-      pdfUrl: "/docs/Install_Docker.pdf",
-      tags: ["Docker", "Linux", "Conteneurisation"],
-    },
+
     {
       id: "windows-server-2025",
       title: "Installation Windows Server 2025",
@@ -154,6 +139,58 @@ export const projectsData = {
       tags: ["OS", "Windows", "Active Directory", "Administration système"],
     },
     {
+      id: "GLPI",
+      title: "Installation de GLPI",
+      description: "Installation et configuration de GLPI",
+      image: "/images/logo-glpi.webp",
+      pdfUrl: "/docs/install-GLPI.pdf",
+      tags: ["Support", "Web", "E6"],
+    },
+    {
+      id: "pfsense",
+      title: "Installation et configuration de PFSENSE",
+      description: "Documentation d'installation et de configuration de PFSENSE",
+      image: "/images/logo-pfsense-logo.webp",
+      pdfUrl: "/docs/install_pfsense.pdf",
+      tags: ["PFSENSE", "Parefeu", "Réseau", "E6"],
+    },
+    {
+      id: "Zabbix",
+      title: "Installation et configuration de Zabbix",
+      description: "Documentation d'installation et de configuration de Zabbix",
+      image: "/images/logo-zabbix-logo.webp",
+      pdfUrl: "/docs/Install_zabbix.pdf",
+      tags: ["Zabbix", "Monitoring"],
+    },
+        {
+      id: "Veille",
+      title: "Documentation de veille technologique",
+      description: "Documentation de veille technologique",
+      image: "/images/logo-gantt.webp",
+      pdfUrl: "/docs/veille.pdf",
+      tags: ["Veille"],
+    },
+
+
+
+        {
+      id: "arch",
+      title: "Archlinux",
+      description: "Installation et configuration de Archlinux",
+      image: "/images/logo-arch-logo.webp",
+      pdfUrl: "/docs/install-arch.pdf",
+      tags: ["Linux", "OS", "Serveur"],
+    },
+    
+    {
+      id: "docker",
+      title: "Installation Docker",
+      description: "Installation et configuration de Docker sur Linux",
+      image: "/images/logo-docker-logo.webp",
+      pdfUrl: "/docs/Install_Docker.pdf",
+      tags: ["Docker", "Linux", "Conteneurisation"],
+    },
+        {
       id: "windows-10",
       title: "Installation Windows 10",
       description: "Installation et configuration de Windows 10",
@@ -177,7 +214,7 @@ export const projectsData = {
       pdfUrl: "/docs/Install_Ubuntu.pdf",
       tags: ["OS", "Linux", "Serveur", "Administration système"],
     },
-    {
+        {
       id: "haproxy",
       title: "Installation HAProxy",
       description: "Installation et configuration du load balancer HAProxy",
@@ -211,14 +248,6 @@ export const projectsData = {
       tags: ["Web", "Serveur", "Apache", "WAF"],
     },
     {
-      id: "GLPI",
-      title: "Installation de GLPI",
-      description: "Installation et configuration de GLPI",
-      image: "/images/logo-glpi.webp",
-      pdfUrl: "/docs/install-GLPI.pdf",
-      tags: ["Support", "Web", "E6"],
-    },
-    {
       id: "bash",
       title: "Script Bash",
       description: "Backup via rsync",
@@ -233,30 +262,6 @@ export const projectsData = {
       image: "/images/logo-profile.webp",
       pdfUrl: "/docs/scripts_powershell.pdf",
       tags: ["Powershell", "Administration système"],
-    },
-    {
-      id: "pfsense",
-      title: "Installation et configuration de PFSENSE",
-      description: "Documentation d'installation et de configuration de PFSENSE",
-      image: "/images/logo-pfsense-logo.webp",
-      pdfUrl: "/docs/install_pfsense.pdf",
-      tags: ["PFSENSE", "Parefeu", "Réseau", "E6"],
-    },
-    {
-      id: "Zabbix",
-      title: "Installation et configuration de Zabbix",
-      description: "Documentation d'installation et de configuration de Zabbix",
-      image: "/images/logo-zabbix-logo.webp",
-      pdfUrl: "/docs/Install_zabbix.pdf",
-      tags: ["Zabbix", "Monitoring"],
-    },
-    {
-      id: "Veille",
-      title: "Documentation de veille technologique",
-      description: "Documentation de veille technologique",
-      image: "/images/logo-gantt.webp",
-      pdfUrl: "/docs/veille.pdf",
-      tags: ["Veille"],
-    },
+    }
   ],
 };
