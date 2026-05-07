@@ -119,15 +119,9 @@ export const projectsData = {
           description: "Schéma de l'infrastructure mise en place pour l'épreuve E6",
         },
         {
-<<<<<<< HEAD
-          title: "Schéma Réseau",
-          url: "/docs/E6/infra.png",
-          description: "Schéma Réseau",
-=======
           title: "Trello de gestion de projet",
           url: "https://trello.com/b/M7M2Bnpz/infra",
           description: "Trello de gestion de projet pour l'épreuve E6",
->>>>>>> fc22edd320105dba71ff59b9f932c5d9a9d61ace
         }
       ]
       
