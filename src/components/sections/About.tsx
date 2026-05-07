@@ -172,7 +172,7 @@ const About: React.FC = () => {
                     </div>
                     <div className="bg-gray-700/50 rounded-lg md:rounded-xl p-2 md:p-3 text-center border border-gray-600">
                       <div className="text-sm sm:text-base md:text-lg font-bold text-orange-500 mb-1">
-                        15+
+                        14
                       </div>
                       <div className="text-xs text-gray-400">Documentations</div>
                     </div>
@@ -188,7 +188,7 @@ const About: React.FC = () => {
                       <div className="text-sm sm:text-base md:text-lg font-bold text-orange-500 mb-1">
                         2
                       </div>
-                      <div className="text-xs text-gray-400">Mois de stage</div>
+                      <div className="text-xs text-gray-400">Expériences Professionneles</div>
                     </div>
                   </div>
 

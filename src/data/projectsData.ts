@@ -33,6 +33,11 @@ export const projectsData = {
           description: "Site web de l'entreprise Revive - Interface utilisateur complète avec e-commerce",
         },
         {
+          title: "Trello Revive",
+          url: "/https://trello.com/b/zPjQsarH/revive",
+          description: "Trello de gestion de projet pour l'entreprise Revive - Organisation des tâches et suivi de l'avancement",
+        },
+        {
           title: "Bon de commande Revive",
           url: "/docs/AP1/bon_commande.pdf",
           description: "Document de commande pour l'entreprise Revive",
@@ -102,22 +107,31 @@ export const projectsData = {
     },
     {
       id: "e6",
-      title: "E6 / AP-2",
-      description: "Épreuve E6 et AP-2 - Problématique de la M2L",
+      title: "E6",
+      description: "Épreuve E6 - Information Complémentaire",
       image: "/images/logo-M2L.webp",
-      tags: ["E6", "Windows", "Active Directory", "Déploiement logiciel"],
+    
+      tags: ["E6"],
       documents: [
           {
-          title: "Présentation E6",
-          url: "/docs/AP2/ap2-pres.pdf",
-          description: "Présentation des problématiques et leurs solutions",
+          title: "Schema de l'infrastructure",
+          url: "docs/E6/Infra.pdf",
+          description: "Schéma de l'infrastructure mise en place pour l'épreuve E6",
         },
         {
+<<<<<<< HEAD
           title: "Schéma Réseau",
           url: "/docs/E6/infra.png",
           description: "Schéma Réseau",
+=======
+          title: "Trello de gestion de projet",
+          url: "https://trello.com/b/M7M2Bnpz/infra",
+          description: "Trello de gestion de projet pour l'épreuve E6",
+>>>>>>> fc22edd320105dba71ff59b9f932c5d9a9d61ace
         }
       ]
+      
+
     },
   ],
   technical: [
@@ -129,22 +143,7 @@ export const projectsData = {
       pdfUrl: "/docs/Install_Proxmox.pdf",
       tags: ["Hyperviseur", "Virtualisation", "Clustering"],
     },
-    {
-      id: "arch",
-      title: "Archlinux",
-      description: "Installation et configuration de Archlinux",
-      image: "/images/logo-arch-logo.webp",
-      pdfUrl: "/docs/install-arch.pdf",
-      tags: ["Linux", "OS", "Serveur"],
-    },
-    {
-      id: "docker",
-      title: "Installation Docker",
-      description: "Installation et configuration de Docker sur Linux",
-      image: "/images/logo-docker-logo.webp",
-      pdfUrl: "/docs/Install_Docker.pdf",
-      tags: ["Docker", "Linux", "Conteneurisation"],
-    },
+
     {
       id: "windows-server-2025",
       title: "Installation Windows Server 2025",
@@ -154,6 +153,64 @@ export const projectsData = {
       tags: ["OS", "Windows", "Active Directory", "Administration système"],
     },
     {
+      id: "GLPI",
+      title: "Installation de GLPI",
+      description: "Installation et configuration de GLPI",
+      image: "/images/logo-glpi.webp",
+      pdfUrl: "/docs/install-GLPI.pdf",
+      tags: ["Support", "Web", "E6"],
+    },
+    {
+      id: "pfsense",
+      title: "Installation et configuration de PFSENSE",
+      description: "Documentation d'installation et de configuration de PFSENSE",
+      image: "/images/logo-pfsense-logo.webp",
+      pdfUrl: "/docs/install_pfsense.pdf",
+      tags: ["PFSENSE", "Parefeu", "Réseau", "E6"],
+    },
+    {
+      id: "Zabbix",
+      title: "Installation et configuration de Zabbix",
+      description: "Documentation d'installation et de configuration de Zabbix",
+      image: "/images/logo-zabbix-logo.webp",
+      pdfUrl: "/docs/Install_zabbix.pdf",
+      tags: ["Zabbix", "Monitoring"],
+    },
+      {
+      id: "Veille",
+      title: "Documentation de veille technologique",
+      description: "Documentation de veille technologique",
+      image: "/images/logo-gantt.webp",
+      pdfUrl: "/docs/Veille.pdf",
+      tags: ["Veille"],
+    },
+      {
+      id: "Portfolio",
+      title: "Mise en ligne du portfolio",
+      description: "Documentation de la mise en ligne du portfolio",
+      image: "/images/logo-profile.webp",
+      pdfUrl: "/docs/portfolio.pdf",
+      tags: ["Portfolio"],
+    },
+
+    {
+      id: "arch",
+      title: "Archlinux",
+      description: "Installation et configuration de Archlinux",
+      image: "/images/logo-arch-logo.webp",
+      pdfUrl: "/docs/install-arch.pdf",
+      tags: ["Linux", "OS"],
+    },
+    
+    {
+      id: "docker",
+      title: "Installation Docker",
+      description: "Installation et configuration de Docker sur Linux",
+      image: "/images/logo-docker-logo.webp",
+      pdfUrl: "/docs/Install_Docker.pdf",
+      tags: ["Docker", "Linux", "Conteneurisation"],
+    },
+        {
       id: "windows-10",
       title: "Installation Windows 10",
       description: "Installation et configuration de Windows 10",
@@ -177,7 +234,7 @@ export const projectsData = {
       pdfUrl: "/docs/Install_Ubuntu.pdf",
       tags: ["OS", "Linux", "Serveur", "Administration système"],
     },
-    {
+        {
       id: "haproxy",
       title: "Installation HAProxy",
       description: "Installation et configuration du load balancer HAProxy",
@@ -209,54 +266,7 @@ export const projectsData = {
       image: "/images/logo-apache-logo.webp",
       pdfUrl: "/docs/install-apache2.pdf",
       tags: ["Web", "Serveur", "Apache", "WAF"],
-    },
-    {
-      id: "GLPI",
-      title: "Installation de GLPI",
-      description: "Installation et configuration de GLPI",
-      image: "/images/logo-glpi.webp",
-      pdfUrl: "/docs/install-GLPI.pdf",
-      tags: ["Support", "Web", "E6"],
-    },
-    {
-      id: "bash",
-      title: "Script Bash",
-      description: "Backup via rsync",
-      image: "/images/logo-rsync-logo.webp",
-      pdfUrl: "/docs/script_bash.pdf",
-      tags: ["Bash", "Backup", "Administration système"],
-    },
-    {
-      id: "powershell",
-      title: "Script powershell",
-      description: "Scripts d'administration en Powershell",
-      image: "/images/logo-profile.webp",
-      pdfUrl: "/docs/scripts_powershell.pdf",
-      tags: ["Powershell", "Administration système"],
-    },
-    {
-      id: "pfsense",
-      title: "Installation et configuration de PFSENSE",
-      description: "Documentation d'installation et de configuration de PFSENSE",
-      image: "/images/logo-pfsense-logo.webp",
-      pdfUrl: "/docs/install_pfsense.pdf",
-      tags: ["PFSENSE", "Parefeu", "Réseau", "E6"],
-    },
-    {
-      id: "Zabbix",
-      title: "Installation et configuration de Zabbix",
-      description: "Documentation d'installation et de configuration de Zabbix",
-      image: "/images/logo-zabbix-logo.webp",
-      pdfUrl: "/docs/Install_zabbix.pdf",
-      tags: ["Zabbix", "Monitoring"],
-    },
-    {
-      id: "Veille",
-      title: "Documentation de veille technologique",
-      description: "Documentation de veille technologique",
-      image: "/images/logo-gantt.webp",
-      pdfUrl: "/docs/veille.pdf",
-      tags: ["Veille"],
-    },
+    }
+
   ],
 };
