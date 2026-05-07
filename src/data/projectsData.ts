@@ -34,7 +34,7 @@ export const projectsData = {
         },
         {
           title: "Trello Revive",
-          url: "/https://trello.com/b/zPjQsarH/revive",
+          url: "https://trello.com/b/zPjQsarH/revive",
           description: "Trello de gestion de projet pour l'entreprise Revive - Organisation des tâches et suivi de l'avancement",
         },
         {
